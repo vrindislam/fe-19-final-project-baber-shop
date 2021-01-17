@@ -1,4 +1,12 @@
 {
+  "watch": {
+    "stylelint-dev": {
+      "patterns": [
+        "/src/**/*.less"
+      ],
+      "extensions": "less"
+    }
+  },
   "name": "barber_shop",
   "version": "0.1.0",
   "private": true,
@@ -10,14 +18,24 @@
     "@testing-library/user-event": "^11.1.0",
     "antd": "^4.5.2",
     "craco-less": "^1.17.0",
+    "npm-run-all": "^4.1.1",
+    "npm-watch": "^0.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "stylelint": "^13.8.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-order": "^4.1.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+    "start": "npm-run-all -p watch-sass-js start-js",
+    "start-js": "craco start",
+    "build": "npm run stylelint-build && craco build",
+    "test": "craco test",
+    "stylelint-dev": "stylelint \"src/**/*.less\" --cache --cache-location \".stylelintcache\" exit 0",
+    "stylelint-build": "stylelint src/**/*.less",
+    "stylelint-fix-sass": "stylelint --fix src/**/*.less",
+    "watch-sass-js": "npm-watch"
   },
   "eslintConfig": {
     "extends": "react-app"

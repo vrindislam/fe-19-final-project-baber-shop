@@ -1,19 +1,13 @@
 import React from 'react';
 import './App.less';
-import BasicForm from "./components/basicForm/BasicForm";
-// import FormWithUseHook from "./components/FormWithUseHook";
 import {Divider} from "antd";
-import ButtonConfig from './components/button/Button'
-
-
-
-
-
+// import ButtonConfig from './components/button/Button'
+// import BasicForm from "./components/basicForm/BasicForm";
+// import FormWithUseHook from "./components/FormWithUseHook";
 import FormSizeDemo from "./components/FormWithUseHook";
 
 
-const App = () => (
-    <>
+const App = () => (    <>
 
         {/*<div className={'AppContainer'}>*/}
         {/*    <BasicForm/>*/}
