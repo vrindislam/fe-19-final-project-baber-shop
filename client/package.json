@@ -56,5 +56,9 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.1.2",
+    "standard": "^16.0.3"
   }
 }
