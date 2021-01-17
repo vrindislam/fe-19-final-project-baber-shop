@@ -37,9 +37,6 @@
     "stylelint-fix-sass": "stylelint --fix src/**/*.less",
     "watch-sass-js": "npm-watch"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
