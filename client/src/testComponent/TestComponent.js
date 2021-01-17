@@ -1,23 +1,8 @@
 import React from 'react';
-import {
-  Form,
-  Select,
-  InputNumber,
-  DatePicker,
-  Switch,
-  Slider,
-  Button,
-  Rate,
-  Typography,
-  Space,
-  Divider,
-} from 'antd';
-import './App.less';
-
-const { Option } = Select;
+import {Typography,Space} from 'antd';
 const { Title } = Typography;
 
-const App = () => (
+const TestComponent = () => (
   <>
     <section style={{ textAlign: 'center', marginTop: 48, marginBottom: 40 }}>
       <Space align="start">
@@ -35,4 +20,4 @@ const App = () => (
   </>
 );
 
-export default App;
+export default TestComponent;
