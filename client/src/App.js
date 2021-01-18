@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react'
 import 'antd/dist/antd.less'
 import { Layout, Menu } from 'antd';
-import SiteHeader from './components/header/Header'
+import SiteHeader from './components/header/SiteHeader'
 import { getProducts } from './functions/products/product'
-const { Header, Content, Footer } = Layout;
+import MainRoutes from './routes/MainRoutes'
+const { Content, Footer } = Layout;
 
 const App = () => {
 
   useEffect( () => {
+    // Data base check Request => to delete
     console.log('ROUTE',`${process.env.REACT_APP_API}`)
     getProducts()
       .then(products => console.log(products.data[0]) )
@@ -20,7 +22,7 @@ const App = () => {
       <SiteHeader/>
       <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64, height: '100vh' }}>
         <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-          Content
+          <MainRoutes/>
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
