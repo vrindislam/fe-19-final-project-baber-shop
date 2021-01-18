@@ -10,13 +10,12 @@ import {
   LogoutOutlined,
   ShoppingOutlined,
   ShoppingCartOutlined,
-} from "@ant-design/icons"
+} from '@ant-design/icons'
 
-const {Header} = Layout
-const {Item} = Menu
+const { Header } = Layout
+const { Item } = Menu
 
-function SiteHeader () {
-
+function SiteHeader() {
   return (
     <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
       <div className="logo" />
@@ -32,7 +31,7 @@ function SiteHeader () {
         <Item key="cart" icon={<ShoppingCartOutlined />}>
           <Link to="/cart">
             <Badge count={2} offset={[9, 0]}>
-              <span style={{color: 'rgba(255, 255, 255, 0.65)'}}>Cart</span>
+              <span style={{ color: 'rgba(255, 255, 255, 0.65)' }}>Cart</span>
             </Badge>
           </Link>
         </Item>
@@ -45,9 +44,11 @@ function SiteHeader () {
           <Link to="/login">Login</Link>
         </Item>
 
+        <Item key="admin-dashboard" icon={<SettingOutlined />}>
+          <Link to="/admin/dashboard">Admin dashboard</Link>
+        </Item>
       </Menu>
     </Header>
-
   )
 }
 
