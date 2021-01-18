@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import 'antd/dist/antd.less'
-import { Layout, Menu } from 'antd';
+import { Layout} from 'antd';
 import SiteHeader from './components/header/SiteHeader'
 import { getProducts } from './functions/products/product'
 import MainRoutes from './routes/MainRoutes'
