@@ -3,7 +3,7 @@
   "plugins": [
     "stylelint-order"
   ],
-  "syntax": "scss",
+  "syntax": "less",
   "rules": {
     "number-leading-zero": "never",
     "no-missing-end-of-source-newline": null

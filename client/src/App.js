@@ -1,38 +1,31 @@
-import React from 'react';
-import {
-  Form,
-  Select,
-  InputNumber,
-  DatePicker,
-  Switch,
-  Slider,
-  Button,
-  Rate,
-  Typography,
-  Space,
-  Divider,
-} from 'antd';
-import './App.less';
+import React, {useEffect} from 'react'
+import 'antd/dist/antd.less'
+import { Layout, Menu } from 'antd';
+import SiteHeader from './components/header/Header'
+import { getProducts } from './functions/products/product'
+const { Header, Content, Footer } = Layout;
 
-const { Option } = Select;
-const { Title } = Typography;
+const App = () => {
 
-const App = () => (
-  <>
-    <section style={{ textAlign: 'center', marginTop: 48, marginBottom: 40 }}>
-      <Space align="start">
-        <img
-          style={{width: 40, height: 40 }}
-          src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-          alt="Ant Design"
-        />
-        <Title level={2} style={{ marginBottom: 0 }}>
-          Ant Design
-        </Title>
-      </Space>
-    </section>
+  useEffect( () => {
+    console.log('ROUTE',`${process.env.REACT_APP_API}`)
+    getProducts()
+      .then(products => console.log(products.data[0]) )
+      .catch(err => console.log(err))
+    ;
+  },[])
 
-  </>
-);
+  return (
+    <Layout>
+      <SiteHeader/>
+      <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64, height: '100vh' }}>
+        <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+          Content
+        </div>
+      </Content>
+      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+    </Layout>
+  )
+};
 
 export default App;
