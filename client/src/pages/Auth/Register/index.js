@@ -1,11 +1,7 @@
-// import React from 'react'
-import './styles.less'
-
 import React from 'react';
 import { Link } from "react-router-dom";
+import './styles.less'
 import axios from "axios";
-
-// import './Register.less'
 
 import {
   Form,
@@ -149,7 +145,7 @@ const Register = () => {
                 return Promise.resolve();
               }
               // eslint-disable-next-line prefer-promise-reject-errors
-              return Promise.reject('The two passwords that you entered do not match!');
+              return Promise.reject ('The two passwords that you entered do not match!');
             },
           }),
         ]}
@@ -176,7 +172,7 @@ const Register = () => {
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-        <Link to="/login">Login</Link>
+        <Link to="/login">Already registered?(link to Login Form)</Link>
       </Form.Item>
     </Form>
   );
