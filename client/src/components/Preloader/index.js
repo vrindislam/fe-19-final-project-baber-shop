@@ -5,7 +5,7 @@ import './styles.less';
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-function Preloader () {
+const Preloader = () => {
 
     return (
         <div className='spin'>
