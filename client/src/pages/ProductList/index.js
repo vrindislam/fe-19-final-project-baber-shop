@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.less';
 
-function ProductList() {
+const ProductList = (props) => {
     return (
         <h2>Here should be all products</h2>
     )

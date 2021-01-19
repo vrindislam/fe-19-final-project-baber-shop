@@ -12,7 +12,7 @@ import ProductList from '../pages/ProductList';
 import ProductDetails from "../pages/ProductDetails";
 import ErrorPage from "../pages/ErrorPage404";
 
-function MainRoutes() {
+const MainRoutes = () => {
     return (
         <Switch>
             <Route exact path={'/home'} component={Home}/>
@@ -27,7 +27,4 @@ function MainRoutes() {
     )
 }
 
-export default MainRoutes
-
-
-
+export default MainRoutes;

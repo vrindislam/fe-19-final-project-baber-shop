@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.less';
 
-function Cart(props) {
+const Cart = (props) => {
     return (
         <h2>Cart Page</h2>
     )

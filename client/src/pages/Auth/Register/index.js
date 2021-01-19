@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.less';
 
-function Register (props) {
+const Register = (props) => {
   return (
     <h2>This is Register Page</h2>
   )

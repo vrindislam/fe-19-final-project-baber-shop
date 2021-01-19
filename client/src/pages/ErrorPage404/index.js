@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.less';
 
-function ErrorPage(props) {
+const ErrorPage = (props) => {
     return (
 
         <h2>404 Page</h2>
