@@ -1,5 +1,5 @@
 import React from 'react'
-import './Modal.less'
+import './styles.less'
 
 function Modal (props) {
   return (
