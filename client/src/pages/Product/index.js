@@ -1,5 +1,5 @@
 import React from 'react'
-import './Product.less'
+import './sytles.less'
 
 function Product (props) {
   return (
