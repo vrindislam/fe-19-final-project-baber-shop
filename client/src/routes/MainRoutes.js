@@ -2,15 +2,15 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 // import UserRoute from './protectedRoutes/UserRoute';
 // import AdminRoute from './protectedRoutes/AdminRoute';
+// import ForgotPassword from '../pages/Auth/ForgotPassword';
+// import AdminDashboard from '../pages/Admin/AdminDashboard';
 import Home from '../pages/Home';
 import Register from '../pages/Auth/Register';
 import Login from '../pages/Auth/Login';
-// import ForgotPassword from '../pages/Auth/ForgotPassword';
 import Cart from '../pages/Cart';
 import ProductList from '../pages/ProductList';
 import ProductDetails from "../pages/ProductDetails";
 import ErrorPage from "../pages/ErrorPage404";
-// import AdminDashboard from '../pages/Admin/AdminDashboard';
 
 function MainRoutes() {
     return (
