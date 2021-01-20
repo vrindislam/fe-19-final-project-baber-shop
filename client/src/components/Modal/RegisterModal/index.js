@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Register from "../../../pages/Auth/Register/index"
 import {showRegisterModal, hideRegisterModal} from '../../../store/registerModalAction'
 
-function ModalRegister() {
+const ModalRegister () => {
   const modalHandler = useSelector(state => state.myModalRegister.registerModalOpen);
   const dispatch = useDispatch();
   console.log('modalHandler-modalHandler-modalHandler',modalHandler);
