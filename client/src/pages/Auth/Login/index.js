@@ -1,10 +1,15 @@
 import React from 'react'
 import './styles.less'
 
-function Login (props) {
+function Login () {
   return (
-    <div>Login Page</div>
+      <div>Login Page <span onClick={test}>test push</span></div>
+
   )
+}
+
+function test() {
+  console.log('test')
 }
 
 export default Login
