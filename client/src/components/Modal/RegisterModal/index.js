@@ -3,9 +3,9 @@ import React from "react";
 import { Modal, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import Register from "../../../pages/Auth/Register/index"
-import {showRegisterModal, hideRegisterModal} from '../../../store/registerModalAction'
+import {showRegisterModal, hideRegisterModal} from '../../../store/registerModal/registerModalAction'
 
-const ModalRegister () => {
+const ModalRegister = () => {
   const modalHandler = useSelector(state => state.myModalRegister.registerModalOpen);
   const dispatch = useDispatch();
   console.log('modalHandler-modalHandler-modalHandler',modalHandler);
