@@ -1,9 +1,5 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-// import UserRoute from './protectedRoutes/UserRoute';
-// import AdminRoute from './protectedRoutes/AdminRoute';
-// import ForgotPassword from '../pages/Auth/ForgotPassword';
-// import AdminDashboard from '../pages/Admin/AdminDashboard';
 import Home from '../pages/Home';
 import Register from '../pages/Auth/Register';
 import Login from '../pages/Auth/Login';
