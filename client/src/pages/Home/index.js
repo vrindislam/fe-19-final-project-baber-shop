@@ -3,7 +3,7 @@ import "./styles.less";
 
 function Home (props) {
   return (
-    <div></div>
+      <div>Main Page</div>
   )
 }
 
