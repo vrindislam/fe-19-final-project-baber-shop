@@ -1,9 +1,9 @@
-import React from 'react'
-import './styles.less'
+import React from "react";
+import "./styles.less";
 
 function Home (props) {
   return (
-    <div>Main Page</div>
+    <div></div>
   )
 }
 
