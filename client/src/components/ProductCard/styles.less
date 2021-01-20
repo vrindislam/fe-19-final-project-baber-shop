@@ -1,18 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');;
+
 .product-card-container {
-  display: inline-block;
   position: relative;
+  display: inline-block;
   width: 305px;
   height: 272px;
+  border: 2px solid #000000;
+}
 
-  &-heading {
-    position: absolute;
-  }
+.product-card-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 205px;
+  height: 205px;
+  transform: translate(-50%, -50%);
+}
 
-  &-price {
-    position: absolute;
-  }
+.product-heading-wrapper {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  display: inline-block;
+  max-width: 152px;
+  font-size: 20px;
 
-  &-img {
-    position: absolute;
+  p {
+    margin: 0;
+    padding: 0 10px;
+    font-family: Roboto;
   }
 }
+
+.product-heading {
+  margin: 0;
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+.product-price {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+
+.button-container {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  .ant-btn-primary {
+    width: 160px;
+    height: 40px;
+    color: #000000;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    background-color: #EFE95E;
+    border: 1px solid #EFE95E;
+    border-radius: 14px;
+    &:hover {
+      background-color: #fff852;
+      border: 1px solid #fff852;
+    }
+    &:active {
+      background-color: #EFE95E;
+      border: 1px solid #fff852;
+    }
+  }
+
+
+}
+
+
+
+

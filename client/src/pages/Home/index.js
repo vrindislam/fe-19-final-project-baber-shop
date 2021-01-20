@@ -3,9 +3,37 @@ import './styles.less'
 import ProductCard from "../../components/ProductCard";
 
 function Home (props) {
+  const product = {
+      enabled: true,
+      imageUrls: [
+          "https://livecdn.wmarket.com.ua/media/catalog/product/cache/1/small_image/250x250/d58d44b981214661663244ef00ea7e30/h/y/hyjytjyuk.jpg",
+          "img/products/men/002.png",
+          "img/products/men/003.png",
+          "img/products/men/004.png"
+      ],
+      quantity: 156,
+      _id: "5da463678cca382250dd7bc7",
+      name: "Andis Blocking UltraEdge",
+      currentPrice: 100,
+      previousPrice: 250,
+      categories: "men",
+      color: "red",
+      productUrl: "/men",
+      brand: "braaaand",
+      myCustomParam: "some string or json for custom param",
+      itemNo: 291759,
+      date: "2019-10-14T12:00:39.679Z",
+      __v: 0,
+      oneMoreCustomParam: {
+          description: "blablabla",
+          rate: 4.8,
+          likes: 20
+      }
+  }
+
   return (
     <div>
-      <ProductCard/>
+      <ProductCard product={product}/>
     </div>
   )
 }
