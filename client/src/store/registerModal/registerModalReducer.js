@@ -1,4 +1,4 @@
-import {SHOW_REGISTER_MODAL,HIDE_REGISTER_MODAL} from './registerModalAction'
+import {SHOW_REGISTER_MODAL,HIDE_REGISTER_MODAL} from '../actionTypes'
 
 const initialState = {
   registerModalOpen: false

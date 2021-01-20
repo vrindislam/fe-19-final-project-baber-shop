@@ -1,5 +1,4 @@
-export const SHOW_REGISTER_MODAL = 'SHOW_REGISTER_MODAL'
-export const HIDE_REGISTER_MODAL = 'HIDE_REGISTER_MODAL'
+import {SHOW_REGISTER_MODAL, HIDE_REGISTER_MODAL} from '../actionTypes'
 
 export const showRegisterModal = () => dispatch => {
   dispatch({
