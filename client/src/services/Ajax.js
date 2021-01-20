@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 
-export default class Ajax extends React.Component {
+class Ajax extends React.Component {
 
     static async get(endpoint) {
         const {data} = await axios.get(`${process.env.REACT_APP_API}${endpoint}`)
@@ -42,3 +42,5 @@ export default class Ajax extends React.Component {
         return data;
     }
 }
+
+export default Ajax;
