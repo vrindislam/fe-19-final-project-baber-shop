@@ -11,6 +11,7 @@ import ForgotPassword from '../pages/Auth/ForgotPassword'
 import Cart from '../pages/Cart'
 import Shop from '../pages/Shop'
 import AdminDashboard from '../pages/Admin/AdminDashboard'
+import AdminCategory from '../pages/Admin/AdminCategory'
 
 function MainRoutes () {
   return (
@@ -22,6 +23,7 @@ function MainRoutes () {
       <Route exact path={'/cart'} component={Cart}/>
       <Route exact path={'/shop'} component={Shop}/>
       <AdminRoute exact path={'/admin/dashboard'} component={AdminDashboard}/>
+      <AdminRoute exact path={'/admin/category'} component={AdminCategory}/>
       <Route exact path="*" render={() => <div>Page is not found</div>} />
     </Switch>
   )
