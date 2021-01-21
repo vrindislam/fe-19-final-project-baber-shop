@@ -30,7 +30,6 @@ function SiteHeader() {
 
         <Item key="cart" className='basket-iconn' icon={<ShoppingCartOutlined />}>
           <PopoverBasket className='basket-icon'/>
-          {/* </PopoverBasket> */}
         </Item>
 
         <Item key="register" icon={<UserAddOutlined />}>

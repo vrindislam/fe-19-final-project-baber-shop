@@ -1,5 +1,4 @@
 import React from "react";
-// import "./styles.less";
 import { Modal, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import Register from "../../../pages/Auth/Register/index"
