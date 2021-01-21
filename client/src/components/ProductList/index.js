@@ -4,6 +4,7 @@ import './styles.less';
 
 const ProductList = () => {
 
+// Temporary array with products, which is not yet in the DB
     const products = [
         {
             enabled: true,
