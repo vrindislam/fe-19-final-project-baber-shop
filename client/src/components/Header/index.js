@@ -11,6 +11,8 @@ import {
   ShoppingCartOutlined,
 } from '@ant-design/icons'
 import PopoverBasket from '../PopoverBasket/index'
+import LiveSearch from './LiveSearch'
+
 
 const { Header } = Layout
 const { Item } = Menu
@@ -44,6 +46,7 @@ function SiteHeader() {
           <Link to="/admin/dashboard">Admin dashboard</Link>
         </Item>
       </Menu>
+      <LiveSearch/>
     </Header>
   )
 }
