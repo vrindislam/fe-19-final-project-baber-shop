@@ -87,8 +87,6 @@ const Login = ({history}) => {
         .catch(err => {
             console.log('Something bad happened! ---> ', err.response.data.loginOrEmail || err.response.data.password)
         })
-
-    // setVisible(false);
   };
 
   return (
