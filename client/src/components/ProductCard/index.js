@@ -6,7 +6,7 @@ import {cartAction} from "../../store/cart/cartAction";
 
 const ProductCard = ({ product }) => {
 
-    const {name, imageUrls, currentPrice, itemNo, categories, productUrl} = product;
+    const {name, imageUrls, currentPrice, itemNo, categories} = product;
     const dispatch = useDispatch();
 
     const onAddToCart = (e) => {
@@ -17,7 +17,6 @@ const ProductCard = ({ product }) => {
     return (
         <>
             <li className='product-card-container'>
-                <a href={productUrl}>
                     <Card data-category={categories} src='google.com' data-itemno={itemNo} bordered={true} style={{ width: 305, height: 272, position: 'relative' }} hoverable={true} cover={
                         <img
                             className='product-card-img'
@@ -34,7 +33,6 @@ const ProductCard = ({ product }) => {
                             <Button type="primary" className='product-card-btn' onClick={onAddToCart}>Add to cart</Button>
                         </div>
                     </Card>
-                </a>
             </li>
         </>
     )
