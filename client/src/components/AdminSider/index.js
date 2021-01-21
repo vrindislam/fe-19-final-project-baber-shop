@@ -18,7 +18,7 @@ const AdminSider = () => {
         defaultOpenKeys={["sub1", "sub2", "sub3"]}
         style={{ height: "100%", borderRight: 0 }}
       >
-        <SubMenu key="sub1" icon={<ContainerOutlined />} title="Manage Categories">
+        <SubMenu key="sub1" icon={<ContainerOutlined />} title="Manage Catalog">
           <Item key="category">
             <Link to='/admin/category'>Category</Link>
           </Item>
