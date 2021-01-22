@@ -2,15 +2,16 @@
 import React from 'react'
 import './styles.less'
 import Slider from "../../components/Slider";
+import ProductList from "../../components/ProductList";
 
-function Home(props) {
-    return (
-        <div>
-            <div>Main Page</div>
-            <Slider/>
+function Home (props) {
 
-        </div>
-    )
+  return (
+    <div>
+        <Slider/>
+        <ProductList/>
+    </div>
+  )
 }
 
 export default Home
