@@ -20,7 +20,7 @@ const App = () => {
   return (
     <Layout>
       <SiteHeader/>
-      <Content className="site-layout" style={{ padding: '0 0px', marginTop: 64}}>
+      <Content className="site-layout" style={{padding: '0 0px', marginTop: 64}}>
         <div className="site-layout-background" style={{ minHeight: 380 }}>
           <MainRoutes/>
         </div>

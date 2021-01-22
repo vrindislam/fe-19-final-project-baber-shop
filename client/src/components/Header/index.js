@@ -1,24 +1,26 @@
-import React from 'react'
-import { Layout, Menu, Badge } from 'antd'
-import './styles.less'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Layout, Menu, Badge } from "antd";
+import "./styles.less";
+import { Link } from "react-router-dom";
 import {
   AppstoreOutlined,
   SettingOutlined,
   UserOutlined,
   UserAddOutlined,
   ShoppingOutlined,
-  ShoppingCartOutlined,
-} from '@ant-design/icons'
+  ShoppingCartOutlined
+} from "@ant-design/icons";
+// import PopoverBasket from "../PopoverBasket/index";
+// import LiveSearch from "./LiveSearch";
 
-const { Header } = Layout
-const { Item } = Menu
+const { Header } = Layout;
+const { Item } = Menu;
 
-function SiteHeader() {
+function SiteHeader () {
   return (
-    <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+    <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
       <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]}>
         <Item key="home" icon={<AppstoreOutlined />}>
           <Link to="/">Home</Link>
         </Item>
@@ -30,7 +32,7 @@ function SiteHeader() {
         <Item key="cart" icon={<ShoppingCartOutlined />}>
           <Link to="/cart">
             <Badge count={2} offset={[9, 0]}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.65)' }}>Cart</span>
+              <span style={{ color: "rgba(255, 255, 255, 0.65)" }}>Cart</span>
             </Badge>
           </Link>
         </Item>
@@ -43,8 +45,8 @@ function SiteHeader() {
           <Link to="/login">Login</Link>
         </Item>
 
-        <Item key="admin-dashboard" icon={<SettingOutlined />}>
-          <Link to="/admin/dashboard">Admin dashboard</Link>
+        <Item key="pdp">
+          <Link to="/product-details">Product Details</Link>
         </Item>
 
         <Item key="admin-category" icon={<SettingOutlined />}>
@@ -52,7 +54,7 @@ function SiteHeader() {
         </Item>
       </Menu>
     </Header>
-  )
+  );
 }
 
-export default SiteHeader
+export default SiteHeader;

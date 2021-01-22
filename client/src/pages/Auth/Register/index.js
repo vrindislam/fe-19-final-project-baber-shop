@@ -33,8 +33,9 @@ const tailFormItemLayout = {
 };
 
 
-const Register = () => {
+const Register = (props) => {
   const [form] = Form.useForm();
+  console.log(props.onOk);
 
   const onFinish = (values) => {
     const newCustomer = {...values,isAdmin: false}
@@ -43,7 +44,9 @@ const Register = () => {
     axios.post(`${process.env.REACT_APP_API}/customers`, newCustomer)
       .then(savedCustomer => {console.log(savedCustomer)})
       .catch(err => {console.log(err)})
+    props.onOk()
   };
+
 
   return (
 
@@ -178,4 +181,4 @@ const Register = () => {
   );
 };
 
-export default Register
+export default Register;
