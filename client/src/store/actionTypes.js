@@ -1,2 +1,8 @@
-export const TEST_STORE = 'TEST_STORE'
+export const TEST_STORE = 'TEST_STORE';
+export const SET_LOADING = 'SET_LOADING';
+export const CANCEL_LOADING = 'CANCEL_LOADING';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const SHOW_REGISTER_MODAL = 'SHOW_REGISTER_MODAL'
+export const HIDE_REGISTER_MODAL = 'HIDE_REGISTER_MODAL'
+
 
