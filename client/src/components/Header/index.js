@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Menu, Badge } from 'antd'
+import { Layout, Menu } from 'antd'
 import './styles.less'
 import { Link } from 'react-router-dom'
 import {
@@ -10,7 +10,9 @@ import {
   ShoppingOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons'
+import PopoverBasket from '../PopoverBasket/index'
 import LiveSearch from './LiveSearch'
+
 
 const { Header } = Layout
 const { Item } = Menu
@@ -28,12 +30,8 @@ function SiteHeader() {
           <Link to="/shop">Shop</Link>
         </Item>
 
-        <Item key="cart" icon={<ShoppingCartOutlined />}>
-          <Link to="/cart">
-            <Badge count={2} offset={[9, 0]}>
-              <span style={{ color: 'rgba(255, 255, 255, 0.65)' }}>Cart</span>
-            </Badge>
-          </Link>
+        <Item key="cart" className='basket-iconn' icon={<ShoppingCartOutlined />}>
+          <PopoverBasket className='basket-icon'/>
         </Item>
 
         <Item key="register" icon={<UserAddOutlined />}>

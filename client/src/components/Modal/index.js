@@ -1,9 +1,12 @@
 import React from 'react'
 import './styles.less'
 
-function Modal (props) {
+function Modal () {
+
   return (
-    <div>Modal </div>
+    <div>
+      Register
+    </div>
   )
 }
 
