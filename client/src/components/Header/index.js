@@ -46,6 +46,10 @@ function SiteHeader() {
         <Item key="admin-dashboard" icon={<SettingOutlined />}>
           <Link to="/admin/dashboard">Admin dashboard</Link>
         </Item>
+
+        <Item key="admin-category" icon={<SettingOutlined />}>
+          <Link to="/admin/category">Admin add category</Link>
+        </Item>
       </Menu>
     </Header>
   )

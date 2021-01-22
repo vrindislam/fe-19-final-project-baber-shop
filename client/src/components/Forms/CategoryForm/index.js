@@ -1,59 +1,127 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './style.less';
-import { Form, Input, Button, message} from 'antd';
-import {createCategory} from "./functions";
+import { Form, Input, Button, message, Select} from 'antd';
+import {createCategory, getCatalog} from "./functions";
 
-// form layout settings
-const layout = {
-  labelCol: {
-    span: 24,
-  },
-  wrapperCol: {
-    span: 24,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    span: 24,
-  },
-};
-
-// constants to create form input fields8
-
-const rules = [{required: true, message: 'field is required'}];
-const fieldsSetArr = [
-  {label: "Category ID", name: "id", rules, hidden: false},
-  {label: "Category Name", name: "name", rules, hidden: false},
-  {label: "Category Description", name: "description", rules, hidden: false},
-  {label:"Image URL", name:"imgUrl", hidden: false},
-  {label:"Level", name:"level", hidden: false},
-  {label:"Parent ID", name:"parentId", hidden: false}
-]
+const {Option} = Select;
+// token will be removed
+const Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMDM3ZmU5YjQ5NzkzNWIzOGE4YTlhYiIsImZpcnN0TmFtZSI6IkVtaWxpZW4iLCJsYXN0TmFtZSI6IlNpZCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYxMTM1MDQzNywiZXhwIjoxNjExMzg2NDM3fQ.gkZtfCfy0UtOBq1ddplXydHYaCqhUVgCwhOFaIUktmI'
 
 
-const CategoryForm =() => {
-  const [form] = Form.useForm()
-  const [disabled, setDisabled] = useState(true)
+const CategoryForm = () => {
+
+  const [form] = Form.useForm();
+  const [disabledBtn, setDisabledBtn] = useState(true);
+  const [disabledParentCategory, setDisabledParentCategory] = useState(true);
+  const [levels] = useState(3);
+  const [parentCategories, setParentCategories] = useState(["cat1", "cat2", "cat3"]);
+
+  useEffect(() => {
+    // // to make request to data base and get max possible value of categories level
+    //
+    // // To launch the loader before request
+    // // ------- will be added...
+    //
+    // getCatalog(Authorization)
+    //   .then(res => {
+    //     console.log(res.data);
+    //     // const uniqLevels = [...new Set(res.data.map(cat => cat.level))][0].replace(/\D/g, '') * 1;
+    //     // setLevels(uniqLevels);
+    //   })
+    //   .catch(err => console.log('GET CATALOG ERR (CATEGORY FORM) ==>', err))
+
+  }, [])
+
+  // Create-Form Schema => can be moved in the separate file
+  const rules = [{required: true, message: 'field is required'}];
+  const fieldsSetArr = [
+    ['select-level', {label:"Level", name:"level", rules}],
+    ['select-parentCategory', {label:"Parent ID", name:"parentId", rules}],
+    ['input', {label: "Category ID", name: "id", rules}],
+    ['input', {label: "Category Name", name: "name", rules}],
+    ['input', {label: "Category Description", name: "description"}]
+  ]
+
+  // form layout settings => can be moved in the separate file
+  const layout = {
+    labelCol: {
+      span: 24,
+    },
+    wrapperCol: {
+      span: 24,
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      span: 24,
+    },
+  };
 
   // function to create form input fields based on constants
-  const setUpFormFields = () => fieldsSetArr.map(category => (
-    <Form.Item key={category.name} {...category}>
-      <Input placeholder={`input ${category.label}`} />
-    </Form.Item>
-  ))
+  const setUpFormFields = () => fieldsSetArr.map(category => {
+    let element = '';
+    const [fieldType, settings] = category;
+    switch (fieldType) {
+      case 'input':
+        element = (
+          <Form.Item key={settings.name} {...settings}>
+            <Input placeholder={`input ${settings.label}`} />
+          </Form.Item>
+        )
+        break;
+      case 'select-level':
+        element = (
+          <Form.Item key={settings.name} {...settings}>
+            <Select onChange={handleLevelChange} placeholder={`input ${settings.label}`}>
+              {[...Array(levels).keys()].map(level => (<Option key={`levelKeys${level+1}`} value={`${level+1}`}>{`level ${level+1}`}</Option>))}
+            </Select>
+          </Form.Item>
+        )
+        break;
+      case 'select-parentCategory':
+        element = (
+          <Form.Item key={settings.name} {...settings}>
+            <Select placeholder={`input ${settings.label}`} disabled={disabledParentCategory}>
+              {parentCategories.map(category => (<Option key={category} value={category}>{category}</Option>))}
+            </Select>
+          </Form.Item>
+        )
+        break;
+      default:
+        element = null
+    }
+    return element
+  })
 
-  // handle form on succesful submit
+  // function get parent Categories ID based on selected Level
+  const handleLevelChange = (level) => {
+    // Logic below helps to build Levels structure for categories; you can't create next level id parent of previous level is not specified
+    if (level.replace(/\D/g, '') * 1 === 1) {
+      setParentCategories(['null'])
+    } else {
+      const parentLevel = (level * 1 - 1).toString();
+      getCatalog(Authorization)
+        .then(res => {
+          const uniqParentForCategory = res.data
+            .filter(cat => cat.level === parentLevel)
+            .map(cat => cat.id);
+          setParentCategories([...new Set(uniqParentForCategory)])
+        })
+        .catch(err => console.log('GET CATALOG ERR (CATEGORY FORM) ==>', err))
+    }
+    setDisabledParentCategory(false);
+  }
+
+  // handle form on a successfully submit
   const onFinish = (values) => {
     console.log('Values =>>>>>', values);
-
-    // token will be removed
-    const Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMDM3ZmU5YjQ5NzkzNWIzOGE4YTlhYiIsImZpcnN0TmFtZSI6IkVtaWxpZW4iLCJsYXN0TmFtZSI6IlNpZCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYxMTIzNDM4MCwiZXhwIjoxNjExMjcwMzgwfQ.XoD1ae07PBIvN5EfG1aK2umYySTwowm0GNwx9YZ_D1g'
 
     // function will be changed
     createCategory(values, Authorization)
       .then(res => {
-        console.log(res.data)
+        console.log(res.data);
         message.success(`new Category ${res.data.name} was created`, 1.5);
+        form.resetFields();
       })
       .catch(err => {
         message.error(`${err}`, 1.5);
@@ -66,11 +134,11 @@ const CategoryForm =() => {
     console.log('Failed:', errorInfo);
   };
 
-  // Activate Submit button once form is filled
-  const handleSubmitButtonDisable = (e) => {
-    setDisabled(!form.isFieldsTouched(true) || form.getFieldsError().filter(({ errors }) => errors.length).length > 0);
+  // Activate Submit button once form is filled handleOnFieldsChange
+  const handleOnFieldsChange = (e) => {
+    // handleSubmitButtonDisable
+    setDisabledBtn(!form.isFieldsTouched(true) || form.getFieldsError().filter(({ errors }) => errors.length).length > 0);
   }
-
 
   return (
     <Form
@@ -81,22 +149,25 @@ const CategoryForm =() => {
       initialValues={{
         id: '',
         name: '',
-        description: 'some description',
-        imgUrl: 'img/catalog/women.png',
-        level: 0,
-        parentId: 'null',
+        description: '',
+        imgUrl: '',
+        level: '',
+        parentId: '',
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
-      onFieldsChange={handleSubmitButtonDisable}
+      onFieldsChange={handleOnFieldsChange}
     >
       {setUpFormFields()}
       <Form.Item {...tailLayout}>
         <Button
           type="primary"
           htmlType="submit"
-          disabled={disabled}>
+          disabled={disabledBtn}>
           Submit
+        </Button>
+        <Button htmlType="button" onClick={() => form.resetFields()} style={{marginLeft: '20px'}}>
+          Reset
         </Button>
       </Form.Item>
     </Form>

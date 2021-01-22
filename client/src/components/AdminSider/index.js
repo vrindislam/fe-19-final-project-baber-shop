@@ -20,10 +20,10 @@ const AdminSider = () => {
       >
         <SubMenu key="sub1" icon={<ContainerOutlined />} title="Manage Catalog">
           <Item key="category">
-            <Link to='/admin/category'>Category</Link>
+            <Link to='/admin/category'>Create Category</Link>
           </Item>
           <Item key="sub">
-            <Link to='/admin/sub'>Sub-Category</Link>
+            <Link to='/admin/category-list'>List of Categories</Link>
           </Item>
         </SubMenu>
         <SubMenu key="sub2" icon={<DatabaseOutlined />} title="Manage Product">
