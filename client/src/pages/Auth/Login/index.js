@@ -1,10 +1,10 @@
-import React from 'react'
-import './styles.less'
+import React from 'react';
+import './styles.less';
 
-function Login (props) {
-  return (
-    <div>Login Page</div>
-  )
+const Login = (props) => {
+    return (
+        <h2>This is Log in Page</h2>
+    )
 }
 
-export default Login
+export default Login;
