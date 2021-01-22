@@ -4,12 +4,11 @@ import { Form, Input, Button, message, Select} from 'antd';
 import {createCategory, getCatalog} from "./functions";
 
 const {Option} = Select;
-// token will be removed
+// token will be taaken from local storage
 const Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMDM3ZmU5YjQ5NzkzNWIzOGE4YTlhYiIsImZpcnN0TmFtZSI6IkVtaWxpZW4iLCJsYXN0TmFtZSI6IlNpZCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYxMTM1MDQzNywiZXhwIjoxNjExMzg2NDM3fQ.gkZtfCfy0UtOBq1ddplXydHYaCqhUVgCwhOFaIUktmI'
 
 
 const CategoryForm = () => {
-
   const [form] = Form.useForm();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledParentCategory, setDisabledParentCategory] = useState(true);
@@ -17,22 +16,10 @@ const CategoryForm = () => {
   const [parentCategories, setParentCategories] = useState(["cat1", "cat2", "cat3"]);
 
   useEffect(() => {
-    // // to make request to data base and get max possible value of categories level
-    //
-    // // To launch the loader before request
-    // // ------- will be added...
-    //
-    // getCatalog(Authorization)
-    //   .then(res => {
-    //     console.log(res.data);
-    //     // const uniqLevels = [...new Set(res.data.map(cat => cat.level))][0].replace(/\D/g, '') * 1;
-    //     // setLevels(uniqLevels);
-    //   })
-    //   .catch(err => console.log('GET CATALOG ERR (CATEGORY FORM) ==>', err))
-
+    // logic will be added later
   }, [])
 
-  // Create-Form Schema => can be moved in the separate file
+  // Create-Form Schema and controls rules
   const rules = [{required: true, message: 'field is required'}];
   const fieldsSetArr = [
     ['select-level', {label:"Level", name:"level", rules}],
@@ -42,7 +29,7 @@ const CategoryForm = () => {
     ['input', {label: "Category Description", name: "description"}]
   ]
 
-  // form layout settings => can be moved in the separate file
+  // form layout settings
   const layout = {
     labelCol: {
       span: 24,
@@ -114,9 +101,7 @@ const CategoryForm = () => {
 
   // handle form on a successfully submit
   const onFinish = (values) => {
-    console.log('Values =>>>>>', values);
-
-    // function will be changed
+    // will be changed with common Ajax
     createCategory(values, Authorization)
       .then(res => {
         console.log(res.data);
@@ -131,7 +116,8 @@ const CategoryForm = () => {
 
   // handle form on faild submit
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log('Form Failed on submit:', errorInfo);
+    message.error('Form Failed on submit', 1.5);
   };
 
   // Activate Submit button once form is filled handleOnFieldsChange
