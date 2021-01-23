@@ -108,6 +108,7 @@ const Login = ({history}) => {
                  }}
             >
                 <LoginIcon />
+                LogIn
             </div>
             <LoginFormInModal
                 visible={visible}
