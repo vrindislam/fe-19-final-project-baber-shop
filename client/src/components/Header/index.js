@@ -23,7 +23,7 @@ function SiteHeader() {
             <div className="logo"/>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
                 <Item key="home" icon={<AppstoreOutlined/>}>
-                    <Link to="/home">Home</Link>
+                    <Link to="/">Home</Link>
                 </Item>
 
                 <Item key="plp" icon={<ShoppingOutlined/>}>
