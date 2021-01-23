@@ -11,7 +11,7 @@ import ErrorPage from "../pages/ErrorPage404";
 const MainRoutes = () => {
     return (
         <Switch>
-            <Route exact path={'/home'} component={Home}/>
+            <Route exact path={'/'} component={Home}/>
             <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/cart'} component={Cart}/>
