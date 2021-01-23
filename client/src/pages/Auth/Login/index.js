@@ -2,10 +2,9 @@ import React, {useState} from 'react'
 import './styles.less'
 import {Link} from "react-router-dom";
 import Ajax from "../../../services/Ajax";
-import Logo from '../../../logo.svg';
 
 import {Modal, Form, Input, message} from 'antd';
-import Icon, {UserOutlined, LockOutlined} from '@ant-design/icons';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
 
 
 const LoginFormInModal = ({visible, onSubmit, onCancel}) => {
@@ -98,8 +97,6 @@ const Login = ({history}) => {
             })
     };
 
-    const LoginIcon = props => <Icon component={() => Logo} {...props} />;
-
     return (
         <div>
             <div style={{height: 80 + 'px'}}
@@ -107,7 +104,6 @@ const Login = ({history}) => {
                      setVisible(true);
                  }}
             >
-                <LoginIcon />
                 LogIn
             </div>
             <LoginFormInModal
