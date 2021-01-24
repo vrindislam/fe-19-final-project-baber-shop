@@ -7,12 +7,12 @@ const Btn = withRouter(({history}) => {
 
     return (
         <button type='primary' onClick={() => {
-            history.push('/home')
+            history.push('/')
         }}> Back to Home page!</button>
     );
 })
 
-const ErrorPage = (props) => {
+const ErrorPage = () => {
     return (
         <>
             <Result
