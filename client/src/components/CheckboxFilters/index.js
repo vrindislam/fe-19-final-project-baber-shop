@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import './styles.less';
 import CheckboxItem from "./CheckboxItem";
+// import Ajax from "../../services/Ajax";
 
 const CheckboxFilter = (props) => {
 
     const [checkboxArr, setCheckbox] = useState([]);
-
+    // const [filters, setFilters] = useState([]);
     const catchCheckbox = (e) => {
         const clicked = e.target;
         const index = checkboxArr.findIndex(item => item === clicked.name);
@@ -50,8 +51,6 @@ const CheckboxFilter = (props) => {
                 <CheckboxItem name='france'/>
             </div>
         </div>
-
     )
 }
-
 export default CheckboxFilter;

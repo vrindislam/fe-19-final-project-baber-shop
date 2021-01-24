@@ -3,10 +3,11 @@ import axios from "axios";
 
 class Ajax extends React.Component {
 
-    static async get(endpoint) {
-        const {data} = await axios.get(`${process.env.REACT_APP_API}${endpoint}`)
-        console.log('get all data-->', data);
-        return data
+    static get(endpoint) {
+        // const {data} = axios.get(`${process.env.REACT_APP_API}${endpoint}`)
+        // console.log('get all data-->', data);
+        // return data
+        return axios.get(`${process.env.REACT_APP_API}${endpoint}`)
     }
 
     static async post(endpoint, object) {
