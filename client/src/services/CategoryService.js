@@ -18,7 +18,7 @@ class CategoryService {
         }
     }
 
-    async getLowestPrice(category = 'razor') {
+    async getLowestPrice(category = {id: 'razor'}) {
         const {products} = await Ajax.get(`/products/filter?categories=${category.id}`);
         return Math.min.apply(Math, (products || []).map(p => p.currentPrice));
     }
