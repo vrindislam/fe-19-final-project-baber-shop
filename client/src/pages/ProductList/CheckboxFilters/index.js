@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.less';
 
 const CheckboxFilter = () => {
+
+    const [checkboxArr, setCheckbox] = useState([]);
+
+    const catchCheckbox = (e) => {
+        const clicked = e.target;
+        const index = checkboxArr.findIndex(item => item === clicked.value);
+        const clonedArr = [...checkboxArr];
+        if (clicked.type === 'checkbox') {
+            console.log(clicked.value, 'was clicked');
+            if (index < 0) {
+                clonedArr.push(clicked.value);
+                setCheckbox(clonedArr);
+                console.log('this checkbox arr', clonedArr);
+            } else {
+                const filtered = clonedArr.filter(item => item !== clicked.value);
+                setCheckbox(filtered);
+                console.log('this checkbox arr', filtered);
+            }
+        }
+    }
+
     return (
         <>
-            <div className='checkbox-container'>
+            <div className='checkbox-container' onClick={catchCheckbox}>
                 <div className='checkbox-group'>
                     <p className='checkbox-group__name'>Category</p>
                     <input className='checkbox-group__item' type="checkbox" value='razor'/> Razor <br/>
