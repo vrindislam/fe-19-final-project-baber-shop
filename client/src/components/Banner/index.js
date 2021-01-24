@@ -16,7 +16,6 @@ const Banner = ({title, config}) => {
             case 'cp': {
                 CategoryService.getRandomCategories(1)
                     .then(cats => {
-                        console.log(111, cats)
                         setCategories(cats || [])
                     });
                 break;
