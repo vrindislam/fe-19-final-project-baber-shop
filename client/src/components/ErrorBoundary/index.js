@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import * as Sentry from "@sentry/react";
-import Error from "../../pages/ErrorPage_Boundary";
+import ErrorPageBoundary from "../../pages/ErrorPage_Boundary";
+
+// used class component as Hooks for ErrorBoundary are not available
 
 export default class ErrorBoundary extends PureComponent {
   state = {
@@ -18,26 +19,21 @@ export default class ErrorBoundary extends PureComponent {
 
   // use to log an error in Sentry
   componentDidCatch (error, errorInfo) {
-    this.setState({ error, errorInfo });
     Sentry.withScope((scope) => {
       scope.setExtras(errorInfo);
       const eventId = Sentry.captureException(error);
-      this.setState({ eventId, errorInfo });
+      this.setState({ eventId, errorInfo, error });
     });
   }
 
   render () {
     const { hasError, errorInfo, eventId, error } = this.state;
     if (hasError) {
-      return <Error
+      return <ErrorPageBoundary
         errorInfo={errorInfo}
         eventId={eventId}
-        error={error} />;
+        error={error} />
     }
     return this.props.children;
   }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired
-};

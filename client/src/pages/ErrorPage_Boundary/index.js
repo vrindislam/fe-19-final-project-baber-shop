@@ -3,7 +3,7 @@ import { Result, Button, Row, Col } from "antd";
 import * as Sentry from "@sentry/react";
 import { useHistory } from "react-router";
 
-const Error = (props) => {
+const ErrorPageBoundary = (props) => {
   const history = useHistory();
   const { errorInfo, error, eventId } = props;
   return (
@@ -37,4 +37,4 @@ const Error = (props) => {
   );
 };
 
-export default Error;
+export default ErrorPageBoundary;
