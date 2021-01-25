@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu} from "antd";
+import { Layout, Menu } from "antd";
 import "./styles.less";
 import { Link } from "react-router-dom";
 import {
@@ -9,27 +9,36 @@ import {
   UserAddOutlined,
   ShoppingOutlined,
   ShoppingCartOutlined,
-} from '@ant-design/icons'
-import PopoverBasket from '../PopoverBasket/index'
+  LogoutOutlined
+} from "@ant-design/icons";
+import PopoverBasket from "../PopoverBasket/index";
 // import LiveSearch from './LiveSearch'
 
+const { Header } = Layout;
+const { Item } = Menu;
 
-const {Header} = Layout
-const {Item} = Menu
+function SiteHeader () {
 
-function SiteHeader() {
-    return (
-        <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
-            <div className="logo"/>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}>
-                <Item key="home" icon={<AppstoreOutlined/>}>
-                    <Link to="/">Home</Link>
-                </Item>
-                <Item key="plp" icon={<ShoppingOutlined/>}>
-                    <Link to="/shop">Shop</Link>
-                </Item>
-        <Item key="cart" className='basket-iconn' icon={<ShoppingCartOutlined />}>
-          <PopoverBasket className='basket-icon'/>
+  const handleLogout = () => {
+    if(!localStorage.getItem('token')) return
+    localStorage.removeItem('token');
+
+    // once header will be finished maybe it will be needed to add some ui fixes
+
+  }
+
+  return (
+    <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+      <div className="logo" />
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]}>
+        <Item key="home" icon={<AppstoreOutlined />}>
+          <Link to="/">Home</Link>
+        </Item>
+        <Item key="plp" icon={<ShoppingOutlined />}>
+          <Link to="/shop">Shop</Link>
+        </Item>
+        <Item key="cart" className="basket-iconn" icon={<ShoppingCartOutlined />}>
+          <PopoverBasket className="basket-icon" />
         </Item>
 
         <Item key="shop" icon={<ShoppingOutlined />}>
@@ -51,7 +60,13 @@ function SiteHeader() {
         <Item key="admin-category" icon={<SettingOutlined />}>
           <Link to="/admin/category">Admin add category</Link>
         </Item>
+
+        <Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout} >
+          Logout
+        </Item>
+
       </Menu>
+
     </Header>
   );
 }
