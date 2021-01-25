@@ -1,12 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './styles.less';
 import CheckboxItem from "./CheckboxItem";
-// import Ajax from "../../services/Ajax";
+import Ajax from "../../services/Ajax";
+// import axios from "axios";
 
 const CheckboxFilter = (props) => {
 
     const [checkboxArr, setCheckbox] = useState([]);
-    // const [filters, setFilters] = useState([]);
+    const [filters, setFilters] = useState([]);
+    // const [checkedBox, setCheckboxes] = useState("");
+    // const getFilteredProducts = async (query) => await axios.post(`${process.env.REACT_APP_API}/products/filter/`,query);
+
+    // const findItem = (event) => {
+    //     setCheckboxes(event.target.value)
+    // }
+
+    useEffect(() => {
+        async function fetch() {
+            const {data} = await Ajax.get('/filters');
+            setFilters(data);
+        }
+
+        fetch()
+    }, []);
+    console.log('filters -->>', filters);
+
     const catchCheckbox = (e) => {
         const clicked = e.target;
         const index = checkboxArr.findIndex(item => item === clicked.name);
@@ -27,29 +45,11 @@ const CheckboxFilter = (props) => {
 
     return (
         <div className='checkbox-container' onClick={catchCheckbox}>
-            <div className='checkbox-group'>
-                <p className='checkbox-group__name'>Category</p>
-                <CheckboxItem name='razor'/>
-                <CheckboxItem name='trimmer'/>
-                <CheckboxItem name='scissors'/>
-            </div>
-            <div className='checkbox-group'>
-                <p className='checkbox-group__name'>Brand</p>
-                <CheckboxItem name='jaguar'/>
-                <CheckboxItem name='panasonic'/>
-                <CheckboxItem name='oster'/>
-                <CheckboxItem name='sibel'/>
-                <CheckboxItem name='wahi'/>
-                <CheckboxItem name='kasho'/>
-            </div>
-            <div className='checkbox-group'>
-                <p className='checkbox-group__name'>Country of origin</p>
-                <CheckboxItem name='ukraine'/>
-                <CheckboxItem name='usa'/>
-                <CheckboxItem name='china'/>
-                <CheckboxItem name='japan'/>
-                <CheckboxItem name='france'/>
-            </div>
+            {
+                filters.map(item =>
+                    <CheckboxItem name={item.name} key={item.name}/>
+                )
+            }
         </div>
     )
 }
