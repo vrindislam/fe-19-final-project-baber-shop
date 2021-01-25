@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Badge } from "antd";
+import { Layout, Menu} from "antd";
 import "./styles.less";
 import { Link } from "react-router-dom";
 import {
@@ -34,14 +34,6 @@ function SiteHeader() {
 
         <Item key="shop" icon={<ShoppingOutlined />}>
           <Link to="/shop">Shop</Link>
-        </Item>
-
-        <Item key="cart" icon={<ShoppingCartOutlined />}>
-          <Link to="/cart">
-            <Badge count={2} offset={[9, 0]}>
-              <span style={{ color: "rgba(255, 255, 255, 0.65)" }}>Cart</span>
-            </Badge>
-          </Link>
         </Item>
 
         <Item key="register" icon={<UserAddOutlined />}>
