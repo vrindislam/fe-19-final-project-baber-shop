@@ -5,10 +5,11 @@ const CheckboxItem = (props) => {
 
     return (
         <>
-            <div className='checkbox-group__item'>
-                <input type="checkbox" id={props.name} name={props.name}/>
+            <div>
+                <input data-type={props.type} type="checkbox" id={props.name} name={props.name}/>
                 <label htmlFor={props.name}>{props.name}</label>
             </div>
+
         </>
     )
 }

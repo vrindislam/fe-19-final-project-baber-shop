@@ -2,18 +2,15 @@ import React, {useState, useEffect} from 'react';
 import './styles.less';
 import CheckboxItem from "./CheckboxItem";
 import Ajax from "../../services/Ajax";
+import {useSelector} from "react-redux";
 // import axios from "axios";
 
 const CheckboxFilter = (props) => {
 
     const [checkboxArr, setCheckbox] = useState([]);
     const [filters, setFilters] = useState([]);
-    // const [checkedBox, setCheckboxes] = useState("");
-    // const getFilteredProducts = async (query) => await axios.post(`${process.env.REACT_APP_API}/products/filter/`,query);
-
-    // const findItem = (event) => {
-    //     setCheckboxes(event.target.value)
-    // }
+    const filtersRedux = useSelector(state => state.filters.filter);
+    console.log('redux--->>', filtersRedux);
 
     useEffect(() => {
         async function fetch() {
@@ -23,22 +20,30 @@ const CheckboxFilter = (props) => {
 
         fetch()
     }, []);
-    console.log('filters -->>', filters);
+    const trans  = [...filters].map(item =>{
+        return {
+            type: item.type,
+            name: item.name,
+            id: item._id
+        }
+    });
+    console.log('----->>', trans);
 
     const catchCheckbox = (e) => {
         const clicked = e.target;
-        const index = checkboxArr.findIndex(item => item === clicked.name);
+        console.log('clicked', clicked);
+        const index = checkboxArr.findIndex(item => item.name === clicked.name);
         const clonedArr = [...checkboxArr];
         if (clicked.type === 'checkbox') {
             console.log(clicked.name, 'was clicked');
             if (index < 0) {
-                clonedArr.push(clicked.name);
+                clonedArr.push({name:clicked.name, type:clicked.dataset.type});
                 setCheckbox(clonedArr);
-                console.log('this checkbox arr', clonedArr);
+                console.log('before this checkbox arr', clonedArr);
             } else {
-                const filtered = clonedArr.filter(item => item !== clicked.name);
+                const filtered = clonedArr.filter(item => item.name !== clicked.name);
                 setCheckbox(filtered);
-                console.log('this checkbox arr', filtered);
+                console.log('after this checkbox arr', filtered);
             }
         }
     }
@@ -46,8 +51,10 @@ const CheckboxFilter = (props) => {
     return (
         <div className='checkbox-container' onClick={catchCheckbox}>
             {
-                filters.map(item =>
-                    <CheckboxItem name={item.name} key={item.name}/>
+                trans.map(item =>
+                    // <div className='checkbox-group__item'>
+                        <CheckboxItem type={item.type} name={item.name} key={item.name}/>
+                    // </div>
                 )
             }
         </div>
