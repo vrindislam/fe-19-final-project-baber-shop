@@ -4,23 +4,22 @@ import CheckboxItem from "./CheckboxItem";
 import Ajax from "../../services/Ajax";
 import {useSelector, useDispatch} from "react-redux";
 import {checkboxFilterAdd, checkboxFilterDelete} from "../../store/checkboxFilters/checkboxFiltersAction";
-// import axios from "axios";
 
 const CheckboxFilter = (props) => {
 
     const [filters, setFilters] = useState([]);
     const filtersRedux = useSelector(state => state.filters.filters);
-    console.log('redux--->>', filtersRedux);
     const dispatch = useDispatch();
+    console.log('redux--->>', filtersRedux);
 
     useEffect(() => {
         async function fetch() {
             const {data} = await Ajax.get('/filters');
             setFilters(data);
         }
-
         fetch()
     }, []);
+
     const trans  = [...filters].map(item =>{
         return {
             type: item.type,
