@@ -1,11 +1,10 @@
 import React, {useEffect} from "react";
-import { Layout, Row, Col, Divider } from "antd";
+import { Layout, Row, Col, Divider} from "antd";
 import "./styles.less";
 import AdminSider from "../../../components/AdminSider";
 import CategoryForm from "../../../components/Forms/CategoryForm";
 
-
-const { Content} = Layout;
+const { Content } = Layout;
 
 const AdminCatergory = () => {
 
@@ -25,7 +24,6 @@ const AdminCatergory = () => {
             </Col>
           </Row>
         </Content>
-
     </Layout>
   );
 };
