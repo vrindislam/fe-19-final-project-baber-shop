@@ -7,39 +7,38 @@ import {checkboxFilterAdd, checkboxFilterDelete} from "../../store/checkboxFilte
 
 const CheckboxFilter = (props) => {
 
-    const [filters, setFilters] = useState([]);
+    const [filtersFromDB, setFiltersFromDB] = useState([]);
     const filtersRedux = useSelector(state => state.filters.filters);
     const dispatch = useDispatch();
-    console.log('redux--->>', filtersRedux);
+    console.log('from redux--->>', filtersRedux);
 
     useEffect(() => {
         async function fetch() {
             const {data} = await Ajax.get('/filters');
-            setFilters(data);
+            setFiltersFromDB(data);
         }
+
         fetch()
     }, []);
 
-    const trans  = [...filters].map(item =>{
-        return {
-            type: item.type,
-            name: item.name,
-            id: item._id
-        }
-    });
-    console.log('----->>', trans);
+    // const filters = [...filtersFromDB].map(item => {
+    //     return {
+    //         type: item.type,
+    //         name: item.name
+            // id: item._id
+        // }
+    // });
+
+    console.log('filters ----->>', filtersFromDB);
 
     const catchCheckbox = (e) => {
-        const clicked = e.target;
-        const index = filtersRedux.findIndex(item => item.name === clicked.name);
-        if (clicked.type === 'checkbox') {
-            const el = {type:clicked.dataset.type, name:clicked.name};
+        if (e.target.type === 'checkbox') {
+            const index = filtersRedux.findIndex(item => item.name === e.target.name);
+            const el = {type: e.target.dataset.type, name: e.target.name};
             if (index < 0) {
                 dispatch(checkboxFilterAdd(el));
-                console.log('before this checkbox arr', filtersRedux);
             } else {
                 dispatch(checkboxFilterDelete(el));
-                console.log('after this checkbox arr', filtersRedux);
             }
         }
     }
@@ -47,8 +46,8 @@ const CheckboxFilter = (props) => {
     return (
         <div className='checkbox-container' onClick={catchCheckbox}>
             {
-                trans.map(item =>
-                    // <div className='checkbox-group__item'>
+                filtersFromDB.map(item =>
+                        // <div className='checkbox-group__item'>
                         <CheckboxItem type={item.type} name={item.name} key={item.name}/>
                     // </div>
                 )
