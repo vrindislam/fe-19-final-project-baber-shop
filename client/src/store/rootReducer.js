@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   myModalRegister: myModalRegister,
   preloader: preloaderReducer,
   cart: cartReducer,
-  filters: filterReducer
+  checkboxFilters: filterReducer
 })
 
 export default rootReducer

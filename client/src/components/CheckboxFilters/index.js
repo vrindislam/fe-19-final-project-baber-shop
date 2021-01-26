@@ -8,7 +8,7 @@ import {checkboxFilterAdd, checkboxFilterDelete} from "../../store/checkboxFilte
 const CheckboxFilter = (props) => {
 
     const [filtersFromDB, setFiltersFromDB] = useState([]);
-    const filtersRedux = useSelector(state => state.filters.filters);
+    const filtersRedux = useSelector(state => state.checkboxFilters.filters);
     const dispatch = useDispatch();
     console.log('from redux--->>', filtersRedux);
 
@@ -21,15 +21,12 @@ const CheckboxFilter = (props) => {
         fetch()
     }, []);
 
-    // const filters = [...filtersFromDB].map(item => {
-    //     return {
-    //         type: item.type,
-    //         name: item.name
-            // id: item._id
-        // }
-    // });
+    const types = filtersFromDB.map(item => {
+       return item.type
+    })
+    const uniq = Array.from(new Set(types));
 
-    console.log('filters ----->>', filtersFromDB);
+    console.log('filters ----->>', uniq);
 
     const catchCheckbox = (e) => {
         if (e.target.type === 'checkbox') {
