@@ -1,15 +1,34 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './styles.less'
+import Ajax from "../../../services/Ajax";
 
-const CheckboxItem = (props) => {
+
+const CheckboxItem = ({types}) => {
+
+    const [names, setNames] = useState([]);
+
+    useEffect(() => {
+        async function fetch() {
+            const {data} = await Ajax.get(`/filters/${types}`);
+            setNames(data);
+        }
+
+        fetch()
+    }, [types]);
+
+    const arr = names.map(item => {
+        return item.name
+    })
 
     return (
-        <>
-            <div>
-                <input data-type={props.type} type="checkbox" id={props.name} name={props.name}/>
-                <label htmlFor={props.name}>{props.name}</label>
-            </div>
-
+        <>{
+            arr.map(item =>
+                <div>
+                    <input data-type={types} type="checkbox" id={types} name={item}/>
+                    <label htmlFor={item}>{item}</label>
+                </div>
+            )
+        }
         </>
     )
 }
