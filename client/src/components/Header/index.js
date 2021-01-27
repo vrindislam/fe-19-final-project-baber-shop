@@ -37,14 +37,7 @@ function SiteHeader () {
         <Item key="plp" icon={<ShoppingOutlined />}>
           <Link to="/shop">Shop</Link>
         </Item>
-        <Item key="cart" className="basket-iconn" icon={<ShoppingCartOutlined />}>
-          <PopoverBasket className="basket-icon" />
-        </Item>
-
-        <Item key="shop" icon={<ShoppingOutlined />}>
-          <Link to="/shop">Shop</Link>
-        </Item>
-
+        
         <Item key="register" icon={<UserAddOutlined />}>
           <Link to="/register">Register</Link>
         </Item>
@@ -61,9 +54,14 @@ function SiteHeader () {
           <Link to="/admin/category">Admin add category</Link>
         </Item>
 
+        <Item key="cart" icon={<ShoppingCartOutlined className='basket-icon'/>}>
+          <PopoverBasket/>
+        </Item>
+
         <Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout} >
           Logout
         </Item>
+
 
       </Menu>
 
