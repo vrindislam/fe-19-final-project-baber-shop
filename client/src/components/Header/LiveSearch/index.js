@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import './style.less'
 import { Input, Menu, Dropdown } from 'antd'
 import { Link } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
 import { getSearchedProducts } from '../../../functions/products/product'
+import {debounce} from 'lodash'
 
 const prefix = <SearchOutlined/>
 
@@ -14,6 +15,22 @@ const LiveSearch = () => {
   const findItem = (event) => {
     setFilteredItem(event.target.value)
   }
+
+  const filterData = (products) =>{
+    setItems(products.data.filter(item => {
+      return item.name.toLowerCase().match(filteredItem)
+    }))
+  }
+
+  const updateQuery = () =>{
+    if(!filteredItem){
+      return setItems([])
+    }
+    getSearchedProducts({query: filteredItem})
+      .then(products => filterData(products))
+      .catch(err => console.log(err))
+  }
+  const delayedQuery = useCallback(debounce(updateQuery, 500),[filteredItem])
 
 
   const products = items.map((el,index) =>
@@ -28,15 +45,9 @@ const LiveSearch = () => {
   </Menu>)
 
   useEffect(() => {
-    if(!filteredItem){
-      return setItems([])
-    }
-    getSearchedProducts({query: filteredItem})
-      .then(products => setItems(products.data.filter(item => {
-        return item.name.toLowerCase().match(filteredItem)
-      })))
-      .catch(err => console.log(err))
-  }, [filteredItem])
+    delayedQuery()
+    return delayedQuery.cancel
+  }, [delayedQuery])
 
 
 
