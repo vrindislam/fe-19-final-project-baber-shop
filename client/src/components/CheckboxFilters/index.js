@@ -5,7 +5,7 @@ import Ajax from "../../services/Ajax";
 import {useSelector, useDispatch} from "react-redux";
 import {checkboxFilterAdd, checkboxFilterDelete} from "../../store/checkboxFilters/checkboxFiltersAction";
 
-const CheckboxFilter = (props) => {
+const CheckboxFilter = () => {
 
     const [filtersFromDB, setFiltersFromDB] = useState([]);
     const filtersRedux = useSelector(state => state.checkboxFilters.filters);
@@ -21,12 +21,16 @@ const CheckboxFilter = (props) => {
         fetch()
     }, []);
 
-    const types = filtersFromDB.map(item => {
-       return item.type
-    })
-    const uniq = Array.from(new Set(types));
+    // const types = filtersFromDB.map(item => {
+    //     return {
+    //         type: item.type,
+    //         name: item.name
+    //     }
+    // })
 
-    console.log('filters ----->>', uniq);
+    // const uniq = Array.from(new Set(types));
+
+    console.log('filters ----->>', filtersFromDB);
 
     const catchCheckbox = (e) => {
         if (e.target.type === 'checkbox') {
@@ -42,14 +46,16 @@ const CheckboxFilter = (props) => {
 
     return (
         <div className='checkbox-container' onClick={catchCheckbox}>
+            <p>There are {filtersFromDB.length} filters</p>
             {
                 filtersFromDB.map(item =>
-                        // <div className='checkbox-group__item'>
+                    <div className='checkbox-group__item'>
                         <CheckboxItem type={item.type} name={item.name} key={item.name}/>
-                    // </div>
+                    </div>
                 )
             }
         </div>
     )
 }
+
 export default CheckboxFilter;
