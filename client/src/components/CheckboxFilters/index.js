@@ -21,16 +21,18 @@ const CheckboxFilter = () => {
         fetch()
     }, []);
 
-    // const types = filtersFromDB.map(item => {
-    //     return {
-    //         type: item.type,
-    //         name: item.name
-    //     }
-    // })
+    const types = filtersFromDB.map(item => {
+        return {
+            type: item.type,
+            name: item.name
+        }
+    })
+    // const a = [{
+    //     type: 'category', name: ['razor', 'trimmer', 'scissors']
+    // }]
 
-    // const uniq = Array.from(new Set(types));
-
-    console.log('filters ----->>', filtersFromDB);
+    // console.log('filters ----->>', Object.assign(...types,{}));
+    console.log('filters ----->>', types);
 
     const catchCheckbox = (e) => {
         if (e.target.type === 'checkbox') {
@@ -48,7 +50,7 @@ const CheckboxFilter = () => {
         <div className='checkbox-container' onClick={catchCheckbox}>
             <p>There are {filtersFromDB.length} filters</p>
             {
-                filtersFromDB.map(item =>
+                types.map(item =>
                     <div className='checkbox-group__item'>
                         <CheckboxItem type={item.type} name={item.name} key={item.name}/>
                     </div>
