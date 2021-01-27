@@ -1,5 +1,7 @@
 import React from "react";
-import { Layout, Menu } from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import { Layout, Menu} from "antd";
+import { authUser } from "../../store/user/userAction";
 import "./styles.less";
 import { Link } from "react-router-dom";
 import {
@@ -13,18 +15,17 @@ import {
 } from "@ant-design/icons";
 import PopoverBasket from "../PopoverBasket/index";
 // import LiveSearch from './LiveSearch'
-
 const { Header } = Layout;
 const { Item } = Menu;
 
 function SiteHeader () {
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state => ({...state.user})))
 
   const handleLogout = () => {
-    if(!localStorage.getItem('token')) return
+    if(!isAuthenticated) return
+    dispatch(authUser(false))
     localStorage.removeItem('token');
-
-    // once header will be finished maybe it will be needed to add some ui fixes
-
   }
 
   return (
@@ -61,9 +62,11 @@ function SiteHeader () {
           <Link to="/admin/category">Admin add category</Link>
         </Item>
 
+        {isAuthenticated &&
         <Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout} >
           Logout
-        </Item>
+        </Item>}
+
 
       </Menu>
 
