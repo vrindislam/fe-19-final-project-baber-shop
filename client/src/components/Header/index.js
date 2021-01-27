@@ -14,7 +14,9 @@ import {
   LogoutOutlined
 } from "@ant-design/icons";
 import PopoverBasket from "../PopoverBasket/index";
-// import LiveSearch from './LiveSearch'
+
+import LiveSearch from './LiveSearch'
+
 const { Header } = Layout;
 const { Item } = Menu;
 
@@ -68,7 +70,7 @@ function SiteHeader () {
 
 
       </Menu>
-
+    <LiveSearch/>
     </Header>
   );
 }
