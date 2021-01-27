@@ -1,12 +1,13 @@
 import React from "react";
 import { Modal } from "antd";
 import withModal from "../index";
-import Register from "../../../components/Forms/RegistrationForm/index";
+import LoginFormInModal from "../../../pages/Auth/Login"
 
-const ModalRegistration = (props) => {
+const ModalLogin = (props) => {
+
   return (
     <div>
-      {props.modalTypes === "RegistrationForm" &&
+      {props.modalTypes === "LoginForm" &&
       <Modal
         centered
         visible={props.modalHandler}
@@ -14,13 +15,11 @@ const ModalRegistration = (props) => {
         width={1000}
         footer={false}
       >
-        <Register onOk={props.handleRegisterModalClose}/>
+        <LoginFormInModal onOk={props.handleRegisterModalClose}/>
       </Modal>
       }
     </div>
   );
 };
 
-export default withModal(ModalRegistration);
-
-
+export default withModal(ModalLogin);

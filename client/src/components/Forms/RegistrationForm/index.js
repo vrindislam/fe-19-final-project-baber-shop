@@ -2,10 +2,15 @@ import React from "react";
 import "./styles.less";
 import axios from "axios";
 import { collectionItemsForm } from "./collectionItems";
-import { Button, Form, Input,Typography } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { Link } from "react-router-dom";
 
-const {Title} = Typography;
+import LoginFormInModal from "../../Modal/LoginModal_test/index";
+import { showLoginModal } from "../../../store/modalTypes/modalTypesAction";
+import { showModal } from "../../../store/modal/modalAction";
+import { useDispatch } from "react-redux";
+
+const { Title } = Typography;
 const formItemLayout2 = {
   labelCol: {
     xs: { span: 24 },
@@ -15,7 +20,7 @@ const formItemLayout2 = {
     xs: { span: 24 },
     sm: { span: 16 }
   }
-}
+};
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -28,8 +33,7 @@ const tailFormItemLayout = {
       offset: 8
     }
   }
-}
-
+};
 
 
 const RegistrationForm = (props) => {
@@ -45,10 +49,15 @@ const RegistrationForm = (props) => {
       .catch(err => {
         console.log(err);
       });
-    props.onOk()
+    props.onOk();
   };
 
   console.log();
+  const dispatch = useDispatch();
+  const showModalLog = () => {
+    dispatch(showLoginModal());
+    dispatch(showModal());
+  };
 
   return (
     <Form
@@ -67,7 +76,8 @@ const RegistrationForm = (props) => {
                    label={formItem.label}
                    rules={[{
                      required: formItem.required,
-                     message: formItem.message }, {
+                     message: formItem.message
+                   }, {
                      type: formItem.type,
                      message: formItem.messageType
                    }]}
@@ -84,8 +94,11 @@ const RegistrationForm = (props) => {
         </Button>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <Link to="/login">Already registered?(link to Login Form)</Link>
+        {/* <button onClick={showModalLog}>Already registered?(link to Login Form)</button> */}
+        <span onClick={showModalLog}>Already registered?(link to Login Form MODAL)</span>
+        <Link to="/login">link to Login PAGE</Link>
       </Form.Item>
+      <LoginFormInModal/>
     </Form>
   );
 };
