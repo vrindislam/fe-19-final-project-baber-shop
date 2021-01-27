@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './styles.less'
 import {Link} from "react-router-dom";
-import Ajax from "../../../services/Ajax";
+import LoginService from "../../../services/LoginService";
 
 import {Modal, Form, Input, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
@@ -81,19 +81,15 @@ const Login = ({history}) => {
         console.log('Received user data of login form: ', userData);
         message.loading({content: 'Loading...', key});
 
-        Ajax.post('/customers/login', userData)
+        LoginService.LoginResult(userData)
             .then(loginResult => {
-                setTimeout(() => {
-                    message.success({content: 'Successful!', key, duration: 2});
-                }, 500);
+                message.success({content: 'Successful!', key, duration: 2});
                 localStorage.setItem('token', loginResult.token);
                 history.push('/')
             })
             .catch(err => {
                 const error = err.response.data;
-                setTimeout(() => {
-                    message.error({content: error.loginOrEmail || error.password, key, duration: 3});
-                }, 500);
+                message.error({content: error.loginOrEmail || error.password, key, duration: 3});
             })
     };
 

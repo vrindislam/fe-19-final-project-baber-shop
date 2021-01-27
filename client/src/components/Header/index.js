@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Menu, Badge } from "antd";
 import "./styles.less";
 import { Link } from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -11,6 +12,8 @@ import {
   ShoppingCartOutlined,
 } from '@ant-design/icons'
 import PopoverBasket from '../PopoverBasket/index'
+import LoginModal from "../Modal/LoginModal";
+import {showLoginModal} from "../../store/loginModal/loginModalAction";
 // import LiveSearch from './LiveSearch'
 
 
@@ -18,6 +21,10 @@ const {Header} = Layout
 const {Item} = Menu
 
 function SiteHeader() {
+    const dispatch = useDispatch();
+    const loginModalShow = () => {
+        dispatch(showLoginModal())
+    }
     return (
         <Header style={{position: 'fixed', zIndex: 1, width: '100%'}}>
             <div className="logo"/>
@@ -48,9 +55,10 @@ function SiteHeader() {
           <Link to="/register">Register</Link>
         </Item>
 
-        <Item key="login" icon={<UserOutlined />}>
-          <Link to="/login">Login</Link>
+        <Item key="login" icon={<UserOutlined />} onClick={loginModalShow}>
+          Login
         </Item>
+        <LoginModal />
 
         <Item key="pdp">
           <Link to="/product-details">Product Details</Link>
