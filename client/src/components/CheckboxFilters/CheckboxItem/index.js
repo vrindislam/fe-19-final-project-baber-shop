@@ -24,7 +24,7 @@ const CheckboxItem = ({type}) => {
             names.map(item =>
                 <div key={item}>
                     <input data-type={type} type="checkbox" id={item} name={item}/>
-                    <label htmlFor={item}>{item}</label>
+                    <label className='checkbox-label' htmlFor={item}>{item}</label>
                 </div>
             )
         }
