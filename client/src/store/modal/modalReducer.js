@@ -1,4 +1,4 @@
-import {SHOW_MODAL,HIDE_MODAL} from '../actionTypes'
+import {HANDLE_MODAL} from "./modalActionTypes";
 
 const initialState = {
   modalOpen: false
@@ -6,12 +6,7 @@ const initialState = {
 
 export function modalHandler (state = initialState, action) {
   switch (action.type) {
-    case SHOW_MODAL:
-      return {
-        ...state,
-        modalOpen: action.payload
-      }
-    case HIDE_MODAL:
+    case HANDLE_MODAL:
       return {
         ...state,
         modalOpen: action.payload

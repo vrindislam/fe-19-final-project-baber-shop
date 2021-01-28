@@ -1,0 +1,1 @@
+export const HANDLE_MODAL = 'SHOW_REGISTER_MODAL'
