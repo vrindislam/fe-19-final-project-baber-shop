@@ -31,7 +31,7 @@ function SiteHeader () {
   }
 
   return (
-    <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+    <Header style={{ position: "fixed", zIndex: 1, width: "100%", height: 119 }}>
       <div className="logo" />
       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]}>
 
