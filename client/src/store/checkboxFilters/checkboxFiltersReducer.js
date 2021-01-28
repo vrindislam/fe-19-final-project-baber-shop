@@ -1,30 +1,8 @@
 import {FILTER_ADDED, FILTER_DELETED} from "../actionTypes";
 
 const initialState = {
-    filters: {}
+    filters: []
 }
-
-// export default function filterReducer(state = initialState, action){
-//
-//     switch (action.type){
-//
-//         case FILTER_ADDED:
-//
-//             return {
-//                 ...state,
-//                 filters: [...state.filters, action.payload]
-//             }
-//
-//         case FILTER_DELETED:
-//
-//             return {
-//                 filters: [...state.filters.filter(item => item.name !== action.payload.name)]
-//             }
-//
-//         default:
-//             return state
-//     }
-// }
 
 export default function filterReducer(state = initialState, action){
 
@@ -34,7 +12,7 @@ export default function filterReducer(state = initialState, action){
 
             return {
                 ...state,
-                filters: {...state.filters, ...action.payload}
+                filters: [...state.filters, action.payload]
             }
 
         case FILTER_DELETED:
@@ -47,3 +25,25 @@ export default function filterReducer(state = initialState, action){
             return state
     }
 }
+
+// export default function filterReducer(state = initialState, action){
+//
+//     switch (action.type){
+//
+//         case FILTER_ADDED:
+//
+//             return {
+//                 ...state,
+//                 filters: {...state.filters, ...action.payload}
+//             }
+//
+//         case FILTER_DELETED:
+//
+//             return {
+//                 filters: [...state.filters.filter(item => item.name !== action.payload.name)]
+//             }
+//
+//         default:
+//             return state
+//     }
+// }

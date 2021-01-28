@@ -4,6 +4,7 @@ import myModalRegister from './registerModal/registerModalReducer'
 import preloaderReducer from './preloader/preloaderReducer'
 import cartReducer from "./cart/cartReducer";
 import filterReducer from "./checkboxFilters/checkboxFiltersReducer";
+import priceFilterReducer from "./priceFilter/priceFilterReducer";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   myModalRegister: myModalRegister,
   preloader: preloaderReducer,
   cart: cartReducer,
-  checkboxFilters: filterReducer
+  checkboxFilters: filterReducer,
+  priceFilter: priceFilterReducer
 })
 
 export default rootReducer
