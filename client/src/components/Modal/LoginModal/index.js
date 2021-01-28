@@ -14,7 +14,8 @@ const LoginModal = () => {
 
     return (
         <Modal
-            title="LogIn"
+            name='login-modal'
+            title='LogIn'
             visible={modalHandler}
             onCancel={loginModalClose}
             footer={false}

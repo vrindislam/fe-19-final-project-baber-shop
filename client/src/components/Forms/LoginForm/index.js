@@ -1,24 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useHistory, Link} from 'react-router-dom';
 import './styles.less'
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import {Link} from "react-router-dom";
 import LoginService from "../../../services/LoginService";
-
+import Preloader from "../../Preloader";
+import {useDispatch} from "react-redux";
+import {hideLoginModal} from "../../../store/loginModal/loginModalAction";
+// не закрывается модальное
+// не очищаются поля
+// при нажатии сабмит с пустыми инпутами кнопка возвращается в исходный стиль
 const Login = () => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
     const onFinish = (customerData) => {
         console.log('Received values of form: ', customerData);
-        message.loading({content: 'Loading...', key: 'updatable'});
+        setLoading(true);
 
         LoginService.LoginResult(customerData)
             .then(loginResult => {
-                message.success({content: 'Successful!', key: 'updatable', duration: 2});
+                setLoading(false);
                 localStorage.setItem('token', loginResult.token);
-                return <Link to="/" />
+                // здесь диспатч isAuth: true
+                setError('');
+                dispatch(hideLoginModal());
+                history.push('/');
             })
             .catch(err => {
                 const error = err.response.data;
-                message.error({content: error.loginOrEmail || error.password, key: 'updatable', duration: 3});
+                setLoading(false);
+                setError(error.loginOrEmail || error.password);
             })
     };
 
@@ -27,10 +41,13 @@ const Login = () => {
             name="normal_login"
             className="login-form"
             initialValues={{
-                remember: true,
+                remember: true
             }}
             onFinish={onFinish}
         >
+            <Form.Item className='login-form-input-label'>
+                Login or Email
+            </Form.Item>
             <Form.Item
                 name="loginOrEmail"
                 rules={[
@@ -39,8 +56,12 @@ const Login = () => {
                         message: 'Please input your Username or Email!',
                     },
                 ]}
+                style={{margin: 0}}
             >
                 <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
+            </Form.Item>
+            <Form.Item className='login-form-input-label'>
+                Password
             </Form.Item>
             <Form.Item
                 name="password"
@@ -50,21 +71,27 @@ const Login = () => {
                         message: 'Please input your Password!',
                     },
                 ]}
+                style={{margin: 0}}
             >
                 <Input.Password
                     prefix={<LockOutlined className="site-form-item-icon"/>}
                     placeholder="Password"
                 />
             </Form.Item>
-            <Form.Item className='test-elements-class'>
+            <Form.Item style={{margin: 0}}>
                 <Link to="/forgot/password">Forgot password?</Link>
             </Form.Item>
-            <Form.Item className='test-elements-class'>
+            <Form.Item>
                 Do not have an account?
                 <Link to="/register"> Register now!</Link>
+            </Form.Item>
+            <Form.Item style={{margin: 0}}>
                 <Button type="primary" htmlType="submit" className="login-form-button">
                     Log in
                 </Button>
+            </Form.Item>
+            <Form.Item className='login-form-preloader'>
+                {loading ? <Preloader /> : error}
             </Form.Item>
         </Form>
     );
