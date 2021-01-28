@@ -2,15 +2,16 @@ import React, {useState} from 'react';
 import {useHistory, Link} from 'react-router-dom';
 import './styles.less'
 import {Form, Input, Button} from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import LoginService from "../../../services/LoginService";
 import Preloader from "../../Preloader";
 import {useDispatch} from "react-redux";
 import {hideLoginModal} from "../../../store/loginModal/loginModalAction";
-// не закрывается модальное
-// не очищаются поля
+import {authUser} from "../../../store/user/userAction";
+// модальное окно не закрывается при редиректе
 // при нажатии сабмит с пустыми инпутами кнопка возвращается в исходный стиль
 const Login = () => {
+    const [form] = Form.useForm();
     const history = useHistory();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
@@ -24,10 +25,11 @@ const Login = () => {
             .then(loginResult => {
                 setLoading(false);
                 localStorage.setItem('token', loginResult.token);
-                // здесь диспатч isAuth: true
+                dispatch(authUser(true))
                 setError('');
                 dispatch(hideLoginModal());
                 history.push('/');
+                form.resetFields(['loginOrEmail', 'password']);
             })
             .catch(err => {
                 const error = err.response.data;
@@ -38,6 +40,7 @@ const Login = () => {
 
     return (
         <Form
+            form={form}
             name="normal_login"
             className="login-form"
             initialValues={{
@@ -45,11 +48,10 @@ const Login = () => {
             }}
             onFinish={onFinish}
         >
-            <Form.Item className='login-form-input-label'>
-                Login or Email
-            </Form.Item>
             <Form.Item
                 name="loginOrEmail"
+                className='input-label'
+                label='Login or Email'
                 rules={[
                     {
                         required: true,
@@ -58,13 +60,14 @@ const Login = () => {
                 ]}
                 style={{margin: 0}}
             >
-                <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
-            </Form.Item>
-            <Form.Item className='login-form-input-label'>
-                Password
+                <Input prefix={<UserOutlined className="site-form-item-icon"/>}
+                       placeholder="Username"
+                />
             </Form.Item>
             <Form.Item
                 name="password"
+                className='input-label'
+                label='Password'
                 rules={[
                     {
                         required: true,
@@ -85,14 +88,12 @@ const Login = () => {
                 Do not have an account?
                 <Link to="/register"> Register now!</Link>
             </Form.Item>
-            <Form.Item style={{margin: 0}}>
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                    Log in
-                </Button>
-            </Form.Item>
-            <Form.Item className='login-form-preloader'>
-                {loading ? <Preloader /> : error}
-            </Form.Item>
+            <Button type="primary" htmlType="submit">
+                Log in
+            </Button>
+            <p className='preloader' style={{color: loading ? 'black' : 'red'}}>
+                {loading ? <Preloader/> : error}
+            </p>
         </Form>
     );
 };
