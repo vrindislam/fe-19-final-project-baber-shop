@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import './styles.less'
+import './styles.less';
 import Ajax from "../../../services/Ajax";
 
-const CheckboxItem = ({types}) => {
+const CheckboxItem = ({type}) => {
 
     const [checkboxNames, setNames] = useState([]);
 
     useEffect(() => {
         async function fetch() {
-            const {data} = await Ajax.get(`/filters/${types}`);
-            setNames(data);
+            const result = await Ajax.get(`/filters/${type}`);
+            setNames(result);
         }
 
         fetch()
-    }, [types]);
+    }, [type]);
 
     const names = checkboxNames.map(item => {
         return item.name
@@ -23,7 +23,7 @@ const CheckboxItem = ({types}) => {
         <>{
             names.map(item =>
                 <div key={item}>
-                    <input data-type={types} type="checkbox" id={item} name={item}/>
+                    <input data-type={type} type="checkbox" id={item} name={item}/>
                     <label htmlFor={item}>{item}</label>
                 </div>
             )

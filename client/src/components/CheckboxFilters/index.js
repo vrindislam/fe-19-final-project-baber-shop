@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './styles.less';
 import CheckboxItem from "./CheckboxItem";
-import Ajax from "../../services/Ajax";
 import {useSelector, useDispatch} from "react-redux";
 import {checkboxFilterAdd, checkboxFilterDelete} from "../../store/checkboxFilters/checkboxFiltersAction";
+import Ajax from "../../services/Ajax";
 
 const CheckboxFilter = () => {
 
@@ -14,8 +14,8 @@ const CheckboxFilter = () => {
 
     useEffect(() => {
         async function fetch() {
-            const {data} = await Ajax.get('/filters');
-            setFiltersFromDB(data);
+            const result = await Ajax.get('/filters');
+            setFiltersFromDB(result);
         }
 
         fetch()
@@ -44,7 +44,7 @@ const CheckboxFilter = () => {
                 uniqTypes.map(item =>
                     <div key={item} className='checkbox-group'>
                         <p className='checkbox-group__name'>{item}</p>
-                        <CheckboxItem types={item}/>
+                        <CheckboxItem type={item}/>
                     </div>
                 )
             }
