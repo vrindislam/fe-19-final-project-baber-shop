@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Ajax from "../../services/Ajax";
 import { Slider, InputNumber, Row, Col, Form } from 'antd';
-import './styles.less'
+import './styles.less';
+import {useDispatch} from "react-redux";
+import {checkboxFilterAdd} from "../../store/checkboxFilters/checkboxFiltersAction";
 
 const PriceSlider = () => {
-    const [minValue, setMinValue] = useState(0)
-    const [maxValue, setMaxValue] = useState(0)
-    const [filteredPrice, setFilteredPrice] = useState('')
+    const [minValue, setMinValue] = useState(200);
+    const [maxValue, setMaxValue] = useState(700);
+    const [filteredPrice, setFilteredPrice] = useState('');
+    const dispatch = useDispatch();
 
     useEffect( () => {
         const data = Ajax.get(filteredPrice);
@@ -14,27 +17,38 @@ const PriceSlider = () => {
         console.log('Data -->', data);
     }, [filteredPrice])
 
+    useEffect(()=>{
+        dispatch(checkboxFilterAdd({minPrice: minValue, maxPrice: maxValue}));
+    }, [minValue, maxValue, dispatch])
+
     const onSliderChange = value => {
+        // dispatch(checkboxFilterAdd({minPrice: value[0], maxPrice: value[1]}));
+        // dispatch(checkboxFilterAdd({maxPrice: value[1]}));
         setMinValue(value[0]);
         setMaxValue(value[1]);
     }
 
     const onSliderMouseUp = () => {
         setFilteredPrice(`/products/filter?minPrice=${minValue}&maxPrice=${maxValue}`);
-        // console.log('onMouseUp trigered')
+        // dispatch(checkboxFilterAdd({minPrice: minValue, maxPrice: maxValue}));
+        // dispatch(checkboxFilterAdd({maxPrice: value[1]}));
+        // console.log('onMouseUp triggered')
     }
 
     const onChangeInputMin = value => {
         if (maxValue > value) {
             setMinValue(value);
-            setFilteredPrice(`/products/filter?minPrice=${value}&maxPrice=${maxValue}`);
+            // dispatch(checkboxFilterAdd({minPrice: value, maxPrice: maxValue}));
+            // setFilteredPrice(`/products/filter?minPrice=${value}&maxPrice=${maxValue}`);
         }
     }
 
     const onChangeInputMax = value => {
         if (minValue < value) {
+            // dispatch(checkboxFilterAdd({maxPrice: value}));
+            // dispatch(checkboxFilterAdd({minPrice: minValue, maxPrice: value}));
             setMaxValue(value);
-            setFilteredPrice(`/products/filter?minPrice=${minValue}&maxPrice=${value}`);
+            // setFilteredPrice(`/products/filter?minPrice=${minValue}&maxPrice=${value}`);
         }
     }
 
