@@ -6,9 +6,9 @@ export const content = (
   <div className='popover-basket-div'>
     <p>You have 5 goods in the basket</p>
     <p>For a total amount ...$</p>
-    <Button className='black-button'>Make an order</Button>
+    <Button className='make-order-button'>Make an order</Button>
     <Link to="/cart">
-      <Button className='yellow-button' type={'primary'} >Go to Basket</Button>
+      <Button className='to-basket-button' type={'primary'} >Go to Basket</Button>
     </Link>
   </div>
 );

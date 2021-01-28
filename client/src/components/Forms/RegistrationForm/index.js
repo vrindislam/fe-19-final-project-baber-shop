@@ -89,7 +89,7 @@ const RegistrationForm = (props) => {
         </Form.Item>
       )}
       <Form.Item {...tailFormItemLayout}>
-        <Button className='black-button' type="primary" htmlType="submit">
+        <Button className='registration-button' type="primary" htmlType="submit">
           Register
         </Button>
       </Form.Item>
