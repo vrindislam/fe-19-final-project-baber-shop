@@ -2,6 +2,9 @@ import React, {useState} from 'react'
 import './styles.less'
 import {Link} from "react-router-dom";
 import LoginService from "../../../services/LoginService";
+// temporary will be removed once Login will be finilized
+import {useDispatch} from "react-redux";
+import {authUser} from "../../../store/user/userAction";
 
 import {Modal, Form, Input, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
@@ -76,6 +79,7 @@ const LoginFormInModal = ({visible, onSubmit, onCancel}) => {
 const Login = ({history}) => {
     const [visible, setVisible] = useState(false);
     const key = 'updatable';
+    const dispatch = useDispatch();
 
     const onSubmit = (userData) => {
         console.log('Received user data of login form: ', userData);
@@ -85,6 +89,7 @@ const Login = ({history}) => {
             .then(loginResult => {
                 message.success({content: 'Successful!', key, duration: 2});
                 localStorage.setItem('token', loginResult.token);
+                dispatch(authUser(true))
                 history.push('/')
             })
             .catch(err => {
