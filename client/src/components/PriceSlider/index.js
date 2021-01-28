@@ -21,7 +21,7 @@ const PriceSlider = () => {
 
     const onSliderMouseUp = () => {
         setFilteredPrice(`/products/filter?minPrice=${minValue}&maxPrice=${maxValue}`);
-        console.log('onMouseUp trigered')
+        // console.log('onMouseUp trigered')
     }
 
     const onChangeInputMin = value => {
