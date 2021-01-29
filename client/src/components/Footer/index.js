@@ -69,16 +69,16 @@ function Footer() {
     return (
 
         <AntFooter className='footer'>
-            <Row gutter={[10, 16]}>
-                <Col className="gutter-row ={}" xs={24} sm={24} lg={5}>
-                    <div className='footer-link'>
+            <Row gutter={[5,20]}>
+                <Col xs={24} sm={24} lg={5}>
+                    <div className='footer-logo'>
                         <Link to="/home">
                             < Image src="footerLogo/logo_white.png" alt="logo-white" className='imgTestRespons'/>
                         </Link>
                     </div>
                 </Col>
                 <Col className="footer-nav" xs={24} sm={8} lg={4}>
-                    <Link className='footer-link footer-header_link' to="/home">
+                    <Link className='footer-header_link' to="/home">
                         About Us
                     </Link>
                     <Link className='footer-link' to="/home">
@@ -95,7 +95,7 @@ function Footer() {
                     </Link>
                 </Col>
                 <Col className="footer-nav" xs={24} sm={8} lg={4}>
-                    <Link className='footer-link footer-header_link' to="/home">
+                    <Link className='footer-header_link' to="/home">
                         Contacts
                     </Link>
                     <Link className='footer-link' to="/home">
@@ -106,7 +106,7 @@ function Footer() {
                     </Link>
                 </Col>
                 <Col className="footer-nav" xs={24} sm={8} lg={4}>
-                    <Link className='footer-link footer-header_link' to="/home">
+                    <Link className='footer-header_link' to="/home">
                         Items
                     </Link>
                     <Link className='footer-link' to="/home">
@@ -119,9 +119,9 @@ function Footer() {
                         Store
                     </Link>
                 </Col>
-                <Col className="gutter-row footer-link" xs={24} sm={18} lg={7}>
+                <Col className="footer-socials" xs={24} sm={18} lg={7}>
                     <Search
-                        className='footer-subscribePanel'
+                        className='footer-socials_subscribePanel'
                         placeholder='Enter your email'
                         prefix={<MailOutlined/>}
                         allowClear
@@ -130,16 +130,19 @@ function Footer() {
                         color='yellow'
                         onSearch={() => alert('Success')}
                     />
-                    <Link className='footer-link' to="/home">
-                        <InstagramOutlined className='footer-socialIcons'/>
+                    <Link to="/home">
+                        <InstagramOutlined className='footer-socials_icons'/>
                     </Link>
-                    <Link className='footer-link' to="/home">
-                        <FacebookOutlined className='footer-socialIcons'/>
+                    <Link to="/home">
+                        <FacebookOutlined className='footer-socials_icons'/>
                     </Link>
-                    <Link className='footer-link' to="/home">
-                        <YoutubeOutlined className='footer-socialIcons'/>
+                    <Link to="/home">
+                        <YoutubeOutlined className='footer-socials_icons'/>
                     </Link>
                 </Col>
+            </Row>
+            <Row>
+                <Col className='footer-copyright'>Copyright © Barber All Rights Reserved 2021</Col>
             </Row>
         </AntFooter>
     )
