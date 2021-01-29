@@ -6,11 +6,9 @@ import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import LoginService from "../../../services/LoginService";
 import Preloader from "../../Preloader";
 import {useDispatch} from "react-redux";
-import {hideLoginModal} from "../../../store/loginModal/loginModalAction";
 import {authUser} from "../../../store/user/userAction";
-// модальное окно не закрывается при редиректе
-// при нажатии сабмит с пустыми инпутами кнопка возвращается в исходный стиль
-const Login = () => {
+
+const Login = ({toCloseModal}) => {
     const [form] = Form.useForm();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -27,7 +25,7 @@ const Login = () => {
                 localStorage.setItem('token', loginResult.token);
                 dispatch(authUser(true))
                 setError('');
-                dispatch(hideLoginModal());
+                toCloseModal();
                 history.push('/');
                 form.resetFields(['loginOrEmail', 'password']);
             })
@@ -82,11 +80,11 @@ const Login = () => {
                 />
             </Form.Item>
             <Form.Item style={{margin: 0}}>
-                <Link to="/forgot/password">Forgot password?</Link>
+                <Link to="/forgot/password" onClick={toCloseModal}>Forgot password?</Link>
             </Form.Item>
             <Form.Item>
                 Do not have an account?
-                <Link to="/register"> Register now!</Link>
+                <Link to="/register" onClick={toCloseModal}> Register now!</Link>
             </Form.Item>
             <Button type="primary" htmlType="submit">
                 Log in

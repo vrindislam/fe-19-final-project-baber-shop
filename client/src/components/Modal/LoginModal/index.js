@@ -19,7 +19,7 @@ const LoginModal = () => {
             onCancel={loginModalClose}
             footer={false}
         >
-            <Login />
+            <Login toCloseModal={loginModalClose} />
         </Modal>
     )
 }
