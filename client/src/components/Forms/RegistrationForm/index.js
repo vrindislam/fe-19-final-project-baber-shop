@@ -8,15 +8,16 @@ import { Link } from "react-router-dom";
 
 import login from '../../../pages/Auth/Login/index';
 import withModal from "../../../components/Modal/index";
-import { showMeModalINeed } from "../../../store/modalTypes/modalTypesAction";
-import { showModal } from "../../../store/modal/modalAction"
+import { showModal } from "../../../store/modal/modalAction";
 import { useDispatch } from "react-redux";
 
 const RegistrationForm = (props) => {
   const [form] = Form.useForm();
   console.log(props.onOk);
 
-  const ModalLogin = withModal(login)
+  const typeOfModal = "LoginForm";
+  const ModalLogin = withModal( login, typeOfModal );
+  const dispatch = useDispatch();
 
   const onFinish = (values) => {
     const newCustomer = { ...values, isAdmin: false };
@@ -30,10 +31,9 @@ const RegistrationForm = (props) => {
     props.onOk();
   };
 
-  const dispatch = useDispatch()
+
   const showModalLogin = () => {
-    dispatch(showMeModalINeed("LoginForm"));
-    dispatch(showModal(true));
+    dispatch(showModal({status: true, type: "LoginForm"}));
   };
   return (
     <Form

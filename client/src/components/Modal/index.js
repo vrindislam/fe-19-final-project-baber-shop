@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../store/modal/modalAction";
 import { Modal } from "antd";
 
-const withModal = WrappedComponent => {
+const withModal = (WrappedComponent, typeOfModal) => {
   const WithModal = (props) => {
     const modalHandler = useSelector(state => state.modalHandler.modalOpen);
-    const modalTypes = useSelector(state => state.modalTypes.typesOfModal);
+    const modalTypes = useSelector(state => state.modalHandler.typesOfModal);
     const dispatch = useDispatch();
 
     const handleRegisterModalClose = () => {
@@ -15,7 +15,7 @@ const withModal = WrappedComponent => {
     };
     return (
       <>
-        {props.typeOfModal === modalTypes &&
+        {typeOfModal === modalTypes &&
         <Modal
           centered
           visible={modalHandler}

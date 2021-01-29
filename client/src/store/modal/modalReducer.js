@@ -1,7 +1,8 @@
 import {HANDLE_MODAL} from "./modalActionTypes";
 
 const initialState = {
-  modalOpen: false
+  modalOpen: false,
+  typesOfModal: ''
 }
 
 export function modalHandler (state = initialState, action) {
@@ -9,7 +10,8 @@ export function modalHandler (state = initialState, action) {
     case HANDLE_MODAL:
       return {
         ...state,
-        modalOpen: action.payload
+        modalOpen: action.payload.status,
+        typesOfModal: action.payload.type
       }
     default: return state
   }
