@@ -1,34 +1,44 @@
-import React, {useEffect} from 'react'
-import 'antd/dist/antd.less'
-import {Layout} from 'antd';
-import SiteHeader from './components/Header'
-import {getProducts} from './functions/products/product'
-import MainRoutes from './routes/MainRoutes'
+import React, { useEffect } from "react";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router";
+import "antd/dist/antd.less";
+import { Layout } from "antd";
+import SiteHeader from "./components/Header";
+import MainRoutes from "./routes/MainRoutes";
+import jwt_decode from "jwt-decode";
+import { authUser } from "./store/user/userAction";
 
-const {Content, Footer} = Layout;
+const { Content, Footer } = Layout;
 
 const App = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-    useEffect(() => {
-        // Data base check Request => to delete
-        console.log('ROUTE', `${process.env.REACT_APP_API}`)
-        getProducts()
-            .then(products => console.log(products.data[0]))
-            .catch(err => console.log(err))
-        ;
-    }, [])
+  useEffect(() => {
+    // to check token expiration once App_did_Mount, after it will be checked through middleware in redux with every store request
+    if (localStorage.getItem("token")) {
+      const decoded = jwt_decode(localStorage.getItem("token"));
+      if(decoded && decoded.exp && (decoded.exp < Date.now() / 1000) ) {
+        localStorage.removeItem("token");
+        dispatch(authUser(false));
+        history.push('/');
+      } else {
+        dispatch(authUser(true));
+      }
+    }
+  },[dispatch, history])
 
-    return (
-        <Layout>
-            <SiteHeader/>
-            <Content className="site-layout" style={{padding: '0 50px', marginTop: 64, height: '100vh'}}>
-                <div className="site-layout-background" style={{padding: 24, minHeight: 380}}>
-                    <MainRoutes/>
-                </div>
-            </Content>
-            <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
-        </Layout>
-    )
+  return (
+    <Layout>
+      <SiteHeader />
+      <Content className="site-layout" style={{ padding: "0 0px", marginTop: 120 }}>
+        <div className="site-layout-background" style={{ minHeight: 380 }}>
+          <MainRoutes />
+        </div>
+      </Content>
+      <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+    </Layout>
+  );
 };
 
 export default App;
