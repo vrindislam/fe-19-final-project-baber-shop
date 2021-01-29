@@ -1,40 +1,23 @@
 import React from "react";
 import "./styles.less";
 import axios from "axios";
+import { Button, Form, Input } from "antd";
 import { collectionItemsForm } from "./collectionItems";
-import { Button, Form, Input,Typography } from "antd";
+import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
 import { Link } from "react-router-dom";
 
-const {Title} = Typography;
-const formItemLayout2 = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 }
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 }
-  }
-}
-
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 8
-    },
-    sm: {
-      span: 16,
-      offset: 8
-    }
-  }
-}
-
-
+import login from '../../../pages/Auth/Login/index';
+import withModal from "../../../components/Modal/index";
+import { showModal } from "../../../store/modal/modalAction";
+import { useDispatch } from "react-redux";
 
 const RegistrationForm = (props) => {
   const [form] = Form.useForm();
   console.log(props.onOk);
+
+  const typeOfModal = "LoginForm";
+  const ModalLogin = withModal( login, typeOfModal );
+  const dispatch = useDispatch();
 
   const onFinish = (values) => {
     const newCustomer = { ...values, isAdmin: false };
@@ -45,11 +28,13 @@ const RegistrationForm = (props) => {
       .catch(err => {
         console.log(err);
       });
-    props.onOk()
+    props.onOk();
   };
 
-  console.log();
 
+  const showModalLogin = () => {
+    dispatch(showModal({status: true, type: typeOfModal}));
+  };
   return (
     <Form
       {...formItemLayout2}
@@ -61,20 +46,23 @@ const RegistrationForm = (props) => {
       }}
       scrollToFirstError
     >
-      <Title level={4} className='registration-form-title'>Registration</Title>
+      <Form.Item className='registration-form-title' {...tailFormItemLayout}>
+          Register
+      </Form.Item>
       {collectionItemsForm.map(formItem =>
         <Form.Item name={formItem.name}
                    label={formItem.label}
                    rules={[{
                      required: formItem.required,
-                     message: formItem.message }, {
+                     message: formItem.message
+                   }, {
                      type: formItem.type,
                      message: formItem.messageType
                    }]}
                    key={formItem.name}>
           {formItem.name === "password"
-            ? <Input.Password/>
-            : <Input/>
+            ? <Input.Password placeholder={formItem.label}/>
+            : <Input placeholder={formItem.label}/>
           }
         </Form.Item>
       )}
@@ -84,8 +72,10 @@ const RegistrationForm = (props) => {
         </Button>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
-        <Link to="/login">Already registered?(link to Login Form)</Link>
+        <span onClick={showModalLogin}>Already registered?(link to Login Form MODAL)</span>
+        <Link to="/login">link to Login PAGE</Link>
       </Form.Item>
+      <ModalLogin />
     </Form>
   );
 };
