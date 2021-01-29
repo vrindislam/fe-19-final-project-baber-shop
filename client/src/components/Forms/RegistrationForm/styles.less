@@ -1,40 +1,46 @@
 #register {
   background-color: #fff;
-}
-.ant-form-item-control-input-content > input, .ant-input-affix-wrapper {
-  border-color: #000;
-}
-.registration-form-title {
-  padding-top: 20px;
-  font-weight: 700;
-  font-size: 30px;
-}
-#register div {
-  .ant-col {
-    flex: 1 1 40%;
+
+  .ant-form-item-control-input-content > input, .ant-input-affix-wrapper {
+    border-color: #000;
   }
-  .ant-form-item-control {
-    margin-right: 5%;
+
+  .registration-form-title {
+    padding-top: 20px;
+    font-weight: 700;
+    font-size: 30px;
   }
-}
-.registration-button {
-  color: black;
-  font-weight: 700;
-  background-color: rgba(239,233,94,1);
-  border: .5px rgba(239,233,94,1) solid;
-  //border-radius: 25px;
-}
-.registration-button:hover {
-  color: black;
-  background-color: white;
-  border: 1px black solid;
-}
-@media (max-width: 575px) {
- .ant-form .ant-form-item .ant-form-item-label, .ant-form .ant-form-item .ant-form-item-control {
-   flex: 1 1 80%;
-   margin-right: 30px;
-   margin-left: 30px;
- }}
-.ant-input-affix-wrapper > input.ant-input {
-  padding: 0;
+
+  div {
+    .ant-col {
+      flex: 1 1 50%;
+    }
+    .ant-form-item-control {
+      margin-right: 3%;
+    }
+  }
+
+  .registration-button {
+    color: black;
+    font-weight: 700;
+    background-color: rgba(239, 233, 94, 1);
+    border: .5px rgba(239, 233, 94, 1) solid;
+    //border-radius: 25px;
+  }
+
+  .registration-button:hover {
+    color: black;
+    background-color: white;
+    border: 1px black solid;
+  }
+
+  @media (max-width: 575px) {
+    .ant-form-item-control, .ant-form-item-label {
+      margin-left: 3%;
+    }
+  }
+
+  .ant-input-affix-wrapper > input.ant-input {
+    padding: 0;
+  }
 }

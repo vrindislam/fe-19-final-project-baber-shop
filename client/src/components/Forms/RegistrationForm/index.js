@@ -33,7 +33,7 @@ const RegistrationForm = (props) => {
 
 
   const showModalLogin = () => {
-    dispatch(showModal({status: true, type: "LoginForm"}));
+    dispatch(showModal({status: true, type: typeOfModal}));
   };
   return (
     <Form
@@ -75,7 +75,7 @@ const RegistrationForm = (props) => {
         <span onClick={showModalLogin}>Already registered?(link to Login Form MODAL)</span>
         <Link to="/login">link to Login PAGE</Link>
       </Form.Item>
-      <ModalLogin typeOfModal="LoginForm"/>
+      <ModalLogin />
     </Form>
   );
 };
