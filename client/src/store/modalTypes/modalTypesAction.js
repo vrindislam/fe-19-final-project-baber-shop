@@ -1,15 +1,8 @@
-import { REGISTRATION_FORM_MODAL, LOGIN_FORM_MODAL } from '../actionTypes'
+import { MODAL_TYPE } from './actionsTypes'
 
-export const showRegistrationModal = () => dispatch => {
+export const showMeModalINeed = (myModal) => dispatch => {
   dispatch ({
-    type: REGISTRATION_FORM_MODAL,
-    payload: 'RegistrationForm'
-  })
-}
-
-export const showLoginModal = () => dispatch => {
-  dispatch ({
-    type: LOGIN_FORM_MODAL,
-    payload: 'LoginForm'
+    type: MODAL_TYPE,
+    payload: myModal
   })
 }

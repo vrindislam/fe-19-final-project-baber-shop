@@ -5,8 +5,9 @@
   border-color: #000;
 }
 .registration-form-title {
-  padding: 10px 0 ;
-  text-align: center;
+  padding-top: 20px;
+  font-weight: 700;
+  font-size: 30px;
 }
 .ant-col {
   flex: 1 1 20%
@@ -15,14 +16,23 @@
   margin-left: 20%;
 }
 .registration-button {
-  color: white;
-  background-color: black;
-  border: 1px black solid;
-  border-radius: 25px;
+  color: black;
+  font-weight: 700;
+  background-color: rgba(239,233,94,1);
+  border: .5px rgba(239,233,94,1) solid;
+  //border-radius: 25px;
 }
 .registration-button:hover {
   color: black;
   background-color: white;
   border: 1px black solid;
 }
-
+@media (max-width: 575px) {
+ .ant-form .ant-form-item .ant-form-item-label, .ant-form .ant-form-item .ant-form-item-control {
+   flex: 1 1 80%;
+   margin-right: 30px;
+   margin-left: 30px;
+ }}
+.ant-input-affix-wrapper > input.ant-input {
+  padding: 0;
+}

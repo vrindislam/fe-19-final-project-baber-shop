@@ -1,1 +1,1 @@
-export const HANDLE_MODAL = 'SHOW_REGISTER_MODAL'
+export const HANDLE_MODAL = 'HANDLE_MODAL'

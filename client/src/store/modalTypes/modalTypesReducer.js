@@ -1,4 +1,4 @@
-import { REGISTRATION_FORM_MODAL, LOGIN_FORM_MODAL } from '../actionTypes'
+import { MODAL_TYPE } from './actionsTypes'
 
 const initialState = {
   typesOfModal: ''
@@ -6,12 +6,7 @@ const initialState = {
 
 export function ModalTypes (state = initialState, action) {
   switch (action.type) {
-    case REGISTRATION_FORM_MODAL:
-      return {
-        ...state,
-        typesOfModal: action.payload
-      };
-    case LOGIN_FORM_MODAL:
+    case MODAL_TYPE:
       return {
         ...state,
         typesOfModal: action.payload
