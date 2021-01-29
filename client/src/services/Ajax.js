@@ -1,7 +1,6 @@
-import React from 'react';
 import axios from "axios";
 
-class Ajax extends React.Component {
+class Ajax {
 
     static async get(endpoint) {
         const {data} = await axios.get(`${process.env.REACT_APP_API}${endpoint}`)
