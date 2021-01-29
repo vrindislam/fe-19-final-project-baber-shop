@@ -13,6 +13,18 @@ const PriceSlider = () => {
     const priceFilterRedux = useSelector(state => state.priceFilter.price);
     console.log('from redux---->>', priceFilterRedux);
 
+    // const queryString = require('query-string');
+    // const string = queryString.stringify(priceFilterRedux, {arrayFormat: "comma"});
+    // const data = Ajax.get(`/products/filter/${string}`);
+    // useEffect(()=>{
+    //     async function fetch(){
+    //         const {products} = await Ajax.get(`/products/filter/${string}`);
+    //         console.log('this is from string query', products);
+    //     }
+    //     fetch()
+    // }, [string])
+    // console.log('query string----->>>', string);
+
     useEffect( () => {
         const data = Ajax.get(filteredPrice);
         console.log('filteredPrice -->', filteredPrice);
@@ -30,6 +42,7 @@ const PriceSlider = () => {
 
     const onSliderMouseUp = () => {
         setFilteredPrice(`/products/filter?minPrice=${minValue}&maxPrice=${maxValue}`);
+        // setFilteredPrice(`/products/filter?${string}`);
     }
 
     const onChangeInputMin = value => {

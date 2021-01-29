@@ -10,7 +10,7 @@ const CheckboxFilter = () => {
     const [filtersFromDB, setFiltersFromDB] = useState([]);
     const filtersRedux = useSelector(state => state.checkboxFilters.filters);
     const dispatch = useDispatch();
-    console.log('from redux--->>', filtersRedux);
+    // console.log('from redux--->>', filtersRedux);
 
     useEffect(() => {
         async function fetch() {
@@ -30,6 +30,7 @@ const CheckboxFilter = () => {
         if (e.target.type === 'checkbox') {
             const index = filtersRedux.findIndex(item => item.name === e.target.name);
             const el = {type: e.target.dataset.type, name: e.target.name};
+            // const el = {[e.target.dataset.type]:[e.target.name]};
             if (index < 0) {
                 dispatch(checkboxFilterAdd(el));
             } else {
