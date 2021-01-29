@@ -26,8 +26,8 @@ const Login = ({toCloseModal}) => {
                 dispatch(authUser(true))
                 setError('');
                 toCloseModal();
-                history.push('/');
                 form.resetFields(['loginOrEmail', 'password']);
+                history.push('/');
             })
             .catch(err => {
                 const error = err.response.data;
@@ -86,7 +86,7 @@ const Login = ({toCloseModal}) => {
                 Do not have an account?
                 <Link to="/register" onClick={toCloseModal}> Register now!</Link>
             </Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button className='login-button' type="primary" htmlType="submit">
                 Log in
             </Button>
             <p className='preloader' style={{color: loading ? 'black' : 'red'}}>
