@@ -1,7 +1,6 @@
 import React from 'react'
 import './styles.less'
 import Slider from "../../components/Slider";
-import Footer from "../../components/Footer";
 import Banner from "../../components/Banner";
 
 const Home = (props) => {
@@ -11,7 +10,6 @@ const Home = (props) => {
             <Slider/>
             <Banner title={'Best sellers'} config='cp'/>
             <Banner title={'One more  thing'} config='cc'/>
-            <Footer/>
         </div>
     )
 }

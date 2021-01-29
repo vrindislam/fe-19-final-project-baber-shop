@@ -1,5 +1,5 @@
-import React from "react";
-import {Col, Input, Image, Layout, Row} from 'antd';
+import React, {useEffect, useState} from "react";
+import {Col, Image, Input, Layout, Row} from 'antd';
 import Ajax from "../../services/Ajax";
 import './styles.less'
 import {Link} from "react-router-dom";
@@ -10,115 +10,47 @@ const {Search} = Input;
 const {get} = Ajax;
 const {Footer: AntFooter} = Layout;
 
-// Footer: The bottom layout with the default style,
-// in which any element can be nested, and must be placed in Layout.
-
-
 function Footer() {
-    //
-    // const newLinks = [
-    //     {
-    //         title: "About us",
-    //         links: [
-    //             {
-    //                 description: "Store",
-    //                 url: "/about-us/store"
-    //             },
-    //             {
-    //                 description: "News",
-    //                 url: "/about-us/news"
-    //             },
-    //             {
-    //                 description: "Special offers",
-    //                 url: "/about-us/special-offers"
-    //             }, {
-    //                 description: "Policy",
-    //                 url: "/about-us/Policy"
-    //             }]
-    //     },
-    //     {
-    //         title: "Contacts",
-    //         links: [
-    //             {
-    //                 description: "Map of stores",
-    //                 url: "/contacts/map-of-stores"
-    //             },
-    //             {
-    //                 description: "Call us",
-    //                 url: "/contacts/call-us"
-    //             }]
-    //     },
-    //     {
-    //         title: "Items",
-    //         links: [
-    //             {
-    //                 description: "Payment",
-    //                 url: "/items/payment"
-    //             },
-    //             {
-    //                 description: "Shipment",
-    //                 url: "/items/shipment"
-    //             },
-    //             {
-    //                 description: "Find your parcel",
-    //                 url: "/items/find-your-parcel"
-    //             }]
-    //     }]
-    get('/links');
+
+    const [links, setLinks] = useState([]);
+    useEffect(() => {
+        get('/links')
+            .then(links => setLinks(links || []))
+    }, [])
+    console.log('links', links);
 
     return (
 
         <AntFooter className='footer'>
-            <Row gutter={[5,20]}>
+            <Row gutter={[5, 20]}>
                 <Col xs={24} sm={24} lg={5}>
                     <div className='footer-logo'>
-                        <Link to="/home">
-                            < Image src="footerLogo/logo_white.png" alt="logo-white" className='imgTestRespons'/>
+                        <Link to="/">
+                            <Image src="footerLogo/logo_white.png" alt="logo-white" preview={false}/>
                         </Link>
                     </div>
                 </Col>
-                <Col className="footer-nav" xs={24} sm={8} lg={4}>
-                    <Link className='footer-header_link' to="/home">
-                        About Us
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Store
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        News
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Special offers
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Policy
-                    </Link>
-                </Col>
-                <Col className="footer-nav" xs={24} sm={8} lg={4}>
-                    <Link className='footer-header_link' to="/home">
-                        Contacts
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Store
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Call us
-                    </Link>
-                </Col>
-                <Col className="footer-nav" xs={24} sm={8} lg={4}>
-                    <Link className='footer-header_link' to="/home">
-                        Items
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Store
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        News
-                    </Link>
-                    <Link className='footer-link' to="/home">
-                        Store
-                    </Link>
-                </Col>
+
+
+                {links.map(mainLink => {
+                    return (
+                        <Col key={mainLink._id} className="footer-nav" xs={24} sm={8} lg={4}>
+                            <Link className='footer-header_link'  to={mainLink.url}>
+                                {mainLink.title}
+                            </Link>)
+                            {
+                                mainLink.links.map(link => {
+                                    return (
+                                        <Link className='footer-link' key={link._id} to={link.url}>
+                                            {link.description}
+                                        </Link>)
+                                })
+                            }
+                        </Col>
+                    )
+                })
+                }
+
                 <Col className="footer-socials" xs={24} sm={18} lg={7}>
                     <Search
                         className='footer-socials_subscribePanel'
@@ -130,15 +62,15 @@ function Footer() {
                         color='yellow'
                         onSearch={() => alert('Success')}
                     />
-                    <Link to="/home">
+                    <a href="https://www.instagram.com" target='_blank' rel='noreferrer'>
                         <InstagramOutlined className='footer-socials_icons'/>
-                    </Link>
-                    <Link to="/home">
+                    </a>
+                    <a href="https://www.facebook.com/" target='_blank' rel='noreferrer'>
                         <FacebookOutlined className='footer-socials_icons'/>
-                    </Link>
-                    <Link to="/home">
+                    </a>
+                    <a href="https://www.youtube.com/" target='_blank' rel='noreferrer'>
                         <YoutubeOutlined className='footer-socials_icons'/>
-                    </Link>
+                    </a>
                 </Col>
             </Row>
             <Row>
