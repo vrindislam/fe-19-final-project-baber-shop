@@ -9,6 +9,7 @@ import ProductDetails from "../pages/ProductDetails";
 import ErrorPage from '../pages/ErrorPage404';
 import AdminCategory from '../pages/Admin/AdminCategory';
 
+
 const MainRoutes = () => {
     return (
         <Switch>

@@ -1,13 +1,12 @@
 import React, {useEffect} from "react";
-import { Layout, Row, Col, Divider } from "antd";
+import { Layout, Row, Col, Divider} from "antd";
 import "./styles.less";
 import AdminSider from "../../../components/AdminSider";
 import CategoryForm from "../../../components/Forms/CategoryForm";
 
+const { Content } = Layout;
 
-const { Content} = Layout;
-
-const AdminCatergory = (props) => {
+const AdminCatergory = () => {
 
   useEffect(() => {
     console.log('AdminCategory did Mount');
@@ -25,7 +24,6 @@ const AdminCatergory = (props) => {
             </Col>
           </Row>
         </Content>
-
     </Layout>
   );
 };
