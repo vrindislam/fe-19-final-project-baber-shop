@@ -22,6 +22,15 @@ class CategoryService {
         const {products} = await Ajax.get(`/products/filter?categories=${category.id}`);
         return Math.min.apply(Math, (products || []).map(p => p.currentPrice));
     }
+
+    async getCategories() {
+        return await Ajax.get('/catalog');
+    }
+
+    async createCategory (category) {
+         return await Ajax.post('/catalog', category);
+    }
+
 }
 
 export default new CategoryService();
