@@ -104,7 +104,6 @@ const CategoryForm = () => {
     // will be changed with common Ajax
     createCategory(values, Authorization)
       .then(res => {
-        console.log(res.data);
         message.success(`new Category ${res.data.name} was created`, 1.5);
         form.resetFields();
       })

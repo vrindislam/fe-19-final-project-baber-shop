@@ -9,7 +9,7 @@ const { Content } = Layout;
 const AdminCatergory = () => {
 
   useEffect(() => {
-    console.log('AdminCategory did Mount');
+    // console.log('AdminCategory did Mount');
 
   }, [])
 
