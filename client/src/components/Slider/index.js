@@ -1,7 +1,8 @@
 import {Carousel} from 'antd';
 import React from 'react'
+import {Link} from "react-router-dom";
 
-export default function Slider() {
+function Slider() {
 
     const contentStyle = {
         minWidth: '300px',
@@ -28,12 +29,13 @@ export default function Slider() {
         <Carousel autoplay>
             {bannersIMG.map(banner => (
                     <div key={banner.index}>
-                        <a href="/">
+                        <Link to="/home">
                             <img style={contentStyle} src={banner.url} alt={`slider-${banner.index}`}/>
-                        </a>
+                        </Link>
                     </div>
                 )
             )}
         </Carousel>
     );
 }
+export default Slider;

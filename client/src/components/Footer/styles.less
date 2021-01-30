@@ -1,0 +1,80 @@
+@import '~antd/lib/style/themes/default.less';
+
+.footer {
+  background-color: @black;
+  text-align: center;
+
+  &-logo {
+    vertical-align: center;
+
+  }
+
+  & a {
+    color: @white;
+    text-decoration: none;
+
+    &:hover {
+      color: @white;
+    }
+  }
+
+  &-link {
+    display: block;
+    margin-bottom: 10px;
+    //border: 2px solid @red-10;
+  }
+
+  &-header_link {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  &-socials {
+    margin: 0 auto;
+    vertical-align: center;
+
+    &_subscribePanel {
+      margin-bottom: 15px;
+    }
+
+    &_icons {
+      font-size: 2em;
+      margin-right: 15px;
+    }
+
+  }
+
+  & button {
+    color: @black;
+    background: @yellow-5;
+    border: 1px solid @yellow-5;
+    text-shadow: none;
+
+    &:hover {
+      background: @yellow-6;
+      color: @black;
+      border: 1px solid @black;
+    }
+  }
+
+  &-copyright {
+    color: #8c8c8c;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 585px) {
+  .footer {
+    padding: 20px;
+    &-link {
+      display: none;
+    }
+
+    &-header_link {
+      margin: 0;
+    }
+
+  }
+}
+
