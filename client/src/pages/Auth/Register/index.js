@@ -18,7 +18,7 @@ const Register = () => {
 
   return (
     <>
-      <ModalReg width={1000}/>
+      <ModalReg width={1000} />
       <RegistrationForm />
       <button onClick={showModalRegistration}>Click me to show Register Modal</button>
     </>
