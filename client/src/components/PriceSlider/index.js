@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Ajax from "../../services/Ajax";
 import { Slider, InputNumber, Row, Col, Form } from 'antd';
 import './styles.less';
 import { useDispatch, useSelector } from "react-redux";
@@ -12,24 +11,7 @@ const PriceSlider = () => {
     const dispatch = useDispatch();
     const priceFilterRedux = useSelector(state => state.priceFilter.price);
     console.log('from redux---->>', priceFilterRedux);
-
-    // const queryString = require('query-string');
-    // const string = queryString.stringify(priceFilterRedux, {arrayFormat: "comma"});
-    // const data = Ajax.get(`/products/filter/${string}`);
-    // useEffect(()=>{
-    //     async function fetch(){
-    //         const {products} = await Ajax.get(`/products/filter/${string}`);
-    //         console.log('this is from string query', products);
-    //     }
-    //     fetch()
-    // }, [string])
-    // console.log('query string----->>>', string);
-
-    useEffect( () => {
-        const data = Ajax.get(filteredPrice);
-        console.log('filteredPrice -->', filteredPrice);
-        console.log('Data -->', data);
-    }, [filteredPrice])
+    console.log('string--->>>', filteredPrice);
 
     useEffect(()=>{
         dispatch(priceFilter({minPrice: minValue, maxPrice: maxValue}));

@@ -10,7 +10,7 @@ const CheckboxFilter = () => {
     const [filtersFromDB, setFiltersFromDB] = useState([]);
     const filtersRedux = useSelector(state => state.checkboxFilters.filters);
     const dispatch = useDispatch();
-    // console.log('from redux--->>', filtersRedux);
+    console.log('from redux--->>', filtersRedux);
 
     useEffect(() => {
         async function fetch() {
