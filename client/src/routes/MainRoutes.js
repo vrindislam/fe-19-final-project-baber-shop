@@ -10,7 +10,6 @@ import ErrorPage from '../pages/ErrorPage404';
 import AdminCategory from '../pages/Admin/AdminCategory';
 import AdminRoute from "./protectedRoutes/AdminRoute";
 
-
 const MainRoutes = () => {
     return (
         <Switch>

@@ -18,9 +18,10 @@ const App = () => {
     // to check token expiration once App_did_Mount, after it will be checked through middleware in redux with every store request
     if (localStorage.getItem("token")) {
       const decoded = jwt_decode(localStorage.getItem("token"));
+      console.log(decoded)
       if(decoded && decoded.exp && (decoded.exp < Date.now() / 1000) ) {
         localStorage.removeItem("token");
-        dispatch(authUser({isAdmin: false}));
+        dispatch(authUser({isAuthenticated: false}));
         history.push('/');
       } else {
         delete decoded.iat

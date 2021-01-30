@@ -12,7 +12,7 @@ const initialValue = {
 const userReducer = (state = initialValue, action) => {
   switch (action.type) {
     case USER_AUTH_STATUS:
-      return action.payload.isAdmin ? action.payload : initialValue;
+      return action.payload.isAuthenticated ? action.payload : initialValue;
     default:
       return state
   }

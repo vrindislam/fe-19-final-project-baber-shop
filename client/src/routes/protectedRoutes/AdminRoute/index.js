@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Route, Redirect } from "react-router-dom";
+import React, { useEffect} from "react";
+import { Route} from "react-router-dom";
 import { useSelector } from "react-redux";
+import {useHistory} from "react-router";
 
-const AdminRoute = ({ ...rest }) => {
+const AdminRoute = ({...rest }) => {
+  const history = useHistory();
   const { exp, isAuthenticated, isAdmin } = useSelector(state => ({ ...state.user }));
-  const [verified, setVerified] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated && isAdmin && localStorage.token && exp && (exp < Date.now() / 1000)) {
-      setVerified(true);
+    if (!(isAuthenticated && isAdmin && localStorage.token && exp && (exp > Date.now() / 1000))) {
+      history.push('/');
     }
-  }, [exp, isAuthenticated, isAdmin]);
+  }, [exp, isAuthenticated, isAdmin, history]);
 
-  return verified ? <Route {...rest} /> :  <Redirect to={'/'}/>;
+  return <Route {...rest} />;
 };
 
 export default AdminRoute;
