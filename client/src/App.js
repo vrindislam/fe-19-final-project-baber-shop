@@ -20,10 +20,11 @@ const App = () => {
       const decoded = jwt_decode(localStorage.getItem("token"));
       if(decoded && decoded.exp && (decoded.exp < Date.now() / 1000) ) {
         localStorage.removeItem("token");
-        dispatch(authUser(false));
+        dispatch(authUser({isAdmin: false}));
         history.push('/');
       } else {
-        dispatch(authUser(true));
+        delete decoded.iat
+        dispatch(authUser({...decoded, isAuthenticated: true}));
       }
     }
   },[dispatch, history])
