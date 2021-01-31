@@ -4,7 +4,7 @@ class Ajax {
 
     static async get(endpoint) {
         const {data} = await axios.get(`${process.env.REACT_APP_API}${endpoint}`)
-        console.log('get all data-->', data);
+        // console.log('get all data-->', data);
         return data
     }
 
