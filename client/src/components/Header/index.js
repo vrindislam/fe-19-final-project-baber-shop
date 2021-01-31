@@ -6,7 +6,6 @@ import "./styles.less";
 import { Link } from "react-router-dom";
 import {
   AppstoreOutlined,
-  SettingOutlined,
   UserOutlined,
   UserAddOutlined,
   ShoppingOutlined,
@@ -53,10 +52,6 @@ function SiteHeader () {
 
         <Item key="pdp">
           <Link to="/product-details">Product Details</Link>
-        </Item>
-
-        <Item key="admin-category" icon={<SettingOutlined />}>
-          <Link to="/admin/category">Admin add category</Link>
         </Item>
 
         <Item key="cart" icon={<ShoppingCartOutlined className='basket-icon'/>}>
