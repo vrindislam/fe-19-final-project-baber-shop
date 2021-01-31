@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
-import './style.less';
 import { Form, Input, Button, message, Select} from 'antd';
 import CategoryService from "../../../services/CategoryService";
+import './style.less';
+
 const {Option} = Select;
 
 const CategoryForm = () => {
@@ -85,14 +86,8 @@ const CategoryForm = () => {
       setParentCategories(['null'])
     } else {
       const parentLevel = (level * 1 - 1).toString();
-      console.log('Parent Level ==>',parentLevel);
-      CategoryService.getCategories()
-        .then(data => {
-          const uniqParentForCategory = data
-            .filter(cat => cat.level === parentLevel)
-            .map(cat => cat.id);
-          setParentCategories([...new Set(uniqParentForCategory)])
-        })
+      CategoryService.getUniqIdCategoriesWithLevel(parentLevel)
+        .then(uniqParentForCategory => setParentCategories(uniqParentForCategory))
         .catch(err => console.log('GET CATALOG ERR (CATEGORY FORM) ==>', err))
     }
     setDisabledParentCategory(false);
