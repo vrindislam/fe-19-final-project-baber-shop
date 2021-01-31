@@ -4,8 +4,8 @@ import CheckboxFilter from "../../components/CheckboxFilters";
 import PriceSlider from "../../components/PriceSlider";
 import {useSelector} from "react-redux";
 import {pickUpValues, groupValues} from "../../functions/checkboxFilters/filters";
-// import Ajax from "../../services/Ajax";
-import axios from "axios";
+import Ajax from "../../services/Ajax";
+// import axios from "axios";
 
 const ProductList = () => {
 
@@ -19,9 +19,8 @@ const ProductList = () => {
 
     useEffect(()=>{
         async function fetch(){
-            // const data = await Ajax.get(`/products/filter?${string}`);
-            const {data} = await axios.get(`${process.env.REACT_APP_API}/products/filter?${string}`);
-            setFiltered(data.products);
+            const {products} = await Ajax.get(`/products/filter?${string}`);
+            setFiltered(products);
         }
         fetch()
     }, [string])
