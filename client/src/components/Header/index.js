@@ -68,7 +68,6 @@ function SiteHeader () {
           Logout
         </Item>}
 
-
       </Menu>
     <LiveSearch/>
     </Header>

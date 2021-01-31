@@ -3,7 +3,7 @@ import { Route} from "react-router-dom";
 import { useSelector } from "react-redux";
 import {useHistory} from "react-router";
 
-const AdminRoute = ({...rest }) => {
+const AdminRoutes = ({...rest }) => {
   const history = useHistory();
   const { exp, isAuthenticated, isAdmin } = useSelector(state => ({ ...state.user }));
 
@@ -16,4 +16,4 @@ const AdminRoute = ({...rest }) => {
   return <Route {...rest} />;
 };
 
-export default AdminRoute;
+export default AdminRoutes;

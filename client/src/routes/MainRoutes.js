@@ -8,7 +8,7 @@ import ProductList from '../pages/ProductList';
 import ProductDetails from "../pages/ProductDetails";
 import ErrorPage from '../pages/ErrorPage404';
 import AdminCategory from '../pages/Admin/AdminCategory';
-import AdminRoute from "./protectedRoutes/AdminRoute";
+import AdminRoute from "./protectedRoutes/AdminRoutes";
 
 const MainRoutes = () => {
     return (
