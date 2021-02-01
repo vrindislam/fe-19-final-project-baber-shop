@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.less';
 import CheckboxFilter from "../../components/CheckboxFilters";
 import PriceSlider from "../../components/PriceSlider";
-
 const ProductList = () => {
 
     return (
