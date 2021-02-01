@@ -28,8 +28,6 @@ const FilteredProducts = () => {
   const items = products.map(product =>
     <ProductCard key={product._id} product={product}/>
   )
-  const lastItem = products[products.length - 1]
-  console.log('dsdsdsdsdsdsdddd',lastItem)
 
   return (
     <>
