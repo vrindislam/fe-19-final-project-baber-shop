@@ -1,36 +1,28 @@
-import React, {useState, useEffect} from 'react';
+import React  from 'react';
 import { Slider, InputNumber, Row, Col, Form } from 'antd';
 import './styles.less';
-import { useDispatch } from "react-redux";
-import { priceFilter } from "../../store/priceFilter/priceFilterAction";
 
-const PriceSlider = () => {
-    const [minValue, setMinValue] = useState(200);
-    const [maxValue, setMaxValue] = useState(700);
-    const dispatch = useDispatch();
-
-    useEffect(()=>{
-        dispatch(priceFilter({minPrice: minValue, maxPrice: maxValue}));
-    },[minValue, maxValue, dispatch])
+const PriceSlider = ({minValue, maxValue, setMaxVal, setMinVal}) => {
 
     const onSliderChange = value => {
-        setMinValue(value[0]);
-        setMaxValue(value[1]);
+        setMinVal(value[0]);
+        setMaxVal(value[1]);
     }
 
     const onSliderMouseUp = (value) => {
-        dispatch(priceFilter({minPrice: minValue, maxPrice: maxValue}));
+        setMinVal(value[0]);
+        setMaxVal(value[1]);
     }
 
     const onChangeInputMin = value => {
         if (maxValue > value) {
-            setMinValue(value);
+            setMinVal(value);
         }
     }
 
     const onChangeInputMax = value => {
         if (minValue < value) {
-            setMaxValue(value);
+            setMaxVal(value);
         }
     }
 
