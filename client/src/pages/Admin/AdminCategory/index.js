@@ -4,7 +4,7 @@ import { Layout, Row, Col, Divider, Card } from "antd";
 import AdminSider from "../../../components/AdminSider";
 import CategoryForm from "../../../components/Forms/CategoryForm";
 import CategoryService from "../../../services/CategoryService";
-import noImage from "../../../images/no_image.png";
+import noImage from "../../../blank_image/no_image.png";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./styles.less";
 
@@ -54,7 +54,7 @@ const AdminCatergory = () => {
                                 cover={
                                   <img
                                     alt={name}
-                                    src={noImage || imgUrl}
+                                    src={ imgUrl && imgUrl.length > 0 ? `/${imgUrl}` : noImage}
                                     style={{ height: "300px", objectFit: "cover" }}
                                     className="p-1"
                                   />
