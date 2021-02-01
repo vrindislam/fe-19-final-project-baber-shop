@@ -5,7 +5,7 @@ import './style.less';
 
 const {Option} = Select;
 
-const CategoryForm = () => {
+const CategoryForm = ({loadCategories}) => {
   const [form] = Form.useForm();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledParentCategory, setDisabledParentCategory] = useState(true);
@@ -99,6 +99,7 @@ const CategoryForm = () => {
       .then(res => {
         message.success(`new Category ${res.name} was created`, 1.5);
         form.resetFields();
+        loadCategories();
       })
       .catch(err => {
         message.error(`${err}`, 1.5);
