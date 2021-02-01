@@ -48,9 +48,9 @@ const ProductList = () => {
                     <PriceSlider minValue={minValue} maxValue={maxValue} setMinVal={setMinValue} setMaxVal={setMaxValue}/>
                     <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
                 </div>
-                <div>
+
                     <FilteredProducts queryString={string}/>
-                </div>
+
             </div>
         </>
     )
