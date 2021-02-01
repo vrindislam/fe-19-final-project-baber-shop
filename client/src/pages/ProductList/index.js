@@ -4,6 +4,7 @@ import CheckboxFilter from "../../components/CheckboxFilters";
 import PriceSlider from "../../components/PriceSlider";
 import {pickUpValues, groupValues} from "../../functions/checkboxFilters/filters";
 import Ajax from "../../services/Ajax";
+import FilteredProducts from "../../components/FilteredProducts";
 
 const ProductList = () => {
 
@@ -11,23 +12,11 @@ const ProductList = () => {
     const [checkboxFiltersClicked, setCheckboxFiltersClicked] = useState([]);
     const [minValue, setMinValue] = useState(100);
     const [maxValue, setMaxValue] = useState(700);
-    const [filteredProducts,setFilteredProducts] = useState([]);
-    console.log('filtered-->', filteredProducts)
 
     const queryString = require('query-string');
     const values = pickUpValues(checkboxFiltersClicked);
     const groupedValues = groupValues(values);
     const string = queryString.stringify({...groupedValues, ...{minPrice: minValue, maxPrice: maxValue}}, {arrayFormat: "comma"});
-    console.log('string---->', string);
-
-    useEffect(()=>{
-        async function fetch(){
-            const {products} = await Ajax.get(`/products/filter?${string}`);
-            console.log('filtered from server--->>', products);
-            setFilteredProducts(products);
-        }
-        fetch()
-    }, [string])
 
     useEffect(() => {
         async function fetch() {
@@ -54,9 +43,14 @@ const ProductList = () => {
 
     return (
         <>
-            <div className="filters-container">
-                <PriceSlider minValue={minValue} maxValue={maxValue} setMinVal={setMinValue} setMaxVal={setMaxValue}/>
-                <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
+            <div className="product-list-container" style={{display:"flex"}}>
+                <div className="filters-container" style={{display: "inline-block"}}>
+                    <PriceSlider minValue={minValue} maxValue={maxValue} setMinVal={setMinValue} setMaxVal={setMaxValue}/>
+                    <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
+                </div>
+                <div>
+                    <FilteredProducts queryString={string}/>
+                </div>
             </div>
         </>
     )
