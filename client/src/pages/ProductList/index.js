@@ -5,7 +5,6 @@ import PriceSlider from "../../components/PriceSlider";
 import {useSelector} from "react-redux";
 import {pickUpValues, groupValues} from "../../functions/checkboxFilters/filters";
 import Ajax from "../../services/Ajax";
-// import axios from "axios";
 
 const ProductList = () => {
 
@@ -24,12 +23,11 @@ const ProductList = () => {
         }
         fetch()
     }, [string])
-    console.log('query string---->>', `http://localhost:5000/api/products/filter?${string}`);
+
     console.log('from server--->>', filtered);
 
     return (
         <>
-            <h2>Here should be all products</h2>
             <div className="filters-container">
                 <PriceSlider/>
                 <CheckboxFilter/>
