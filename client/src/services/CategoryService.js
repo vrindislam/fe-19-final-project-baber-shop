@@ -51,7 +51,6 @@ class CategoryService {
       for (const key of levels) {
         const uniq = allCategories
           .filter((cat, index) => cat.level === key)
-          .map(cat => ({name: cat.name, parentId: cat.parentId, id: cat.id}));
         sortedCategories[key] = [...new Set(uniq)];
       }
       return sortedCategories;
