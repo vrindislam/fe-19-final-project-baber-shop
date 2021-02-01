@@ -1,0 +1,47 @@
+@import '~antd/lib/style/themes/default.less';
+
+
+.staticPage {
+  &-container {
+    padding: 50px;
+    text-indent: 3.5em;
+    text-align: justify;
+  }
+
+  &-content {
+    font-size: 1.3em;
+    line-height: 1.8em;
+  }
+
+  &-link {
+    color: @yellow-6;
+    text-shadow: 1px 1px 2px @black;
+
+    &:hover {
+      color: @black;
+
+    }
+  }
+}
+
+@media (max-width: 585px) {
+  .staticPage {
+    &-container {
+      text-indent: 2.5em;
+      padding: 25px;
+
+      & h1 {
+        font-size: 30px;
+      }
+
+      & h2 {
+        font-size: 24px;
+      }
+    }
+
+    &-content {
+      font-size: 1.1em;
+      line-height: 1.5em;
+    }
+  }
+}

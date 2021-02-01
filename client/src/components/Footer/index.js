@@ -22,7 +22,7 @@ function Footer() {
     return (
 
         <AntFooter className='footer'>
-            <Row gutter={[5, 20]}>
+            <Row justify='center' gutter={[5, 20]}>
                 <Col xs={24} sm={24} lg={5}>
                     <div className='footer-logo'>
                         <Link to="/">
@@ -35,7 +35,7 @@ function Footer() {
                 {links.map(mainLink => {
                     return (
                         <Col key={mainLink._id} className="footer-nav" xs={24} sm={8} lg={4}>
-                            <Link className='footer-header_link'  to={mainLink.url}>
+                            <Link className='footer-header_link'  to={`/pages${mainLink.url}`}>
                                 {mainLink.title}
                             </Link>)
                             {
@@ -73,7 +73,7 @@ function Footer() {
                     </a>
                 </Col>
             </Row>
-            <Row>
+            <Row justify='center'>
                 <Col className='footer-copyright'>Copyright © Barber All Rights Reserved 2021</Col>
             </Row>
         </AntFooter>
