@@ -5,6 +5,7 @@ import preloaderReducer from './preloader/preloaderReducer'
 import cartReducer from "./cart/cartReducer";
 import userReducer from "./user/userReducer";
 
+
 const rootReducer = combineReducers({
   testProduct: testReducer,
   user: userReducer,
