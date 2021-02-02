@@ -15,17 +15,18 @@ import {
 } from "@ant-design/icons";
 import PopoverBasket from "../PopoverBasket/index";
 import LiveSearch from './LiveSearch'
-import LoginModal from "../Modal/LoginModal";
-import {showLoginModal} from "../../store/loginModal/loginModalAction";
+import {showModal} from "../../store/modal/modalAction";
+import Login from "../Modal/LoginModal";
 
 const {Header} = Layout;
 const {Item} = Menu;
 
 function SiteHeader() {
-    const dispatch = useDispatch();
-    const loginModalShow = () => {
-        dispatch(showLoginModal())
-    }
+    const dispatch = useDispatch()
+
+    const showModalLogin = () => {
+        dispatch(showModal({status: true, type: "LoginForm"}));
+    };
 
     const {isAuthenticated} = useSelector((state => ({...state.user})))
     const handleLogout = () => {
@@ -51,10 +52,10 @@ function SiteHeader() {
                     <Link to="/register">Register</Link>
                 </Item>
 
-                <Item key="login" icon={<UserOutlined/>} onClick={loginModalShow}>
+                <Item key="login" icon={<UserOutlined/>} onClick={showModalLogin}>
                     Login
                 </Item>
-                <LoginModal/>
+                <Login />
 
                 <Item key="pdp">
                     <Link to="/product-details">Product Details</Link>

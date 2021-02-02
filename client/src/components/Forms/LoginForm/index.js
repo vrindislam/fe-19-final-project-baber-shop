@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {useHistory, Link} from 'react-router-dom';
 import './styles.less'
+import {useHistory, Link} from 'react-router-dom';
 import {Form, Input, Button} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import LoginService from "../../../services/LoginService";
@@ -8,7 +8,7 @@ import Preloader from "../../Preloader";
 import {useDispatch} from "react-redux";
 import {authUser} from "../../../store/user/userAction";
 
-const Login = ({toCloseModal}) => {
+const LoginForm = (props) => {
     const [form] = Form.useForm();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -24,9 +24,6 @@ const Login = ({toCloseModal}) => {
                 setLoading(false);
                 localStorage.setItem('token', loginResult.token);
                 dispatch(authUser(true))
-                setError('');
-                toCloseModal();
-                form.resetFields(['loginOrEmail', 'password']);
                 history.push('/');
             })
             .catch(err => {
@@ -46,6 +43,9 @@ const Login = ({toCloseModal}) => {
             }}
             onFinish={onFinish}
         >
+            <Form.Item className='login-form-title'>
+                LogIn
+            </Form.Item>
             <Form.Item
                 name="loginOrEmail"
                 className='input-label'
@@ -80,11 +80,13 @@ const Login = ({toCloseModal}) => {
                 />
             </Form.Item>
             <Form.Item style={{margin: 0}}>
-                <Link to="/forgot/password" onClick={toCloseModal}>Forgot password?</Link>
+                <Link to="/forgot/password"
+                      onClick={props.handleRegisterModalClose}>Forgot password?</Link>
             </Form.Item>
             <Form.Item>
                 Do not have an account?
-                <Link to="/register" onClick={toCloseModal}> Register now!</Link>
+                <Link to="/register"
+                      onClick={props.handleRegisterModalClose}> Register now!</Link>
             </Form.Item>
             <Button className='login-button' type="primary" htmlType="submit">
                 Log in
@@ -96,4 +98,4 @@ const Login = ({toCloseModal}) => {
     );
 };
 
-export default Login
+export default LoginForm
