@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Layout, Row, Col, Divider } from "antd";
+import useAsyncEffect from "use-async-effect";
 import AdminSider from "../../../components/AdminSider";
 import CategoryForm from "../../../components/Forms/CategoryForm";
 import CategoryService from "../../../services/CategoryService";
-import "./styles.less";
 import AdminCategoryCard from "../../../components/AdminCategoryCard";
-import useAsyncEffect from "use-async-effect";
+
+import "./styles.less";
 
 const { Content } = Layout;
 
 const AdminCatergory = () => {
   const [listOfCategories, setListOfCategories] = useState(null);
-
   useAsyncEffect(async isMounted => {
     CategoryService.getCategoriesSortedPerLevels()
       .then(res => {
@@ -38,11 +38,14 @@ const AdminCatergory = () => {
       <Content className="category-content-container">
         <Divider orientation="left">Create Category</Divider>
         <Row gutter={16}>
-          <Col span={24}>
+          <Col span={22} style={{margin: 'auto'}}>
             <CategoryForm loadCategories={loadCategories} />
           </Col>
         </Row>
-        <Row gutter={16}>
+        <Row
+          gutter={16}
+          justify={'center'}
+        >
           <Col span={24}>
             {listOfCategories && listOfCategories.map(cat => {
                 const [level, categories] = cat;

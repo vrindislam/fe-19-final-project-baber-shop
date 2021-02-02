@@ -20,7 +20,7 @@ const AdminCategoryCard = ({ category: { name, imgUrl, description, id } }) => {
         />
       }
       actions={[
-        <Link to={`/admin/product/${id}`}>
+        <Link to={`/admin/category/${id}`}>
           <EditOutlined className="text-warning" />
         </Link>,
         <DeleteOutlined

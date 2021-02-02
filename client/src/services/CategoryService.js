@@ -27,6 +27,10 @@ class CategoryService {
     return await Ajax.get("/catalog");
   }
 
+  async getCategory (id) {
+    return await Ajax.get(`/catalog/${id}`);
+  }
+
   async getUniqIdCategoriesWithLevel (level) {
     const allCategories = await this.getCategories();
     if (allCategories && allCategories.length > 0) {
@@ -58,6 +62,7 @@ class CategoryService {
       return null;
     }
   }
+
 
 }
 

@@ -5,8 +5,9 @@ import './style.less';
 
 const {Option} = Select;
 
-const CategoryForm = ({ loadCategories }) => {
-
+const CategoryUpdateForm = (props) => {
+  const {categoryToUpdate} = props;
+  console.log('Category TO update', categoryToUpdate)
   const [form] = Form.useForm();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledParentCategory, setDisabledParentCategory] = useState(true);
@@ -14,15 +15,16 @@ const CategoryForm = ({ loadCategories }) => {
   const [parentCategories, setParentCategories] = useState(["cat1", "cat2", "cat3"]);
 
   useEffect(() => {
-    // logic will be added later
-  }, [])
+    form.setFieldsValue({
+      name: categoryToUpdate && categoryToUpdate.name ? categoryToUpdate.name : '',
+      description: categoryToUpdate && categoryToUpdate.description ? categoryToUpdate.description : '',
+      imgUrl: categoryToUpdate && categoryToUpdate.imgUrl ? categoryToUpdate.imgUrl : '',
+    })
+  },[categoryToUpdate, form])
 
   // Create-Form Schema and controls rules
   const rules = [{required: true, message: 'field is required'}];
   const fieldsSetArr = [
-    ['select-level', {label:"Level", name:"level", rules}],
-    ['select-parentCategory', {label:"Parent ID", name:"parentId", rules}],
-    ['input', {label: "Category ID", name: "id", rules}],
     ['input', {label: "Category Name", name: "name", rules}],
     ['input', {label: "Category Description", name: "description"}],
     ['input', {label: "Image URL", name: "imgUrl"}]
@@ -100,7 +102,6 @@ const CategoryForm = ({ loadCategories }) => {
       .then(res => {
         message.success(`new Category ${res.name} was created`, 1.5);
         form.resetFields();
-        loadCategories();
       })
       .catch(err => {
         message.error(`${err}`, 1.5);
@@ -126,14 +127,6 @@ const CategoryForm = ({ loadCategories }) => {
       form={form}
       {...layout}
       layout='vertical'
-      initialValues={{
-        id: '',
-        name: '',
-        description: '',
-        imgUrl: '',
-        level: '',
-        parentId: ''
-      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       onFieldsChange={handleOnFieldsChange}
@@ -154,4 +147,4 @@ const CategoryForm = ({ loadCategories }) => {
   );
 }
 
-export default CategoryForm;
+export default CategoryUpdateForm;
