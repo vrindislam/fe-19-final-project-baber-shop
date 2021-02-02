@@ -7,8 +7,9 @@ import SiteHeader from "./components/Header";
 import MainRoutes from "./routes/MainRoutes";
 import jwt_decode from "jwt-decode";
 import { authUser } from "./store/user/userAction";
+import Footer from "./components/Footer";
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 const App = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const App = () => {
           <MainRoutes />
         </div>
       </Content>
-      <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+      <Footer/>
     </Layout>
   );
 };
