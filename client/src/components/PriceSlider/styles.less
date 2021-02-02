@@ -73,3 +73,30 @@
     border-color: #EFE95E;
   }
 }
+
+@media screen and (min-width: 586px) and (max-width: 992px){
+
+  .slider-container .ant-row .ant-col-24{
+    max-width: 75%;
+  }
+  .slider-container{
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 585px){
+
+  .slider-heading-container .slider-heading{
+    font-size: 24px;
+  }
+  .slider-container{
+    width: 400px;
+
+    & .ant-input-number{
+      width: 100px;
+    }
+  }
+  .slider-container .ant-col .ant-form-item-label label {
+    font-size: 20px;
+  }
+}

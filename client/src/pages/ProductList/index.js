@@ -12,7 +12,7 @@ const ProductList = () => {
     const [checkboxFiltersClicked, setCheckboxFiltersClicked] = useState([]);
     const [minValue, setMinValue] = useState(100);
     const [maxValue, setMaxValue] = useState(700);
-
+    const [showFilters, setShowFilters] = useState(false);
     const queryString = require('query-string');
     const values = pickUpValues(checkboxFiltersClicked);
     const groupedValues = groupValues(values);
@@ -41,16 +41,27 @@ const ProductList = () => {
         }
     }
 
+    const openFilters = () =>{
+        setShowFilters(!showFilters);
+    }
+
+    const show = showFilters ? 'active' : 'hidden';
+    const showButton = {display: showFilters? 'none' : 'inline-block'}
+
+
+
     return (
         <>
-            <div className="product-list-container" style={{display:"flex"}}>
-                <div className="filters-container" style={{display: "inline-block"}}>
+            <div className="product-list-container">
+                <div className={"filters-container " + show} >
                     <PriceSlider minValue={minValue} maxValue={maxValue} setMinVal={setMinValue} setMaxVal={setMaxValue}/>
                     <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
                 </div>
-
+                <div className="open-filters-btn-container">
+                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X</button>
+                    <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>O</button>
+                </div>
                     <FilteredProducts queryString={string}/>
-
             </div>
         </>
     )

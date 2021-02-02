@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
     return (
         <>
             <li className='product-card-container'>
-                    <Card data-category={categories} src='google.com' data-itemno={itemNo} bordered={true} style={{ width: 305, height: 272, position: 'relative' }} hoverable={true} cover={
+                    <Card data-category={categories} src='google.com' data-itemno={itemNo} bordered={true} hoverable={true} cover={
                         <img
                             className='product-card-img'
                             alt="product-item"

@@ -32,7 +32,7 @@ const FilteredProducts = ({queryString}) => {
         setProductsPerPage(prevValue => prevValue + 2)
     }
     const showLoadingContainer = {
-        width: 315, height: 295, backgroundColor: '#C4C4C4', display: showLoading ? 'flex' : 'none'
+        display: showLoading ? 'flex' : 'none'
     }
 
     return (

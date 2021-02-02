@@ -6,19 +6,33 @@
     padding-left: 5px;
   }
   input[type='checkbox']{
-    appearance: none;
+
     background-color: #FFFFFF;
     border: 1px solid #000000;
     padding: 4px;
+    border-radius: 2px;
     box-shadow: none;
     -webkit-appearance: none;
-    border-radius: 2px;
+    appearance: none;
   }
   input[type='checkbox']:checked{
     background-color: #000000;
   }
   input[type='checkbox']:focus{
     outline: none;
+  }
+}
+
+@media screen and (max-width: 585px){
+
+  .checkbox-container .checkbox-label{
+    font-size: 24px;
+  }
+  .checkbox-container input[type=checkbox]{
+    padding: 10px;
+  }
+  .checkbox-group__item{
+    margin: 5px 0;
   }
 }
 
