@@ -1,9 +1,10 @@
 import React from 'react';
 import './styles.less';
+import ProductCarousel from "../../components/Product_Carousel";
 
 const ProductDetails = (props) => {
     return (
-        <h2>This is Product Details page</h2>
+        <ProductCarousel/>
     )
 }
 
