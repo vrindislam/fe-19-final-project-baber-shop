@@ -7,6 +7,7 @@ import LoginService from "../../../services/LoginService";
 import Preloader from "../../Preloader";
 import {useDispatch} from "react-redux";
 import {authUser} from "../../../store/user/userAction";
+import jwt_decode from "jwt-decode";
 
 const LoginForm = (props) => {
     const [form] = Form.useForm();
@@ -23,7 +24,9 @@ const LoginForm = (props) => {
             .then(loginResult => {
                 setLoading(false);
                 localStorage.setItem('token', loginResult.token);
-                dispatch(authUser(true))
+                const decoded = jwt_decode(loginResult.token);
+                delete decoded.iat
+                dispatch(authUser({...decoded, isAuthenticated: true}));
                 history.push('/');
             })
             .catch(err => {
@@ -36,8 +39,7 @@ const LoginForm = (props) => {
     return (
         <Form
             form={form}
-            name="normal_login"
-            className="login-form"
+            name="login-form"
             initialValues={{
                 remember: true
             }}
@@ -86,11 +88,14 @@ const LoginForm = (props) => {
                 <Link to="/register"
                       onClick={props.handleRegisterModalClose}> Register now!</Link>
             </Form.Item>
-            <Button className='login-form-button' type="primary" htmlType="submit">
+            <Button className='login-form-button'
+                    type="primary"
+                    htmlType="submit"
+                    style={{width: props.btnWidth}}>
                 Log in
             </Button>
             <div className='login-form-preloader'
-               style={{color: loading ? 'black' : 'red'}}>
+                 style={{color: loading ? 'black' : 'red'}}>
                 {loading ? <Preloader/> : error}
             </div>
         </Form>
