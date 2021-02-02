@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import './styles.less'
 import {Link} from "react-router-dom";
 import Ajax from "../../../services/Ajax";
-// temporary will be removed once Login will be finilized
 import {useDispatch} from "react-redux";
 import {authUser} from "../../../store/user/userAction";
+import jwt_decode from "jwt-decode";
 
 import {Modal, Form, Input, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
@@ -91,7 +91,9 @@ const Login = ({history}) => {
                     message.success({content: 'Successful!', key, duration: 2});
                 }, 500);
                 localStorage.setItem('token', loginResult.token);
-                dispatch(authUser(true))
+                const decoded = jwt_decode(loginResult.token);
+                delete decoded.iat
+                dispatch(authUser({...decoded, isAuthenticated: true}));
                 history.push('/')
             })
             .catch(err => {

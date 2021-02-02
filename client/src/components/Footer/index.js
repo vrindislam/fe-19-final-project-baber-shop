@@ -11,11 +11,14 @@ const {get} = Ajax;
 const {Footer: AntFooter} = Layout;
 
 function Footer() {
-
     const [links, setLinks] = useState([]);
     useEffect(() => {
+        let cleanupFunction = false;
         get('/links')
-            .then(links => setLinks(links || []))
+            .then(links => {
+                if (!cleanupFunction) setLinks(links || [])
+            })
+        return () => cleanupFunction = true
     }, [])
     console.log('links', links);
 
