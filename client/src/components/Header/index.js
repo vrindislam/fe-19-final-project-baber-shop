@@ -6,7 +6,6 @@ import "./styles.less";
 import {Link} from "react-router-dom";
 import {
     AppstoreOutlined,
-    SettingOutlined,
     UserOutlined,
     UserAddOutlined,
     ShoppingOutlined,
@@ -22,7 +21,7 @@ const {Header} = Layout;
 const {Item} = Menu;
 
 function SiteHeader() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const showModalLogin = () => {
         dispatch(showModal({status: true, type: "LoginForm"}));
@@ -55,14 +54,10 @@ function SiteHeader() {
                 <Item key="login" icon={<UserOutlined/>} onClick={showModalLogin}>
                     Login
                 </Item>
-                <Login />
+                <Login/>
 
                 <Item key="pdp">
                     <Link to="/product-details">Product Details</Link>
-                </Item>
-
-                <Item key="admin-category" icon={<SettingOutlined/>}>
-                    <Link to="/admin/category">Admin add category</Link>
                 </Item>
 
                 <Item key="cart" icon={<ShoppingCartOutlined className='basket-icon'/>}>
@@ -73,7 +68,6 @@ function SiteHeader() {
                 <Item key="logout" icon={<LogoutOutlined/>} onClick={handleLogout}>
                     Logout
                 </Item>}
-
 
             </Menu>
             <LiveSearch/>
