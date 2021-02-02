@@ -48,7 +48,7 @@ const LoginForm = (props) => {
             </Form.Item>
             <Form.Item
                 name="loginOrEmail"
-                className='input-label'
+                className='login-form-item-margin'
                 label='Login or Email'
                 rules={[
                     {
@@ -56,7 +56,6 @@ const LoginForm = (props) => {
                         message: 'Please input your Username or Email!',
                     },
                 ]}
-                style={{margin: 0}}
             >
                 <Input prefix={<UserOutlined className="site-form-item-icon"/>}
                        placeholder="Username"
@@ -64,7 +63,7 @@ const LoginForm = (props) => {
             </Form.Item>
             <Form.Item
                 name="password"
-                className='input-label'
+                className='login-form-item-margin'
                 label='Password'
                 rules={[
                     {
@@ -72,14 +71,13 @@ const LoginForm = (props) => {
                         message: 'Please input your Password!',
                     },
                 ]}
-                style={{margin: 0}}
             >
                 <Input.Password
                     prefix={<LockOutlined className="site-form-item-icon"/>}
                     placeholder="Password"
                 />
             </Form.Item>
-            <Form.Item style={{margin: 0}}>
+            <Form.Item className='login-form-item-margin'>
                 <Link to="/forgot/password"
                       onClick={props.handleRegisterModalClose}>Forgot password?</Link>
             </Form.Item>
@@ -88,12 +86,13 @@ const LoginForm = (props) => {
                 <Link to="/register"
                       onClick={props.handleRegisterModalClose}> Register now!</Link>
             </Form.Item>
-            <Button className='login-button' type="primary" htmlType="submit">
+            <Button className='login-form-button' type="primary" htmlType="submit">
                 Log in
             </Button>
-            <p className='preloader' style={{color: loading ? 'black' : 'red'}}>
+            <div className='login-form-preloader'
+               style={{color: loading ? 'black' : 'red'}}>
                 {loading ? <Preloader/> : error}
-            </p>
+            </div>
         </Form>
     );
 };
