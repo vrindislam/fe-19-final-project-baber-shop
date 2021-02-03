@@ -1,35 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import Ajax from "../../services/Ajax";
 import ImageGallery from 'react-image-gallery';
 
 import './styles.less';
 
-const images = [
-    {
-        original: 'https://picsum.photos/id/1018/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1018/1000/600/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/1000/600/',
-    },
-    {
-        original: 'https://picsum.photos/id/1015/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1015/1000/600/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/1000/600/',
-    },
-];
-
 const ProductCarousel = () => {
+    const [img, setImg] = useState([])
+
+    useEffect( () => {
+        async function fetch () {
+            const { imageUrls } = await Ajax.get('/products/76100')
+            imageUrls.map( image => {
+                return setImg( state => [
+                        ...state,
+                        {
+                            original: image,
+                            thumbnail: image
+                        }
+                    ])
+                })
+        }
+        fetch();
+    }, [])
+
     return (
         <div className='product-carousel-container'>
             <ImageGallery
-                items={images}
+                items={img}
                 showFullscreenButton={false}
                 showPlayButton={false}
-                thumbnailPosition={'left'}
+                // thumbnailPosition={'left'}
                 product-carousel-container={false}
             />
         </div>

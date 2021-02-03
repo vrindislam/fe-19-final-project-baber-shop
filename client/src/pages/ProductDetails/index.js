@@ -4,7 +4,9 @@ import ProductCarousel from "../../components/Product_Carousel";
 
 const ProductDetails = (props) => {
     return (
-        <ProductCarousel/>
+        <div className='container'>
+            <ProductCarousel/>
+        </div>
     )
 }
 
