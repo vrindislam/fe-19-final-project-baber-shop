@@ -54,7 +54,7 @@ function SiteHeader() {
                 <Item key="login" icon={<UserOutlined/>} onClick={showModalLogin}>
                     Login
                 </Item>
-                <Login/>
+                <Login />
 
                 <Item key="pdp">
                     <Link to="/product-details">Product Details</Link>

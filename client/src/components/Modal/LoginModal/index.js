@@ -8,7 +8,7 @@ const Login = () => {
     const ModalLogin = withModal(LoginForm, typeOfModal);
 
     return (
-        <ModalLogin width={500}/>
+        <ModalLogin width={500} btnWidth={'100%'}/>
     )
 }
 

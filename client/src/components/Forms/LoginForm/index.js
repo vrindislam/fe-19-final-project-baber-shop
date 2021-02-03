@@ -27,6 +27,7 @@ const LoginForm = (props) => {
                 const decoded = jwt_decode(loginResult.token);
                 delete decoded.iat
                 dispatch(authUser({...decoded, isAuthenticated: true}));
+                props.handleRegisterModalClose();
                 history.push('/');
             })
             .catch(err => {
@@ -91,11 +92,11 @@ const LoginForm = (props) => {
             <Button className='login-form-button'
                     type="primary"
                     htmlType="submit"
-                    style={{width: props.btnWidth}}>
+                    style={{width: props.btnWidth}}
+            >
                 Log in
             </Button>
-            <div className='login-form-preloader'
-                 style={{color: loading ? 'black' : 'red'}}>
+            <div className='login-form-preloader'>
                 {loading ? <Preloader/> : error}
             </div>
         </Form>
