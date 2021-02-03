@@ -1,0 +1,35 @@
+.filtered-products-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 35px 25px;
+
+  .load-more-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 315px;
+    height: 295px;
+    background-color: #C4C4C4;
+  }
+  .load-more-btn svg{
+    width: 35px;
+    height: 33px;
+  }
+  .ant-card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 586px) and (max-width: 992px){
+
+  .filtered-products-container .load-more-btn{
+    width: 220px;
+    height: 190px;
+  }
+  .filtered-products-container{
+    padding: 55px;
+  }
+}
