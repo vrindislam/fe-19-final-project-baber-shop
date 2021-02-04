@@ -27,6 +27,7 @@ const withModal = (WrappedComponent, typeOfModal) => {
             modalHandler={modalHandler}
             handleRegisterModalClose={handleRegisterModalClose}
             {...props}
+            btnWidth={props.btnWidth}
           />
         </Modal>
         }

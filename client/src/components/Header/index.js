@@ -1,72 +1,95 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { Layout, Menu} from "antd";
-import { authUser } from "../../store/user/userAction";
+import { Col, PageHeader, Row}  from "antd";
+import {authUser} from "../../store/user/userAction";
 import "./styles.less";
-import { Link } from "react-router-dom";
-import {
-  AppstoreOutlined,
-  UserOutlined,
-  UserAddOutlined,
-  ShoppingOutlined,
-  ShoppingCartOutlined,
-  LogoutOutlined
-} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 import PopoverBasket from "../PopoverBasket/index";
-
 import LiveSearch from './LiveSearch'
+import {showModal} from "../../store/modal/modalAction";
+import Login from "../Modal/LoginModal";
+import {headerLogo, iconContact, iconCatalogue, iconCart, iconLogin } from './img/index'
+import { LogoutOutlined } from "@ant-design/icons";
 
-const { Header } = Layout;
-const { Item } = Menu;
 
-function SiteHeader () {
-  const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state => ({...state.user})))
+const SiteHeader = () =>{
+    const dispatch = useDispatch();
+    const showModalLogin = () => {
+        dispatch(showModal({status: true, type: "LoginForm"}));
+    };
 
-  const handleLogout = () => {
-    if(!isAuthenticated) return
-    dispatch(authUser(false))
-    localStorage.removeItem('token');
-  }
+    const {isAuthenticated, firstName} = useSelector((state => ({...state.user})))
+    const handleLogout = () => {
+        if (!isAuthenticated) return
+        dispatch(authUser(false))
+        localStorage.removeItem('token');
+    }
 
-  return (
-    <Header style={{ position: "fixed", zIndex: 1, width: "100%", height: 119 }}>
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["home"]}>
 
-        <Item key="home" icon={<AppstoreOutlined />}>
-          <Link to="/">Home</Link>
-        </Item>
+    return (
+        <PageHeader style={{position: 'fixed', zIndex: 1, padding:0, margin:0, height:'auto',  width: "100%",  textAlign: "center" }} >
+            <Row className="header-row" gutter={[24, 24]}>
 
-        <Item key="plp" icon={<ShoppingOutlined />}>
-          <Link to="/shop">Shop</Link>
-        </Item>
+                <Col style={{padding:2, marginTop:10}} xs={6} sm={8} lg={8} >
+                    {!isAuthenticated ?(<><div className="login" key="login"  onClick={showModalLogin}>
+                            <img src={iconLogin} alt="User-icon"/>
+                            <span className="login-title">LogIn</span>
+                        </div><Login/></>) : (<><img src={iconLogin} alt="User-icon"/><span className="username">{firstName}</span></> )
+                    }
+                </Col>
 
-        <Item key="register" icon={<UserAddOutlined />}>
-          <Link to="/register">Register</Link>
-        </Item>
+                <Col style={{padding:2}} xs={10} sm={8}  lg={8} >
+                    <div className='header-logo'  key="home" >
+                        <Link to="/">
+                            <img style={{width:'150px'}} src={headerLogo} alt="Logo"/>
+                        </Link>
+                    </div >
+                </Col>
+                <Col style={{padding:2, marginTop:10}} xs={8} sm={8}  lg={8} >
+                   <Row justify="center">
+                       <Col>
+                         <div className="header-contact"  key="contact" >
+                                <a  href="tel:+79998887766">
+                                <img style={{width:18}} src={iconContact} alt="icon-contact"/>
+                                <span className="contact-number">+380(067)6167008</span>
+                                </a>
+                         </div >
+                       </Col>
 
-        <Item key="login" icon={<UserOutlined />}>
-          <Link to="/login">Login</Link>
-        </Item>
+                       <Col style={{ marginLeft:20}}>
+                             {isAuthenticated &&
+                             <div className="logoutBtn"  key="logout"  onClick={handleLogout} >
+                                {<LogoutOutlined/>} <span className="logout-title">LogOut</span>
+                             </div>}
+                       </Col>
+                     </Row>
+                </Col>
+            </Row>
 
-        <Item key="pdp">
-          <Link to="/product-details">Product Details</Link>
-        </Item>
+            <Row className="header-row"  gutter={[24, 24]}>
 
-        <Item key="cart" icon={<ShoppingCartOutlined className='basket-icon'/>}>
-          <PopoverBasket/>
-        </Item>
+                <Col style={{padding:2}}  xs={{ span:12, order: 1 }} sm={{span:12, order: 1 }}  lg={{span:8, order: 1 }} >
+                    <div className="catalogue-btn" key="plp" >
+                        <Link className="catalogue-btn-link" to="/shop">
+                            <img className="catalogue-img" src={iconCatalogue} alt="icon"/>
+                            Catalogue</Link>
+                    </div>
+                </Col>
+                <Col style={{padding:2}} className="search-box"  xs={{span:20, order: 3 }} sm={{span:18, order: 3 }}  lg={{span:8, order: 2 }} >
+                    <LiveSearch />
+                </Col>
+                <Col style={{padding:2}} xs={{span:12, order: 2 }} sm={{span:12, order: 2 }}  lg={{span:8, order: 3 }} >
 
-        {isAuthenticated &&
-        <Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout} >
-          Logout
-        </Item>}
+                    <div className="cart" key="cart">
+                        <img className="img-cart" src={iconCart} alt="icon"/>
+                        <PopoverBasket/>
+                    </div>
+                </Col>
+            </Row>
+        </PageHeader>
 
-      </Menu>
-    <LiveSearch/>
-    </Header>
-  );
+    );
 }
 
 export default SiteHeader;
+
