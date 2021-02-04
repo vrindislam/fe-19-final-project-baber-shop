@@ -50,7 +50,7 @@ const AdminCatergory = () => {
         <Divider orientation="left">Create Category</Divider>
         <Row gutter={16}>
           <Col span={22} style={{ margin: "auto", textAlign: 'left'}}>
-            <Button style={{marginLeft: '14px'}} onClick={() => dispatchModal(true)}>Create Category</Button>
+            <Button type={'primary'} style={{marginLeft: '14px'}} onClick={() => dispatchModal(true)}>Create Category</Button>
             <ModalCategoryForm width={800} loadCategories={loadCategories} dispatchModal={dispatchModal} />
           </Col>
         </Row>
