@@ -10,7 +10,7 @@ const {Search} = Input;
 const {get} = Ajax;
 const {Footer: AntFooter} = Layout;
 
-function Footer() {
+const Footer = () => {
 
     const [links, setLinks] = useState([]);
     useEffect(() => {
@@ -26,7 +26,7 @@ function Footer() {
                 <Col xs={24} sm={24} lg={5}>
                     <div className='footer-logo'>
                         <Link to="/">
-                            <Image src="footerLogo/logo_white.png" alt="logo-white" preview={false}/>
+                            <Image src="/logo/footerLogo/logo_white.png" alt="logo-white" preview={false}/>
                         </Link>
                     </div>
                 </Col>
@@ -35,13 +35,13 @@ function Footer() {
                 {links.map(mainLink => {
                     return (
                         <Col key={mainLink._id} className="footer-nav" xs={24} sm={8} lg={4}>
-                            <Link className='footer-header_link'  to={`/pages${mainLink.url}`}>
+                            <Link className='footer-header_link' to={`/pages${mainLink.url}`}>
                                 {mainLink.title}
-                            </Link>)
+                            </Link>
                             {
                                 mainLink.links.map(link => {
                                     return (
-                                        <Link className='footer-link' key={link._id} to={link.url}>
+                                        <Link className='footer-link' key={link._id} to={`/pages${link.url}`}>
                                             {link.description}
                                         </Link>)
                                 })
@@ -62,13 +62,13 @@ function Footer() {
                         color='yellow'
                         onSearch={() => alert('Success')}
                     />
-                    <a href="https://www.instagram.com" target='_blank' rel='noreferrer'>
+                    <a href="https://www.instagram.com" target='_blank' rel='noopener noreferrer'>
                         <InstagramOutlined className='footer-socials_icons'/>
                     </a>
-                    <a href="https://www.facebook.com/" target='_blank' rel='noreferrer'>
+                    <a href="https://www.facebook.com/" target='_blank' rel='noopener noreferrer'>
                         <FacebookOutlined className='footer-socials_icons'/>
                     </a>
-                    <a href="https://www.youtube.com/" target='_blank' rel='noreferrer'>
+                    <a href="https://www.youtube.com/" target='_blank' rel='noopener noreferrer'>
                         <YoutubeOutlined className='footer-socials_icons'/>
                     </a>
                 </Col>

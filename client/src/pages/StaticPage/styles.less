@@ -1,17 +1,25 @@
 @import '~antd/lib/style/themes/default.less';
 
-
 .staticPage {
   &-container {
     padding: 50px;
     text-indent: 3.5em;
     text-align: justify;
-  }
-
-  &-content {
     font-size: 1.3em;
     line-height: 1.8em;
+
+    & h3 {
+      margin-top: 12px;
+    }
+
+    & li {
+      margin-left: 60px;
+      text-indent: 10px;
+    }
   }
+}
+
+.aboutUs {
 
   &-link {
     color: @yellow-6;
@@ -19,8 +27,33 @@
 
     &:hover {
       color: @black;
-
     }
+  }
+}
+
+.contacts {
+  &-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &-map {
+    padding: 15px;
+    width: 600px;
+    height: 450px;
+  }
+}
+
+.privacy {
+  &-container {
+    padding: 15px;
+  }
+}
+
+.items {
+  &-detailsSymbol {
+    color: @red-5;
   }
 }
 
@@ -29,19 +62,37 @@
     &-container {
       text-indent: 2.5em;
       padding: 25px;
+      font-size: 1.1em;
+      line-height: 1.5em;
 
       & h1 {
-        font-size: 30px;
+        font-size: 28px;
       }
 
       & h2 {
         font-size: 24px;
       }
-    }
 
-    &-content {
-      font-size: 1.1em;
-      line-height: 1.5em;
+      & h3 {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .contacts {
+
+    &-map {
+      display: none;
+    }
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .contacts {
+    &-map {
+      width: 480px;
+      height: 360px;
     }
   }
 }
