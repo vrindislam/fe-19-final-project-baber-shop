@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "../../store/user/userAction";
 import { useHistory } from "react-router";
 
+import './styles.less'
+
+
 const { Item } = Menu;
 const { Sider } = Layout;
 
@@ -23,7 +26,8 @@ const AdminSider = () => {
   };
 
   return (
-    <Sider width={210}>
+    <Sider
+      className={'admin-sider-menue'}>
       <Menu
         mode="inline"
         defaultSelectedKeys={[defaultSelected]}
