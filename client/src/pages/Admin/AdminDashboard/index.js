@@ -1,14 +1,11 @@
 import React from "react";
 import {Layout, Row, Col, Divider} from "antd";
 import AdminSider from "../../../components/AdminSider";
-import {setAxiosHeaders} from "../../../services/setAxiosHeaders";
 import "./styles.less";
 
 const {Content} = Layout;
 
 const AdminDashboard = () => {
-
-    setAxiosHeaders();
 
     return (
         <Layout className="admin-dashboard-container">
