@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
+import {useHistory} from "react-router";
 import { Form, Input, Button, message } from "antd";
 import { fieldsSetArr, layout, tailLayout } from "./constants";
-// import CategoryService from "../../../services/CategoryService";
+import CategoryService from "../../../services/CategoryService";
+
 import "./style.less";
 
-
-const CategoryUpdateForm = (props) => {
-  const { categoryToUpdate } = props;
-  console.log("Category TO update", categoryToUpdate);
+const CategoryUpdateForm = ({ categoryToUpdate }) => {
+  const history = useHistory();
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -38,7 +38,16 @@ const CategoryUpdateForm = (props) => {
 
   // handle form on a successfully submit
   const onFinish = (values) => {
-    // new Logic
+    console.log('Cat to update ===>>>', categoryToUpdate.id);
+    console.log('Values ===>>>', values);
+    CategoryService.updateCategory(categoryToUpdate.id, values)
+      .then(res => {
+        message.success(`Category ${res.name} was updated`, 1.5);
+        history.push('/admin/category');
+      })
+      .catch(err => {
+        message.error(`${err}`, 1.5);
+      });
   };
 
   // handle form on faild submit

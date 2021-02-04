@@ -5,7 +5,7 @@ class Ajax extends React.Component {
 
     static async get(endpoint) {
         const {data} = await axios.get(`${process.env.REACT_APP_API}${endpoint}`)
-        console.log('get all data-->', data);
+        // console.log('get all data-->', data);
         return data
     }
 
@@ -16,7 +16,7 @@ class Ajax extends React.Component {
                 'Authorization': `${localStorage.getItem('token')}`
             }
         })
-        console.log('post new data-->', data);
+        // console.log('post new data-->', data);
         return data;
     }
 
@@ -27,7 +27,7 @@ class Ajax extends React.Component {
                 'Authorization': `${localStorage.getItem('token')}`
             }
         })
-        console.log('update old data-->', data);
+        // console.log('update old data-->', data);
         return data;
     }
 
@@ -38,7 +38,7 @@ class Ajax extends React.Component {
                 'Authorization': `${localStorage.getItem('token')}`
             }
         })
-        console.log('delete data-->', data);
+        // console.log('delete data-->', data);
         return data;
     }
 }

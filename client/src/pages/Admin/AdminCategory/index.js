@@ -12,6 +12,7 @@ const { Content } = Layout;
 
 const AdminCatergory = () => {
   const [listOfCategories, setListOfCategories] = useState(null);
+
   useAsyncEffect(async isMounted => {
     CategoryService.getCategoriesSortedPerLevels()
       .then(res => {
@@ -56,7 +57,7 @@ const AdminCatergory = () => {
                       {categories && categories.length > 0 && categories.map(category => {
                           return (
                             <div className={"category-list-item"} key={`${category._id}`}>
-                              <AdminCategoryCard category={category} />
+                              <AdminCategoryCard category={category} loadCategories={loadCategories} />
                             </div>
                           );
                         }
