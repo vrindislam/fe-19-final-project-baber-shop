@@ -14,17 +14,17 @@ import { LogoutOutlined } from "@ant-design/icons";
 
 const SiteHeader = () =>{
     const dispatch = useDispatch();
+  const {isAuthenticated, firstName} = useSelector((state => ({...state.user})))
+
     const showModalLogin = () => {
         dispatch(showModal({status: true, type: "LoginForm"}));
     };
 
-    const {isAuthenticated, firstName} = useSelector((state => ({...state.user})))
     const handleLogout = () => {
         if (!isAuthenticated) return
-        dispatch(authUser(false))
+        dispatch(authUser({isAuthenticated: false}))
         localStorage.removeItem('token');
     }
-
 
     return (
         <PageHeader style={{position: 'fixed', zIndex: 1, padding:0, margin:0, height:'auto',  width: "100%",  textAlign: "center" }} >

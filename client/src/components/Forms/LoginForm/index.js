@@ -26,6 +26,7 @@ const LoginForm = (props) => {
                 localStorage.setItem('token', loginResult.token);
                 const decoded = jwt_decode(loginResult.token);
                 delete decoded.iat
+                props.handleRegisterModalClose();
                 dispatch(authUser({...decoded, isAuthenticated: true}));
                 if (decoded.isAdmin) history.push('/');
             })

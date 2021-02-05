@@ -25,7 +25,7 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
     ['input', {label: "Category ID", name: "id", rules}],
     ['input', {label: "Category Name", name: "name", rules}],
     ['input', {label: "Category Description", name: "description"}],
-    ['input', {label: "Image URL", name: "imgUrl"}]
+    ['input', {label: "Image URL", name: "imgUrl", rules}]
   ]
 
   // form layout settings
