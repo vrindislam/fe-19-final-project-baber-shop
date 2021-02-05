@@ -63,6 +63,14 @@ class CategoryService {
     }
   }
 
+  async updateCategory (id, updates) {
+    return await Ajax.put(`/catalog`, id, JSON.stringify(updates));
+  }
+
+  async deleteCategory (id) {
+    return await Ajax.deleteRequest(`/catalog`, id);
+  }
+
 
 }
 

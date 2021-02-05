@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import { Layout, Row, Col, Divider } from "antd";
+import { Layout, Row, Col, Divider, Button } from "antd";
 import useAsyncEffect from "use-async-effect";
 import AdminSider from "../../../components/AdminSider";
 import CategoryForm from "../../../components/Forms/CategoryForm";
 import CategoryService from "../../../services/CategoryService";
 import AdminCategoryCard from "../../../components/AdminCategoryCard";
+import withModal from "../../../components/Modal";
+import { useDispatch } from "react-redux";
+import { showModal } from "../../../store/modal/modalAction";
 
 import "./styles.less";
-
 const { Content } = Layout;
 
 const AdminCatergory = () => {
   const [listOfCategories, setListOfCategories] = useState(null);
+  const typeOfModal = "categoryFormInModal";
+  const dispatch = useDispatch();
+  const ModalCategoryForm = withModal(CategoryForm, typeOfModal);
+
+
   useAsyncEffect(async isMounted => {
     CategoryService.getCategoriesSortedPerLevels()
       .then(res => {
@@ -32,19 +39,24 @@ const AdminCatergory = () => {
       .catch(err => console.log(err));
   };
 
+  const dispatchModal = (status) => {
+    dispatch(showModal({ status, type: typeOfModal }));
+  };
+
   return (
     <Layout className="admin-category-container">
       <AdminSider />
       <Content className="category-content-container">
         <Divider orientation="left">Create Category</Divider>
         <Row gutter={16}>
-          <Col span={22} style={{margin: 'auto'}}>
-            <CategoryForm loadCategories={loadCategories} />
+          <Col span={22} style={{ margin: "auto", textAlign: 'left'}}>
+            <Button type={'primary'} style={{marginLeft: '14px'}} onClick={() => dispatchModal(true)}>Create Category</Button>
+            <ModalCategoryForm width={800} loadCategories={loadCategories} dispatchModal={dispatchModal} />
           </Col>
         </Row>
         <Row
           gutter={16}
-          justify={'center'}
+          justify={"center"}
         >
           <Col span={24}>
             {listOfCategories && listOfCategories.map(cat => {
@@ -56,7 +68,7 @@ const AdminCatergory = () => {
                       {categories && categories.length > 0 && categories.map(category => {
                           return (
                             <div className={"category-list-item"} key={`${category._id}`}>
-                              <AdminCategoryCard category={category} />
+                              <AdminCategoryCard category={category} loadCategories={loadCategories} />
                             </div>
                           );
                         }
