@@ -11,8 +11,12 @@ const Slider = () => {
     const history = useHistory();
     const [slides, setSlides] = useState([]);
     useEffect(() => {
+        let cleanupFunction = false;
         get('/slides')
-            .then(slides => setSlides(slides || []))
+            .then(slides => {
+                if (!cleanupFunction) setSlides(slides || [])
+            })
+        return () => cleanupFunction = true
     }, [])
 
 

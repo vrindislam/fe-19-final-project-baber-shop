@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import {FacebookOutlined, InstagramOutlined, MailOutlined, YoutubeOutlined} from '@ant-design/icons';
 
 const {Search} = Input;
-
 const {get} = Ajax;
 const {Footer: AntFooter} = Layout;
 
