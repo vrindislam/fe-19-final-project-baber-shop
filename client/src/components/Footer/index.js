@@ -17,7 +17,6 @@ const Footer = () => {
         get('/links')
             .then(links => setLinks(links || []))
     }, [])
-    console.log('links', links);
 
     return (
 

@@ -1,0 +1,87 @@
+@import '~antd/lib/style/themes/default.less';
+
+
+.carousel {
+  position: relative;
+
+  &-mainImage {
+    min-width: 300px;
+    max-width: 100%;
+  }
+
+  &-text {
+    position: absolute;
+    top: 24%;
+    left: 10%;
+    width: 30%;
+    color: @white;
+    font-size: 1.6vw;
+    text-decoration: none;
+
+    &-title {
+      margin-bottom: 1.6vw;
+      color: @white;
+      font-weight: bold;
+      font-size: 3.4vw;
+    }
+
+    &-btn {
+      width: 10vw;
+      height: 3vw;
+      margin-top: 2vw;
+      padding: 2px;
+      font-size: 1.4vw;
+      border-width: 2px;
+
+
+      &:hover {
+        color: @yellow-5;
+        border: 2px solid @yellow-5;
+      }
+    }
+  }
+}
+
+#testBanner {
+
+  & .ant-carousel .slick-prev {
+    top: 265px;
+    left: 35px;
+    z-index: 1;
+    color: transparent;
+    font-size: 30px;
+
+    &::before {
+      font-size: 25px;
+    }
+  }
+
+  & .ant-carousel .slick-next {
+    top: 265px;
+    right: 35px;
+    z-index: 1;
+    color: transparent;
+    font-size: 30px;
+
+    &::before {
+      font-size: 25px;
+    }
+  }
+
+  & .ant-carousel .slick-dots li {
+    margin-right: 20px;
+  }
+
+  & .ant-carousel .slick-dots li button {
+    width: 25px;
+
+    height: 5px;
+  }
+
+  & .ant-carousel .slick-dots li.slick-active button {
+    width: 40px;
+    opacity: .8;
+  }
+
+
+}

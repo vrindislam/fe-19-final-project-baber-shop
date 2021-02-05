@@ -1,41 +1,42 @@
-import {Carousel} from 'antd';
-import React from 'react'
-import {Link} from "react-router-dom";
+import {Button, Carousel} from 'antd';
+import React, {useEffect, useState} from 'react'
+import {useHistory} from "react-router-dom";
+import './styles.less'
+import Ajax from "../../services/Ajax";
 
-function Slider() {
+const {get} = Ajax;
 
-    const contentStyle = {
-        minWidth: '300px',
-        maxWidth: '100%'
-    };
-// Надо еще будет добавить в объект картинки ссылку для перехода при клике(когда будут категории)
-// а картинки будем получать запросом
-    const bannersIMG = [
-        {
-            url: 'https://barbercompany.com/image/cache/webp/catalog/Banner/banner-1--desktop-1920x650.webp',
-            index: 1
-        },
-        {
-            url: 'https://barbercompany.com/image/cache/webp/catalog/Banner/banner-2--desktop-1920x650.webp',
-            index: 2
-        },
-        {
-            url: 'https://barbercompany.com/image/cache/webp/catalog/Banner/banner-3--desktop-1920x650.webp',
-            index: 3
-        }
-    ]
+const Slider = () => {
+
+    const history = useHistory();
+    const [banners, setBanners] = useState([]);
+    useEffect(() => {
+        get('/slides')
+            .then(slides => setBanners(slides || []))
+    }, [])
+
 
     return (
-        <Carousel autoplay>
-            {bannersIMG.map(banner => (
-                    <div key={banner.index}>
-                        <Link to="/home">
-                            <img style={contentStyle} src={banner.url} alt={`slider-${banner.index}`}/>
-                        </Link>
-                    </div>
-                )
-            )}
-        </Carousel>
+        <div id='testBanner'>
+            <Carousel arrows='true'>
+                {banners.map(banner => (
+                        <div key={banner.customId}>
+                            <div className='carousel'>
+                                <img className='carousel-mainImage' src={banner.imageUrl} alt={`slider-${banner.alt}`}/>
+                                <div className='carousel-text'>
+                                    <h2 className='carousel-text-title'>{banner.text.title}</h2>
+                                    <div>{banner.text.text}</div>
+                                    <Button className='carousel-text-btn' shape='round' ghost
+                                            onClick={() => {
+                                                history.push(banner.link)
+                                            }}>More details</Button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                )}
+            </Carousel>
+        </div>
     );
 }
 export default Slider;
