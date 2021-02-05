@@ -29,6 +29,7 @@ const Banner = ({title, config}) => {
                 //
             }
         }
+        return () => setCategories([]);
     }, [config]);
 
     useEffect(() => {
@@ -36,6 +37,7 @@ const Banner = ({title, config}) => {
             ProductService.getProductsForBanner() // categories[0]
                 .then(products => setProducts(products || []));
         }
+        return () => setProducts([]);
     }, [config, categories]);
 
     return (
@@ -47,7 +49,7 @@ const Banner = ({title, config}) => {
                 <Row justify="space-around" gutter={[20, 20]}>
                     {categories.map(cat => {
                         return (
-                            <Col xxl={12} xl={24} lg={24} md={24} sm={24} key={cat.id}>
+                            <Col xxl={12} xl={12} lg={12} md={12} sm={24} key={cat.id}>
                                 <CategoryBanner category={cat} />
                             </Col>
                         )
