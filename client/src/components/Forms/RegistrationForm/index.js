@@ -6,8 +6,6 @@ import { collectionItemsForm } from "./collectionItems";
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
 import { Link } from "react-router-dom";
 
-import login from '../../../pages/Auth/Login/index';
-import withModal from "../../../components/Modal/index";
 import { showModal } from "../../../store/modal/modalAction";
 import { useDispatch } from "react-redux";
 
@@ -15,9 +13,10 @@ const RegistrationForm = (props) => {
   const [form] = Form.useForm();
   console.log(props.onOk);
 
-  const typeOfModal = "LoginForm";
-  const ModalLogin = withModal( login, typeOfModal );
   const dispatch = useDispatch();
+  const showModalLogin = () => {
+    dispatch(showModal({status: true, type: 'LoginForm'}));
+  };
 
   const onFinish = (values) => {
     const newCustomer = { ...values, isAdmin: false };
@@ -32,9 +31,6 @@ const RegistrationForm = (props) => {
   };
 
 
-  const showModalLogin = () => {
-    dispatch(showModal({status: true, type: typeOfModal}));
-  };
   return (
     <Form
       {...formItemLayout2}
@@ -75,7 +71,7 @@ const RegistrationForm = (props) => {
         <span onClick={showModalLogin}>Already registered?(link to Login Form MODAL)</span>
         <Link to="/login">link to Login PAGE</Link>
       </Form.Item>
-      <ModalLogin />
+
     </Form>
   );
 };

@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from "react";
-import './style.less';
 import { Form, Input, Button, message, Select} from 'antd';
-import {createCategory, getCatalog} from "./functions";
+import CategoryService from "../../../services/CategoryService";
+import './style.less';
 
 const {Option} = Select;
-// token will be taaken from local storage
-const Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMDM3ZmU5YjQ5NzkzNWIzOGE4YTlhYiIsImZpcnN0TmFtZSI6IkVtaWxpZW4iLCJsYXN0TmFtZSI6IlNpZCIsImlzQWRtaW4iOnRydWUsImlhdCI6MTYxMTM1MDQzNywiZXhwIjoxNjExMzg2NDM3fQ.gkZtfCfy0UtOBq1ddplXydHYaCqhUVgCwhOFaIUktmI'
 
+const CategoryForm = ({ loadCategories, dispatchModal }) => {
 
-const CategoryForm = () => {
   const [form] = Form.useForm();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledParentCategory, setDisabledParentCategory] = useState(true);
@@ -26,7 +24,8 @@ const CategoryForm = () => {
     ['select-parentCategory', {label:"Parent ID", name:"parentId", rules}],
     ['input', {label: "Category ID", name: "id", rules}],
     ['input', {label: "Category Name", name: "name", rules}],
-    ['input', {label: "Category Description", name: "description"}]
+    ['input', {label: "Category Description", name: "description"}],
+    ['input', {label: "Image URL", name: "imgUrl", rules}]
   ]
 
   // form layout settings
@@ -82,18 +81,14 @@ const CategoryForm = () => {
 
   // function get parent Categories ID based on selected Level
   const handleLevelChange = (level) => {
-    // Logic below helps to build Levels structure for categories; you can't create next level id parent of previous level is not specified
+    // Logic below helps to build Levels structure for categories;
+    // you can't create next level id parent of previous level is not specified
     if (level.replace(/\D/g, '') * 1 === 1) {
       setParentCategories(['null'])
     } else {
       const parentLevel = (level * 1 - 1).toString();
-      getCatalog(Authorization)
-        .then(res => {
-          const uniqParentForCategory = res.data
-            .filter(cat => cat.level === parentLevel)
-            .map(cat => cat.id);
-          setParentCategories([...new Set(uniqParentForCategory)])
-        })
+      CategoryService.getUniqIdCategoriesWithLevel(parentLevel)
+        .then(uniqParentForCategory => setParentCategories(uniqParentForCategory))
         .catch(err => console.log('GET CATALOG ERR (CATEGORY FORM) ==>', err))
     }
     setDisabledParentCategory(false);
@@ -101,12 +96,12 @@ const CategoryForm = () => {
 
   // handle form on a successfully submit
   const onFinish = (values) => {
-    // will be changed with common Ajax
-    createCategory(values, Authorization)
+    CategoryService.createCategory(values)
       .then(res => {
-        console.log(res.data);
-        message.success(`new Category ${res.data.name} was created`, 1.5);
+        message.success(`new Category ${res.name} was created`, 1.5);
         form.resetFields();
+        dispatchModal(false);
+        loadCategories();
       })
       .catch(err => {
         message.error(`${err}`, 1.5);
@@ -138,7 +133,7 @@ const CategoryForm = () => {
         description: '',
         imgUrl: '',
         level: '',
-        parentId: '',
+        parentId: ''
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}

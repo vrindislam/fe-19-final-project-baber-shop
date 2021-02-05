@@ -14,8 +14,12 @@ const Footer = () => {
 
     const [links, setLinks] = useState([]);
     useEffect(() => {
+        let cleanupFunction = false;
         get('/links')
-            .then(links => setLinks(links || []))
+            .then(links => {
+                if (!cleanupFunction) setLinks(links || [])
+            })
+        return () => cleanupFunction = true
     }, [])
 
     return (

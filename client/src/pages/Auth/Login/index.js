@@ -1,125 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './styles.less'
-import {Link} from "react-router-dom";
-import Ajax from "../../../services/Ajax";
-// temporary will be removed once Login will be finilized
-import {useDispatch} from "react-redux";
-import {authUser} from "../../../store/user/userAction";
+import LoginForm from "../../../components/Forms/LoginForm";
 
-import {Modal, Form, Input, message} from 'antd';
-import {UserOutlined, LockOutlined} from '@ant-design/icons';
-
-
-const LoginFormInModal = ({visible, onSubmit, onCancel}) => {
-    const [form] = Form.useForm();
-
-    const onOk = () => {
-        form.validateFields()
-            .then((userData) => {
-                form.resetFields();
-                onSubmit(userData);
-            })
-            .catch((info) => {
-                console.log('Validate Failed:', info);
-            });
-    }
+const Login = () => {
     return (
-        <Modal
-            visible={visible}
-            title="LogIn"
-            okText="Log in"
-            cancelText="Cancel"
-            onCancel={onCancel}
-            onOk={onOk}
-        >
-            <Form
-                form={form}
-                layout="vertical"
-                name="form_in_modal"
-            >
-                <Form.Item
-                    name="loginOrEmail"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Username or Email!',
-                        },
-                    ]}
-                >
-                    <Input prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="Username"/>
-                </Form.Item>
-                <Form.Item
-                    name="password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your Password!',
-                        },
-                    ]}
-                >
-                    <Input.Password
-                        prefix={<LockOutlined className="site-form-item-icon"/>}
-                        placeholder="Password"
-                    />
-                </Form.Item>
-
-                <Form.Item className='test-elements-class'>
-                    <Link to="/forgot/password">Forgot password?</Link>
-                </Form.Item>
-                <Form.Item className='test-elements-class'>
-                    Do not have an account?
-                    <Link to="/register"> Register now!</Link>
-                </Form.Item>
-
-            </Form>
-        </Modal>
-    );
-};
-
-const Login = ({history}) => {
-    const [visible, setVisible] = useState(false);
-    const key = 'updatable';
-    const dispatch = useDispatch();
-
-    const onSubmit = (userData) => {
-        console.log('Received user data of login form: ', userData);
-        message.loading({content: 'Loading...', key});
-
-        Ajax.post('/customers/login', userData)
-            .then(loginResult => {
-                setTimeout(() => {
-                    message.success({content: 'Successful!', key, duration: 2});
-                }, 500);
-                localStorage.setItem('token', loginResult.token);
-                dispatch(authUser(true))
-                history.push('/')
-            })
-            .catch(err => {
-                const error = err.response.data;
-                setTimeout(() => {
-                    message.error({content: error.loginOrEmail || error.password, key, duration: 3});
-                }, 500);
-            })
-    };
-
-    return (
-        <div>
-            <div style={{height: 80 + 'px'}}
-                 onClick={() => {
-                     setVisible(true);
-                 }}
-            >
-                LogIn
-            </div>
-            <LoginFormInModal
-                visible={visible}
-                onSubmit={onSubmit}
-                onCancel={() => {
-                    setVisible(false);
-                }}
-            />
+        <div className='login-page-wrapper'>
+            <LoginForm />
         </div>
-    );
-};
+    )
+}
 
 export default Login

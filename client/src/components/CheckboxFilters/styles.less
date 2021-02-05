@@ -1,0 +1,30 @@
+.checkbox {
+  &-container {
+    padding-left: 10px;
+  }
+
+  &-group {
+    margin-bottom: 10px;
+
+    &__name {
+      margin: 0;
+      margin-block-end: 0;
+      margin-block-start: 0;
+      font-weight: 700;
+      font-size: 14px;
+    }
+  }
+}
+@media screen and (min-width: 586px) and (max-width: 992px){
+
+  .checkbox-container{
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 586px){
+
+  .checkbox-group__name{
+    font-size: 24px;
+  }
+}

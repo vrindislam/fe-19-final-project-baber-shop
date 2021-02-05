@@ -5,6 +5,7 @@ import Banner from "../../components/Banner";
 
 
 const Home = (props) => {
+
     return (
         <div>
             <h2>This is Home Page</h2>

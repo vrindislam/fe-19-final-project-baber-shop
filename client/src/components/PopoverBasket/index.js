@@ -8,11 +8,11 @@ const PopoverBasket = () => {
   const someValueFromRedux = 5
 
   return (
-      <Popover placement="bottom" align={{ offset: [0, 30] }} className='popover-basket-div' content={content} trigger="hover">
+      <Popover placement="bottom" align={{ offset: [-19, 0] }} className='popover-basket-div' content={content} trigger="hover">
         <Link to="/cart">
-          <Badge className='basket-badge' count={someValueFromRedux} size="small" offset={[-25, -15]}>
+          <Badge className='basket-badge' count={someValueFromRedux} size="small" offset={[-20, -20]}>
           </Badge>
-          <span style={{ color: "rgba(255, 255, 255, 0.65)" }}>Cart</span>
+          <span style={{ color: "black" }}>Cart</span>
         </Link>
       </Popover>
   )
