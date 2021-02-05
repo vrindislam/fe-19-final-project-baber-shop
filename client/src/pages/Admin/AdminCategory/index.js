@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { showModal } from "../../../store/modal/modalAction";
 
 import "./styles.less";
+import LocalSearch from "../../../components/LocalSearch";
 const { Content } = Layout;
 
 const AdminCatergory = () => {
@@ -17,6 +18,7 @@ const AdminCatergory = () => {
   const typeOfModal = "categoryFormInModal";
   const dispatch = useDispatch();
   const ModalCategoryForm = withModal(CategoryForm, typeOfModal);
+  const [keyWord, setKeyWord] = useState('');
 
 
   useAsyncEffect(async isMounted => {
@@ -43,6 +45,8 @@ const AdminCatergory = () => {
     dispatch(showModal({ status, type: typeOfModal }));
   };
 
+  const searched = keyword => c => c.name.toLowerCase().includes(keyword);
+
   return (
     <Layout className="admin-category-container">
       <AdminSider />
@@ -52,6 +56,12 @@ const AdminCatergory = () => {
           <Col span={22} style={{ margin: "auto", textAlign: 'left'}}>
             <Button type={'primary'} style={{marginLeft: '14px'}} onClick={() => dispatchModal(true)}>Create Category</Button>
             <ModalCategoryForm width={800} loadCategories={loadCategories} dispatchModal={dispatchModal} />
+          </Col>
+        </Row>
+        <Divider orientation="left">Search</Divider>
+        <Row gutter={16}>
+          <Col span={22} style={{ margin: "auto", textAlign: 'left'}}>
+            <LocalSearch keyWord={keyWord} setKeyWord={setKeyWord}/>
           </Col>
         </Row>
         <Row
@@ -65,7 +75,7 @@ const AdminCatergory = () => {
                   <div key={`level_${level}`}>
                     <Divider orientation="left">{`Category Level ${level}`}</Divider>
                     <div className={"category-list-contaier"}>
-                      {categories && categories.length > 0 && categories.map(category => {
+                      {categories && categories.length > 0 && categories.filter(searched(keyWord)).map(category => {
                           return (
                             <div className={"category-list-item"} key={`${category._id}`}>
                               <AdminCategoryCard category={category} loadCategories={loadCategories} />
