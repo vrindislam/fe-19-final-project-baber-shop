@@ -43,7 +43,7 @@
 }
 
 
-#testBanner {
+#customCarousel {
 
   & .ant-carousel .slick-prev {
     left: 4vw;
@@ -52,7 +52,6 @@
 
     &::before {
       font-size: 1.8vw;
-
     }
   }
 
@@ -67,18 +66,20 @@
     }
   }
 
+  & .ant-carousel .slick-dots {
+    margin-left: 0;
+  }
+
   & .ant-carousel .slick-dots li {
     margin-right: 20px;
   }
 
   & .ant-carousel .slick-dots li button {
     width: 25px;
-
     height: 5px;
   }
 
   & .ant-carousel .slick-dots li.slick-active button {
     width: 40px;
-    opacity: .8;
   }
 }

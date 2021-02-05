@@ -9,27 +9,29 @@ const {get} = Ajax;
 const Slider = () => {
 
     const history = useHistory();
-    const [banners, setBanners] = useState([]);
+    const [slides, setSlides] = useState([]);
     useEffect(() => {
         get('/slides')
-            .then(slides => setBanners(slides || []))
+            .then(slides => setSlides(slides || []))
     }, [])
 
 
     return (
-        <div id='testBanner'>
-            <Carousel arrows='true'>
-                {banners.map(banner => (
-                        <div key={banner.customId}>
+        <div id='customCarousel'>
+            <Carousel autoplay arrows='true'>
+                {slides.map(slide => (
+                        <div key={slide.customId}>
                             <div className='carousel'>
-                                <img className='carousel-mainImage' src={banner.imageUrl} alt={`slider-${banner.alt}`}/>
+                                <img className='carousel-mainImage' src={slide.imageUrl} alt={`slider-${slide.alt}`}/>
                                 <div className='carousel-text'>
-                                    <h2 className='carousel-text-title'>{banner.text.title}</h2>
-                                    <div>{banner.text.text}</div>
+                                    <h2 className='carousel-text-title'>{slide.text.title}</h2>
+                                    <div>{slide.text.text}</div>
                                     <Button className='carousel-text-btn' shape='round' ghost
                                             onClick={() => {
-                                                history.push(banner.link)
-                                            }}>More details</Button>
+                                                history.push(slide.link)
+                                            }}>
+                                        More details
+                                    </Button>
                                 </div>
                             </div>
                         </div>
