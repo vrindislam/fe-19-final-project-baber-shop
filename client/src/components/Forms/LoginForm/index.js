@@ -27,8 +27,7 @@ const LoginForm = (props) => {
                 const decoded = jwt_decode(loginResult.token);
                 delete decoded.iat
                 dispatch(authUser({...decoded, isAuthenticated: true}));
-                props.handleRegisterModalClose();
-                history.push('/');
+                if (decoded.isAdmin) history.push('/');
             })
             .catch(err => {
                 const error = err.response.data;
