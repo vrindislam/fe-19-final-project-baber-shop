@@ -3,6 +3,7 @@ import './styles.less'
 import Slider from "../../components/Slider";
 import Banner from "../../components/Banner";
 
+
 const Home = (props) => {
     return (
         <div>
