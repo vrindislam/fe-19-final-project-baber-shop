@@ -1,13 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Card } from "antd";
+import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { Card, message, Modal } from "antd";
 import noImage from "../../blank_image/no_image.png";
+import CategoryService from "../../services/CategoryService";
 import "./style.less";
 
 const { Meta } = Card;
+const { confirm } = Modal;
 
-const AdminCategoryCard = ({ category: { name, imgUrl, description, id } }) => {
+const AdminCategoryCard = ({ category: { name, imgUrl, description, id }, loadCategories }) => {
+
+  const handleDelete = () => {
+    confirm({
+      title: `Do you want to delete category ${name}?`,
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        // some logical checks must be before deleting. To clarify with Saribeg
+        CategoryService.deleteCategory(id)
+          .then(res => {
+            message.success(res.message);
+            loadCategories()
+          })
+          .catch(err => message.error(err))
+      },
+      onCancel() {message.warning('Deletion Canceled');},
+    });
+  }
 
   return (
     <Card
@@ -25,7 +44,7 @@ const AdminCategoryCard = ({ category: { name, imgUrl, description, id } }) => {
         </Link>,
         <DeleteOutlined
           className="text-danger"
-          onClick={() => console.log("handleRemove(slug)")} />
+          onClick={handleDelete} />
       ]}
     >
       <Meta
