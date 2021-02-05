@@ -31,7 +31,7 @@ const StaticPage = () => {
                     {parse(page.htmlContent)}
                 </Content>
                 : error
-                    ? <Redirect to={'/404'}/>
+                    ? <Redirect to={'/error'}/>
                     : ''
             }
         </>

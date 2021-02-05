@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store/configureStore'
 import ErrorBoundary from "./components/ErrorBoundary";
+import ScrollToTop from "./routes/ScrollToTop";
 import './reset.css'
 import './index.css'
 
@@ -27,6 +28,7 @@ Sentry.init({
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
+      <ScrollToTop />
       <ErrorBoundary>
         <App />
       </ErrorBoundary>
