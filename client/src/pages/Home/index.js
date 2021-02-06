@@ -7,9 +7,8 @@ const Home = (props) => {
 
     return (
         <div>
-            <h2>This is Home Page</h2>
             <Slider/>
-            <Banner title={'Best sellers'} config='cp'/>
+            <Banner title={'Best sellers'} config='cc'/>
             <Banner title={'One more  thing'} config='cc'/>
         </div>
     )
