@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   modalHandler: modalHandler,
   preloader: preloaderReducer,
-  cart: cartReducer,
+  cart: cartReducer
 })
 
 export default rootReducer

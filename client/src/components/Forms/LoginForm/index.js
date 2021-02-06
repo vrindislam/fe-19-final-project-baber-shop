@@ -20,10 +20,12 @@ const LoginForm = (props) => {
         console.log('Received values of form: ', customerData);
         setLoading(true);
 
+
         LoginService.LoginResult(customerData)
             .then(loginResult => {
                 setLoading(false);
                 localStorage.setItem('token', loginResult.token);
+
                 const decoded = jwt_decode(loginResult.token);
                 delete decoded.iat
                 props.handleRegisterModalClose();
