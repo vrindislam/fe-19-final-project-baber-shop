@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import './styles.less';
 import {Menu} from 'antd';
 import CategoryService from "../../services/CategoryService";
+import {Link} from "react-router-dom";
 
 const {SubMenu} = Menu;
 
@@ -53,7 +54,9 @@ const Catalogue = (props) => {
                                                     return (
                                                         <Menu.Item key={categoryLvl3.id}
                                                                    className='catalogue-menu-item'>
-                                                            {categoryLvl3.name}
+                                                            <Link to='/shop'>
+                                                                {categoryLvl3.name} (link to '/shop')
+                                                            </Link>
                                                         </Menu.Item>
                                                     )
                                                 })}
