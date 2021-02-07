@@ -4,25 +4,57 @@
 .hidden {
   display: none;
 }
-.ant-menu.catalogue-list {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 100%;
+.catalogue-btn-link.ant-menu {
+  width: 230px;
+  height: 35px;
+  margin: auto;
+  padding: 5px 40px;
+  color: white;
+  background: black;
+  position: relative;
 }
-.ant-menu-submenu.catalogue-item > div,
+.catalogue-title {
+  position: absolute;
+  background-color: transparent;
+  right: 5%;
+  bottom: -5px;
+
+  & > div {
+    font-size: 22px;
+    margin: 0;
+
+    & > i {
+      display: none;
+    }
+  }
+}
+
+.ant-menu > .ant-menu-submenu-popup {
+  position: absolute;
+  top: 107px;
+  left: 110px;
+  width: 16%;
+}
+
+.catalogue-title.ant-menu-submenu-active > div, .catalogue-title.ant-menu-submenu-selected {
+  color: #f0f2f5;
+}
+
+.catalogue-item.ant-menu-submenu > div,
 .ant-menu .ant-menu-sub .ant-menu-vertical > li {
   margin: 0;
 }
 
-.ant-menu-submenu.catalogue-item, .ant-menu-item.catalogue-menu-item {
+.catalogue-item.ant-menu-submenu, .catalogue-menu-item.ant-menu-item {
   background-color: lightgrey;
   font-size: 16px;
 }
 .catalogue-item:hover, .catalogue-menu-item:hover {
   background-color: darkgray;
 }
-.ant-menu-submenu-active.catalogue-item > div {
+
+.catalogue-item.ant-menu-submenu-active > div,
+.catalogue-item.ant-menu-submenu-selected {
   color: black;
 }
 

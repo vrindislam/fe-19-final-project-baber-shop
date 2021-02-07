@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { Col, PageHeader, Row}  from "antd";
 import {authUser} from "../../store/user/userAction";
@@ -8,7 +8,7 @@ import PopoverBasket from "../PopoverBasket/index";
 import LiveSearch from './LiveSearch'
 import {showModal} from "../../store/modal/modalAction";
 import Login from "../Modal/LoginModal";
-import {headerLogo, iconContact, iconCatalogue, iconCart, iconLogin } from './img/index'
+import {headerLogo, iconContact, iconCart, iconLogin } from './img/index'
 import { LogoutOutlined } from "@ant-design/icons";
 import Catalogue from "../Catalogue";
 
@@ -20,11 +20,6 @@ const SiteHeader = () =>{
     const showModalLogin = () => {
         dispatch(showModal({status: true, type: "LoginForm"}));
     };
-
-    const [visibleCatalogue, setVisibleCatalogue] = useState(false);
-    const showHeaderCatalogue = () => {
-        setVisibleCatalogue(!visibleCatalogue);
-    }
 
     const handleLogout = () => {
         if (!isAuthenticated) return
@@ -75,12 +70,8 @@ const SiteHeader = () =>{
             <Row className="header-row"  gutter={[24, 24]}>
 
                 <Col style={{padding:2}}  xs={{ span:12, order: 1 }} sm={{span:12, order: 1 }}  lg={{span:8, order: 1 }} >
-                    <div className="catalogue-btn" key="plp" onClick={showHeaderCatalogue}>
-                        <Link className="catalogue-btn-link">
-                            <img className="catalogue-img" src={iconCatalogue} alt="icon"/>
-                            Catalogue
-                            <Catalogue visible={visibleCatalogue}/>
-                        </Link>
+                    <div className="catalogue-btn" key="plp">
+                        <Catalogue />
                     </div>
                 </Col>
                 <Col style={{padding:2}} className="search-box"  xs={{span:20, order: 3 }} sm={{span:18, order: 3 }}  lg={{span:8, order: 2 }} >
