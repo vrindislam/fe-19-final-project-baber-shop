@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { Col, PageHeader, Row}  from "antd";
 import {authUser} from "../../store/user/userAction";
@@ -10,21 +10,27 @@ import {showModal} from "../../store/modal/modalAction";
 import Login from "../Modal/LoginModal";
 import {headerLogo, iconContact, iconCatalogue, iconLogin } from './img/index'
 import { LogoutOutlined } from "@ant-design/icons";
+import Catalogue from "../Catalogue";
 
 
 const SiteHeader = () =>{
     const dispatch = useDispatch();
+  const {isAuthenticated, firstName} = useSelector((state => ({...state.user})))
+
     const showModalLogin = () => {
         dispatch(showModal({status: true, type: "LoginForm"}));
     };
 
-    const {isAuthenticated, firstName} = useSelector((state => ({...state.user})))
-    const handleLogout = () => {
-        if (!isAuthenticated) return
-        dispatch(authUser(false))
-        localStorage.removeItem('token');
+    const [visibleCatalogue, setVisibleCatalogue] = useState(false);
+    const showHeaderCatalogue = () => {
+        setVisibleCatalogue(!visibleCatalogue);
     }
 
+    const handleLogout = () => {
+        if (!isAuthenticated) return
+        dispatch(authUser({isAuthenticated: false}))
+        localStorage.removeItem('token');
+    }
 
     return (
         <PageHeader style={{position: 'fixed', zIndex: 1, padding:0, margin:0, height:'auto',  width: "100%",  textAlign: "center" }} >
@@ -69,10 +75,12 @@ const SiteHeader = () =>{
             <Row className="header-row"  gutter={[24, 24]}>
 
                 <Col style={{padding:2}}  xs={{ span:12, order: 1 }} sm={{span:12, order: 1 }}  lg={{span:8, order: 1 }} >
-                    <div className="catalogue-btn" key="plp" >
-                        <Link className="catalogue-btn-link" to="/shop">
+                    <div className="catalogue-btn" key="plp" onClick={showHeaderCatalogue}>
+                        <Link className="catalogue-btn-link">
                             <img className="catalogue-img" src={iconCatalogue} alt="icon"/>
-                            Catalogue</Link>
+                            Catalogue
+                            <Catalogue visible={visibleCatalogue}/>
+                        </Link>
                     </div>
                 </Col>
                 <Col style={{padding:2}} className="search-box"  xs={{span:20, order: 3 }} sm={{span:18, order: 3 }}  lg={{span:8, order: 2 }} >

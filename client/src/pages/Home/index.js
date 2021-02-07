@@ -17,7 +17,7 @@ const Home = (props) => {
               href={Union}
             />
             <Slider/>
-            <Banner title={'Best sellers'} config='cp'/>
+            <Banner title={'Best sellers'} config='cc'/>
             <Banner title={'One more  thing'} config='cc'/>
         </div>
     )

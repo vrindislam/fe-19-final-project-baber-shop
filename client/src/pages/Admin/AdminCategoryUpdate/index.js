@@ -31,7 +31,7 @@ const AdminCatergoryUpdate = () => {
         <Divider orientation="left">Update Category</Divider>
         <Row gutter={16}>
           <Col span={22} style={{margin: 'auto'}}>
-            <CategoryUpdateForm categoryToUpdate={categoryToUpdate} consoleLog={'consolelog'}/>
+            <CategoryUpdateForm categoryToUpdate={categoryToUpdate} />
           </Col>
         </Row>
       </Content>

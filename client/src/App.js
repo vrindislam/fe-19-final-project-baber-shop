@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import "antd/dist/antd.less";
 import { Layout } from "antd";
 import SiteHeader from "./components/Header";
 import MainRoutes from "./routes/MainRoutes";
@@ -9,7 +10,6 @@ import { authUser } from "./store/user/userAction";
 import Footer from "./components/Footer";
 import AdminRouting from "./routes/AdminRouting";
 
-import "antd/dist/antd.less";
 
 const { Content } = Layout;
 
