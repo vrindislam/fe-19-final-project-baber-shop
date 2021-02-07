@@ -3,11 +3,19 @@ import './styles.less'
 import Slider from "../../components/Slider";
 import Banner from "../../components/Banner";
 
+import {MetaForPages} from "../../components/Helmet"
+import Union from "./Union.png"
+
 const Home = (props) => {
 
     return (
         <div>
-            <h2>This is Home Page</h2>
+            <MetaForPages
+              title="Home Page "
+              content="BarberShop Home Main Page"
+              rel="icon"
+              href={Union}
+            />
             <Slider/>
             <Banner title={'Best sellers'} config='cp'/>
             <Banner title={'One more  thing'} config='cc'/>
