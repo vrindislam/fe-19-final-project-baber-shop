@@ -29,7 +29,6 @@ const ProductCarousel = () => {
                 items={img}
                 showFullscreenButton={false}
                 showPlayButton={false}
-                // thumbnailPosition={'left'}
                 product-carousel-container={false}
             />
         </div>
