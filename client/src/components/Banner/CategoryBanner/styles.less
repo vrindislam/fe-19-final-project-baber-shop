@@ -1,32 +1,40 @@
+@import '~antd/lib/style/themes/default.less';
+
 .category-banner {
   position: relative;
+  width: 100%;
+  max-width: 628px;
+  max-height: 565px;
 
   &-img {
     display: block;
-    width: 628px;
-    height: 565px;
+    width: 100%;
+    height: 100%;
   }
 
   &-info {
     position: absolute;
-    bottom: 45px;
-    left: 40px
+    top: 77%;
+    left: 6.5%;
+  }
+
+  & .ant-image {
+    width: 100%;
+    height: 100%;
   }
 }
 
 .category-info {
-  color: #FFFFFF;
+  color: @white;
   font-weight: bold;
-  font-size: 45px;
+  font-size: 3vw;
   font-family: Roboto, serif;
   font-style: normal;
-  line-height: 53px;
 
   &-price {
-    margin-top: 7px;
+    margin-top: 8px;
     font-weight: normal;
-    font-size: 30px;
-    line-height: 35px;
+    font-size: 2vw;
   }
 
 

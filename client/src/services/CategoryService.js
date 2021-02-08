@@ -7,10 +7,10 @@ class CategoryService {
     if (allCategories && allCategories.length > 0) {
       const slice = allCategories.filter(c => +c.level === 1).sort(() => .5 - Math.random()).slice(0, count);
       return Promise.all(slice.map(async cat => {
-        const lowest = await this.getLowestPrice(); // cat
+        const lowest = await this.getLowestPrice(cat);
         return {
           ...cat,
-          price: lowest
+          price: Number.isFinite(lowest) || null
         };
       }));
     } else {
@@ -61,6 +61,14 @@ class CategoryService {
     } else {
       return null;
     }
+  }
+
+  async updateCategory (id, updates) {
+    return await Ajax.put(`/catalog`, id, JSON.stringify(updates));
+  }
+
+  async deleteCategory (id) {
+    return await Ajax.deleteRequest(`/catalog`, id);
   }
 
 
