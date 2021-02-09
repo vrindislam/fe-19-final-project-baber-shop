@@ -4,6 +4,7 @@ import modalHandler from './modal/modalReducer'
 import preloaderReducer from './preloader/preloaderReducer'
 import cartReducer from "./cart/cartReducer";
 import userReducer from "./user/userReducer";
+import cartProducts from "./cartItem/cartItemReducer";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   modalHandler: modalHandler,
   preloader: preloaderReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  cartProducts: cartProducts
 })
 
 export default rootReducer

@@ -1,10 +1,15 @@
-import React from 'react';
-import './styles.less';
+import React from "react";
+import "./styles.less";
+import ProductsContainer from "../../components/CartProductsContainer";
+import CartTotal from "../../components/CartTotal";
 
 const Cart = (props) => {
-    return (
-        <h2>Cart Page</h2>
-    )
-}
+  return (
+    <div className="cart-wrapper-div">
+      <ProductsContainer/>
+      <CartTotal/>
+    </div>
+  );
+};
 
-export default Cart
+export default Cart;
