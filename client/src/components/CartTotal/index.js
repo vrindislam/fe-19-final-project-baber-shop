@@ -1,17 +1,17 @@
 import React from "react";
 import "./style.less";
+import {useSelector} from 'react-redux'
 
 const CartTotal = () => {
-
-  const someValue = 3;
+  const products = useSelector(state => state.cartProducts.length)
 
   return (
     <div className="cart-total-wrapper">
       <p>TOTAL</p>
-      <p>{someValue}item<span>$ {someValue}</span></p>
+      <p>{products}item<span>$ {products}</span></p>
       <p>Shipment<span>$ {}</span></p>
       <p>Order Total</p>
-      <p>{someValue}</p>
+      <p>{products}</p>
     </div>
   );
 };
