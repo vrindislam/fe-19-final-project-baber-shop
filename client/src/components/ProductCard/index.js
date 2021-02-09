@@ -12,16 +12,6 @@ const ProductCard = ({ product }) => {
   const onAddToCart = (e) => {
     e.preventDefault();
     dispatch(addToCart(product));
-    if(localStorage.getItem("products-in-Basket") === null) {
-      const LocalStorageProducts = []
-      LocalStorageProducts.push(product)
-      localStorage.setItem("products-in-Basket",JSON.stringify(LocalStorageProducts))
-    }
-    else {
-      const LocalStorageProducts = JSON.parse(localStorage.getItem("products-in-Basket")).filter(productLs => productLs.itemNo !== product.itemNo)
-      LocalStorageProducts.push(product)
-      localStorage.setItem("products-in-Basket",JSON.stringify(LocalStorageProducts))
-    }
   };
 
   return (

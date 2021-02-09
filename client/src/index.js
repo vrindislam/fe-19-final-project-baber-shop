@@ -6,11 +6,12 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './store/configureStore'
+import { store, persistor } from './store/configureStore'
 import ErrorBoundary from "./components/ErrorBoundary";
 import ScrollToTop from "./routes/ScrollToTop";
 import './reset.css'
 import './index.css'
+import {PersistGate} from 'redux-persist/integration/react';
 
 // Sentry settings for errors tracking
 Sentry.init({
@@ -30,7 +31,9 @@ ReactDOM.render(
     <BrowserRouter>
       <ScrollToTop />
       <ErrorBoundary>
-        <App />
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
       </ErrorBoundary>
     </BrowserRouter>
   </Provider>,
