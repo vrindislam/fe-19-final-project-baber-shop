@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useHistory, useLocation, useParams} from "react-router";
+import {useHistory, useParams} from "react-router";
 import './styles.less';
 import CheckboxFilter from "../../components/CheckboxFilters";
 import PriceSlider from "../../components/PriceSlider";
@@ -12,7 +12,7 @@ const ProductList = () => {
     const queryString = require('query-string');
     const {query} = useParams();
     const history = useHistory();
-    const location = useLocation();
+    // const location = useLocation();
 
     const [checkboxFiltersDB, setCheckboxFiltersDB] = useState([]);
     const [checkboxFiltersClicked, setCheckboxFiltersClicked] = useState([]);
@@ -46,11 +46,12 @@ const ProductList = () => {
     //     setParsedUrl(parsedString);
     //     console.log('location-->', location);
     // }, []);
-
     useEffect(() => {
+        const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
+        setParsedUrl(parsedString);
         setMinValue(parsedUrl.minPrice);
         setMaxValue(parsedUrl.maxPrice);
-    }, [parsedUrl.minPrice, parsedUrl.maxPrice])
+    }, [parsedUrl.minPrice, parsedUrl.maxPrice, query, queryString])
 
     const clickButton = () => {
         history.push(string);
@@ -59,7 +60,7 @@ const ProductList = () => {
         const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
         console.log('parsedString-->', parsedString);
         setParsedUrl(parsedString);
-        console.log('location-->', location);
+        // console.log('location-->', location);
     }
 
     const catchCheckbox = (e) => {

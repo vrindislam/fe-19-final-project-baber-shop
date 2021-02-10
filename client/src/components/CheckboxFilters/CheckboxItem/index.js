@@ -16,17 +16,16 @@ const CheckboxItem = ({type, parsedURL}) => {
     }, [type]);
 
     const urlValues = Object.values(parsedURL).flat(Infinity);
-    console.log('this url from item---->', urlValues);
+    console.log('url values---->', urlValues);
     const names = checkboxNames.map(item => {
         return item.name
     })
-    console.log('names--->', names);
 
     return (
         <>{
             names.map(item =>
                 <div className='checkbox-group__item' key={item}>
-                    <input className='item-filter' data-type={type} checked={urlValues.includes(item)} type="checkbox" id={item} name={item}/>
+                    <input className='item-filter' data-type={type} defaultChecked={urlValues.includes(item)} type="checkbox" id={item} name={item}/>
                     <label className='checkbox-label' htmlFor={item}>{item}</label>
                 </div>
             )
