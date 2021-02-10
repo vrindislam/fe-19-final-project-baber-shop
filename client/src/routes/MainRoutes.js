@@ -18,7 +18,7 @@ const MainRoutes = () => {
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/cart'} component={Cart}/>
             <Route exact path={'/error'} component={ErrorPage}/>
-            <Route exact path={'/shop/:queryStringUrl'} component={ProductList}/>
+            <Route exact path={'/shop/:query'} component={ProductList}/>
             <Route exact path={'/product-details'} component={ProductDetails}/>
             <Route exact path={'/admin/category'} component={AdminCategory}/>
             <Route exact path={'/pages/:id+'} component={StaticPage}/>

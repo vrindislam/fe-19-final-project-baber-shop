@@ -9,7 +9,7 @@ const PriceSlider = ({minValue, maxValue, setMaxVal, setMinVal}) => {
         setMaxVal(value[1]);
     }
 
-    const onSliderMouseUp = (value) => {
+    const onSliderMouseUp = value => {
         setMinVal(value[0]);
         setMaxVal(value[1]);
     }

@@ -10,16 +10,17 @@ import FilteredProducts from "../../components/FilteredProducts";
 const ProductList = () => {
 
     const queryString = require('query-string');
-    const {queryStringUrl} = useParams();
+    const {query} = useParams();
     const history = useHistory();
     const location = useLocation();
 
     const [checkboxFiltersDB, setCheckboxFiltersDB] = useState([]);
     const [checkboxFiltersClicked, setCheckboxFiltersClicked] = useState([]);
-    const [minValue, setMinValue] = useState(100);
+    const [minValue, setMinValue] = useState(150);
     const [maxValue, setMaxValue] = useState(700);
     const [showFilters, setShowFilters] = useState(false);
     const [parsedUrl, setParsedUrl] = useState({});
+
     const values = pickUpValues(checkboxFiltersClicked);
     const groupedValues = groupValues(values);
     const string = queryString.stringify({
@@ -35,24 +36,31 @@ const ProductList = () => {
             const result = await Ajax.get('/filters');
             setCheckboxFiltersDB(result);
         }
+
         fetch()
     }, []);
 
-    useEffect(() => {
-        const parsedString = queryString.parse(queryStringUrl, {arrayFormat: 'comma'});
-        setParsedUrl(parsedString);
-        console.log('path--->>', location.pathname);
-        console.log('parsedString-->', parsedString);
-        console.log('parsedString from state', parsedUrl);
-        // location.pathname += string;
-        history.push(location.pathname);
-        console.log('location-->', location);
-    }, [history, location, parsedUrl, queryString, queryStringUrl, string]);
+    // useEffect(() => {
+    //     const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
+    //     console.log('parsedString-->', parsedString);
+    //     setParsedUrl(parsedString);
+    //     console.log('location-->', location);
+    // }, []);
 
     useEffect(() => {
         setMinValue(parsedUrl.minPrice);
         setMaxValue(parsedUrl.maxPrice);
-    }, [parsedUrl.maxPrice, parsedUrl.minPrice])
+    }, [parsedUrl.minPrice, parsedUrl.maxPrice])
+
+    const clickButton = () => {
+        history.push(string);
+    }
+    const clickButtonParse = () => {
+        const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
+        console.log('parsedString-->', parsedString);
+        setParsedUrl(parsedString);
+        console.log('location-->', location);
+    }
 
     const catchCheckbox = (e) => {
         if (e.target.type === 'checkbox') {
@@ -78,10 +86,12 @@ const ProductList = () => {
         <>
             <div className="product-list-container">
                 <div className={"filters-container " + show}>
-                    <PriceSlider minValue={minValue || parsedUrl.minPrice} maxValue={maxValue || parsedUrl.maxPrice}
+                    <PriceSlider minValue={minValue} maxValue={maxValue}
                                  setMinVal={setMinValue}
                                  setMaxVal={setMaxValue}/>
-                    <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
+                    <button onClick={clickButton}>push</button>
+                    <button onClick={clickButtonParse}>parse</button>
+                    <CheckboxFilter parsedURL={parsedUrl} filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
                 </div>
                 <div className="open-filters-btn-container">
                     <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X
