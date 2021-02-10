@@ -36,7 +36,6 @@ const ProductList = () => {
             const result = await Ajax.get('/filters');
             setCheckboxFiltersDB(result);
         }
-
         fetch()
     }, []);
 
@@ -65,15 +64,21 @@ const ProductList = () => {
 
     const catchCheckbox = (e) => {
         if (e.target.type === 'checkbox') {
-            const clonedCheckboxFilters = [...checkboxFiltersClicked]
+            const clonedCheckboxFilters = [...checkboxFiltersClicked];
             const index = checkboxFiltersClicked.findIndex(item => item.name === e.target.name);
             const el = {type: e.target.dataset.type, name: e.target.name};
             if (index < 0) {
                 clonedCheckboxFilters.push(el);
                 setCheckboxFiltersClicked(clonedCheckboxFilters);
+                setTimeout(()=>{
+                    history.push(string);
+                }, 3000)
             } else {
                 const filtered = clonedCheckboxFilters.filter(item => item.name !== el.name);
                 setCheckboxFiltersClicked(filtered);
+                // setTimeout(()=>{
+                //     history.push(string);
+                // }, 1500)
             }
         }
     }
