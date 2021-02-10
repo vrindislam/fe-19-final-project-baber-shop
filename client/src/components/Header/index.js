@@ -8,7 +8,7 @@ import PopoverBasket from "../PopoverBasket/index";
 import LiveSearch from './LiveSearch'
 import {showModal} from "../../store/modal/modalAction";
 import Login from "../Modal/LoginModal";
-import {headerLogo, iconContact, iconCart, iconLogin } from './img/index'
+import {headerLogo, iconContact, iconLogin } from './img/index'
 import { LogoutOutlined } from "@ant-design/icons";
 import Catalogue from "../Catalogue";
 
@@ -80,7 +80,6 @@ const SiteHeader = () =>{
                 <Col style={{padding:2}} xs={{span:12, order: 2 }} sm={{span:12, order: 2 }}  lg={{span:8, order: 3 }} >
 
                     <div className="cart" key="cart">
-                        <img className="img-cart" src={iconCart} alt="icon"/>
                         <PopoverBasket/>
                     </div>
                 </Col>
