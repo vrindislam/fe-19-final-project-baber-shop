@@ -10,7 +10,7 @@ const Profile = (props) => {
     return (
         <div className='profile'>
             <Row>
-                <Col className='profile-btnContainer' xs={{span: 20, offset: 2}} sm={{span: 8, offset: 2}}>
+                <Col className='profile-btnContainer' xs={{span: 20, offset: 2}} sm={{span: 8, offset: 2}} md={{span: 6, offset: 2}} xl={{span: 6, offset: 3}}>
                     <Row style={{border: `1px solid red`}}>
                         <Button type='primary'>Personal information</Button></Row>
                     <Row>
