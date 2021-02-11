@@ -1,4 +1,4 @@
-import {ADDING_TO_CART,DELETE_FROM_CART,INCREASE_QUANTITY,DECREASE_QUANTITY} from "./actionTypes"
+import {ADDING_TO_CART,DELETE_FROM_CART,QUANTITY_HANDLER} from "./actionTypes"
 
 export const addToCart = item  => {
   return {
@@ -14,16 +14,16 @@ export const deleteFromCart = id  => {
   }
 }
 
-export const increaseCart = (array) => {
+export const quantityHandler = (object) => {
   return {
-    type: INCREASE_QUANTITY,
-    payload: {array}
+    type: QUANTITY_HANDLER,
+    payload: {object}
   }
 }
 
-export const decreaseCart = (array) => {
-  return {
-    type: DECREASE_QUANTITY,
-    payload: {array}
-  }
-}
+// export const decreaseCart = (array) => {
+//   return {
+//     type: DECREASE_QUANTITY,
+//     payload: {array}
+//   }
+// }

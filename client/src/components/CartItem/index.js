@@ -2,43 +2,28 @@ import React, { useState, useEffect } from "react";
 import "./style.less";
 
 import { PlusCircleFilled, MinusCircleFilled, DeleteFilled } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart, increaseCart, decreaseCart } from "../../store/cartItem/actionCartItem";
+import { useDispatch } from "react-redux";
+import { deleteFromCart, quantityHandler } from "../../store/cartItem/actionCartItem";
 
 const CartItem = (props) => {
+  console.log("CartItem---props",props);
   const dispatch = useDispatch();
-
-  const { imageUrls, name, currentPrice, _id, productsInCart, itemNo } = props.product;
-  const amountRedux = useSelector(state => state.cartProducts);
+  const { imageUrls, name, currentPrice, _id, productsInCart, } = props.product;
   const [total, setTotal] = useState(0);
   useEffect(() => {
     setTotal(productsInCart * currentPrice);
   }, [productsInCart, currentPrice]);
   const increment = () => {
-    const productWithQuantity = { ...props.product, productsInCart: props.productsInCart + 1 };
-    const expandedAmountRedux = [...amountRedux, productWithQuantity]
-    const newArray = []
-    expandedAmountRedux.forEach(item => {
-      if((item.itemNo === itemNo && item.productsInCart) !== productsInCart || item.itemNo !== itemNo )  {
-        newArray.push(item)
-      }
-    })
-    dispatch(increaseCart(newArray))
+    const before = props.product.productsInCart
+    const after = {...props.product, productsInCart: before + 1}
+    dispatch(quantityHandler(after))
   };
 
   console.log("props.productsInCart---props.productsInCart",props.productsInCart);
   const decrement = () => {
-    const productWithQuantityDecrease = { ...props.product, productsInCart: props.productsInCart - 1 };
-    const expandedAmountRedux = [...amountRedux, productWithQuantityDecrease]
-    const rrtty = Array.from(new Set(expandedAmountRedux))
-    console.log("kjnkjkjjjkjdofgjdgjdogdgod",rrtty);
-    const newArray = []
-    expandedAmountRedux.forEach(item => {
-      if((item.itemNo === itemNo && item.productsInCart) !== productsInCart || item.itemNo !== itemNo )  {
-        newArray.push(item)
-      }
-    })
-    dispatch(decreaseCart(newArray))
+    const before = props.product.productsInCart
+    const after = {...props.product, productsInCart: before - 1 }
+    dispatch(quantityHandler(after))
   };
 return (
   <div className="cart-item-wrapper">
@@ -56,8 +41,8 @@ return (
     <div className="cart-item-price">{currentPrice}</div>
     <div className="cart-item-amount">
       <PlusCircleFilled onClick={increment}/>
-      <span>{props.productsInCart}</span>
-      {props.productsInCart !== 0 &&
+      <span>{productsInCart}</span>
+      {productsInCart !== 0 &&
       <MinusCircleFilled onClick={decrement}/>
       }
     </div>
