@@ -16,12 +16,12 @@ import { authUser } from "../../../store/user/userAction";
 
 const RegistrationForm = (props) => {
   const [form] = Form.useForm();
-  console.log(props.onOk);
   const history = useHistory();
   const dispatch = useDispatch();
   const showModalLogin = () => {
     dispatch(showModal({status: true, type: 'LoginForm'}));
   };
+  console.log("props.modal",props.modal)
 
   const error = () => {
     message.error(
@@ -58,6 +58,7 @@ const RegistrationForm = (props) => {
             const decoded = jwt_decode(loginResult.token);
             delete decoded.iat
             dispatch(authUser({...decoded, isAuthenticated: true}));
+            props.modal !== true &&
             history.push('/');
           })
           .catch(err => {
@@ -69,7 +70,6 @@ const RegistrationForm = (props) => {
         onReset()
         console.log(err);
       });
-    props.onOk();
   };
 
 

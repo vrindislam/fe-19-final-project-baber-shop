@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
   modalHandler: modalHandler,
   preloader: preloaderReducer,
   cart: cartReducer,
-  cartProducts: cartProducts
+  cartProducts: cartProducts,
 })
 
 export default persistReducer(persistConfig, rootReducer);
