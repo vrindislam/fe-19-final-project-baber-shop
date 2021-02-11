@@ -60,6 +60,7 @@ const RegistrationForm = (props) => {
             dispatch(authUser({...decoded, isAuthenticated: true}));
             props.modal !== true &&
             history.push('/');
+            props.handleRegisterModalClose()
           })
           .catch(err => {
             console.log("login error",err);

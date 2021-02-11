@@ -19,7 +19,7 @@ const CartItem = (props) => {
     const expandedAmountRedux = [...amountRedux, productWithQuantity]
     const newArray = []
     expandedAmountRedux.forEach(item => {
-      if(item.itemNo === itemNo && item.productsInCart !== productsInCart || item.itemNo !== itemNo )  {
+      if((item.itemNo === itemNo && item.productsInCart) !== productsInCart || item.itemNo !== itemNo )  {
         newArray.push(item)
       }
     })
@@ -34,7 +34,7 @@ const CartItem = (props) => {
     console.log("kjnkjkjjjkjdofgjdgjdogdgod",rrtty);
     const newArray = []
     expandedAmountRedux.forEach(item => {
-      if(item.itemNo === itemNo && item.productsInCart !== productsInCart || item.itemNo !== itemNo )  {
+      if((item.itemNo === itemNo && item.productsInCart) !== productsInCart || item.itemNo !== itemNo )  {
         newArray.push(item)
       }
     })

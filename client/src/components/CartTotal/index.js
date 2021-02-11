@@ -4,18 +4,24 @@ import {useSelector} from 'react-redux'
 
 const CartTotal = () => {
   const productsLength = useSelector(state => state.cartProducts.length)
+  // console.log("productsLength",productsLength);
   const products = useSelector(state => state.cartProducts)
+  // console.log("products",products);
   const sumArray = []
-  products.forEach(item => sumArray.push(item.currentPrice * item.productsInCart))
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  const totalMoney = sumArray.reduce(reducer)
+  if(products !== 0) {
+    products.forEach(item => sumArray.push(item.currentPrice * item.productsInCart))
+    // console.log("sumArray",sumArray);
+  }
+  const totalMoney = sumArray.reduce((a,b) => a+b,0)
+  // console.log("totalMoney",totalMoney);
   return (
     <div className="cart-total-wrapper">
       <p>TOTAL</p>
-      <p>{productsLength}item<span>$ {totalMoney}</span></p>
+      <p>{productsLength}item<span>${totalMoney}
+      </span></p>
       <p>Shipment<span>$ {}</span></p>
       <p>Order Total</p>
-      <p>{products}</p>
+      <p>{totalMoney}</p>
     </div>
   );
 };
