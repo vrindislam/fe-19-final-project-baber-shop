@@ -22,7 +22,7 @@ const MainRoutes = () => {
             <Route exact path={'/error'} component={ErrorPage}/>
             <Route exact path={'/shop'} component={ProductList}/>
             <Route exact path={'/product-details'} component={ProductDetails}/>
-            <UserRoute exact path={'/profile'} component={Profile}/>
+            <UserRoute path={'/profile'} component={Profile}/>
             <Route exact path={'/admin/category'} component={AdminCategory}/>
             <Route exact path={'/pages/:id+'} component={StaticPage}/>
             <Route exact path="*" render={() => <h1>You are on the wrong page boy</h1>}/>

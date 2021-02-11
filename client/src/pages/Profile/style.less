@@ -5,13 +5,16 @@
 
   &-btnContainer {
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 
     & button {
-      min-width: 140px;
+      min-width: 150px;
       min-height: 25px;
       font-size: 14px;
       padding: 0;
-      margin: 4px auto;
+      margin: 4px 10px;
       background-color: @black;
       color: @white;
       border: 1px solid @black;
@@ -25,7 +28,7 @@
 
   }
 
-  & .ant-btn-primary:focus {
+  & .selected .ant-btn-primary {
     background-color: @yellow-5;
     border: 0.2vw solid @black;
     color: @black;
@@ -35,7 +38,10 @@
 
 @media (min-width: 576px) {
   .profile {
+    display: block;
+
     &-btnContainer {
+
       & button {
         min-width: 180px;
         min-height: 30px;
@@ -76,7 +82,7 @@
       }
     }
 
-    & .ant-btn-primary:focus {
+    & .selected .ant-btn-primary {
       margin-left: 3vw;
     }
   }
