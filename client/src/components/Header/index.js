@@ -34,10 +34,10 @@ const SiteHeader = () => {
 
     return (
         <PageHeader style={{
-            position: 'fixed',
-            zIndex: 1,
-            padding: 0,
-            margin: 0,
+            // position: 'fixed',
+            // zIndex: 1,
+            // padding: 0,
+            // margin: 0,
             height: 'auto',
             width: "100%",
             textAlign: "center",
@@ -53,7 +53,7 @@ const SiteHeader = () => {
                                 <span className="login-title">LogIn</span>
                             </div>
                             <Login/></>)
-                        : (<Link to='/profile' className='profile'>
+                        : (<Link to='/profile' className='header-profile'>
                             <img src={iconLogin} alt="User-icon"/>
                             <span className="username"> Hello, {firstName}</span>
                         </Link>)

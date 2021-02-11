@@ -13,5 +13,5 @@ export const collectionItemsProfile = [
   { name: "login", label: "Login", rules:[{required: true, message: 'Please input your Login!'}]},
   { name: "email", label: "E-mail", rules:[{required: true, message: 'Please input your E-mail!'},{type: 'email', messageType: 'The input is not valid E-mail!'}]},
   { name: "password", label: "Password", rules:[{required: true, message: 'Please input your password!'}]},
-  { name: "phone", label: "Phone Number", rules:[{required: true, message: 'Please input your phone number!'},{type:'number', message:'The phone number must contain only numbers'},{min:12, max:12, message: 'The phone number must contain 13 characters'}]}
+  { name: "phone", label: "Phone Number", rules:[{required: true, message: 'Please input your phone number!'},{min:12, max:12, message: 'The phone number must contain 12 characters'}]}
 ];

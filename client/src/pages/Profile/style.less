@@ -1,39 +1,73 @@
 @import '~antd/lib/style/themes/default.less';
 
 .profile {
-  margin: 5vw auto;
+  margin: 15px 0;
 
   &-btnContainer {
-    & button  {
-      min-width: 15vw;
-      min-height: 3vw;
+    margin-bottom: 10px;
+
+    & button {
+      min-width: 140px;
+      min-height: 25px;
+      font-size: 14px;
+      padding: 0;
+      margin: 4px auto;
       background-color: @black;
-      font-size: 1.1vw;
       color: @white;
-      margin: 1vw;
       border: 1px solid @black;
 
       &:hover {
         background-color: @yellow-5;
         border: 1px solid @yellow-5;
         color: @black;
-        margin-left: 3vw;
       }
+    }
 
-    }
-    & .ant-btn-primary:focus{
-      background-color: @yellow-5;
-      border: 0.2vw solid @black;
-      color: @black;
-      margin-left: 3vw;
-    }
+  }
+
+  & .ant-btn-primary:focus {
+    background-color: @yellow-5;
+    border: 0.2vw solid @black;
+    color: @black;
   }
 }
 
-#profile {
-  & .ant-form-item-required {
-    &::before {
-      content: none;
+
+@media (min-width: 576px) {
+  .profile {
+    &-btnContainer {
+      margin-left: 15px;
+
+      & button {
+        min-width: 180px;
+        min-height: 30px;
+        font-size: 14px;
+        padding: 0;
+        margin: 4px 0;
+      }
+    }
+
+  }
+}
+
+@media (min-width: 1199px) {
+  .profile {
+    margin: 5vw auto;
+
+    & button {
+      min-width: 20vw;
+      min-height: 3vw;
+      max-height: 5vw;
+      font-size: 24px;
+      margin: 1vw;
+
+      &:hover {
+        margin-left: 3vw;
+      }
+    }
+
+    & .ant-btn-primary:focus {
+      margin-left: 3vw;
     }
   }
 }

@@ -2,38 +2,40 @@ import {Button, Col, Form, Input} from "antd";
 import {collectionItemsProfile} from "../../Forms/RegistrationForm/collectionItems";
 import React, {useEffect} from "react";
 import Ajax from "../../../services/Ajax";
+import './style.less'
 
-const {get,put} = Ajax;
+const {get, put} = Ajax;
 
 
 const UserInformation = () => {
-
     const layout = {
-        labelCol: {
-            span: 24,
-        },
-        wrapperCol: {
-            span: 16
-        },
-    };
+            labelCol: {
+                span: 24,
+            },
+            wrapperCol: {
+                span: 24
+            },
+        };
+
     const formTailLayout = {
         labelCol: {
             span: 24,
         },
         wrapperCol: {
-            span: 3,
-            offset: 13,
+            span: 24,
         },
     };
 
     const [form] = Form.useForm();
 
-    const onCheck = async () => {
+    const onFinish = async () => {
         try {
             const values = await form.validateFields();
-            put('/customers','', values)
+            put('/customers', '', values);
+            alert('Your user data has been successfully updated');
+
         } catch (errorInfo) {
-            console.log('Failed:', errorInfo);
+            alert('Enter correct information', errorInfo);
         }
     }
 
@@ -42,25 +44,25 @@ const UserInformation = () => {
         get('/customers/customer')
             .then(customer => {
                 if (!cleanupFunction)
-                form.setFieldsValue({
-                        firstName: customer.firstName,
-                        lastName: customer.lastName,
-                        login: customer.login,
-                        email: customer.email,
-                        phone: customer.phone,
-                    }
-                )
+                    form.setFieldsValue({
+                            firstName: customer.firstName,
+                            lastName: customer.lastName,
+                            login: customer.login,
+                            email: customer.email,
+                            phone: customer.phone,
+                        }
+                    )
                 console.log('Customer', customer)
             })
         return () => cleanupFunction = true
-    },[form])
-// ?????? депенденси
+    }, [form])
+
     return (
-        <Col xs={{span: 12}}>
+        <Col xs={{span: 20, offset: 2}}>
             <Form
                 form={form}
                 {...layout}
-                name="profile"
+                name="userInfo"
                 initialValues={{
                     remember: true,
                 }}
@@ -78,8 +80,8 @@ const UserInformation = () => {
                         : ''
                 )}
                 <Form.Item {...formTailLayout}>
-                    <Button type="primary" onClick={onCheck} >
-                        Check
+                    <Button type="primary" onClick={onFinish}>
+                        Submit
                     </Button>
                 </Form.Item>
             </Form>

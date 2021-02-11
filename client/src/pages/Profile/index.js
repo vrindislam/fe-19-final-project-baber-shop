@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Col, Layout, Row} from 'antd';
+import {Button, Col, Row} from 'antd';
 import {Link} from "react-router-dom";
 import './style.less'
 import UserInformation from '../../components/Profile/UserInformation'
@@ -8,9 +8,9 @@ const Profile = (props) => {
 
 
     return (
-        <Layout className='profile'>
+        <div className='profile'>
             <Row>
-                <Col className='profile-btnContainer' xs={{offset: 3, span: 6}}>
+                <Col className='profile-btnContainer' xs={{span: 20, offset: 2}} sm={{span: 8, offset: 2}}>
                     <Row style={{border: `1px solid red`}}>
                         <Button type='primary'>Personal information</Button></Row>
                     <Row>
@@ -19,11 +19,10 @@ const Profile = (props) => {
                     <Row><Button type='primary'>Favourites</Button></Row>
                     <Row><Button type='primary'>Change password</Button></Row>
                     <Row><Button type='primary'>Log out</Button></Row>
-
                 </Col>
                 <UserInformation/>
             </Row>
-        </Layout>
+        </div>
     )
 }
 
