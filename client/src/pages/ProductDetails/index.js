@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './styles.less';
-import ProductCarousel from "../../components/Product_Carousel";
+import ProductCarousel from "../../components/ProductCarousel";
 import Ajax from "../../services/Ajax";
 
 const ProductDetails = (props) => {
