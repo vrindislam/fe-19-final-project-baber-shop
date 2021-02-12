@@ -8,7 +8,6 @@ import ImageUpload from "../../ImageUpload";
 import "./style.less";
 
 const CategoryUpdateForm = ({ categoryToUpdate }) => {
-  console.log("CAT to UPDATE========>", categoryToUpdate);
   const history = useHistory();
   const [form] = Form.useForm();
   const [images, setImages] = useState([]);
@@ -42,7 +41,6 @@ const CategoryUpdateForm = ({ categoryToUpdate }) => {
   // handle form on a successfully submit
   const onFinish = (values) => {
     const submitValue = { ...values, imgUrl: images && images.length > 0 ? images : [] };
-    console.log('SubmitValue LLLLLLLLL ====>>>>>>', submitValue);
     CategoryService.updateCategory(categoryToUpdate.id, submitValue)
       .then(res => {
         message.success(`Category ${res.name} was updated`, 1.5);
