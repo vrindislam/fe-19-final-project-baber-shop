@@ -12,7 +12,7 @@ exports.cloudinaryUpload = async (req, res) => {
   const result = await cloudinary.uploader.upload(req.body.image, {
     public_id: `${Date.now()}`,
     resource_type: "auto", // jpeg, png
-    folder: 'barber_shop'
+    folder: req.body.folder
   });
   res.json({
     public_id: result.public_id,

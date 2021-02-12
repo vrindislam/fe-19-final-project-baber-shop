@@ -8,9 +8,7 @@ import "./styles.less";
 const {Content} = Layout;
 
 const AdminDashboard = () => {
-  const [images, setImages] = useState({
-    imgUrl: []
-  })
+  const [images, setImages] = useState([])
 
     return (
         <Layout className="admin-dashboard-container">
@@ -19,8 +17,8 @@ const AdminDashboard = () => {
                 <Divider orientation="left">Admin Dashboard</Divider>
                 <Row gutter={16}>
                     <Col span={24} style={{textAlign: 'left'}}>
-                        <ImageUpload images={images} setImages={setImages}/>
-                      {JSON.stringify(images.imgUrl)}
+                        <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={'test4'}/>
+                      {JSON.stringify(images)}
                     </Col>
                 </Row>
             </Content>
