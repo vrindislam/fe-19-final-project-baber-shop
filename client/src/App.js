@@ -40,7 +40,7 @@ const App = () => {
   const layoutShop = () => (
     <Layout>
       <SiteHeader />
-      <Content className="site-layout" style={{ padding: "0 0px", marginTop: 120 }}>
+      <Content className="site-layout" style={{ padding: "0 0px"}}>
         <div className="site-layout-background" style={{ minHeight: 380 }}>
           <MainRoutes />
         </div>
