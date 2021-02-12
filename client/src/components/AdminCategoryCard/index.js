@@ -5,6 +5,7 @@ import { Card, message, Modal } from "antd";
 import noImage from "../../blank_image/no_image.png";
 import CategoryService from "../../services/CategoryService";
 import "./style.less";
+import CloudinaryService from "../../services/CloudinaryService";
 
 const { Meta } = Card;
 const { confirm } = Modal;
@@ -15,18 +16,29 @@ const AdminCategoryCard = ({ category: { name, imgUrl, description, id }, loadCa
     confirm({
       title: `Do you want to delete category ${name}?`,
       icon: <ExclamationCircleOutlined />,
-      onOk() {
-        // some logical checks must be before deleting. To clarify with Saribeg
+      onOk () {
         CategoryService.deleteCategory(id)
           .then(res => {
+            if (imgUrl && imgUrl.length > 0) {
+              for (const { public_id } of imgUrl) {
+                CloudinaryService.imageRemove({ public_id })
+                  .then(res => {
+                    console.log("images deleted from cloudinary", res);
+                  })
+                  .catch(err => {
+                    console.log(err);
+                    message.error(`Image delete issue ${err}`);
+                  });
+              }
+            }
             message.success(res.message);
-            loadCategories()
+            loadCategories();
           })
-          .catch(err => message.error(err))
+          .catch(err => message.error(err));
       },
-      onCancel() {message.warning('Deletion Canceled');},
+      onCancel () {message.warning("Deletion Canceled");}
     });
-  }
+  };
 
   return (
     <Card

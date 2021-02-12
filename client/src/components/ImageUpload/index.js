@@ -36,14 +36,14 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
   const handleImageRemove = (public_id) => {
     setPreloaderStatus(true);
     CloudinaryService.imageRemove({ public_id })
-      .then((res) => {
+      .then(res => {
         setPreloaderStatus(false);
         const filteredImages = [...images].filter((item) => {
           return item.public_id !== public_id;
         });
         setImages(filteredImages);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         setPreloaderStatus(false);
       });
