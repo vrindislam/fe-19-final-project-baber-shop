@@ -7,6 +7,10 @@ import Cart from '../pages/Cart';
 import ProductList from '../pages/ProductList';
 import ProductDetails from "../pages/ProductDetails";
 import ErrorPage from '../pages/ErrorPage404';
+import AdminCategory from '../pages/Admin/AdminCategory';
+import StaticPage from "../pages/StaticPage";
+import Profile from "../pages/Profile";
+import UserRoute from "./protectedRoutes/UserRoute";
 
 const MainRoutes = () => {
     return (
@@ -18,6 +22,9 @@ const MainRoutes = () => {
             <Route exact path={'/error'} component={ErrorPage}/>
             <Route exact path={'/shop'} component={ProductList}/>
             <Route exact path={'/product-details'} component={ProductDetails}/>
+            <UserRoute path={'/profile'} component={Profile}/>
+            <Route exact path={'/admin/category'} component={AdminCategory}/>
+            <Route exact path={'/pages/:id+'} component={StaticPage}/>
             <Route exact path="*" render={() => <h1>You are on the wrong page boy</h1>}/>
         </Switch>
     )

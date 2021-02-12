@@ -1,7 +1,10 @@
+@import '~antd/lib/style/themes/default.less';
+
 .basket-icon {
   position: relative;
   font-size: 30px;
 }
+
 .basket-icon > svg {
   position: absolute;
   right: -4px;
@@ -13,42 +16,48 @@
   position: relative;
   font-size: 30px;
 }
+
 .basket-icon > svg {
   position: absolute;
   right: -4px;
   bottom: -11px;
   font-size: 30px;
 }
-.login{
+
+.login {
   cursor: pointer;
 }
-.login-title{
+
+.login-title {
   padding-left: 3px;
   font-weight: 600;
   font-size: 20px;
   vertical-align: text-bottom;
 }
 
-.header-contact>a{
+.header-contact > a {
   color: black;
   font-size: 18px;
 }
-.cart{
+
+.cart {
   max-width: 220px;
   height: 35px;
   margin: auto;
   color: black;
   font-size: 24px;
-  border: 1px solid black;
+  //border: 1px solid black;
 }
-.img-cart{
+
+.img-cart {
   width: 33px;
   margin-right: 5px;
   padding-bottom: 0;
   vertical-align: sub;
 }
 
-.catalogue-btn-link{
+.catalogue-btn-link {
+  position: relative;
   width: 230px;
   height: 35px;
   margin: auto;
@@ -56,27 +65,30 @@
   color: white;
   font-size: 22px;
   background: black;
-
 }
-.catalogue-btn-link:hover{
+
+.catalogue-btn-link:hover {
   color: white;
 }
-.catalogue-img{
+
+.catalogue-img {
   margin-right: 15px;
   margin-bottom: -4px;
   padding: 5px;
   background: white;
   border-radius: 12px;
 }
-.header-row{
+
+.header-row {
   margin: -18px -12px;
 }
 
-@media (max-width: 585px ){
-  .contact-number{
+@media (max-width: 585px ) {
+  .contact-number {
     display: none;
   }
-  .catalogue-btn-link{
+
+  .catalogue-btn-link {
     height: 25px;
     margin: auto;
     padding: 3px 3px;
@@ -86,28 +98,41 @@
 
   }
 }
-@media (max-width: 767px ){
 
-  .contact-number{
+@media (max-width: 767px ) {
+
+  .contact-number {
     display: none;
   }
-  .logout-title{
+
+  .logout-title {
     display: none;
   }
 }
-.search-box{
+
+.search-box {
   margin: auto;
 }
-.username{
+
+.username {
   font-weight: 600;
   font-size: 20px;
   vertical-align: text-bottom;
 }
 
-.logoutBtn{
-  font-size: 18px;
+.logoutBtn {
   font-weight: bold;
+  font-size: 18px;
   cursor: pointer;
 }
 
+.header-profile {
+  color: @black;
+  text-decoration: none;
+  cursor: pointer;
 
+  &:hover {
+    color: @yellow-6;
+    text-shadow: 1px 1px 1px @black;
+  }
+}
