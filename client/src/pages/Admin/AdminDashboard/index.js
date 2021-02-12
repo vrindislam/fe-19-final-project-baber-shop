@@ -1,14 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {Layout, Row, Col, Divider} from "antd";
 import AdminSider from "../../../components/AdminSider";
-import ImageUpload from '../../../components/ImageUpload'
+
 
 import "./styles.less";
 
 const {Content} = Layout;
 
 const AdminDashboard = () => {
-  const [images, setImages] = useState([])
 
     return (
         <Layout className="admin-dashboard-container">
@@ -17,7 +16,7 @@ const AdminDashboard = () => {
                 <Divider orientation="left">Admin Dashboard</Divider>
                 <Row gutter={16}>
                     <Col span={24} style={{textAlign: 'left'}}>
-                        <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={'barber_shop_catergories'}/>
+                        <p>TBD ...</p>
                     </Col>
                 </Row>
             </Content>
