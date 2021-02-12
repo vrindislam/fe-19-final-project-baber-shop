@@ -6,6 +6,8 @@ import {pickUpValues, groupValues} from "../../functions/checkboxFilters/filters
 import Ajax from "../../services/Ajax";
 import FilteredProducts from "../../components/FilteredProducts";
 
+import {MetaForPages} from "../../components/Helmet"
+
 const ProductList = () => {
 
     const [checkboxFiltersDB, setCheckboxFiltersDB] = useState([]);
@@ -48,10 +50,13 @@ const ProductList = () => {
     const show = showFilters ? 'active' : 'hidden';
     const showButton = {display: showFilters? 'none' : 'inline-block'}
 
-
-
     return (
         <>
+            <MetaForPages
+              title = "Barber Shop Market"
+              content = "Barber Shop market"
+              rel = "icon"
+            />
             <div className="product-list-container">
                 <div className={"filters-container " + show} >
                     <PriceSlider minValue={minValue} maxValue={maxValue} setMinVal={setMinValue} setMaxVal={setMaxValue}/>

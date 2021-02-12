@@ -6,3 +6,12 @@ export const collectionItemsForm = [
   { name: "password", label: "Password", required: true, message: 'Please input your password!'},
   { name: "phone", label: "Phone Number", required: true, message: 'Please input your phone number!'}
 ];
+
+export const collectionItemsProfile = [
+  { name: "firstName", label: "First Name", rules:[{required: true, message: 'Please enter your First Name!'}]},
+  { name: "lastName", label: "Last Name", rules:[{required: true, message: 'Please enter your Last Name!'}]},
+  { name: "login", label: "Login", rules:[{required: true, message: 'Please enter your Login!'}]},
+  { name: "email", label: "E-mail", rules:[{required: true, message: 'Please enter your E-mail!'},{type: 'email', messageType: 'The entered e-mail is not valid!'}]},
+  { name: "password", label: "Password", rules:[{required: true, message: 'Please enter your password!'}]},
+  { name: "phone", label: "Phone Number", rules:[{required: true, message: 'Please enter your phone number!'},{min:12, max:12, message: 'The phone number must contain 12 characters'}]}
+];
