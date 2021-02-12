@@ -1,4 +1,4 @@
-import {Button, Col, Form, Input} from "antd";
+import {Button, Col, Form, Input, message} from "antd";
 import {collectionItemsProfile} from "../../Forms/RegistrationForm/collectionItems";
 import React, {useEffect} from "react";
 import Ajax from "../../../services/Ajax";
@@ -27,15 +27,20 @@ const UserInformation = () => {
     };
 
     const [form] = Form.useForm();
-
+    const success = () => {
+        message.success('Your user data has been successfully updated');
+    };
+    const error = () => {
+        message.error('Enter correct information');
+    };
     const onFinish = async () => {
         try {
             const values = await form.validateFields();
-            put('/customers', '', values);
-            alert('Your user data has been successfully updated');
+            await put('/customers', '', values);
+            success();
 
         } catch (errorInfo) {
-            alert('Enter correct information', errorInfo);
+            error ();
         }
     }
 

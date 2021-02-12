@@ -4,50 +4,50 @@
   margin: 15px 0;
 
   &-btnContainer {
-    margin-bottom: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin-bottom: 10px;
 
     & button {
       min-width: 150px;
       min-height: 25px;
-      font-size: 14px;
-      padding: 0;
       margin: 4px 10px;
-      background-color: @black;
+      padding: 0;
       color: @white;
+      font-size: 14px;
+      background-color: @black;
       border: 1px solid @black;
 
       &:hover {
+        color: @black;
         background-color: @yellow-5;
         border: 1px solid @yellow-5;
-        color: @black;
       }
     }
 
   }
 
   & .selected .ant-btn-primary {
-    background-color: @yellow-5;
-    border: 0.2vw solid @black;
     color: @black;
+    background-color: @yellow-5;
+    border: .2vw solid @black;
   }
 }
 
 
 @media (min-width: 576px) {
   .profile {
-    display: block;
 
     &-btnContainer {
+      display: block;
 
       & button {
         min-width: 180px;
         min-height: 30px;
-        font-size: 16px;
-        padding: 0;
         margin: 6px 0;
+        padding: 0;
+        font-size: 16px;
       }
     }
   }
@@ -74,8 +74,8 @@
     & button {
       min-width: 240px;
       min-height: 45px;
-      font-size: 22px;
       margin: 10px 0;
+      font-size: 22px;
 
       &:hover {
         margin-left: 3vw;
