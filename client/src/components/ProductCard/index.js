@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
 
     const onAddToCart = (e) => {
         e.preventDefault();
-        const newProduct = {...product, productsInCart: + 1}
+        const newProduct = {...product, cartQuantity: + 1}
         dispatch(addToCart(newProduct));
     }
 

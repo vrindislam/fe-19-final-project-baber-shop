@@ -3,28 +3,15 @@ import "./style.less";
 
 import { PlusCircleFilled, MinusCircleFilled, DeleteFilled } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { deleteFromCart, quantityHandler } from "../../store/cartItem/actionCartItem";
+import { deleteFromCart, increaseQuantity, decreaseQuantity } from "../../store/cartItem/actionCartItem";
 
 const CartItem = (props) => {
-  console.log("CartItem---props",props);
   const dispatch = useDispatch();
-  const { imageUrls, name, currentPrice, _id, productsInCart, } = props.product;
+  const { imageUrls, name, currentPrice, _id, cartQuantity, } = props.product;
   const [total, setTotal] = useState(0);
   useEffect(() => {
-    setTotal(productsInCart * currentPrice);
-  }, [productsInCart, currentPrice]);
-  const increment = () => {
-    const before = props.product.productsInCart
-    const after = {...props.product, productsInCart: before + 1}
-    dispatch(quantityHandler(after))
-  };
-
-  console.log("props.productsInCart---props.productsInCart",props.productsInCart);
-  const decrement = () => {
-    const before = props.product.productsInCart
-    const after = {...props.product, productsInCart: before - 1 }
-    dispatch(quantityHandler(after))
-  };
+    setTotal(cartQuantity * currentPrice);
+  }, [cartQuantity, currentPrice]);
 return (
   <div className="cart-item-wrapper">
     <div>
@@ -38,18 +25,39 @@ return (
         Delectus doloribus explicabo veniam!
       </p>
     </div>
-    <div className="cart-item-price">{currentPrice}</div>
-    <div className="cart-item-amount">
-      <PlusCircleFilled onClick={increment}/>
-      <span>{productsInCart}</span>
-      {productsInCart !== 0 &&
-      <MinusCircleFilled onClick={decrement}/>
-      }
+    <div className="plus-minus-div">
+      <div className="cart-item-price">{currentPrice}</div>
+      <div className="cart-item-amount">
+        <PlusCircleFilled onClick={()=> dispatch(increaseQuantity(_id))}/>
+        <span>{cartQuantity}</span>
+        {cartQuantity === 0
+          ? <MinusCircleFilled />
+          : <MinusCircleFilled onClick={()=> dispatch(decreaseQuantity(_id))}/>
+        }
+      </div>
+      <div className="cart-item-total">{total.toFixed(2)}</div>
+      <div className="cart-item-basket-icon" onClick={() => dispatch(deleteFromCart(_id))}
+        // className="delete-from-basket-icon"
+      >
+        <DeleteFilled/>
+      </div>
     </div>
-    <div className="cart-item-total">{total}</div>
-    <div onClick={() => dispatch(deleteFromCart(_id))} className="delete-from-basket-icon">
-      <DeleteFilled/>
-    </div>
+
+    {/* <div className="cart-item-price">{currentPrice}</div> */}
+    {/* <div className="cart-item-amount"> */}
+    {/*  <PlusCircleFilled onClick={()=> dispatch(increaseQuantity(_id))}/> */}
+    {/*  <span>{productsInCart}</span> */}
+    {/*  {productsInCart === 0 */}
+    {/*    ? <MinusCircleFilled /> */}
+    {/*    : <MinusCircleFilled onClick={()=> dispatch(decreaseQuantity(_id))}/> */}
+    {/*  } */}
+    {/* </div> */}
+    {/* <div className="cart-item-total">{total.toFixed(2)}</div> */}
+    {/* <div className="cart-item-basket-icon" onClick={() => dispatch(deleteFromCart(_id))} */}
+    {/*     // className="delete-from-basket-icon" */}
+    {/* > */}
+    {/*  <DeleteFilled/> */}
+    {/* </div> */}
   </div>
 );
 };

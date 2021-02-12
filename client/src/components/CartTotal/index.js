@@ -3,25 +3,32 @@ import "./style.less";
 import {useSelector} from 'react-redux'
 
 const CartTotal = () => {
-  const productsLength = useSelector(state => state.cartProducts.length)
-  const products = useSelector(state => state.cartProducts)
-  console.log("CartTotal----products--->>>",products,"----typeof---products---->",typeof products);
+  const productsLength = useSelector(state => state.cartProducts.products.length)
+  const products = useSelector(state => state.cartProducts.products);
+
   const sumArray = []
-  if(products !== []) {
-    products.forEach(item => sumArray.push(item.currentPrice * item.productsInCart))
-  }
-  const totalMoney = sumArray.reduce((a, b) => a + b, 0)
+  products.forEach(item => sumArray.push(item.currentPrice * item.cartQuantity))
+  const totalMoney = Number(sumArray.reduce((a, b) => a + b, 0).toFixed(2))
+  const shipment = 30
   return (
     <div className="cart-total-wrapper">
-      <p>TOTAL</p>
-      <p>{productsLength}item<span>
-        ${totalMoney}
-      </span></p>
-      <p>Shipment<span>$ {}</span></p>
-      <p>Order Total</p>
-      <p>
-        {totalMoney}
-      </p>
+      <p className="bold total-header">total</p>
+      <div>
+        <div className="cart-total-div">
+          <div>
+            <span>{productsLength} item(s)</span>
+            <span>${totalMoney}</span>
+          </div>
+          <div>
+            <span>Shipment</span>
+            <span>${shipment}</span>
+          </div>
+        </div>
+        <div className="some-div">
+          <p>order Total</p>
+          <p className="bold total-with-shipment">${totalMoney+shipment}</p>
+        </div>
+      </div>
     </div>
   );
 };

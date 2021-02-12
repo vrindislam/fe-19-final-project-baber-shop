@@ -1,15 +1,37 @@
-import { ADDING_TO_CART, DELETE_FROM_CART, QUANTITY_HANDLER } from "./actionTypes";
+import { ADDING_TO_CART, DELETE_FROM_CART, DECREASE_QUANTITY,INCREASE_QUANTITY } from "./actionTypes";
 
-const initialState = [];
+
+const initialState = {
+  products: [],
+  // cartQuantity: 0
+};
 
 const cartProducts = (state = initialState, action) => {
   switch (action.type) {
     case ADDING_TO_CART:
-      return [...state.filter(product => product.itemNo !== action.payload.item.itemNo),action.payload.item];
+      return {...state, products: [...state.products, action.payload.item]}
     case DELETE_FROM_CART:
-      return state.filter(product => product._id !== action.payload.id);
-    case QUANTITY_HANDLER:
-      return [...state.filter(product => product.itemNo !== action.payload.object.itemNo),action.payload.object];
+      return {...state, products: [...state.products.filter(product => product._id !== action.payload.id)]}
+    case INCREASE_QUANTITY:
+      return {
+        ...state,
+        products: state.products.map(product =>
+          product._id === action.payload._id
+            ? {...product, cartQuantity: product.cartQuantity + 1}
+            : product,
+        ),
+      };
+    case DECREASE_QUANTITY:
+      return {
+        ...state,
+        products: state.products.map(product =>
+          product._id === action.payload._id
+            ? {
+              ...product, cartQuantity: product.cartQuantity - 1
+            }
+            : product,
+        ),
+      };
     default:
       return state;
   }

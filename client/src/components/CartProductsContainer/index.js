@@ -1,22 +1,28 @@
-import React, {useState,useEffect} from "react";
+import React from "react";
 import "./style.less"
 import CartItem from "../CartItem"
 import { useSelector } from "react-redux";
 
 
 const ProductsContainer = () => {
-  const products = useSelector(state => state.cartProducts)
-  const [products2, setProducts2] = useState([])
-  useEffect(() => {
-    setProducts2(products)
-  },[products])
+  const products = useSelector(state => state.cartProducts.products)
 
-  const items = products2.map(product =>
-    <CartItem product={product} key={product.itemNo} productsInCart={product.productsInCart}/>)
+  const items = products.map(product =>
+    <CartItem product={product} key={product.itemNo} cartQuantity={product.cartQuantity}/>)
 
   return (
-    <div className="cart-wrapper">
-      {!products.length?<p>ooops, you have't added products yet</p> : items}
+    <div>
+      <div className="cart-wrapper-title">
+        <p>Shopping cart</p>
+        <p>
+          <span>price for ps</span>
+          <span>Ps</span>
+          <span>Total for Item</span>
+        </p>
+      </div>
+      <div className="cart-wrapper">
+        {items}
+      </div>
     </div>
   );
 };
