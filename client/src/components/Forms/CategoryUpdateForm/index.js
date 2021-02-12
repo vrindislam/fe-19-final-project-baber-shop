@@ -1,21 +1,24 @@
-import React, { useEffect } from "react";
-import {useHistory} from "react-router";
-import { Form, Input, Button, message } from "antd";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
+import { Form, Input, Button, message, Row, Col } from "antd";
 import { fieldsSetArr, layout, tailLayout } from "./constants";
 import CategoryService from "../../../services/CategoryService";
+import ImageUpload from "../../ImageUpload";
 
 import "./style.less";
 
 const CategoryUpdateForm = ({ categoryToUpdate }) => {
+  console.log("CAT to UPDATE========>", categoryToUpdate);
   const history = useHistory();
   const [form] = Form.useForm();
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     form.setFieldsValue({
       name: categoryToUpdate && categoryToUpdate.name ? categoryToUpdate.name : "",
-      description: categoryToUpdate && categoryToUpdate.description ? categoryToUpdate.description : "",
-      imgUrl: categoryToUpdate && categoryToUpdate.imgUrl ? categoryToUpdate.imgUrl : ""
+      description: categoryToUpdate && categoryToUpdate.description ? categoryToUpdate.description : ""
     });
+    if (categoryToUpdate?.imgUrl && categoryToUpdate.imgUrl.length > 0) setImages(categoryToUpdate.imgUrl);
   }, [categoryToUpdate, form]);
 
   // function to create form input fields based on constants
@@ -38,12 +41,12 @@ const CategoryUpdateForm = ({ categoryToUpdate }) => {
 
   // handle form on a successfully submit
   const onFinish = (values) => {
-    console.log('Cat to update ===>>>', categoryToUpdate.id);
-    console.log('Values ===>>>', values);
-    CategoryService.updateCategory(categoryToUpdate.id, values)
+    const submitValue = { ...values, imgUrl: images && images.length > 0 ? images : [] };
+    console.log('SubmitValue LLLLLLLLL ====>>>>>>', submitValue);
+    CategoryService.updateCategory(categoryToUpdate.id, submitValue)
       .then(res => {
         message.success(`Category ${res.name} was updated`, 1.5);
-        history.push('/admin/category');
+        history.push("/admin/category");
       })
       .catch(err => {
         message.error(`${err}`, 1.5);
@@ -66,6 +69,11 @@ const CategoryUpdateForm = ({ categoryToUpdate }) => {
       onFinishFailed={onFinishFailed}
     >
       {setUpFormFields()}
+      <Row gutter={16}>
+        <Col span={24} style={{ textAlign: "left" }}>
+          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={"barber_shop_catergories"} />
+        </Col>
+      </Row>
       <Form.Item {...tailLayout}>
         <Button
           type="primary"

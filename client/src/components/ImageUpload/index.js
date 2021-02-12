@@ -12,7 +12,8 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
   const fileUpload = (e) => {
     setPreloaderStatus(true);
     const files = Object.values(e.target.files);
-    const allUploadedFiles = [...images];
+    let allUploadedFiles = [];
+    if (typeof (images) === "object") allUploadedFiles = [...images];
     if (files) {
       for (const file of files) {
         const reader = new FileReader();
@@ -66,8 +67,8 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
       </div>}
       {!preloaderStatus &&
       <div>
-        {images.length > 0 &&
-        images.map((image) => (
+        {images.length > 0 && typeof (images) === "object" &&
+        images.map(image => (
           <Badge
             count="X"
             key={`${cloudinaryfolderName}_${image.public_id}`}
