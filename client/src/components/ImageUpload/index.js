@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import Preloader from "../Preloader";
 import { Avatar, Badge } from "antd";
@@ -10,38 +9,30 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
 
   const [preloaderStatus, setPreloaderStatus] = useState(false);
 
-  const fileUploadAndResize = (e) => {
+  const fileUpload = (e) => {
     setPreloaderStatus(true);
     const files = Object.values(e.target.files);
     const allUploadedFiles = [...images];
     if (files) {
       for (const file of files) {
-        Resizer.imageFileResizer(
-          file,
-          720,
-          720,
-          "JPEG",
-          100,
-          0,
-          (uri) => {
-            axios
-              .post(
-                `${process.env.REACT_APP_API}/cloudinary/uploadimages`,
-                { image: uri, folder: cloudinaryfolderName })
-              .then(res => {
-                setPreloaderStatus(false);
-                allUploadedFiles.push(res.data);
-                setImages([...allUploadedFiles]);
-              })
-              .catch(err => {
-                setPreloaderStatus(false);
-                console.log(err);
-              });
-          },
-          "base64"
-        );
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          axios
+            .post(
+              `${process.env.REACT_APP_API}/cloudinary/uploadimages`,
+              { image: reader.result, folder: cloudinaryfolderName })
+            .then(res => {
+              setPreloaderStatus(false);
+              allUploadedFiles.push(res.data);
+              setImages([...allUploadedFiles]);
+            })
+            .catch(err => {
+              setPreloaderStatus(false);
+              console.log(err);
+            });
+        };
       }
-
     }
   };
 
@@ -75,7 +66,7 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
             multiple
             hidden
             accept="images/*"
-            onChange={fileUploadAndResize}
+            onChange={fileUpload}
           />
         </label>
       </div>
