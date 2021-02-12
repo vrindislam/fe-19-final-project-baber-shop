@@ -8,7 +8,7 @@ const ProductDetails = (props) => {
 
     useEffect( () => {
         async function fetch () {
-            const { imageUrls } = await Ajax.get('/products/512247')
+            const { imageUrls } = await Ajax.get('/products/76100')
             setImages(imageUrls);
         }
         fetch();
