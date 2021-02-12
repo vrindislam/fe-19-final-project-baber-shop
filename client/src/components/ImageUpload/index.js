@@ -57,10 +57,9 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
   };
 
   return (
-    <>
-      <div className={"row"}>
-        <label className="choose-file-label">
-          Choose File
+    <div className={'cloudinary__container'}>
+        <label className={'cloudinary__upload'}>
+          Upload Image
           <input
             type="file"
             multiple
@@ -69,30 +68,29 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
             onChange={fileUpload}
           />
         </label>
-      </div>
-      {preloaderStatus && <Preloader />}
+      {preloaderStatus && <div className={'cloudinary__preloader'}>
+        <Preloader />
+      </div>}
       {!preloaderStatus &&
-      <div className={"row"}>
+      <div>
         {images.length > 0 &&
         images.map((image) => (
           <Badge
             count="X"
-            key={image.public_id}
+            key={`${cloudinaryfolderName}_${image.public_id}`}
             onClick={() => handleImageRemove(image.public_id)}
-            style={{ cursor: "pointer" }}
+            className={'cloudinary__badge'}
           >
             <Avatar
               src={image.url}
               size={100}
               shape="square"
-              style={{ margin: 10 }}
+              className={'cloudinary__avatar'}
             />
           </Badge>
         ))}
       </div>}
-
-    </>
-
+    </div>
   );
 };
 

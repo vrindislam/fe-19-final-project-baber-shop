@@ -17,8 +17,7 @@ const AdminDashboard = () => {
                 <Divider orientation="left">Admin Dashboard</Divider>
                 <Row gutter={16}>
                     <Col span={24} style={{textAlign: 'left'}}>
-                        <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={'test4'}/>
-                      {JSON.stringify(images)}
+                        <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={'barber_shop_catergories'}/>
                     </Col>
                 </Row>
             </Content>
