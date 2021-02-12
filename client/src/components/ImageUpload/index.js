@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Preloader from "../Preloader";
 import { Avatar, Badge } from "antd";
+import CloudinaryService from "../../services/CloudinaryService";
 
 import "./styles.less";
 
@@ -18,13 +18,10 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-          axios
-            .post(
-              `${process.env.REACT_APP_API}/cloudinary/uploadimages`,
-              { image: reader.result, folder: cloudinaryfolderName })
-            .then(res => {
+          CloudinaryService.imageUpload({ image: reader.result, folder: cloudinaryfolderName })
+            .then(data => {
               setPreloaderStatus(false);
-              allUploadedFiles.push(res.data);
+              allUploadedFiles.push(data);
               setImages([...allUploadedFiles]);
             })
             .catch(err => {
@@ -38,11 +35,7 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
 
   const handleImageRemove = (public_id) => {
     setPreloaderStatus(true);
-    axios
-      .post(
-        `${process.env.REACT_APP_API}/cloudinary/removeimage`,
-        { public_id }
-      )
+    CloudinaryService.imageRemove({ public_id })
       .then((res) => {
         setPreloaderStatus(false);
         const filteredImages = [...images].filter((item) => {
@@ -57,18 +50,18 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
   };
 
   return (
-    <div className={'cloudinary__container'}>
-        <label className={'cloudinary__upload'}>
-          Upload Image
-          <input
-            type="file"
-            multiple
-            hidden
-            accept="images/*"
-            onChange={fileUpload}
-          />
-        </label>
-      {preloaderStatus && <div className={'cloudinary__preloader'}>
+    <div className={"cloudinary__container"}>
+      <label className={"cloudinary__upload"}>
+        Upload Image
+        <input
+          type="file"
+          multiple
+          hidden
+          accept="images/*"
+          onChange={fileUpload}
+        />
+      </label>
+      {preloaderStatus && <div className={"cloudinary__preloader"}>
         <Preloader />
       </div>}
       {!preloaderStatus &&
@@ -79,13 +72,13 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
             count="X"
             key={`${cloudinaryfolderName}_${image.public_id}`}
             onClick={() => handleImageRemove(image.public_id)}
-            className={'cloudinary__badge'}
+            className={"cloudinary__badge"}
           >
             <Avatar
               src={image.url}
               size={100}
               shape="square"
-              className={'cloudinary__avatar'}
+              className={"cloudinary__avatar"}
             />
           </Badge>
         ))}

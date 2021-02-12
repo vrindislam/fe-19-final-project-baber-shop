@@ -106,7 +106,7 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
 
   // handle form on a successfully submit
   const onFinish = (values) => {
-    const submitValue = { ...values, imgUrl: images };
+    const submitValue = { ...values, imgUrl: images && images.length > 0 ? images : [] };
     CategoryService.createCategory(submitValue)
       .then(res => {
         message.success(`new Category ${res.name} was created`, 1.5);
