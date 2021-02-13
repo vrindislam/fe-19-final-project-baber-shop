@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Col, Image, Input, Layout, Row} from 'antd';
+import {Col, Image, Layout, Row} from 'antd';
 import Ajax from "../../services/Ajax";
 import './styles.less'
 import {Link} from "react-router-dom";
-import {FacebookOutlined, InstagramOutlined, MailOutlined, YoutubeOutlined} from '@ant-design/icons';
+import {FacebookOutlined, InstagramOutlined, YoutubeOutlined} from '@ant-design/icons';
+import SubscriptionBox from "../SubscriptionBox";
 
-const {Search} = Input;
 const {get} = Ajax;
 const {Footer: AntFooter} = Layout;
 
@@ -54,16 +54,7 @@ const Footer = () => {
                 }
 
                 <Col className="footer-socials" xs={24} sm={18} lg={7}>
-                    <Search
-                        className='footer-socials_subscribePanel'
-                        placeholder='Enter your email'
-                        prefix={<MailOutlined/>}
-                        allowClear
-                        enterButton="Subscribe"
-                        size="small"
-                        color='yellow'
-                        onSearch={() => alert('Success')}
-                    />
+                    <SubscriptionBox/>
                     <a href="https://www.instagram.com" target='_blank' rel='noopener noreferrer'>
                         <InstagramOutlined className='footer-socials_icons'/>
                     </a>
