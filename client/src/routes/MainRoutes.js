@@ -11,6 +11,7 @@ import AdminCategory from '../pages/Admin/AdminCategory';
 import StaticPage from "../pages/StaticPage";
 import Profile from "../pages/Profile";
 import UserRoute from "./protectedRoutes/UserRoute";
+import UnsubscriptionPage from "../pages/UnsubscriptionPage";
 
 const MainRoutes = () => {
     return (
@@ -25,6 +26,7 @@ const MainRoutes = () => {
             <UserRoute path={'/profile'} component={Profile}/>
             <Route exact path={'/admin/category'} component={AdminCategory}/>
             <Route exact path={'/pages/:id+'} component={StaticPage}/>
+            <Route exact path={'/unsubscribe'} component={UnsubscriptionPage}/>
             <Route exact path="*" render={() => <h1>You are on the wrong page boy</h1>}/>
         </Switch>
     )
