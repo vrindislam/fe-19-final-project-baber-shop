@@ -11,9 +11,13 @@ const UnsubscriptionPage = () => {
     const [state, setState] = useState(null);
 
     useEffect(() => {
+        let isMounted = true;
         const query = queryString.parse(location.search);
         MailService.unsubscribe(query.email, query.check)
-            .then(res => setState(res))
+            .then(res => isMounted && setState(res))
+        return () => {
+            isMounted = false
+        };
     }, [location]);
 
     return (
