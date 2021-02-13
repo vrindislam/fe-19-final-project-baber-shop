@@ -7,14 +7,14 @@ import UserInformation from "../../components/Profile/UserInformation";
 import UserFavourites from "../../components/Profile/UserFavourites";
 import UserOrders from "../../components/Profile/UserOrders";
 
-const Profile = (props) => {
+const Profile = () => {
 
 
     return (
         <Router>
             <div className='profile'>
                 <Row>
-                    <Col className='profile-btnContainer' xs={{span: 20, offset: 2}} sm={{span: 8, offset: 2}}
+                    <Col className='userMenuOptions' xs={{span: 20, offset: 2}} sm={{span: 8, offset: 2}}
                          md={{span: 6, offset: 2}} xl={{span: 6, offset: 3}}>
                         <Row>
                             <NavLink exact to="/profile" activeClassName="selected">
