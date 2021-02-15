@@ -4,10 +4,11 @@ import { Popover,Badge } from "antd";
 import { Link } from "react-router-dom";
 import {content} from './popoverBasketContent'
 import { iconCart } from "../Header/img";
+import { useSelector } from "react-redux";
 
 const PopoverBasket = () => {
-  const someValueFromRedux = 5
-
+  const someValueFromRedux = useSelector(state => state.cartProducts.products.length);
+  console.log("someValueFromRedux",someValueFromRedux);
   return (
       <Popover placement="bottomRight" align={{ offset: [-19, 0] }} className='popover-basket-div' content={content} trigger="hover">
         <Link to="/cart">

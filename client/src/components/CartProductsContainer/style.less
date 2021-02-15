@@ -1,60 +1,29 @@
-.cart-item-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 5px 0;
-  div {
-    margin: 0 10px;
-  }
-  .cart-item-image {
-    width: 150px;
-    height: 150px;
-  }
-  .cart-item-meta {
-    max-width: 380px;
-    p:first-child {
-      margin-bottom: 40px;
-      font-weight: bold;
-      font-size: 16px;
-    }
-    p:last-child {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-  }
-  .cart-item-price {
-    width: 60px;
-    margin: 0 20px;
-  }
-  .cart-item-amount {
-    display: flex;
-    justify-content: space-between;
-    span {
-      width: 15px;
-      margin: 0 5px;
-    }
-    span:nth-child(2) {
-      text-align: center;
-      width: 20px;
-    }
-  }
-  .cart-item-total {
-    width: 65px;
-    margin: 0 20px;
-  }
-  .cart-item-basket-icon {
-    margin: 0 20px;
-  }
-}
-.cart-wrapper-title {
+.cart-container_title {
   display: flex;
   justify-content: space-between;
-  margin-left: 25px;
+  margin-left: 40px;
+
   p:last-child {
     margin-right: 100px;
     span:nth-child(2) {
-      margin-left: 72px;
-      margin-right: 33px;
+      margin-left: 60px;
+      margin-right: 45px;
     }
   }
 }
+.cart-container_main {
+  display: flex;
+  flex-basis: 70%;
+  flex-direction: column;
+  position: relative;
+  height: 324px;
+  margin: 20px 20px;
+  overflow: scroll;
+}
+
+//.psevdo-div {
+//  max-width: 750px;
+//  height: 1px;
+//  border-bottom: 1px rgba(196, 196, 196, 1) solid;
+//  margin: 10px 0 10px 200px;
+//}

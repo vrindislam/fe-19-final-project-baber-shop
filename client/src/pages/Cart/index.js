@@ -17,11 +17,11 @@ const Cart = (props) => {
   };
 
   return (
-    <>
+    <div className="cart-page-wrapper">
       {!productsLength
         ? <p>ooops, you have't added products yet</p>
         : <>
-          <div className="cart-wrapper-div">
+          <div className="cart-container">
             <ProductsContainer/>
             <CartTotal/>
           </div>
@@ -29,7 +29,7 @@ const Cart = (props) => {
           <ModalReg width={1000}/>
         </>
       }
-    </>
+    </div>
   );
 };
 

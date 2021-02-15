@@ -1,18 +1,14 @@
-.cart-wrapper-div {
-  display: flex;
-  //justify-content: space-between;
-  justify-content: center;
-  padding: 5px;
+.cart-page-wrapper {
+  .cart-container {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+  }
 }
-.cart-wrapper {
-  display: flex;
-  flex-basis: 70%;
-  flex-direction: column;
-  position: relative;
-  height: 320px;
-  margin: 20px 20px;
-  overflow: scroll;
+@media (max-width: 992px) {
+  .cart-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
-.delete-from-basket-icon {
-  margin-right: 40px;
-}
+

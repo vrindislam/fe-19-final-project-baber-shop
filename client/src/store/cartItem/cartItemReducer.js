@@ -9,7 +9,8 @@ const initialState = {
 const cartProducts = (state = initialState, action) => {
   switch (action.type) {
     case ADDING_TO_CART:
-      return {...state, products: [...state.products, action.payload.item]}
+      return {...state, products: [...state.products.filter(item => item._id !== action.payload.item._id),action.payload.item]}
+      // return {...state, products: [...state.products, action.payload.item]}
     case DELETE_FROM_CART:
       return {...state, products: [...state.products.filter(product => product._id !== action.payload.id)]}
     case INCREASE_QUANTITY:

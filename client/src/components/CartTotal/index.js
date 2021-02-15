@@ -12,9 +12,9 @@ const CartTotal = () => {
   const shipment = 30
   return (
     <div className="cart-total-wrapper">
-      <p className="bold total-header">total</p>
+      <p className="cart-total_header">total</p>
       <div>
-        <div className="cart-total-div">
+        <div className="cart-total_main">
           <div>
             <span>{productsLength} item(s)</span>
             <span>${totalMoney}</span>
@@ -24,9 +24,9 @@ const CartTotal = () => {
             <span>${shipment}</span>
           </div>
         </div>
-        <div className="some-div">
-          <p>order Total</p>
-          <p className="bold total-with-shipment">${totalMoney+shipment}</p>
+        <div className="cart-total_footer">
+          <p>Order total</p>
+          <p>${totalMoney+shipment}</p>
         </div>
       </div>
     </div>

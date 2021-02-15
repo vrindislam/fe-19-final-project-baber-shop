@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.less";
 import axios from "axios";
-import { Button, Form, Input , message } from "antd";
-import { collectionItemsForm } from "./collectionItems";
+import { Button, Form, Input, message } from "antd";
+import { collectionItemsForm, onlyNumbers, onlyLetters } from "./collectionItems";
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
 import { Link, useHistory } from "react-router-dom";
 
@@ -39,9 +39,6 @@ const RegistrationForm = (props) => {
       <p className="success-message-registration">User has been successfully registered</p>
     );
   };
-  const onReset = () => {
-    form.resetFields();
-  };
 
   const onFinish = (values) => {
     const newCustomer = { ...values, isAdmin: false };
@@ -68,7 +65,7 @@ const RegistrationForm = (props) => {
       })
       .catch(err => {
         error();
-        onReset()
+        // onReset()
         console.log(err);
       });
   };
@@ -81,7 +78,7 @@ const RegistrationForm = (props) => {
       name="register"
       onFinish={onFinish}
       initialValues={{
-        phone: 380
+        phone: "+380"
       }}
       scrollToFirstError
     >
@@ -91,17 +88,24 @@ const RegistrationForm = (props) => {
       {collectionItemsForm.map(formItem =>
         <Form.Item name={formItem.name}
                    label={formItem.label}
-                   rules={[{
-                     required: formItem.required,
-                     message: formItem.message
-                   }, {
-                     type: formItem.type,
-                     message: formItem.messageType
-                   }]}
+                   rules={[
+                     { required: formItem.required, message: formItem.message },
+                     { type: formItem.type, message: formItem.messageType },
+                     { min: formItem.min, message: formItem.messageType },
+                     { max: formItem.max, message: formItem.messageType2}
+                   ]}
                    key={formItem.name}>
           {formItem.name === "password"
-            ? <Input.Password placeholder={formItem.label}/>
-            : <Input placeholder={formItem.label}/>
+            ? <Input.Password maxLength={formItem.max + 1} placeholder={formItem.label}/>
+            : formItem.name === "phone"
+              ? <Input maxLength={13}
+                       onKeyPress={onlyNumbers()}
+              />
+              : formItem.name === "firstName" || formItem.name === "lastName"
+              ? <Input placeholder={formItem.label}
+                       onKeyPress={onlyLetters()}
+                />
+              : <Input placeholder={formItem.label} />
           }
         </Form.Item>
       )}
