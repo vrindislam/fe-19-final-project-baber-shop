@@ -25,8 +25,7 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
     ["select-parentCategory", { label: "Parent ID", name: "parentId", rules }],
     ["input", { label: "Category ID", name: "id", rules }],
     ["input", { label: "Category Name", name: "name", rules }],
-    ["input", { label: "Category Description", name: "description" }]
-
+    ["input", { label: "Category Description", name: "description", rules }]
   ];
 
   // form layout settings
@@ -145,7 +144,7 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
       {setUpFormFields()}
       <Row gutter={16}>
         <Col span={24} style={{ textAlign: "left" }}>
-          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={"catergories"} />
+          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={"catergories2222"} />
         </Col>
       </Row>
       <Form.Item {...tailLayout}>
