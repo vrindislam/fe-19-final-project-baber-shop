@@ -27,7 +27,7 @@ const LoginForm = (props) => {
                 localStorage.setItem('token', loginResult.token);
 
                 const decoded = jwt_decode(loginResult.token);
-                delete decoded.iat
+                delete decoded.iat;
                 props.handleRegisterModalClose();
                 dispatch(authUser({...decoded, isAuthenticated: true}));
                 if (!decoded.isAdmin) history.push('/');
@@ -83,7 +83,7 @@ const LoginForm = (props) => {
                 />
             </Form.Item>
             <Form.Item className='login-form-item-margin'>
-                <Link to="/forgot/password"
+                <Link to="/forgot-password"
                       onClick={props.handleRegisterModalClose}>Forgot password?</Link>
             </Form.Item>
             <Form.Item>

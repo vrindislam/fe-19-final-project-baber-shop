@@ -8,9 +8,10 @@ import PopoverBasket from "../PopoverBasket/index";
 import LiveSearch from './LiveSearch'
 import {showModal} from "../../store/modal/modalAction";
 import Login from "../Modal/LoginModal";
-import {headerLogo, iconContact, iconLogin } from './img/index'
-import { LogoutOutlined } from "@ant-design/icons";
+import {headerLogo, iconContact, iconLogin} from './img/index'
+import {LogoutOutlined} from "@ant-design/icons";
 import Catalogue from "../Catalogue";
+import BreadCrumbs from "../BreadCrumbs";
 
 
 const SiteHeader = () => {
@@ -85,9 +86,9 @@ const SiteHeader = () => {
 
             <Row className="header-row" gutter={[24, 24]}>
 
-                <Col style={{padding:2}}  xs={{ span:12, order: 1 }} sm={{span:12, order: 1 }}  lg={{span:8, order: 1 }} >
-                    <div className="catalogue-btn" key="plp">
-                        <Catalogue />
+                <Col style={{padding: 2}} xs={{span: 12, order: 1}} sm={{span: 12, order: 1}} lg={{span: 8, order: 1}}>
+                    <div key="plp">
+                        <Catalogue/>
                     </div>
                 </Col>
                 <Col style={{padding: 2}} className="search-box" xs={{span: 20, order: 3}} sm={{span: 18, order: 3}}
@@ -101,6 +102,11 @@ const SiteHeader = () => {
                     </div>
                 </Col>
             </Row>
+
+            <Row className="header-row header-breadcrumbs" gutter={[24, 24]}>
+                    <BreadCrumbs/>
+            </Row>
+
         </PageHeader>
 
     );
