@@ -1,6 +1,8 @@
 import React from "react";
 import {Layout, Row, Col, Divider} from "antd";
 import AdminSider from "../../../components/AdminSider";
+
+
 import "./styles.less";
 
 const {Content} = Layout;
@@ -13,8 +15,8 @@ const AdminDashboard = () => {
             <Content className="dashboard-content-container">
                 <Divider orientation="left">Admin Dashboard</Divider>
                 <Row gutter={16}>
-                    <Col span={24}>
-                        <div>Dashboard with statistics</div>
+                    <Col span={24} style={{textAlign: 'left'}}>
+                        <p>TBD ...</p>
                     </Col>
                 </Row>
             </Content>
