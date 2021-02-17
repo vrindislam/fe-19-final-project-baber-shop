@@ -19,18 +19,17 @@ const CheckboxFilter = ({filters, clickCheckbox, parsedUrl}) => {
 
         fetch()
     }, []);
-    console.log('catalog--->', catalog);
-    const catalogNames = catalog.map(item => item.name);
+    const catalogNames = Object.values(parsedUrl).flat(Infinity);
 
     return (
         <div className='checkbox-container' onClick={clickCheckbox}>
             <div className='checkbox-group checkbox-catalog-group'>
                 <p className='checkbox-group__name'>Catalog</p>
                 {
-                    catalogNames.map(item =>
-                        <div className='checkbox-group__item' key={item}>
-                            <input className='item-filter' data-type={'catalog'} type="checkbox" id={item} name={item}/>
-                            <label className='checkbox-label' htmlFor={item}>{item}</label>
+                    catalog.map(item =>
+                        <div className='checkbox-group__item' key={item.name}>
+                            <input className='item-filter' data-type={'catalog'} defaultChecked={catalogNames.includes(item.name)} type="checkbox" id={item.name} name={item.name}/>
+                            <label className='checkbox-label' htmlFor={item.name}>{item.name}</label>
                         </div>
                     )
                 }

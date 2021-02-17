@@ -25,15 +25,7 @@ export function degroupValues(obj) {
             delete obj[key]
         } else if (Array.isArray(obj[key])) {
             console.log('array --->', key, obj[key]);
-            // for (const arrItem of obj[el]) {
-                // object[type] = object[el];
-                // delete object[type];
-                // const object = Object.assign()
-                // object.type = arrItem;
-                // console.log(object);
-            // }
-            // el = {el: obj[el]};
-            // arr.push(el);
+
         } else {
             arr.push(key);
         }
