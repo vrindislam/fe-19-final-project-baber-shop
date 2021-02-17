@@ -1,28 +1,38 @@
 import React  from 'react';
 import { Slider, InputNumber, Row, Col, Form } from 'antd';
 import './styles.less';
+// import {useDispatch} from "react-redux";
+// import {changeMaxPrice, changeMinPrice} from "../../store/priceSlider/priceSliderAction";
 
-const PriceSlider = ({minValue, maxValue, setMaxVal, setMinVal}) => {
-
+const PriceSlider = ({minValue, maxValue, setMinVal, setMaxVal}) => {
+    // const dispatch = useDispatch();
     const onSliderChange = value => {
         setMinVal(value[0]);
+        // dispatch(changeMinPrice(value[0]));
+        // dispatch(changeMaxPrice(value[1]));
         setMaxVal(value[1]);
+        // dispatch(changePrice(value[1]));
+        // console.log('----value', value);
     }
 
     const onSliderMouseUp = value => {
         setMinVal(value[0]);
         setMaxVal(value[1]);
+        // dispatch(changeMinPrice(value[0]));
+        // dispatch(changeMaxPrice(value[1]));
     }
 
     const onChangeInputMin = value => {
         if (maxValue > value) {
             setMinVal(value);
+            // dispatch(changeMinPrice(value[0]));
         }
     }
 
     const onChangeInputMax = value => {
         if (minValue < value) {
             setMaxVal(value);
+            // dispatch(changeMaxPrice(value[1]));
         }
     }
 

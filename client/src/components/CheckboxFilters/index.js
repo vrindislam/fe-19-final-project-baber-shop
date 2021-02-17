@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.less';
 import CheckboxItem from "./CheckboxItem";
 
-const CheckboxFilter = ({filters, clickCheckbox, parsedURL}) => {
+const CheckboxFilter = ({filters, clickCheckbox, parsedUrl}) => {
 
     const allTypes = filters.map(item => {
         return item.type
@@ -15,7 +15,7 @@ const CheckboxFilter = ({filters, clickCheckbox, parsedURL}) => {
                 uniqTypes.map(item =>
                     <div key={item} className='checkbox-group'>
                         <p className='checkbox-group__name'>{item}</p>
-                        <CheckboxItem type={item} parsedURL={parsedURL}/>
+                        <CheckboxItem parsedUrl={parsedUrl} type={item}/>
                     </div>
                 )
             }
