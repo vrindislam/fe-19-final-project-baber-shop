@@ -20,12 +20,11 @@ export function groupValues(array) {
 
 export function degroupValues(obj) {
     const arr = [];
-    // const object = {type: "name"};
-    for (const el in obj) {
-        if (el === 'maxPrice' || el === 'minPrice') {
-            delete obj[el]
-        } else if (Array.isArray(obj[el])) {
-            console.log('array!!!', el, obj[el]);
+    for (const key in obj) {
+        if (key === 'maxPrice' || key === 'minPrice') {
+            delete obj[key]
+        } else if (Array.isArray(obj[key])) {
+            console.log('array --->', key, obj[key]);
             // for (const arrItem of obj[el]) {
                 // object[type] = object[el];
                 // delete object[type];
@@ -35,9 +34,9 @@ export function degroupValues(obj) {
             // }
             // el = {el: obj[el]};
             // arr.push(el);
+        } else {
+            arr.push(key);
         }
-
-        arr.push(el);
     }
     console.log('this array--->', arr);
     return arr

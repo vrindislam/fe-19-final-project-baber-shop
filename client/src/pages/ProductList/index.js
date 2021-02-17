@@ -75,14 +75,14 @@ const ProductList = () => {
             const el = {type: e.target.dataset.type, name: e.target.name};
             if (index < 0) {
                 dispatch(addFilter(el));
-                setTimeout(()=>{
-                    history.push(string);
-                }, 1000)
+                // setTimeout(()=>{
+                //     history.push(string);
+                // }, 1000)
             } else {
                 dispatch(deleteFilter(el));
-                setTimeout(()=>{
-                    history.push(string);
-                }, 1000)
+                // setTimeout(()=>{
+                //     history.push(string);
+                // }, 1000)
             }
         }
     }
