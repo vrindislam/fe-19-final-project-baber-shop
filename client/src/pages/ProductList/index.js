@@ -47,12 +47,6 @@ const ProductList = () => {
         fetch()
     }, []);
 
-    // useEffect(() => {
-    //     const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
-    //     console.log('parsedString-->', parsedString);
-    //     setParsedUrl(parsedString);
-    //     console.log('location-->', location);
-    // }, []);
     useEffect(() => {
         const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
         setParsedUrl(parsedString);
