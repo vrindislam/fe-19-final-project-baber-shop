@@ -67,7 +67,6 @@ const ProductList = () => {
         const parsedString = queryString.parse(query, {arrayFormat: 'comma'});
         console.log('parsedString-->', parsedString);
         setParsedUrl(parsedString);
-        // console.log('location-->', location);
     }
 
     const catchCheckbox = (e) => {
@@ -98,8 +97,6 @@ const ProductList = () => {
             <div className="product-list-container">
                 <div className={"filters-container " + show}>
                     <PriceSlider minValue={minValue} maxValue={maxValue}
-                                 // setMinVal={dispatch(changePrice(minPrice))}
-                                 // setMaxVal={dispatch}
                                  setMinVal={setMinValue}
                                  setMaxVal={setMaxValue}
                     />
