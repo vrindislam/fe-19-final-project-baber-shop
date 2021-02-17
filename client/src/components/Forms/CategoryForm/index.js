@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message, Select, Row, Col } from "antd";
 import CategoryService from "../../../services/CategoryService";
-import {fieldsSetArr, layout, tailLayout, initialFormValues} from './constants';
+import { fieldsSetArr, layout, tailLayout, initialFormValues, rootCloudinaryFolderName } from "./constants";
 import ImageUpload from "../../ImageUpload";
 import "./style.less";
 
@@ -14,6 +14,8 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
   const [levels] = useState(3);
   const [parentCategories, setParentCategories] = useState(["cat1", "cat2", "cat3"]);
   const [images, setImages] = useState([]);
+  const [cloudinaryFolderName, setCloudinaryFolderName] = useState(rootCloudinaryFolderName);
+  const [imageButtonDisabled, setImageButtonDisabled] = useState(true);
 
   // function to create form input fields based on constants
   const setUpFormFields = () => fieldsSetArr.map(category => {
@@ -89,7 +91,16 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
   };
 
   // Activate Submit button once form is filled handleOnFieldsChange
-  const handleOnFieldsChange = () => {
+  const handleOnFieldsChange = ([{ name, value }]) => {
+    //  handle cloudinary foldary name creation
+    if (name && name.length > 0 && name[0] === "id" && value.length > 0) {
+      const cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/${value}`;
+      setCloudinaryFolderName(cloudinaryCategoryfolderName);
+      setImageButtonDisabled(false);
+    } else {
+      setCloudinaryFolderName(rootCloudinaryFolderName);
+      setImageButtonDisabled(true);
+    }
     // handleSubmitButtonDisable
     setDisabledBtn(!form.isFieldsTouched(true) || form.getFieldsError().filter(({ errors }) => errors.length).length > 0);
   };
@@ -108,7 +119,8 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
       {setUpFormFields()}
       <Row gutter={16}>
         <Col span={24} style={{ textAlign: "left" }}>
-          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={"catergories2222"} />
+          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={cloudinaryFolderName}
+                       imageButtonDisabled={imageButtonDisabled} />
         </Col>
       </Row>
       <Form.Item {...tailLayout}>

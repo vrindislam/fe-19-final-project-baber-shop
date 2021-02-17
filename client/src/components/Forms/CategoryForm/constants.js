@@ -34,3 +34,5 @@ export const initialFormValues = {
   parentId: ""
 };
 
+export const rootCloudinaryFolderName = 'categories';
+
