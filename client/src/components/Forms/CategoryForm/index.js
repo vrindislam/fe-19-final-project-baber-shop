@@ -94,7 +94,9 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
   const handleOnFieldsChange = ([{ name, value }]) => {
     //  handle cloudinary foldary name creation
     if (name && name.length > 0 && name[0] === "id" && value.length > 0) {
-      const cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/${value}`;
+      let cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/${value}`;
+      const level = form.getFieldValue("level");
+      if (level && level.length > 0) cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/level${level}/${value}`;
       setCloudinaryFolderName(cloudinaryCategoryfolderName);
       setImageButtonDisabled(false);
     } else if (name && name.length > 0 && name[0] === "id" && value.length === 0) {
