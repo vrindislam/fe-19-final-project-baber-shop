@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, message, Select, Row, Col } from "antd";
 import CategoryService from "../../../services/CategoryService";
-import "./style.less";
+import {fieldsSetArr, layout, tailLayout, initialFormValues} from './constants';
 import ImageUpload from "../../ImageUpload";
+import "./style.less";
 
 const { Option } = Select;
 
@@ -13,43 +14,6 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
   const [levels] = useState(3);
   const [parentCategories, setParentCategories] = useState(["cat1", "cat2", "cat3"]);
   const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    // logic will be added later
-  }, []);
-
-  // Create-Form Schema and controls rules
-  const rules = [{ required: true, message: "field is required" }];
-  const fieldsSetArr = [
-    ["select-level", { label: "Level", name: "level", rules }],
-    ["select-parentCategory", { label: "Parent ID", name: "parentId", rules }],
-    ["input", { label: "Category ID", name: "id", rules }],
-    ["input", { label: "Category Name", name: "name", rules }],
-    ["input", { label: "Category Description", name: "description", rules }]
-  ];
-
-  // form layout settings
-  const layout = {
-    labelCol: {
-      span: 24
-    },
-    wrapperCol: {
-      span: 24
-    }
-  };
-  const tailLayout = {
-    wrapperCol: {
-      span: 24
-    }
-  };
-
-  const initialFormValues = {
-    id: "",
-    name: "",
-    description: "",
-    level: "",
-    parentId: ""
-  };
 
   // function to create form input fields based on constants
   const setUpFormFields = () => fieldsSetArr.map(category => {
