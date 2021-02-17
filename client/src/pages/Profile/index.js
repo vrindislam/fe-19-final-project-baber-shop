@@ -13,8 +13,8 @@ const Profile = () => {
     return (
         <Router>
             <div className='profile'>
-                <Row>
-                    <Col className='userMenuOptions' xs={{span: 20, offset: 2}} sm={{span: 8, offset: 2}}
+                <Row justify-content='center' >
+                    <Col className='userMenuOptions' xs={{span: 20, offset: 2}} sm={{span: 8,offset: 0}}
                          md={{span: 6, offset: 2}} xl={{span: 6, offset: 3}}>
                         <Row>
                             <NavLink exact to="/profile" activeClassName="selected">

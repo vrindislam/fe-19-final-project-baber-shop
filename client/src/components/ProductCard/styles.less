@@ -1,113 +1,215 @@
 @import '~antd/lib/style/themes/default.less';
 
-.product-card-container {
-  display: inline-block;
-  padding: 10px;
-  list-style: none;
+.productCard {
+  position: relative;
+  background-color: @white;
+  font-size: 14px;
+  width: 160px;
+  height: 160px;
+  border: 2px solid @black;
+  box-sizing: border-box;
 
-  .ant-card {
-    position: relative;
-    display: inline-block;
-    width: 305px;
-    height: 272px;
-    border: 2px solid @black;
+  &:hover {
+    box-shadow: 0 0 8px @black;
+  }
+
+  &-title {
+    position: absolute;
+    top: 2px;
+    left: -1px;
+    background-color: @black;
+    color: @white;
+    max-width: 75%;
+    max-height: 30px;
+    padding: 5px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
 
     &:hover {
-      box-shadow: 0 0 8px @yellow-5;
+      background: @black;
+      white-space: normal;
+      max-height: 50%;
+      max-width: 100%;
+      overflow: auto;
+      z-index: 5;
     }
   }
 
+  &-picture {
+    position: relative;
+    top: 28px;
+    padding: 0 30px;
 
-  .product-card-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 205px;
-    height: 205px;
-    transform: translate(-50%, -50%);
-    //width: 305px;
-    //height: 272px;
-    //position: relative;
-  }
-
-  .product-heading-wrapper {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    display: inline-block;
-    max-width: 152px;
-    font-size: 20px;
-
-    p {
-      margin: 0;
-      padding: 0 10px;
+    & .ant-image-img {
+      padding: 20px;
+      width: 120px;
+      height: 120px;
     }
+
   }
 
-  .product-heading {
-    margin: 0;
-    color: #FFFFFF;
-    background-color: #000000;
-  }
-
-  .product-price {
-    font-weight: 700;
-    font-size: 30px;
-  }
-
-
-  .button-container {
+  &-price {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    top: 0;
+    left: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    color: @black;
+  }
 
-    .product-card-btn {
-      width: 160px;
-      height: 40px;
-      color: #000000;
-      font-weight: 500;
-      font-size: 20px;
-      line-height: 20px;
-      background-color: #EFE95E;
-      border: 1px solid #EFE95E;
-      border-radius: 14px;
+  &-buttons {
+    width: 100%;
+    padding: 0 8px;
+    display: flex;
+    position: absolute;
+    bottom: 2px;
+    justify-content: space-between;
+
+    & .btn-favourite {
+      color: @yellow-5;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      padding: 0;
+      height: 18px;
+
+      &:after {
+        -webkit-animation: none;
+        -moz-animation: none;
+        -o-animation: none;
+        -ms-animation: none;
+        animation: none;
+      }
+
+      & .anticon {
+        font-size: 24px;
+
+        &:hover {
+          color: @yellow-7;
+        }
+
+        &:focus {
+          color: @yellow-5;
+        }
+      }
+
+
+    }
+
+    & .btn-addToCard {
+      max-width: 83px;
+      max-height: 25px;
+      padding: 0 8px;
+      color: #000;
+      font-size: 12px;
+      font-weight: bold;
+      background-color: @yellow-5;
+      border: 1px solid @yellow-5;
+      border-radius: 20px;
 
       &:hover {
-        background-color: #fff852;
-        border: 1px solid #fff852;
-      }
-
-      &:active {
-        background-color: #EFE95E;
-        border: 1px solid #fff852;
+        color: @black;
+        border: 1px solid @black;
       }
     }
   }
 }
 
-@media screen and (min-width: 586px) and (max-width: 992px) {
-  .product-card-container .ant-card {
-    width: 205px;
-    height: 172px;
-  }
+@media screen and (min-width: 768px) {
+  .productCard {
+    font-size: 14px;
+    width: 220px;
+    height: 220px;
 
-  .button-container .product-card-btn {
-    width: 110px;
-    height: 30px;
-    padding: 0;
-    font-size: 15px;
-  }
+    &-title {
+      top: 4px;
+         }
 
-  .ant-card-body .product-heading-wrapper .product-heading, .product-price {
-    font-size: 15px;
-  }
+    &-picture {
+      top: 32px;
 
-  .product-card-img {
-    width: 200px;
-    height: 165px;
+      & .ant-image-img {
+        padding: 20px;
+        width: 160px;
+        height: 160px;
+      }
+    }
+
+    &-price {
+      left: 10px;
+      font-size: 20px;
+
+    }
+
+    &-buttons {
+      padding: 0 12px;
+      bottom: 5px;
+
+      & .btn-favourite {
+        padding: 0;
+
+        & .anticon {
+          font-size: 28px;
+        }
+      }
+
+      & .btn-addToCard {
+        min-width: 100px;
+        min-height: 30px;
+        padding: 0 15px;
+        font-size: 14px;
+      }
+    }
   }
 }
 
+@media screen and (min-width: 1200px) {
+  .productCard {
+    font-size: 20px;
+    width: 300px;
+    height: 300px;
 
+    &-title {
+      top: 10px;
+    }
 
+    &-picture {
+      top: 40px;
 
+      & .ant-image-img {
+        padding: 25px;
+        width: 220px;
+        height: 220px;
+      }
+    }
+
+    &-price {
+      top: 0;
+      left: 15px;
+      font-size: 22px;
+
+    }
+
+    &-buttons {
+      padding: 0 20px;
+      bottom: 12px;
+
+      & .btn-favourite {
+        padding: 0 0 0 10px;
+
+        & .anticon {
+          font-size: 30px;
+        }
+      }
+
+      & .btn-addToCard {
+        min-width: 100px;
+        min-height: 30px;
+        padding: 0 15px;
+        font-size: 16px;
+      }
+    }
+  }
+}

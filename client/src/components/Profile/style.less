@@ -1,7 +1,13 @@
 @import '../../../node_modules/antd/lib/style/themes/default.less';
 
 .favouritesContainer {
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & .productCard {
+    margin:5px;
+  }
 }
 
 .userProfileOrderFav {
@@ -27,6 +33,10 @@
 }
 
 @media (min-width: 576px) {
+  .favouritesContainer {
+    justify-content: space-between;
+  }
+
   .userProfileOrderFav {
 
     &-emptyContainer {
@@ -35,6 +45,9 @@
   }
 }
 
+@media (min-width: 768px) {
+
+}
 
 @media (min-width: 992px) {
   .userProfileOrderFav {

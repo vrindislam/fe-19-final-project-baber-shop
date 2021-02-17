@@ -34,8 +34,8 @@ const SiteHeader = () => {
 
     return (
         <PageHeader style={{
-            // position: 'fixed',
-            // zIndex: 1,
+            position: 'sticky',
+            zIndex: 1,
             // padding: 0,
             // margin: 0,
             height: 'auto',
