@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Form, Input, Button, message, Row, Col } from "antd";
 import { fieldsSetArr, layout, tailLayout } from "./constants";
+import { rootCloudinaryFolderName } from "../CategoryForm/constants";
 import CategoryService from "../../../services/CategoryService";
 import ImageUpload from "../../ImageUpload";
 
@@ -11,13 +12,15 @@ const CategoryUpdateForm = ({ categoryToUpdate }) => {
   const history = useHistory();
   const [form] = Form.useForm();
   const [images, setImages] = useState([]);
+  const [cloudinaryFolderName, setCloudinaryFolderName] = useState(rootCloudinaryFolderName);
 
   useEffect(() => {
     form.setFieldsValue({
-      name: categoryToUpdate && categoryToUpdate.name ? categoryToUpdate.name : "",
-      description: categoryToUpdate && categoryToUpdate.description ? categoryToUpdate.description : ""
+      name: categoryToUpdate?.name?.length > 0 ? categoryToUpdate.name : "",
+      description: categoryToUpdate?.description?.length > 0 ? categoryToUpdate.description : ""
     });
-    if (categoryToUpdate?.imgUrl && categoryToUpdate.imgUrl.length > 0) setImages(categoryToUpdate.imgUrl);
+    if (categoryToUpdate?.imgUrl?.length > 0) setImages(categoryToUpdate.imgUrl);
+    if (categoryToUpdate?.level?.length > 0 && categoryToUpdate?.id?.length > 0) setCloudinaryFolderName(`${rootCloudinaryFolderName}/level${categoryToUpdate.level}/${categoryToUpdate.id}`);
   }, [categoryToUpdate, form]);
 
   // function to create form input fields based on constants
@@ -69,7 +72,12 @@ const CategoryUpdateForm = ({ categoryToUpdate }) => {
       {setUpFormFields()}
       <Row gutter={16}>
         <Col span={16} style={{ textAlign: "left" }}>
-          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={"catergories"} />
+          <ImageUpload
+            images={images}
+            setImages={setImages}
+            cloudinaryfolderName={cloudinaryFolderName}
+            imageButtonDisabled={false}
+          />
         </Col>
       </Row>
       <Form.Item {...tailLayout}>

@@ -121,8 +121,12 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
       {setUpFormFields()}
       <Row gutter={16}>
         <Col span={24} style={{ textAlign: "left" }}>
-          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={cloudinaryFolderName}
-                       imageButtonDisabled={imageButtonDisabled} />
+          <ImageUpload
+            images={images}
+            setImages={setImages}
+            cloudinaryfolderName={cloudinaryFolderName}
+            imageButtonDisabled={imageButtonDisabled}
+          />
         </Col>
       </Row>
       <Form.Item {...tailLayout}>
