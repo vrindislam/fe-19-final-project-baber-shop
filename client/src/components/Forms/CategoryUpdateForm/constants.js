@@ -4,7 +4,6 @@ const rules = [{required: true, message: 'field is required'}];
 export const fieldsSetArr = [
   ['input', {label: "Category Name", name: "name", rules}],
   ['input', {label: "Category Description", name: "description", rules}],
-  ['input', {label: "Image URL", name: "imgUrl", rules}]
 ]
 
 // form layout settings

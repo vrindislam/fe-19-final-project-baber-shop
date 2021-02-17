@@ -1,19 +1,18 @@
 import React from "react";
 import "./styles.less";
 import ProductsContainer from "../../components/CartProductsContainer";
-import CartTotal from "../../components/CartTotal";
-import RegistrationForm from "../../components/Forms/RegistrationForm";
-import withModal from "../../components/Modal";
+// import CartTotal from "../../components/CartTotal";
+import RegistrationModal from "../../components/Modal/RegisterModal"
+
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../store/modal/modalAction";
 
+import {TotalAmount} from "../../components/CartTotalQuaintity"
 const Cart = (props) => {
-  const typeOfModal = "RegistrationForm";
-  const ModalReg = withModal(RegistrationForm, typeOfModal);
   const dispatch = useDispatch();
   const productsLength = useSelector(state => state.cartProducts.products.length);
   const showModalR = () => {
-    dispatch(showModal({ status: true, type: typeOfModal }));
+    dispatch(showModal({ status: true, type: "RegistrationForm" }));
   };
 
   return (
@@ -23,10 +22,11 @@ const Cart = (props) => {
         : <>
           <div className="cart-container">
             <ProductsContainer/>
-            <CartTotal/>
+            <TotalAmount total="cartTotal"/>
+            {/* <CartTotal/> */}
           </div>
           <button onClick={showModalR}>SHOW REGISTRATION</button>
-          <ModalReg width={1000}/>
+          <RegistrationModal/>
         </>
       }
     </div>

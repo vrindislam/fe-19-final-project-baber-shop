@@ -30,7 +30,7 @@ const LoginForm = (props) => {
                 delete decoded.iat
                 props.handleRegisterModalClose();
                 dispatch(authUser({...decoded, isAuthenticated: true}));
-                if (decoded.isAdmin) history.push('/');
+                if (!decoded.isAdmin) history.push('/');
             })
             .catch(err => {
                 const error = err.response.data;

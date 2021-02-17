@@ -1,0 +1,58 @@
+@import '../../../node_modules/antd/lib/style/themes/default.less';
+
+.favouritesContainer {
+  text-align: center;
+}
+
+.userProfileOrderFav {
+
+  &-emptyContainer {
+    padding-top: 25px;
+    font-size: 20px;
+    text-align: center;
+
+    & h1 {
+      font-size: 26px;
+    }
+
+    & h3 {
+      font-size: 18px;
+    }
+  }
+
+  &-icon {
+    padding-bottom: 10px;
+    font-size: 60px;
+  }
+}
+
+@media (min-width: 576px) {
+  .userProfileOrderFav {
+
+    &-emptyContainer {
+      padding-top: 0;
+    }
+  }
+}
+
+
+@media (min-width: 992px) {
+  .userProfileOrderFav {
+
+    &-emptyContainer {
+      padding-top: 0;
+
+      & h1 {
+        font-size: 32px;
+      }
+
+      & h3 {
+        font-size: 24px;
+      }
+    }
+
+    &-icon {
+      font-size: 90px;
+    }
+  }
+}

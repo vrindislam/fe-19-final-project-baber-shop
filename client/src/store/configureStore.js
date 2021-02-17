@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import jwt_decode from "jwt-decode";
 import {authUser} from "./user/userAction";
 import axios from "axios";
-import {persistStore} from 'redux-persist'
+import { persistStore } from 'redux-persist'
 
 const checkTokenExpirationMiddleware = store => next => action => {
     const {dispatch} = store;
@@ -39,5 +39,6 @@ export const store = createStore(
     rootReducer,
     compose(applyMiddleware(thunk, checkTokenExpirationMiddleware, setAxiosHeaders), devTools)
 );
-export const persistor = persistStore(store);
+export const persistor = persistStore(store)
+
 export default {store, persistor};

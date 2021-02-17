@@ -21,7 +21,9 @@ const RegistrationForm = (props) => {
   const showModalLogin = () => {
     dispatch(showModal({status: true, type: 'LoginForm'}));
   };
-  console.log("props.modal",props.modal)
+  // console.log("props.modal",props.modal)
+  console.log("collectionItemsForm",collectionItemsForm);
+  console.log("rules",collectionItemsForm.rules);
 
   const error = () => {
     message.error(
@@ -88,24 +90,15 @@ const RegistrationForm = (props) => {
       {collectionItemsForm.map(formItem =>
         <Form.Item name={formItem.name}
                    label={formItem.label}
-                   rules={[
-                     { required: formItem.required, message: formItem.message },
-                     { type: formItem.type, message: formItem.messageType },
-                     { min: formItem.min, message: formItem.messageType },
-                     { max: formItem.max, message: formItem.messageType2}
-                   ]}
+                   rules={formItem.rules}
                    key={formItem.name}>
           {formItem.name === "password"
-            ? <Input.Password maxLength={formItem.max + 1} placeholder={formItem.label}/>
+            ? <Input.Password maxLength={25} placeholder={formItem.label}/>
             : formItem.name === "phone"
-              ? <Input maxLength={13}
-                       onKeyPress={onlyNumbers()}
-              />
+              ? <Input maxLength={13} onKeyPress={onlyNumbers()}/>
               : formItem.name === "firstName" || formItem.name === "lastName"
-              ? <Input placeholder={formItem.label}
-                       onKeyPress={onlyLetters()}
-                />
-              : <Input placeholder={formItem.label} />
+              ? <Input placeholder={formItem.label} onKeyPress={onlyLetters()} maxLength={25}/>
+              : <Input placeholder={formItem.label} maxLength={25}/>
           }
         </Form.Item>
       )}
