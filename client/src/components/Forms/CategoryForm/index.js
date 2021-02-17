@@ -97,7 +97,7 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
       const cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/${value}`;
       setCloudinaryFolderName(cloudinaryCategoryfolderName);
       setImageButtonDisabled(false);
-    } else {
+    } else if (name && name.length > 0 && name[0] === "id" && value.length === 0) {
       setCloudinaryFolderName(rootCloudinaryFolderName);
       setImageButtonDisabled(true);
     }
