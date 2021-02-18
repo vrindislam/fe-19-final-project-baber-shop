@@ -1,18 +1,17 @@
 import React from "react";
 import "./style.less"
 import CartItem from "../CartItem"
-import { useSelector } from "react-redux";
 
 
-const ProductsContainer = () => {
-  const products = useSelector(state => state.cartProducts.products)
+const ProductsContainer = ({ products, isAuth, setCart }) => {
 
   const items = products.map(product =>
-      <div key={product.itemNo}>
-        <CartItem product={product} cartQuantity={product.cartQuantity}/>
-        <div className="psevdo-div"></div>
-      </div>
-    )
+    <CartItem
+      product={isAuth ? product.product : product}
+      key={isAuth ? product._id : product.itemNo}
+      cartQuantityDB={product.cartQuantity}
+      setCart={setCart}
+    />)
     // <CartItem product={product} key={product.itemNo} cartQuantity={product.cartQuantity}/>)
 
   return (

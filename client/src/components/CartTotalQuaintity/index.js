@@ -6,10 +6,17 @@ import { Link } from "react-router-dom";
 
 
 export const TotalAmount = (props) => {
+  const {productsDB} = props
+  console.log('dddddd',props)
   const productsLength = useSelector(state => state.cartProducts.products.length);
   const products = useSelector(state => state.cartProducts.products);
+  const isAuth = useSelector(state => state.user.isAuthenticated);
   const sumArray = [];
-  products.forEach(item => sumArray.push(item.currentPrice * item.cartQuantity));
+  if(isAuth){
+    productsDB.forEach(item => sumArray.push(item.product.currentPrice * item.cartQuantity))
+  }else {
+    products.forEach(item => sumArray.push(item.currentPrice * item.cartQuantity))
+  }
   const totalMoney = Number(sumArray.reduce((a, b) => a + b, 0).toFixed(2));
   const [shipment,setShipment] = useState(0)
   useEffect(() => {

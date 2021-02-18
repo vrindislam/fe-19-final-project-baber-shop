@@ -1,4 +1,4 @@
-import {ADDING_TO_CART,DELETE_FROM_CART,DECREASE_QUANTITY,INCREASE_QUANTITY} from "./actionTypes"
+import {ADDING_TO_CART,DELETE_FROM_CART,DECREASE_QUANTITY,INCREASE_QUANTITY, RESET_CART} from "./actionTypes"
 
 export const addToCart = item  => {
   return {
@@ -25,6 +25,12 @@ export const decreaseQuantity = (_id) => {
   return {
     type: DECREASE_QUANTITY,
     payload: {_id}
+  }
+}
+
+export const resetCart = () =>{
+  return {
+    type: RESET_CART
   }
 }
 
