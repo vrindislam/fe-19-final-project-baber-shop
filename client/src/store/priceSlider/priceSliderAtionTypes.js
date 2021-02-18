@@ -1,2 +1,0 @@
-export const CHANGE_MAX_PRICE = 'CHANGE_MAX_PRICE';
-export const CHANGE_MIN_PRICE = 'CHANGE_MIN_PRICE';

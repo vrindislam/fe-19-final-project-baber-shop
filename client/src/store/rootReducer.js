@@ -5,7 +5,6 @@ import preloaderReducer from './preloader/preloaderReducer'
 import cartReducer from "./cart/cartReducer";
 import userReducer from "./user/userReducer";
 import filterReducer from "./filters/filterReducer";
-import priceSliderReducer from "./priceSlider/priceSliderReducer";
 
 const rootReducer = combineReducers({
   testProduct: testReducer,
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   preloader: preloaderReducer,
   cart: cartReducer,
   filterReducer: filterReducer,
-  priceSliderReducer: priceSliderReducer
 })
 
 export default rootReducer
