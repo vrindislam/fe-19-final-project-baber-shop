@@ -17,19 +17,3 @@ export function groupValues(array) {
     }
     return res
 }
-
-export function degroupValues(obj) {
-    const arr = [];
-    for (const key in obj) {
-        if (key === 'maxPrice' || key === 'minPrice') {
-            delete obj[key]
-        } else if (Array.isArray(obj[key])) {
-            console.log('array --->', key, obj[key]);
-
-        } else {
-            arr.push(key);
-        }
-    }
-    console.log('this array--->', arr);
-    return arr
-}

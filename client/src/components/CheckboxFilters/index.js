@@ -3,7 +3,7 @@ import './styles.less';
 import CheckboxItem from "./CheckboxItem";
 import Ajax from "../../services/Ajax";
 
-const CheckboxFilter = ({filters, clickCheckbox, parsedUrl}) => {
+const CheckboxFilter = ({filters, clickCheckbox}) => {
 
     const [catalog, setCatalog] = useState([]);
     const allTypes = filters.map(item => {
@@ -19,7 +19,6 @@ const CheckboxFilter = ({filters, clickCheckbox, parsedUrl}) => {
 
         fetch()
     }, []);
-    const catalogNames = Object.values(parsedUrl).flat(Infinity);
 
     return (
         <div className='checkbox-container' onClick={clickCheckbox}>
@@ -28,7 +27,7 @@ const CheckboxFilter = ({filters, clickCheckbox, parsedUrl}) => {
                 {
                     catalog.map(item =>
                         <div className='checkbox-group__item' key={item.name}>
-                            <input className='item-filter' data-type={'catalog'} defaultChecked={catalogNames.includes(item.name)} type="checkbox" id={item.name} name={item.name}/>
+                            <input className='item-filter' data-type={'catalog'} type="checkbox" id={item.name} name={item.name}/>
                             <label className='checkbox-label' htmlFor={item.name}>{item.name}</label>
                         </div>
                     )
@@ -38,7 +37,7 @@ const CheckboxFilter = ({filters, clickCheckbox, parsedUrl}) => {
                 uniqTypes.map(item =>
                     <div key={item} className='checkbox-group'>
                         <p className='checkbox-group__name'>{item}</p>
-                        <CheckboxItem parsedUrl={parsedUrl} type={item}/>
+                        <CheckboxItem type={item}/>
                     </div>
                 )
             }

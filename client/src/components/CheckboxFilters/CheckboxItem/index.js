@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './styles.less';
 import Ajax from "../../../services/Ajax";
 
-const CheckboxItem = ({type, parsedUrl}) => {
+const CheckboxItem = ({type}) => {
 
     const [checkboxNames, setNames] = useState([]);
 
@@ -19,13 +19,11 @@ const CheckboxItem = ({type, parsedUrl}) => {
         return item.name
     })
 
-    const filtersNamesUrl = Object.values(parsedUrl).flat(Infinity);
-
     return (
         <>{
             names.map(item =>
                 <div className='checkbox-group__item' key={item}>
-                    <input className='item-filter' data-type={type} defaultChecked={filtersNamesUrl.includes(item)} type="checkbox" id={item} name={item}/>
+                    <input className='item-filter' data-type={type} type="checkbox" id={item} name={item}/>
                     <label className='checkbox-label' htmlFor={item}>{item}</label>
                 </div>
             )
