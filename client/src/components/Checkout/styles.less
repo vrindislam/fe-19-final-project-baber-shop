@@ -3,8 +3,7 @@
   margin: 0 auto 50px;
 
   .ant-steps {
-    width: 30%;
-    margin: 0 auto;
+    width: 100%;
   }
 
   .ant-steps-item-title::after {
@@ -49,7 +48,25 @@
     cursor: default !important;
   }
 
-  .ant-form-item{
+  .ant-form-item {
     margin-bottom: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .checkout {
+    .ant-steps {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .checkout {
+    .ant-steps {
+      width: 50%;
+      margin: 0 auto;
+    }
   }
 }

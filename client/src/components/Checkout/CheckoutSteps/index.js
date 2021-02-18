@@ -32,7 +32,8 @@ const CheckoutSteps = ({children}) => {
             {children.map((child, index) => {
                 const Component = child.type;
                 return (
-                    <Col xs={{span: 24}} sm={{span: 8}} md={{span: 8}} xl={{span: 8}} key={index}>
+                    <Col xs={{span: 24}} sm={{span: 24}} md={{span: 24}} lg={{span: 24}} xl={{span: 8}} key={index}
+                         disabled={state.step !== index}>
                         <div className="checkout-step" disabled={state.step !== index}>
                             <Component {...child.props} disabled={state.step !== index} onChange={onStepChange}/>
                         </div>
