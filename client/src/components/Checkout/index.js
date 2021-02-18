@@ -11,7 +11,7 @@ import actions from "./util/actions";
 const Checkout = () => {
 
     const initialState = {
-        step: 2,
+        step: 0,
         address: null,
         shipping: null,
         payment: null
