@@ -40,7 +40,7 @@ const UserFavourites = () => {
         <>
             {(wishlist.length > 0)
                 ?
-                <Col xs={{span: 24}}  sm={{span: 14, offset: 1}} md={{span: 14, offset: 1}} lg={{span: 13, offset: 2}} xl={{span: 13, offset: 2}}>
+                <Col xs={{span: 24}}  sm={{span: 14, offset: 1}} md={{span: 14, offset: 1}} lg={{span: 13, offset: 2}} xl={{span: 15, offset: 1}}>
                     <div className='favouritesContainer'>
                         {wishlist.map(product => <ProductCard product={product} key={product._id}
                                                               refresh={updateWishlist}/>)}

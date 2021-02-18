@@ -60,10 +60,10 @@
 
   &-buttons {
     width: 100%;
-    padding: 0 8px;
+    padding: 0 5px;
     display: flex;
     position: absolute;
-    bottom: 2px;
+    bottom: 4px;
     justify-content: space-between;
 
     & .btn-favourite {
@@ -96,7 +96,7 @@
 
     & .btn-addToCard {
       max-width: 83px;
-      max-height: 25px;
+      max-height: 20px;
       padding: 0 8px;
       color: #000;
       font-size: 12px;
@@ -115,26 +115,25 @@
 
 @media screen and (min-width: 768px) {
   .productCard {
-    font-size: 14px;
+    font-size: 16px;
     width: 215px;
     height: 215px;
 
     &-title {
       top: 4px;
-         }
+    }
 
     &-picture {
       top: 32px;
 
       & .ant-image-img {
-        padding: 20px;
+        padding: 22px;
         width: 160px;
         height: 160px;
       }
     }
 
     &-price {
-      left: 10px;
       font-size: 20px;
     }
 
@@ -151,7 +150,7 @@
 
       & .btn-addToCard {
         min-width: 100px;
-        min-height: 30px;
+        min-height: 26px;
         padding: 0 12px;
         font-size: 14px;
       }
@@ -176,13 +175,12 @@
     }
 
     &-price {
+      top: 4px;
       left: 14px;
       font-size: 22px;
     }
 
     &-buttons {
-      padding: 0 16px;
-
       & .btn-favourite {
 
         & .anticon {
@@ -214,35 +212,31 @@
       top: 40px;
 
       & .ant-image-img {
-        padding: 25px;
+        padding: 35px;
         width: 220px;
         height: 220px;
       }
     }
 
     &-price {
-      top: 0;
-      left: 15px;
-      font-size: 22px;
+      font-size: 26px;
 
     }
 
     &-buttons {
-      padding: 0 20px;
-      bottom: 12px;
+      bottom: 8px;
 
       & .btn-favourite {
         padding: 0 0 0 10px;
 
         & .anticon {
-          font-size: 30px;
+          font-size: 38px;
         }
       }
 
       & .btn-addToCard {
         min-width: 160px;
         min-height: 40px;
-        padding: 0 15px;
         font-size: 20px;
       }
     }

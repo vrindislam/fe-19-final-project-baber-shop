@@ -1,10 +1,12 @@
 @import '~antd/lib/style/themes/default.less';
 
 #userInfo {
+  & .ant-form-item {
+    max-width: 700px;
+  }
 
   & .ant-form-item-required {
     font-weight: bold;
-
     font-size: 14px;
 
     &::before {
@@ -65,8 +67,11 @@
     & .ant-form-item-required {
       font-size: 20px;
     }
+
     & button {
       font-size: 20px;
+      min-width: 130px;
+      min-height: 40px;
     }
   }
 }
