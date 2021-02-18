@@ -5,7 +5,6 @@ import { showModal } from "../../../store/modal/modalAction"
 import { useDispatch } from "react-redux";
 
 
-
 const Register = () => {
 
   const typeOfModal = "RegistrationForm";

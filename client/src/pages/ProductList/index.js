@@ -8,6 +8,8 @@ import FilteredProducts from "../../components/FilteredProducts";
 import {useDispatch, useSelector} from "react-redux";
 import {addFilter, deleteFilter} from "../../store/filters/filterAction";
 
+import {MetaForPages} from "../../components/Helmet"
+
 const ProductList = () => {
 
     const queryString = require('query-string');
@@ -51,10 +53,17 @@ const ProductList = () => {
         setShowFilters(!showFilters);
     }
     const show = showFilters ? 'active' : 'hidden';
+
     const showButton = {display: showFilters ? 'none' : 'inline-block'}
+
 
     return (
         <>
+            <MetaForPages
+              title = "Barber Shop Market"
+              content = "Barber Shop market"
+              rel = "icon"
+            />
             <div className="product-list-container">
                 <div className={"filters-container " + show}>
                     <PriceSlider minValue={minValue} maxValue={maxValue}
