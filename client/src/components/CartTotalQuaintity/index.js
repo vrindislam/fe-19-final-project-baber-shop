@@ -3,14 +3,24 @@ import "./style.less"
 import { useSelector } from "react-redux";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import Ajax from '../../services/Ajax'
+const {get} = Ajax
 
 
 export const TotalAmount = (props) => {
-  const {productsDB} = props
-  console.log('dddddd',props)
-  const productsLength = useSelector(state => state.cartProducts.products.length);
   const products = useSelector(state => state.cartProducts.products);
   const isAuth = useSelector(state => state.user.isAuthenticated);
+  const [productsDB, setProductsDB] = useState([])
+  useEffect(() => {
+    if (isAuth) {
+      async function fetch(){
+        const queryDB = await get('/cart')
+        setProductsDB(queryDB.products)
+      }
+      fetch()
+    }}, [isAuth])
+
+
   const sumArray = [];
   if(isAuth){
     productsDB.forEach(item => sumArray.push(item.product.currentPrice * item.cartQuantity))
@@ -35,7 +45,7 @@ export const TotalAmount = (props) => {
         <div>
           <div className="cart-total_main">
             <div>
-              <span>{productsLength} item(s)</span>
+              <span>{isAuth? productsDB.length : products.length} item(s)</span>
               <span>${totalMoney}</span>
             </div>
             <div>
@@ -50,7 +60,7 @@ export const TotalAmount = (props) => {
         </div>
       </div>
       : <div className='popover-basket-wrapper'>
-        <p>You have {productsLength} goods in the basket</p>
+        <p>You have {isAuth? productsDB.length : products.length} goods in the basket</p>
         <p>For a total amount ${totalMoney}</p>
         <div className="basket-buttons-wrapper">
           <Button className='make-order-button'>Make an order</Button>

@@ -12,7 +12,6 @@ const ProductsContainer = ({ products, isAuth, setCart }) => {
       cartQuantityDB={product.cartQuantity}
       setCart={setCart}
     />)
-    // <CartItem product={product} key={product.itemNo} cartQuantity={product.cartQuantity}/>)
 
   return (
     <div>
