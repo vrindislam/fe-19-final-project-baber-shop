@@ -40,7 +40,7 @@ const UserFavourites = () => {
         <>
             {(wishlist.length > 0)
                 ?
-                <Col xs={{span: 24}}  sm={{span: 14, offset: 1}} md={{span: 12, offset: 2}} xl={{span: 6, offset: 2}}>
+                <Col xs={{span: 24}}  sm={{span: 14, offset: 1}} md={{span: 14, offset: 1}} lg={{span: 13, offset: 2}} xl={{span: 13, offset: 2}}>
                     <div className='favouritesContainer'>
                         {wishlist.map(product => <ProductCard product={product} key={product._id}
                                                               refresh={updateWishlist}/>)}
@@ -49,7 +49,7 @@ const UserFavourites = () => {
                 :
                 <Col className='userProfileOrderFav-emptyContainer' xs={{span: 20, offset: 2}}
                      sm={{span: 8, offset: 2}}
-                     md={{span: 8, offset: 2}} xl={{span: 6, offset: 2}}>
+                     md={{span: 8, offset: 2}} xl={{span: 8, offset: 2}}>
                     <Title>My favourites</Title>
                     <StarTwoTone twoToneColor='#fadb14' className='userProfileOrderFav-icon'/>
                     <Title level={3}>You haven't products in your favourite list yet.</Title>

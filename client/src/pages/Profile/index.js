@@ -15,7 +15,7 @@ const Profile = () => {
             <div className='profile'>
                 <Row justify-content='center' >
                     <Col className='userMenuOptions' xs={{span: 20, offset: 2}} sm={{span: 8,offset: 0}}
-                         md={{span: 6, offset: 2}} xl={{span: 6, offset: 3}}>
+                         md={{span: 6, offset: 2}} xl={{span: 6, offset: 2}}>
                         <Row>
                             <NavLink exact to="/profile" activeClassName="selected">
                                 <Button type='primary'>Personal information</Button>
