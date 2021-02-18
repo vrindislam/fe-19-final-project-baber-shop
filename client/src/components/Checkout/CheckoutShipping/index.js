@@ -1,8 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import CheckoutContext from "../util/CheckoutContext";
 import Ajax from "../../../services/Ajax";
-import {Button, message, Radio} from "antd";
-import Preloader from "../../Preloader";
+import {Button, message, Radio, Skeleton} from "antd";
 import actions from "../util/actions";
 import './styles.less';
 
@@ -50,7 +49,7 @@ const CheckoutShipping = ({disabled, onChange}) => {
             <h3>Shipping methods</h3>
             {loading
                 ?
-                <Preloader/>
+                <Skeleton/>
                 :
                 null
             }

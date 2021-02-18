@@ -1,9 +1,13 @@
 import React from "react";
 import "./styles.less";
+import Checkout from "../../components/Checkout";
 const Cart = (props) => {
 
   return (
-      <h2>Cart Page</h2>
+      <div>
+        <h2>Cart Page</h2>
+        <Checkout/>
+      </div>
   );
 };
 

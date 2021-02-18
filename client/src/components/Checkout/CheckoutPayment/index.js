@@ -1,8 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import CheckoutContext from "../util/CheckoutContext";
 import Ajax from "../../../services/Ajax";
-import {Button, message, Radio} from "antd";
-import Preloader from "../../Preloader";
+import {Button, message, Radio, Skeleton} from "antd";
 import actions from "../util/actions";
 import './styles.less';
 import PaymentForm from "./PaymentForm";
@@ -42,12 +41,14 @@ const CheckoutPayment = ({disabled, onChange}) => {
         }
     }
 
+    const isCC = (methods.filter(method => method.customId === value)[0] || {}).paymentProcessor;
+
     return (
         <div className="checkout-payment">
             <h3>Payment methods</h3>
             {loading
                 ?
-                <Preloader/>
+                <Skeleton/>
                 :
                 null
             }
@@ -63,7 +64,7 @@ const CheckoutPayment = ({disabled, onChange}) => {
             </div>
             <div className="selected-method">
                 {
-                    methods.filter(method => method.customId === value)[0]
+                    isCC
                         ? (
                             <PaymentForm disabled={disabled}/>
                         )
@@ -72,9 +73,11 @@ const CheckoutPayment = ({disabled, onChange}) => {
             </div>
             {!disabled
                 ?
-                <Button type="primary" onClick={onFinish}>
-                    Submit
-                </Button>
+                <div className="payment-actions">
+                    <Button type="primary" onClick={onFinish}>
+                        Submit
+                    </Button>
+                </div>
                 :
                 null
             }

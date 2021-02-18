@@ -3,10 +3,12 @@ import "./styles.less";
 import {Col, Row} from "antd";
 import CheckoutContext from "../util/CheckoutContext";
 import actions from "../util/actions";
+import {useHistory} from "react-router-dom";
 
 const CheckoutSteps = ({children}) => {
 
     const {state, dispatch} = useContext(CheckoutContext);
+    const history = useHistory();
 
     const onStepChange = () => {
         const steps = children.length;
@@ -18,8 +20,10 @@ const CheckoutSteps = ({children}) => {
             console.log(state.shipping);
             console.log(state.payment);
 
+            // TODO: place order here
+
             dispatch({type: actions.placeOrder});
-            alert('Order placed!');
+            history.push('/order-confirmation');
         }
     }
 

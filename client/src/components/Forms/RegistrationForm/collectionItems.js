@@ -24,10 +24,3 @@ export const collectionItemsCheckoutAddress = [
   { name: "zip", label: "Zip", rules:[{required: true, message: 'Please enter your zip!'}]},
   { name: "phone", label: "Phone Number", rules:[{required: true, message: 'Please enter your phone number!'},{min:12, max:12, message: 'The phone number must contain 12 characters'}]}
 ]
-
-export const collectionItemsCheckoutPayment = [
-  { name: "name", label: "Full name", rules:[{required: true, message: 'Please enter your Full Name!'}]},
-  { name: "number", label: "Card number", rules:[{required: true, message: 'Please enter your card number!'}]},
-  { name: "expiry", label: "Valid through", rules:[{required: true, message: 'Please enter your expiration date!'}]},
-  { name: "cvc", label: "CVV", rules:[{required: true, message: 'Please enter your CVV code!'}]},
-]
