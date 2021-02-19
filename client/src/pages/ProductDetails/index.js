@@ -3,6 +3,7 @@ import ProductCarousel from "../../components/ProductCarousel";
 import Ajax from "../../services/Ajax";
 
 import './styles.less';
+import CategoryCatalogue from "../../components/Catalogue/CategoryCatalog";
 
 const ProductDetails = (props) => {
     const [images, setImages] = useState([])
@@ -19,6 +20,7 @@ const ProductDetails = (props) => {
     return (
         <div className='container'>
             <ProductCarousel imageUrls={images}/>
+            <CategoryCatalogue/>
         </div>
     )
 }

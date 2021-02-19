@@ -80,5 +80,4 @@ const Catalogue = () => {
     )
 }
 
-
-export default Catalogue
+export default Catalogue;
