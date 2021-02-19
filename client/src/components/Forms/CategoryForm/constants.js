@@ -30,8 +30,6 @@ export const initialFormValues = {
   id: "",
   name: "",
   description: "",
-  level: "",
-  parentId: ""
 };
 
 export const rootCloudinaryFolderName = 'categories';
