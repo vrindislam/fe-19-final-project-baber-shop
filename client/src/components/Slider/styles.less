@@ -139,6 +139,41 @@
       width: 40px;
     }
   }
+}
+
+@media screen and (min-width: 1600px) {
+  .carousel {
+    &-text {
+      &-btn {
+        border-width: 2px;
+
+        &:hover {
+          border: 2px solid @yellow-5;
+        }
+      }
+    }
+  }
+
+  #customCarousel {
+    .ant-carousel .slick-dots-bottom {
+    bottom: 40px;
+    }
+
+      & .ant-carousel .slick-dots li {
+      margin-right: 6vw;
+    }
+
+    & .ant-carousel .slick-dots li button {
+      width: 4vw;
+      height: 0.5vw;
+    }
+
+    & .ant-carousel .slick-dots li.slick-active button {
+      width: 6vw;
+      height: 0.5vw;
+
+    }
+  }
 
 
 }
