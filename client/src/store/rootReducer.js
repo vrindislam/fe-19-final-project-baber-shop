@@ -6,6 +6,7 @@ import modalHandler from './modal/modalReducer'
 import preloaderReducer from './preloader/preloaderReducer'
 import cartReducer from "./cart/cartReducer";
 import userReducer from "./user/userReducer";
+import filterReducer from "./filters/filterReducer";
 
 const persistConfig ={
   key:'root',
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   modalHandler: modalHandler,
   preloader: preloaderReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  filterReducer: filterReducer,
 })
 
 export default persistReducer(persistConfig,rootReducer)
