@@ -71,7 +71,20 @@ class CategoryService {
     return await Ajax.deleteRequest(`/catalog`, id);
   }
 
-
+  async getCategoriesNestedByLevels() {
+    const allCategories = await this.getCategories();
+    return allCategories.filter(topLevel => {
+      allCategories.map(subLevel => {
+        if (subLevel.parentId === topLevel.id) {
+          const e = topLevel.childLevel || [];
+          e.push(subLevel);
+          topLevel.childLevel = e;
+        }
+        return subLevel
+      })
+      return topLevel.level === '1';
+    });
+  }
 }
 
 export default new CategoryService();
