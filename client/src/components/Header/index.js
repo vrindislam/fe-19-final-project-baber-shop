@@ -30,10 +30,7 @@ const SiteHeader = () => {
 
     return (
         <PageHeader style={{
-            // position: 'fixed',
-            // zIndex: 1,
-            // padding: 0,
-            // margin: 0,
+            position: 'sticky',
             height: 'auto',
             width: "100%",
             textAlign: "center",
@@ -45,12 +42,12 @@ const SiteHeader = () => {
                     {!isAuthenticated
                         ? (<>
                             <div className="login" key="login" onClick={showModalLogin}>
-                                <img src={iconLogin} alt="User-icon"/>
+                                <img src={iconLogin}  alt="User-icon"/>
                                 <span className="login-title">LogIn</span>
                             </div>
                             <Login/></>)
                         : (<Link to='/profile' className='header-profile'>
-                            <img src={iconLogin} alt="User-icon"/>
+                            <img src={iconLogin} className="user-icon" alt="User-icon"/>
                             <span className="username"> Hello, {firstName}</span>
                         </Link>)
                     }
@@ -68,7 +65,7 @@ const SiteHeader = () => {
                         <Col>
                             <div className="header-contact" key="contact">
                                 <a href="tel:+79998887766">
-                                    <img style={{width: 18}} src={iconContact} alt="icon-contact"/>
+                                    <img style={{width: 19, verticalAlign:'inherit'}} src={iconContact} alt="icon-contact"/>
                                     <span className="contact-number">+380(067)6167008</span>
                                 </a>
                             </div>
@@ -77,21 +74,23 @@ const SiteHeader = () => {
                         <Col style={{marginLeft: 20}}>
                             {isAuthenticated &&
                             <div className="logoutBtn" key="logout" onClick={handleLogout}>
-                                {<LogoutOutlined/>} <span className="logout-title">LogOut</span>
+                                {<LogoutOutlined style={{fontSize:19}}/>} <span className="logout-title">LogOut</span>
                             </div>}
                         </Col>
                     </Row>
                 </Col>
             </Row>
 
-            <Row className="header-row" gutter={[24, 24]}>
+            <Row className="header-row" justify='center' gutter={[24, 24]}>
 
-                <Col style={{padding: 2}} xs={{span: 12, order: 1}} sm={{span: 12, order: 1}} lg={{span: 8, order: 1}}>
-                    <div key="plp">
+
+                <Col className="catalogue-box" style={{padding: 2,textAlign: '-webkit-center'}} xs={{span: 12, order: 1}} sm={{span: 12, order: 1}} lg={{span: 8, order: 1}}>
+                    <div className="catalogue-btn" key="plp">
                         <Catalogue/>
+
                     </div>
                 </Col>
-                <Col style={{padding: 2}} className="search-box" xs={{span: 20, order: 3}} sm={{span: 18, order: 3}}
+                <Col style={{ paddingTop:3, paddingLeft: 4, paddingRight:4}} className="search-box" xs={{span: 24, order: 3}} sm={{span: 21, order: 3}}
                      lg={{span: 8, order: 2}}>
                     <LiveSearch/>
                 </Col>
