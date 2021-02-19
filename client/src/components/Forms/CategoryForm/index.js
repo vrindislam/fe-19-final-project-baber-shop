@@ -76,7 +76,7 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
       .then(res => {
         message.success(`new Category ${res.name} was created`, 1.5);
         form.resetFields();
-        dispatchModal(false);
+        dispatchModal && dispatchModal(false);
         loadCategories();
       })
       .catch(err => {

@@ -47,8 +47,8 @@ const FilteredProducts = ({queryString}) => {
                     hoverable={true}
                     onClick={onLoadMore}
                 >
-                    <SyncOutlined style={{ color: '#000000' }} spin={!!loading}/>
-                    <p style={{ fontSize: '20px', fontWeight: 'bold', color: '#000000' }}>Load More...</p>
+                    <SyncOutlined className='load-more-spinner' spin={!!loading}/>
+                    <p className='load-more-text'>Load More...</p>
                 </Card>
             </div>
         </>
