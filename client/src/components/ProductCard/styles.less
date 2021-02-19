@@ -2,12 +2,13 @@
 
 .productCard {
   position: relative;
-  background-color: @white;
-  font-size: 14px;
-  width: 160px;
-  height: 160px;
-  border: 2px solid @black;
   box-sizing: border-box;
+  width: 155px;
+  height: 155px;
+  font-size: 14px;
+  background-color: @white;
+  border: 2px solid @black;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 0 8px @black;
@@ -17,35 +18,36 @@
     position: absolute;
     top: 2px;
     left: -1px;
-    background-color: @black;
-    color: @white;
     max-width: 75%;
     max-height: 30px;
     padding: 5px 10px;
-    white-space: nowrap;
     overflow: hidden;
+    color: @white;
+    white-space: nowrap;
     text-overflow: ellipsis;
     word-wrap: normal;
+    background-color: @black;
 
     &:hover {
-      background: @black;
-      white-space: normal;
-      max-height: 50%;
-      max-width: 100%;
-      overflow: auto;
       z-index: 5;
+      max-width: 100%;
+      max-height: 50%;
+      overflow: auto;
+      white-space: normal;
+      background: @black;
     }
   }
 
   &-picture {
     position: relative;
     top: 28px;
-    padding: 0 30px;
+    text-align: center;
 
     & .ant-image-img {
+      width: 115px;
+      height: 115px;
       padding: 20px;
-      width: 120px;
-      height: 120px;
+
     }
   }
 
@@ -53,26 +55,26 @@
     position: absolute;
     top: 0;
     left: 10px;
-    font-weight: bold;
-    font-size: 17px;
     color: @black;
+    font-weight: bold;
+    font-size: 15px;
   }
 
   &-buttons {
-    width: 100%;
-    padding: 0 5px;
-    display: flex;
     position: absolute;
     bottom: 4px;
+    display: flex;
     justify-content: space-between;
+    width: 100%;
+    padding: 0 5px;
 
     & .btn-favourite {
+      height: 18px;
+      padding: 0;
       color: @yellow-5;
       border: none;
       outline: none;
       box-shadow: none;
-      padding: 0;
-      height: 18px;
 
       &:after {
         -webkit-animation: none;
@@ -99,8 +101,8 @@
       max-height: 20px;
       padding: 0 8px;
       color: #000;
-      font-size: 12px;
       font-weight: bold;
+      font-size: 12px;
       background-color: @yellow-5;
       border: 1px solid @yellow-5;
       border-radius: 20px;
@@ -115,9 +117,31 @@
 
 @media screen and (min-width: 768px) {
   .productCard {
-    font-size: 16px;
+    width: 165px;
+    height: 165px;
+    font-size: 14px;
+
+    &-picture {
+
+      & .ant-image-img {
+        width: 125px;
+        height: 125px;
+        padding: 20px;
+      }
+    }
+
+    &-price {
+      font-size: 16px;
+    }
+  }
+}
+
+
+@media screen and (min-width: 992px) {
+  .productCard {
     width: 215px;
     height: 215px;
+    font-size: 16px;
 
     &-title {
       top: 4px;
@@ -127,9 +151,9 @@
       top: 32px;
 
       & .ant-image-img {
-        padding: 22px;
         width: 160px;
         height: 160px;
+        padding: 22px;
       }
     }
 
@@ -138,8 +162,8 @@
     }
 
     &-buttons {
-      padding: 0 12px;
       bottom: 5px;
+      padding: 0 12px;
 
       & .btn-favourite {
 
@@ -158,19 +182,19 @@
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1200px) {
   .productCard {
-    font-size: 16px;
     width: 260px;
     height: 260px;
+    font-size: 16px;
 
     &-picture {
       top: 36px;
 
       & .ant-image-img {
-        padding: 25px;
         width: 200px;
         height: 200px;
+        padding: 25px;
       }
     }
 
@@ -198,11 +222,11 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1600px) {
   .productCard {
-    font-size: 20px;
     width: 300px;
     height: 300px;
+    font-size: 20px;
 
     &-title {
       top: 10px;
@@ -212,9 +236,9 @@
       top: 40px;
 
       & .ant-image-img {
-        padding: 35px;
         width: 220px;
         height: 220px;
+        padding: 35px;
       }
     }
 

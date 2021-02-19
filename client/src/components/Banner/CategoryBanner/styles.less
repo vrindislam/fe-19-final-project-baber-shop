@@ -2,9 +2,12 @@
 
 .category-banner {
   position: relative;
-  width: 100%;
-  max-width: 628px;
-  max-height: 565px;
+  display: block;
+  max-width: 340px;
+  max-height: 340px;
+  margin: 0 auto 10px auto;
+  cursor: pointer;
+
 
   &-img {
     display: block;
@@ -14,7 +17,7 @@
 
   &-info {
     position: absolute;
-    top: 77%;
+    top: 82%;
     left: 6.5%;
   }
 
@@ -27,15 +30,80 @@
 .category-info {
   color: @white;
   font-weight: bold;
-  font-size: 3vw;
-  font-family: Roboto, serif;
-  font-style: normal;
+  font-size: 14px;
 
   &-price {
     margin-top: 8px;
     font-weight: normal;
-    font-size: 2vw;
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .category-banner {
+    max-width: 360px;
+    max-height: 360px;
   }
 
+  .category-info {
+    font-size: 20px;
+
+    &-price {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .category-banner {
+    max-width: 470px;
+    max-height: 470px;
+  }
+
+  .category-info {
+    font-size: 26px;
+
+    &-price {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .category-banner {
+    max-width: 575px;
+    max-height: 575px;
+  }
+
+  .category-info {
+    font-size: 28px;
+
+    &-price {
+      margin-top: 12px;
+      font-size: 22px;
+    }
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .category-banner {
+    width: 680px;
+    max-width: 700px;
+    height: 614px;
+    max-height: 614px;
+  }
+
+  .category-info {
+    font-size: 32px;
+
+    &-price {
+      margin-top: 14px;
+      font-size: 24px;
+    }
+  }
 
 }
+
+

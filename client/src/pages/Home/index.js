@@ -11,13 +11,13 @@ const Home = (props) => {
     return (
         <div>
             <MetaForPages
-              title="Home Page "
-              content="BarberShop Home Main Page"
-              rel="icon"
-              href={Union}
+                title="Home Page "
+                content="BarberShop Home Main Page"
+                rel="icon"
+                href={Union}
             />
             <Slider/>
-            <Banner title={'Best sellers'} config='cc'/>
+            <Banner title={'Best sellers'} config='cp'/>
             <Banner title={'One more  thing'} config='cc'/>
         </div>
     )

@@ -46,15 +46,15 @@ const Banner = ({title, config}) => {
                 {title}
             </p>
             <div className="banners-wrapper">
-                <Row justify="space-around" gutter={[20, 20]}>
+                <Row>
                     {categories.map(cat => {
                         return (
-                            <Col xxl={12} xl={12} lg={12} md={12} sm={24} key={cat.id}>
-                                <CategoryBanner category={cat} />
+                            <Col xs={{span: 24}} md={{span: 12}} key={cat.id}>
+                                <CategoryBanner category={cat}/>
                             </Col>
                         )
                     })}
-                    <Col xxl={12} xl={12} lg={24} md={24} sm={24}>
+                    <Col xs={{span: 24}} md={{span: 12}}>
                         <ProductBanner products={products}/>
                     </Col>
                 </Row>

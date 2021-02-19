@@ -57,14 +57,13 @@ const ProductCard = ({product, refresh}) => {
     return (
         <>
             <div className='productCard'>
-              <Link to='/'>
-                <div className='productCard-title'>{name}</div>
-                <div className='productCard-picture'>
-                    <Image src={imageUrls[0]} preview={false}/>
-                    <div className='productCard-price'>{currentPrice}$</div>
-
-                </div>
-              </Link>
+                <Link to={'/'}>
+                    <div className='productCard-title'>{name}</div>
+                    <div className='productCard-picture'>
+                        <Image src={imageUrls[0]} preview={false}/>
+                        <div className='productCard-price'>{currentPrice}$</div>
+                    </div>
+                </Link>
                 <div className='productCard-buttons'>
                     <Button className='btn-favourite' onClick={addToWishlist}>
                         {inWishlistIcon}
