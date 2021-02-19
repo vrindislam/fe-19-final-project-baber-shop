@@ -29,14 +29,14 @@
       width: 10vw;
       height: 3vw;
       margin-top: 2vw;
-      padding: 2px;
+      padding: 0;
       font-size: 1.4vw;
-      border-width: 2px;
+      border-width: 1px;
 
 
       &:hover {
         color: @yellow-5;
-        border: 2px solid @yellow-5;
+        border: 1px solid @yellow-5;
       }
     }
   }
@@ -62,7 +62,17 @@
     &::before {
       z-index: 1;
       font-size: 1.8vw;
+    }
+  }
 
+  & .ant-carousel .slick-slide img {
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  & {
+    .slick-dots li button:before {
+      display: none;
     }
   }
 
@@ -71,15 +81,64 @@
   }
 
   & .ant-carousel .slick-dots li {
-    margin-right: 20px;
+    margin-right: 5px;
   }
 
   & .ant-carousel .slick-dots li button {
-    width: 25px;
+    width: 5px;
     height: 5px;
   }
 
   & .ant-carousel .slick-dots li.slick-active button {
-    width: 40px;
+    width: 7px;
+    height: 7px;
   }
+}
+
+@media screen and (min-width: 586px) {
+  #customCarousel {
+    & .ant-carousel .slick-dots li {
+      margin-right: 10px;
+    }
+
+    & .ant-carousel .slick-dots li button {
+      width: 20px;
+      height: 5px;
+    }
+
+    & .ant-carousel .slick-dots li.slick-active button {
+      width: 30px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .carousel {
+    &-text {
+      &-btn {
+        border-width: 2px;
+
+        &:hover {
+          border: 2px solid @yellow-5;
+        }
+      }
+    }
+  }
+
+  #customCarousel {
+    & .ant-carousel .slick-dots li {
+      margin-right: 20px;
+    }
+
+    & .ant-carousel .slick-dots li button {
+      width: 25px;
+      height: 5px;
+    }
+
+    & .ant-carousel .slick-dots li.slick-active button {
+      width: 40px;
+    }
+  }
+
+
 }

@@ -22,7 +22,7 @@ const Slider = () => {
 
     return (
         <div id='customCarousel'>
-            <Carousel autoplay arrows='true'>
+            <Carousel  arrows='true'>
                 {slides.map(slide => (
                         <div key={slide.customId}>
                             <div className='carousel'>
