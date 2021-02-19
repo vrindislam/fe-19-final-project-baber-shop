@@ -1,5 +1,5 @@
 import {Button, Col, Form, Input, message} from "antd";
-import {collectionItemsProfile} from "../../Forms/RegistrationForm/collectionItems";
+import {collectionItemsForm, onlyLetters, onlyNumbers} from "../../Forms/RegistrationForm/collectionItems";
 import React, {useEffect} from "react";
 import Ajax from "../../../services/Ajax";
 import './style.less'
@@ -9,13 +9,13 @@ const {get, put} = Ajax;
 
 const UserInformation = () => {
     const layout = {
-            labelCol: {
-                span: 24,
-            },
-            wrapperCol: {
-                span: 24
-            },
-        };
+        labelCol: {
+            span: 24,
+        },
+        wrapperCol: {
+            span: 24
+        },
+    };
 
     const formTailLayout = {
         labelCol: {
@@ -25,7 +25,6 @@ const UserInformation = () => {
             span: 24,
         },
     };
-
     const [form] = Form.useForm();
     const success = () => {
         message.success('Your user data has been successfully updated');
@@ -40,7 +39,7 @@ const UserInformation = () => {
             success();
 
         } catch (errorInfo) {
-            error ();
+            error();
         }
     }
 
@@ -57,13 +56,14 @@ const UserInformation = () => {
                             phone: customer.phone,
                         }
                     )
-                console.log('Customer', customer)
+
             })
         return () => cleanupFunction = true
     }, [form])
 
     return (
-        <Col xs={{span: 20, offset: 2}} sm={{span: 12, offset: 1}} md={{span: 12, offset: 2}} xl={{span: 10, offset: 2}}>
+        <Col xs={{span: 20, offset: 2}} sm={{span: 12, offset: 1}} md={{span: 12, offset: 2}}
+             xl={{span: 10, offset: 2}}>
             <Form
                 form={form}
                 {...layout}
@@ -72,7 +72,7 @@ const UserInformation = () => {
                     remember: true,
                 }}
             >
-                {collectionItemsProfile.map(formItem =>
+                {collectionItemsForm.map(formItem =>
                     formItem.name !== "password"
                         ? <Form.Item
                             label={formItem.label}
@@ -80,7 +80,12 @@ const UserInformation = () => {
                             rules={formItem.rules}
                             key={formItem.name}
                         >
-                            <Input placeholder={formItem.name}/>
+                            {formItem.name === "phone"
+                                ? <Input maxLength={13} onKeyPress={onlyNumbers()}/>
+                                : formItem.name === "firstName" || formItem.name === "lastName"
+                                    ? <Input placeholder={formItem.label} onKeyPress={onlyLetters()} maxLength={25}/>
+                                    : <Input placeholder={formItem.label} maxLength={25}/>
+                            }
                         </Form.Item>
                         : ''
                 )}
