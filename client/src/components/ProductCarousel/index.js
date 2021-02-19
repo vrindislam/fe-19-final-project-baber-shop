@@ -1,6 +1,5 @@
 import React from 'react';
 import ImageGallery from 'react-image-gallery';
-
 import './styles.less';
 
 const ProductCarousel = ({imageUrls}) => {

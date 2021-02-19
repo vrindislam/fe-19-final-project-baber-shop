@@ -25,6 +25,14 @@ const ProductCard = ({product, refresh}) => {
         dispatch(cartAction(product));
     }
 
+    const forwardToCardDetails = () => {
+        history.push({
+            pathname: `/product/${product.itemNo}`,
+            state: { product: product },
+        })
+
+    }
+
     const addToWishlist = async () => {
         if (!(isAuthenticated && !isAdmin && localStorage.token && exp && (exp > Date.now() / 1000))) {
             history.push('/login');
@@ -62,7 +70,9 @@ const ProductCard = ({product, refresh}) => {
                       bordered={true}
                       hoverable={true}
                       cover={
+
                           <img
+                              onClick={forwardToCardDetails}
                               className='product-card-img'
                               alt="product-item"
                               src={imageUrls[0]}

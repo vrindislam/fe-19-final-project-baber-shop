@@ -26,27 +26,30 @@
 
 .login {
   cursor: pointer;
+  text-align: center;
 }
 
 .login-title {
   padding-left: 3px;
   font-weight: 600;
   font-size: 20px;
-  vertical-align: text-bottom;
+  vertical-align: baseline;
 }
+
 
 .header-contact > a {
   color: black;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .cart {
-  max-width: 220px;
+  max-width: 251px;
   height: 35px;
   margin: auto;
   color: black;
   font-size: 24px;
-  //border: 1px solid black;
+  border: 1px solid black;
 }
 
 .img-cart {
@@ -59,9 +62,9 @@
 .catalogue-btn-link {
   position: relative;
   width: 230px;
-  height: 35px;
+  height: 30px;
   margin: auto;
-  padding: 5px 40px;
+  padding: 2px 57px;
   color: white;
   font-size: 22px;
   background: black;
@@ -83,24 +86,64 @@
   margin: -18px -12px;
 }
 
+.logout-title{
+  font-weight: 600;
+  font-size: 20px;
+
+}
+.catalogue-btn{
+  max-width: max-content;
+  min-width: 112px;
+  background-color: black;
+
+}
+
 @media (max-width: 585px ) {
+  .user-icon {
+   margin: 0 auto;
+    margin-right: 25px;
+  }
   .contact-number {
     display: none;
+
+  }
+  .login{
+    padding-left: 5px;
+    }
+
+  .username, .login-title{
+    display: none;
+  }
+  .header-contact{
+    margin-left: 34px;
+  }
+  .catalogue-btn{
+    max-width: max-content;
+    background-color: black;
+    border: 1px solid black;
+  }
+  .catalogue-box{
+    background: black;
   }
 
   .catalogue-btn-link {
     height: 25px;
     margin: auto;
-    padding: 3px 3px;
+    padding: 1px 2px;
     color: white;
     font-size: 22px;
-    background: black;
-
+  }
+  .search-box{
+    margin: 0;
+    padding: 2px 4px;
   }
 }
 
-@media (max-width: 767px ) {
+@media (max-width: 768px ) {
 
+  .user-icon{
+    margin-left: 24px;
+  }
   .contact-number {
     display: none;
   }
@@ -108,10 +151,12 @@
   .logout-title {
     display: none;
   }
-}
+  .catalogue-btn{
+    max-width: max-content;
+    min-width: 112px;
+    background-color: black;
 
-.search-box {
-  margin: auto;
+  }
 }
 
 .username {
@@ -136,3 +181,9 @@
     text-shadow: 1px 1px 1px @black;
   }
 }
+@media (max-width: 950px ) {
+  .contact-number {
+    display: none;
+  }
+}
+
