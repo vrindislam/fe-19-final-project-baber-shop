@@ -6,7 +6,7 @@ import {TotalAmount} from "../../components/CartTotalQuaintity"
 import {resetCart} from '../../store/cart/actionCart'
 import Checkout from "../../components/Checkout";
 import Ajax from '../../services/Ajax'
-const{get, put} = Ajax
+const{get, put, post} = Ajax
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,9 @@ const Cart = () => {
       })
       async function fetch(){
         const existingCart = await get('/cart')
-        const cart = existingCart && await put('/cart','',{products:[...items]})
+        const cart = existingCart
+          ? await put('/cart','',{products:[...items]})
+          : await post('/cart',{products:[...items]})
         setProductsDB(cart.products)
         dispatch(resetCart())
 
