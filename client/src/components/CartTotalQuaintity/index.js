@@ -16,7 +16,9 @@ export const TotalAmount = (props) => {
     if (isAuth) {
       async function fetch () {
         const queryDB = await get('/cart')
-        setProductsDB(queryDB.products)
+        if(queryDB){
+          setProductsDB(queryDB.products)
+        }
       }
 
       fetch()

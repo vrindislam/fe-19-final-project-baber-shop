@@ -2,10 +2,9 @@ import React from 'react'
 import './styles.less'
 import Slider from "../../components/Slider";
 import Banner from "../../components/Banner";
-
 import {MetaForPages} from "../../components/Helmet"
 import Union from "./Union.png"
-
+import { ToastContainer } from "react-toastify";
 const Home = (props) => {
 
     return (
@@ -19,6 +18,7 @@ const Home = (props) => {
             <Slider/>
             <Banner title={'Best sellers'} config='cc'/>
             <Banner title={'One more  thing'} config='cc'/>
+            <ToastContainer/>
         </div>
     )
 }

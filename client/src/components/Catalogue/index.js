@@ -5,76 +5,83 @@ import {Link} from "react-router-dom";
 import {iconCatalogue} from "../Header/img";
 
 import {Menu} from 'antd';
+
 const {SubMenu} = Menu;
 
 const Catalogue = () => {
 
-    // const [allCat, setAllCat] = useState([]);
-    const [lvl1, setLvl1] = useState([]);
-    const [lvl2, setLvl2] = useState([]);
-    const [lvl3, setLvl3] = useState([]);
+    const [openKeys, setOpenKeys] = useState([]);
+    const [sortedCategories, setSortedCategories] = useState([]);
+    const rootSubmenuKeys = sortedCategories.map((item, index) => `sub${index}`);
 
-    // const [mode, setMode] = React.useState('vertical');
-    // const changeMode = value => {
-    //     setMode(value ? 'inline' : 'vertical');
-    // };
+    const [visible, setVisible] = React.useState('none');
+    const showCatalogue = () => {
+        setVisible(() => visible === 'none' ? 'block' : 'none')
+    };
 
     useEffect(() => {
-        CategoryService.getCategoriesSortedPerLevels()
-            .then(result => {
-                console.log('categories ---> ', result);
-                // setAllCat(result);
-                setLvl1(result[1]);
-                setLvl2(result[2]);
-                setLvl3(result[3]);
-            })
-            .catch(err => {
-                console.log('error ---> ', err)
-            })
+        CategoryService.getCategoriesNestedByLevels()
+            .then(result => setSortedCategories(result))
+            .catch(err => console.log('error ---> ', err))
     }, [])
+
+    const onOpenChange = keys => {
+        const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
+        if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+            setOpenKeys(keys);
+        } else {
+            setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+        }
+    };
 
     const handleCategoryClick = ({key}) => {
         console.log('click', key);
+        setVisible('none')
+
     }
 
-    const allCategories = lvl1.map(categoryLvl1 => {
+    const categoriesCatalogue = sortedCategories.map((topLevelCategory, index) => {
         return (
-            <SubMenu key={categoryLvl1.id} title={categoryLvl1.name}
-                     className='catalogue-item' onTitleClick={handleCategoryClick}>
-                {lvl2
-                    .filter(cat => cat.parentId === categoryLvl1.id)
-                    .map(categoryLvl2 => {
+            <SubMenu key={'sub' + index} title={topLevelCategory.name}
+                     className='catalogue-item'>
+                {topLevelCategory.childLevel.map(nestedLevel => {
+                    if (nestedLevel.childLevel) {
                         return (
-                            <SubMenu key={categoryLvl2.id} title={categoryLvl2.name}
+                            <SubMenu key={nestedLevel.id} title={nestedLevel.name}
                                      className='catalogue-item'>
-                                {lvl3
-                                    .filter(cat => cat.parentId === categoryLvl2.id)
-                                    .map(categoryLvl3 => {
-                                        return (
-                                            <Menu.Item key={categoryLvl3.id}
-                                                       className='catalogue-menu-item'>
-                                                <Link to='/shop'>
-                                                    {categoryLvl3.name} (link to '/shop')
-                                                </Link>
-                                            </Menu.Item>
-                                        )
-                                    })}
+                                {nestedLevel.childLevel.map(menuItem => {
+                                    return (
+                                        <Menu.Item key={menuItem.id}
+                                                   className='catalogue-menu-item'>
+                                            <Link to='/shop'>{menuItem.name}</Link>
+                                        </Menu.Item>
+                                    )
+                                })}
                             </SubMenu>
                         )
-                    })}
+                    } else {
+                        return (
+                            <Menu.Item key={nestedLevel.id}
+                                       className='catalogue-menu-item'>
+                                <Link to='/shop'>{nestedLevel.name}</Link>
+                            </Menu.Item>
+                        )
+                    }
+                })}
             </SubMenu>
         )
     })
 
     return (
-        <div className="catalogue-btn">
-            <Menu mode={'vertical'} onClick={handleCategoryClick}>
-                <SubMenu key="SubMenu" title="Catalogue" className='catalogue-title'
-                         icon={<img className="catalogue-img" src={iconCatalogue} alt="icon"/>}
-                >
-                    {allCategories}
-                </SubMenu>
-
+        <div className="catalogue-wrapper">
+            <button className='catalogue-btn' onClick={showCatalogue}>
+                <img className="catalogue-btn-img" src={iconCatalogue} alt="icon"/>
+                <span className="catalogue-btn-text">Catalogue</span>
+            </button>
+            <Menu mode='inline' openKeys={openKeys} onOpenChange={onOpenChange}
+                  onClick={handleCategoryClick} style={{display: visible}}
+                  className='catalogue-menu'>
+                {categoriesCatalogue}
             </Menu>
         </div>
     )
