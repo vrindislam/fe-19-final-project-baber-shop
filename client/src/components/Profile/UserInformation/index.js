@@ -63,7 +63,7 @@ const UserInformation = () => {
     }, [form])
 
     return (
-        <Col xs={{span: 20, offset: 2}} sm={{span: 12, offset: 1}} md={{span: 12, offset: 2}} xl={{span: 10, offset: 1}}>
+        <Col xs={{span: 20, offset: 2}} sm={{span: 12, offset: 1}} md={{span: 12, offset: 2}} xl={{span: 10, offset: 2}}>
             <Form
                 form={form}
                 {...layout}

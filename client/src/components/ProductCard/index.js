@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
-import {Button, Card} from 'antd';
+import {Button, Image} from 'antd';
 import {StarFilled, StarOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 import Ajax from "../../services/Ajax";
 import WishListService from '../../services/WishListServise'
 import './styles.less';
@@ -14,7 +15,7 @@ const {checkIfProductInWishList} = WishListService
 
 const ProductCard = ({product, refresh}) => {
 
-    const {name, currentPrice, itemNo, categories, imageUrls, _id} = product;
+    const {name, currentPrice, imageUrls, _id} = product;
     const {exp, isAuthenticated, isAdmin} = useSelector(state => ({...state.user}));
     const history = useHistory();
     const dispatch = useDispatch();
@@ -31,10 +32,10 @@ const ProductCard = ({product, refresh}) => {
     }
 
     const forwardToCardDetails = () => {
-        history.push({
+        return{
             pathname: `/product/${product.itemNo}`,
             state: { product: product },
-        })
+        }
 
     }
 
@@ -68,36 +69,23 @@ const ProductCard = ({product, refresh}) => {
 
     return (
         <>
-            <li className='product-card-container'>
-                <Card data-category={categories}
-                      src='google.com'
-                      data-itemno={itemNo}
-                      bordered={true}
-                      hoverable={true}
-                      cover={
-
-                          <img
-                              onClick={forwardToCardDetails}
-                              className='product-card-img'
-                              alt="product-item"
-                              src={imageUrls[0]}
-                          />
-                      }
-                >
-                    <div className='product-heading-wrapper'>
-                        <p className='product-heading'>{name}</p>
-                        <p className='product-price'>{currentPrice}$</p>
+            <div className='productCard'>
+                <Link to={forwardToCardDetails()}>
+                    <div className='productCard-title'>{name}</div>
+                    <div className='productCard-picture'>
+                        <Image src={imageUrls[0]} preview={false}/>
+                        <div className='productCard-price'>{currentPrice}$</div>
                     </div>
-                    <div className='button-container'>
-                        <Button className='btn-favourite' onClick={addToWishlist}>
-                            {inWishlistIcon}
-                        </Button>
-                        <Button type="primary" className='product-card-btn' onClick={onAddToCart}>
-                            Add to cart
-                        </Button>
-                    </div>
-                </Card>
-            </li>
+                </Link>
+                <div className='productCard-buttons'>
+                    <Button className='btn-favourite' onClick={addToWishlist}>
+                        {inWishlistIcon}
+                    </Button>
+                    <Button className='btn-addToCard' onClick={onAddToCart}>
+                        Add to cart
+                    </Button>
+                </div>
+            </div>
         </>
     )
 }
