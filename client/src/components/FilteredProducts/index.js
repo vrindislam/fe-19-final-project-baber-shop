@@ -23,7 +23,6 @@ const FilteredProducts = ({queryString}) => {
             } else {
                 setShow(true)
             }
-
         }
         fetch()
     }, [queryString, productsPerPage])

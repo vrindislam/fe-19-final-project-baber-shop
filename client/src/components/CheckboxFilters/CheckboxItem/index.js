@@ -23,7 +23,7 @@ const CheckboxItem = ({type}) => {
         <>{
             names.map(item =>
                 <div className='checkbox-group__item' key={item}>
-                    <input data-type={type} type="checkbox" id={item} name={item}/>
+                    <input className='item-filter' data-type={type} type="checkbox" id={item} name={item}/>
                     <label className='checkbox-label' htmlFor={item}>{item}</label>
                 </div>
             )
