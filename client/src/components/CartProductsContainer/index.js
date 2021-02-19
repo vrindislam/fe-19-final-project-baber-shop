@@ -1,16 +1,15 @@
-import React from "react";
-import "./style.less"
-import CartItem from "../CartItem"
+import React from 'react'
+import './style.less'
+import CartItem from '../CartItem'
 
-
-const ProductsContainer = ({ products, isAuth, setCart }) => {
+const ProductsContainer = ({ products, isAuth, setProductsDB }) => {
 
   const items = products.map(product =>
     <CartItem
       product={isAuth ? product.product : product}
       key={isAuth ? product._id : product.itemNo}
       cartQuantityDB={product.cartQuantity}
-      setCart={setCart}
+      setProductsDB={setProductsDB}
     />)
 
   return (
@@ -27,7 +26,7 @@ const ProductsContainer = ({ products, isAuth, setCart }) => {
         {items}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductsContainer;
+export default ProductsContainer

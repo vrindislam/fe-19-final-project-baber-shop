@@ -9,7 +9,7 @@ const{get, put} = Ajax
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const [cart, setCart] = useState([])
+  const [productsDB, setProductsDB] = useState([])
   const isAuth = useSelector(state => state.user.isAuthenticated)
   const products = useSelector(state => state.cartProducts.products)
 
@@ -21,7 +21,7 @@ const Cart = () => {
       async function fetch(){
         const existingCart = await get('/cart')
         const cart = existingCart && await put('/cart','',{products:[...items]})
-        setCart(cart.products)
+        setProductsDB(cart.products)
         dispatch(resetCart())
 
       }
@@ -30,11 +30,11 @@ const Cart = () => {
 
   return (
     <div className="cart-page-wrapper">
-      {!products.length && !cart.length || !products.length && !isAuth
+      {!products.length && !productsDB.length || !products.length && !isAuth
         ? <p>add an item, please</p>
         : <>
           <div className="cart-container">
-            <ProductsContainer products={isAuth? cart : products } isAuth={isAuth} setCart={setCart}/>
+            <ProductsContainer products={isAuth? productsDB : products } isAuth={isAuth} setProductsDB={setProductsDB}/>
             <TotalAmount total="cartTotal"/>
           </div>
         </>
