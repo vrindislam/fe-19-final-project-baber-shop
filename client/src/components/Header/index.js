@@ -31,6 +31,8 @@ const SiteHeader = () => {
     return (
         <PageHeader style={{
             position: 'sticky',
+            top:0,
+            zIndex:999,
             height: 'auto',
             width: "100%",
             textAlign: "center",
@@ -84,8 +86,8 @@ const SiteHeader = () => {
             <Row className="header-row" justify='center' gutter={[24, 24]}>
 
 
-                <Col className="catalogue-box" style={{padding: 2,textAlign: '-webkit-center'}} xs={{span: 12, order: 1}} sm={{span: 12, order: 1}} lg={{span: 8, order: 1}}>
-                    <div className="catalogue-btn" key="plp">
+                <Col className="catalogue-box" style={{padding: 0,textAlign: '-webkit-center'}} xs={{span: 12, order: 1}} sm={{span: 12, order: 1}} lg={{span: 8, order: 1}}>
+                    <div  key="plp">
                         <Catalogue/>
 
                     </div>
