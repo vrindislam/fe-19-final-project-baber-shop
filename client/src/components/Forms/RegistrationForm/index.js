@@ -1,45 +1,28 @@
 import React from "react";
 import "./styles.less";
 import axios from "axios";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input } from "antd";
 import { collectionItemsForm, onlyNumbers, onlyLetters } from "./collectionItems";
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
 import { Link, useHistory } from "react-router-dom";
+import 'react-toastify/dist/ReactToastify.css';
 
 import { showModal } from "../../../store/modal/modalAction";
 import { useDispatch } from "react-redux";
 import LoginService from "../../../services/LoginService";
 import jwt_decode from "jwt-decode";
 import { authUser } from "../../../store/user/userAction";
-
+import {errorRegisterToast,successRegisterToast} from "../../Toasters";
+import { ToastContainer } from "react-toastify";
 
 
 const RegistrationForm = (props) => {
+  console.log("props.handleRegisterModalClose",props.handleRegisterModalClose);
   const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
   const showModalLogin = () => {
     dispatch(showModal({status: true, type: 'LoginForm'}));
-  };
-  // console.log("props.modal",props.modal)
-  console.log("collectionItemsForm",collectionItemsForm);
-  console.log("rules",collectionItemsForm.rules);
-
-  const error = () => {
-    message.error(
-      <div className="error-message-registration-div">
-        <p className="error-message-registration">User has already been registered</p>
-        <button
-          className='registration-button' type="primary"
-          onClick={showModalLogin}>Go to Login Form
-        </button>
-      </div>
-    );
-  };
-  const success = () => {
-    message.success(
-      <p className="success-message-registration">User has been successfully registered</p>
-    );
   };
 
   const onFinish = (values) => {
@@ -47,7 +30,6 @@ const RegistrationForm = (props) => {
     const userData = {}
     axios.post(`${process.env.REACT_APP_API}/customers`, newCustomer)
       .then(savedCustomer => {
-        success();
         const {data} = savedCustomer
         userData.loginOrEmail = data.email;
         userData.password = values.password;
@@ -59,21 +41,25 @@ const RegistrationForm = (props) => {
             dispatch(authUser({...decoded, isAuthenticated: true}));
             props.modal !== true &&
             history.push('/');
+            successRegisterToast()
+            props.modal &&
             props.handleRegisterModalClose()
           })
           .catch(err => {
+            errorRegisterToast()
             console.log("login error",err);
           })
       })
       .catch(err => {
-        error();
-        // onReset()
+        errorRegisterToast()
+        console.log("Registration error");
         console.log(err);
       });
   };
 
 
   return (
+    <>
     <Form
       {...formItemLayout2}
       form={form}
@@ -112,6 +98,8 @@ const RegistrationForm = (props) => {
         <Link to="/login">link to Login PAGE</Link>
       </Form.Item>
     </Form>
+      <ToastContainer/>
+    </>
   );
 };
 
