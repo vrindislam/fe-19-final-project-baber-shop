@@ -16,7 +16,7 @@ const AdminSider = () => {
   const dispatch = useDispatch();
   const { isAuthenticated, firstName } = useSelector((state => ({ ...state.user })));
   const history = useHistory();
-  const defaultSelected = "dashboard";
+  // const defaultSelected = "dashboard";
 
   const handleLogout = () => {
     if (!isAuthenticated) return;
@@ -30,7 +30,7 @@ const AdminSider = () => {
       className={'admin-sider-menue'}>
       <Menu
         mode="inline"
-        defaultSelectedKeys={[defaultSelected]}
+        // defaultSelectedKeys={[defaultSelected]}
         style={{ height: "100%", borderRight: 0 }}
       >
         <Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
