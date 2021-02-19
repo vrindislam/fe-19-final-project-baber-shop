@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu } from "antd";
-import { AccountBookOutlined, ContainerOutlined, LogoutOutlined } from "@ant-design/icons";
+import { AccountBookOutlined, ContainerOutlined, LogoutOutlined, DashboardOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authUser } from "../../store/user/userAction";
@@ -36,11 +36,14 @@ const AdminSider = () => {
         <Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
           {firstName}
         </Item>
-        <Item key="dashboard" icon={<AccountBookOutlined />}>
+        <Item key="dashboard" icon={<DashboardOutlined />}>
           <Link to="/admin">Dashboard</Link>
         </Item>
         <Item key="category" icon={<ContainerOutlined />}>
           <Link to="/admin/category">Manage Categories</Link>
+        </Item>
+        <Item key="product" icon={<AccountBookOutlined />}>
+          <Link to="/admin/product">Manage Products</Link>
         </Item>
       </Menu>
     </Sider>
