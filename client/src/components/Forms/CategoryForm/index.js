@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Input, Button, message, Select, Row, Col } from "antd";
 import CategoryService from "../../../services/CategoryService";
-import "./style.less";
+import { fieldsSetArr, layout, tailLayout, initialFormValues, rootCloudinaryFolderName } from "./constants";
 import ImageUpload from "../../ImageUpload";
+import "./style.less";
 
 const { Option } = Select;
 
@@ -13,44 +14,8 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
   const [levels] = useState(3);
   const [parentCategories, setParentCategories] = useState(["cat1", "cat2", "cat3"]);
   const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    // logic will be added later
-  }, []);
-
-  // Create-Form Schema and controls rules
-  const rules = [{ required: true, message: "field is required" }];
-  const fieldsSetArr = [
-    ["select-level", { label: "Level", name: "level", rules }],
-    ["select-parentCategory", { label: "Parent ID", name: "parentId", rules }],
-    ["input", { label: "Category ID", name: "id", rules }],
-    ["input", { label: "Category Name", name: "name", rules }],
-    ["input", { label: "Category Description", name: "description" }]
-
-  ];
-
-  // form layout settings
-  const layout = {
-    labelCol: {
-      span: 24
-    },
-    wrapperCol: {
-      span: 24
-    }
-  };
-  const tailLayout = {
-    wrapperCol: {
-      span: 24
-    }
-  };
-
-  const initialFormValues = {
-    id: "",
-    name: "",
-    description: "",
-    level: "",
-    parentId: ""
-  };
+  const [cloudinaryFolderName, setCloudinaryFolderName] = useState(rootCloudinaryFolderName);
+  const [imageButtonDisabled, setImageButtonDisabled] = useState(true);
 
   // function to create form input fields based on constants
   const setUpFormFields = () => fieldsSetArr.map(category => {
@@ -126,7 +91,18 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
   };
 
   // Activate Submit button once form is filled handleOnFieldsChange
-  const handleOnFieldsChange = () => {
+  const handleOnFieldsChange = ([{ name, value }]) => {
+    //  handle cloudinary foldary name creation
+    if (name && name.length > 0 && name[0] === "id" && value.length > 0) {
+      let cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/${value}`;
+      const level = form.getFieldValue("level");
+      if (level && level.length > 0) cloudinaryCategoryfolderName = `${rootCloudinaryFolderName}/level${level}/${value}`;
+      setCloudinaryFolderName(cloudinaryCategoryfolderName);
+      setImageButtonDisabled(false);
+    } else if (name && name.length > 0 && name[0] === "id" && value.length === 0) {
+      setCloudinaryFolderName(rootCloudinaryFolderName);
+      setImageButtonDisabled(true);
+    }
     // handleSubmitButtonDisable
     setDisabledBtn(!form.isFieldsTouched(true) || form.getFieldsError().filter(({ errors }) => errors.length).length > 0);
   };
@@ -145,7 +121,12 @@ const CategoryForm = ({ loadCategories, dispatchModal }) => {
       {setUpFormFields()}
       <Row gutter={16}>
         <Col span={24} style={{ textAlign: "left" }}>
-          <ImageUpload images={images} setImages={setImages} cloudinaryfolderName={"catergories"} />
+          <ImageUpload
+            images={images}
+            setImages={setImages}
+            cloudinaryfolderName={cloudinaryFolderName}
+            imageButtonDisabled={imageButtonDisabled}
+          />
         </Col>
       </Row>
       <Form.Item {...tailLayout}>

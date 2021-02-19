@@ -2,14 +2,13 @@ import React  from 'react';
 import { Slider, InputNumber, Row, Col, Form } from 'antd';
 import './styles.less';
 
-const PriceSlider = ({minValue, maxValue, setMaxVal, setMinVal}) => {
-
+const PriceSlider = ({minValue, maxValue, setMinVal, setMaxVal}) => {
     const onSliderChange = value => {
         setMinVal(value[0]);
         setMaxVal(value[1]);
     }
 
-    const onSliderMouseUp = (value) => {
+    const onSliderMouseUp = value => {
         setMinVal(value[0]);
         setMaxVal(value[1]);
     }

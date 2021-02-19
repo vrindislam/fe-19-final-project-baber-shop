@@ -4,6 +4,7 @@ import ProductsContainer from "../../components/CartProductsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import {TotalAmount} from "../../components/CartTotalQuaintity"
 import {resetCart} from '../../store/cart/actionCart'
+import Checkout from "../../components/Checkout";
 import Ajax from '../../services/Ajax'
 const{get, put} = Ajax
 
@@ -39,6 +40,7 @@ const Cart = () => {
           </div>
         </>
       }
+    <Checkout/>
     </div>
   );
 };
