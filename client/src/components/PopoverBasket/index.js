@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import Ajax from '../../services/Ajax'
 const {get} = Ajax
 const PopoverBasket = () => {
-  const productsLength = useSelector(state => state.cartProducts.products.length)
+  const productsLength = useSelector(state => state.cart.products.length)
   const isAuth = useSelector(state => state.user.isAuthenticated)
   const [productsDB, setProductsDB] = useState([])
 

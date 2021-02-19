@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './style.less'
 import { PlusCircleFilled, MinusCircleFilled, DeleteFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteFromCart, increaseQuantity, decreaseQuantity } from '../../store/cartItem/actionCartItem'
+import { deleteFromCart, increaseQuantity, decreaseQuantity } from '../../store/cart/actionCart'
 import Ajax from '../../services/Ajax'
 
 const { deleteRequest, put } = Ajax

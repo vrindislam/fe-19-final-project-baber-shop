@@ -6,7 +6,7 @@ import {StarFilled, StarOutlined} from "@ant-design/icons";
 import Ajax from "../../services/Ajax";
 import WishListService from '../../services/WishListServise'
 import './styles.less';
-import {addToCart} from "../../store/cartItem/actionCartItem";
+import {addToCart} from "../../store/cart/actionCart";
 
 const {put, deleteRequest} = Ajax;
 const {checkIfProductInWishList} = WishListService

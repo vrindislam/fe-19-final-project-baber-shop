@@ -3,7 +3,7 @@ import "./styles.less";
 import ProductsContainer from "../../components/CartProductsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import {TotalAmount} from "../../components/CartTotalQuaintity"
-import {resetCart} from '../../store/cartItem/actionCartItem'
+import {resetCart} from '../../store/cart/actionCart'
 import Ajax from '../../services/Ajax'
 const{get, put} = Ajax
 
@@ -11,7 +11,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [productsDB, setProductsDB] = useState([])
   const isAuth = useSelector(state => state.user.isAuthenticated)
-  const products = useSelector(state => state.cartProducts.products)
+  const products = useSelector(state => state.cart.products)
 
   useEffect(() => {
     if (isAuth) {

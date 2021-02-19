@@ -1,10 +1,5 @@
-export const CREATE_CART = 'CREATE_CART'
-export const REMOVE_CART = 'REMOVE_CART'
 export const ADDING_TO_CART = 'ADD_TO_CART'
 export const DELETE_FROM_CART = 'DELETE_FROM_CART'
 export const DECREASE_QUANTITY = 'DECREASE_QUANTITY'
 export const INCREASE_QUANTITY = 'INCREASE_QUANTITY'
 export const RESET_CART = 'RESET_CART'
-
-
-// export const UPDATE_CART = 'UPDATE_CART'

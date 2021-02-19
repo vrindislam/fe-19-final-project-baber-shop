@@ -9,7 +9,7 @@ const { get } = Ajax
 
 export const TotalAmount = (props) => {
 
-  const products = useSelector(state => state.cartProducts.products)
+  const products = useSelector(state => state.cart.products)
   const isAuth = useSelector(state => state.user.isAuthenticated)
   const [productsDB, setProductsDB] = useState([])
   useEffect(() => {
