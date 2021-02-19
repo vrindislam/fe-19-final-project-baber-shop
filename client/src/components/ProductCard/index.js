@@ -31,6 +31,14 @@ const ProductCard = ({product, refresh}) => {
         }
     }
 
+    const forwardToCardDetails = () => {
+        return{
+            pathname: `/product/${product.itemNo}`,
+            state: { product: product },
+        }
+
+    }
+
     const addToWishlist = async () => {
         if (!(isAuthenticated && !isAdmin && localStorage.token && exp && (exp > Date.now() / 1000))) {
             history.push('/login');
@@ -62,7 +70,7 @@ const ProductCard = ({product, refresh}) => {
     return (
         <>
             <div className='productCard'>
-                <Link to={'/'}>
+                <Link to={forwardToCardDetails()}>
                     <div className='productCard-title'>{name}</div>
                     <div className='productCard-picture'>
                         <Image src={imageUrls[0]} preview={false}/>

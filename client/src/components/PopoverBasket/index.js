@@ -22,7 +22,7 @@ const PopoverBasket = () => {
     }}, [isAuth])
 
   return (
-    <Popover placement="bottomRight" align={{ offset: [-19, 0] }} className='popover-basket-div' content={content}
+    <Popover placement="bottomRight" align={{ offset: [70, 0] }} className='popover-basket-div' content={content}
              trigger="hover">
       <Link to="/cart">
         <img className="img-cart" src={iconCart} alt="icon"/>
