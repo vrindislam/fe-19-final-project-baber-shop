@@ -5,23 +5,22 @@
 }
 
 .catalogue-btn {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 20vw;
   max-width: 400px;
   margin: auto;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
   color: #f0f2f5;
-  background: #000000;
   font-size: 22px;
+  text-align: center;
+  background: #000000;
   border: none;
 
   &-img {
-    padding: 3px;
     margin-right: 10px;
+    padding: 3px;
     background: white;
     border-radius: 12px;
   }
@@ -32,11 +31,11 @@
 }
 
 .catalogue-menu {
+  position: relative;
+  z-index: 100;
   width: 37vw;
   max-width: 600px;
   margin: 0 auto;
-  position: relative;
-  z-index: 100;
 }
 
 .catalogue-item {
@@ -46,8 +45,8 @@
 }
 .catalogue-item.ant-menu-submenu, .catalogue-menu-item.ant-menu-item {
   color: #000000;
-  background-color: lightgrey;
   font-size: 17px;
+  background-color: lightgrey;
 }
 .catalogue-menu-item.ant-menu-item {
   font-size: 16px;
