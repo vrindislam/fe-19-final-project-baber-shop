@@ -1,4 +1,4 @@
-import {USER_AUTH_STATUS} from "./actionTypesUser";
+import {USER_AUTH_STATUS, USER_NAME_CHANGE} from "./actionTypesUser";
 
 const initialValue = {
   isAuthenticated: false,
@@ -13,6 +13,11 @@ const userReducer = (state = initialValue, action) => {
   switch (action.type) {
     case USER_AUTH_STATUS:
       return action.payload.isAuthenticated ? action.payload : initialValue;
+    case USER_NAME_CHANGE:
+      return {
+        ...state,
+        firstName: action.payload
+      }
     default:
       return state
   }

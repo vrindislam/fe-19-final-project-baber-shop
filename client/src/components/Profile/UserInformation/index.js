@@ -3,11 +3,15 @@ import {collectionItemsForm, onlyLetters, onlyNumbers} from "../../Forms/Registr
 import React, {useEffect} from "react";
 import Ajax from "../../../services/Ajax";
 import './style.less'
+import {useDispatch} from "react-redux";
+import {changeFirstName} from "../../../store/user/userAction";
 
 const {get, put} = Ajax;
 
 
 const UserInformation = () => {
+    const dispatch = useDispatch();
+
     const layout = {
         labelCol: {
             span: 24,
@@ -36,6 +40,8 @@ const UserInformation = () => {
         try {
             const values = await form.validateFields();
             await put('/customers', '', values);
+            console.log(values);
+            dispatch(changeFirstName(values.firstName));
             success();
 
         } catch (errorInfo) {
