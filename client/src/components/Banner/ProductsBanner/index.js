@@ -7,7 +7,7 @@ const ProductBanner = ({products}) => {
 
     return (
         <>
-            <Row gutter={[20, 20]} justify="space-around">
+            <Row className='productBanner'>
                 {products.map(product => {
                     return (
                         <Col span={12} key={product.itemNo}>
