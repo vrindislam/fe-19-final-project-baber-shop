@@ -6,7 +6,7 @@ export const collectionItemsForm = [
   { name: "lastName", label: "Last Name", rules:[{required: true, message: 'Please input your Last Name!'}, minRulesLength, maxRulesLength]},
   { name: "login", label: "Login", rules: [{required: true, message: 'Please input your Login'}, minRulesLength, maxRulesLength]},
   { name: "email", label: "E-mail", rules: [{required: true, message: 'Please input your E-mail!'}, {type: "email", messageType: 'The input is not valid E-mail!'},]},
-  { name: "password", label: "Password", rules: [{required: true, message: 'Please input your password!'}, minRulesLength, maxRulesLength]},
+  { name: "password", label: "Password", rules: [{required: true, message: 'Please input your password!'}, {min: 7, message: 'Must be min 7 characters'}, maxRulesLength]},
   { name: "phone", label: "Phone Number", rules: [{required: true, message: 'Please input your phone number!'}, {min:13, max:13, message: 'The phone number must contain 12 characters'}]}
 ];
 

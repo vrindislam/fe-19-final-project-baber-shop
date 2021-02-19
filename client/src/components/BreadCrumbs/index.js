@@ -15,9 +15,7 @@ const BreadCrumbs = () => {
                 ? <Breadcrumb.Item key={key} href="/" className="breadcrumb-item">
                     <HomeOutlined />
                 </Breadcrumb.Item>
-                : <Breadcrumb.Item key={key} className="breadcrumb-item">
-                    <Typography><HomeOutlined /></Typography>
-                </Breadcrumb.Item>
+                : ''
             }
 
             {pathNames.map((name, index) => {
