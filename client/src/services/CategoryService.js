@@ -88,7 +88,6 @@ class CategoryService {
             })
             return topLevel.level === '1';
         });
-
     }
 
 

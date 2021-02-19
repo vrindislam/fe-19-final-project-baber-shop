@@ -7,7 +7,7 @@ import {Menu} from 'antd';
 const {SubMenu} = Menu;
 
 const CategoryCatalogue = () => {
-    const [openKeys, setOpenKeys] = useState(['sub1']);
+    const [openKeys, setOpenKeys] = useState([]);
     const [sortedCategories, setSortedCategories] = useState([]);
 
     const rootSubmenuKeys = sortedCategories.map((item, index) => `sub${index}`);
