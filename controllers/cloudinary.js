@@ -1,11 +1,24 @@
 const cloudinary = require("cloudinary").v2;
+const getConfigs = require("../config/getConfigs");
 
-// config
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// cloudinary config
+(async () => {
+  const configs = await getConfigs();
+  cloudinary.config({
+    cloud_name:
+      process.env.NODE_ENV === "production"
+      ? configs.production.images.cloud_name
+      : configs.development.images.cloud_name,
+    api_key:
+      process.env.NODE_ENV === "production"
+        ? configs.production.images.api_key
+        : configs.development.images.api_key,
+    api_secret:
+      process.env.NODE_ENV === "production"
+        ? configs.production.images.api_secret
+        : configs.development.images.api_secret,
+  });
+})();
 
 // req.files.file.path
 exports.cloudinaryUpload = async (req, res) => {

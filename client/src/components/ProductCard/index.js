@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
-import {cartAction} from "../../store/cart/cartAction";
 import {Button, Image} from 'antd';
 import {StarFilled, StarOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import Ajax from "../../services/Ajax";
 import WishListService from '../../services/WishListServise'
 import './styles.less';
+import {addToCart} from "../../store/cart/actionCart";
 
 const {put, deleteRequest} = Ajax;
 const {checkIfProductInWishList} = WishListService
@@ -23,7 +23,12 @@ const ProductCard = ({product, refresh}) => {
 
     const onAddToCart = (e) => {
         e.preventDefault();
-        dispatch(cartAction(product));
+        if(isAuthenticated){
+            put('/cart/',_id)
+        }else {
+            const newProduct = {...product, cartQuantity: + 1}
+            dispatch(addToCart(newProduct));
+        }
     }
 
     const addToWishlist = async () => {
