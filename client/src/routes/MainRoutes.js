@@ -12,6 +12,8 @@ import StaticPage from "../pages/StaticPage";
 import Profile from "../pages/Profile";
 import UserRoute from "./protectedRoutes/UserRoute";
 import UnsubscriptionPage from "../pages/UnsubscriptionPage";
+import ProductPage from "../pages/ProductPage";
+import OrderConfirmation from "../pages/OrderConfirmation";
 
 const MainRoutes = () => {
     return (
@@ -27,12 +29,14 @@ const MainRoutes = () => {
             <Route exact path={'/admin/category'} component={AdminCategory}/>
             <Route exact path={'/pages/:id+'} component={StaticPage}/>
             <Route exact path={'/unsubscribe'} component={UnsubscriptionPage}/>
+            <Route exact path="/product/:itemNo" component={ProductPage}/>
+            <Route exact path={'/order-confirmation'} component={OrderConfirmation}/>
             <Route exact path="*" render={() => <h1>You are on the wrong page boy</h1>}/>
         </Switch>
     )
 }
 
-export default MainRoutes
+export default MainRoutes;
 
 
 

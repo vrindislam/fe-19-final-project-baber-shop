@@ -1,17 +1,17 @@
 import React from 'react';
 import './styles.less';
 import {Result} from 'antd';
-import {withRouter} from 'react-router-dom'
+import {useHistory} from "react-router";
 
-const Btn = withRouter(({history}) => {
+const Btn = () => {
+    const history = useHistory();
 
     return (
         <button type='primary' onClick={() => {
-            history.push('/')
-        }}> Back to Home page!</button>
+            history.goBack()
+        }}> Go back</button>
     );
-})
-
+}
 const ErrorPage = () => {
     return (
         <>

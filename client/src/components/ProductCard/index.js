@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router";
-import {cartAction} from "../../store/cart/cartAction";
 import {Button, Card} from 'antd';
 import {StarFilled, StarOutlined} from "@ant-design/icons";
 import Ajax from "../../services/Ajax";
 import WishListService from '../../services/WishListServise'
 import './styles.less';
+import {addToCart} from "../../store/cart/actionCart";
 
 const {put, deleteRequest} = Ajax;
 const {checkIfProductInWishList} = WishListService
@@ -22,7 +22,20 @@ const ProductCard = ({product, refresh}) => {
 
     const onAddToCart = (e) => {
         e.preventDefault();
-        dispatch(cartAction(product));
+        if(isAuthenticated){
+            put('/cart/',_id)
+        }else {
+            const newProduct = {...product, cartQuantity: + 1}
+            dispatch(addToCart(newProduct));
+        }
+    }
+
+    const forwardToCardDetails = () => {
+        history.push({
+            pathname: `/product/${product.itemNo}`,
+            state: { product: product },
+        })
+
     }
 
     const addToWishlist = async () => {
@@ -62,7 +75,9 @@ const ProductCard = ({product, refresh}) => {
                       bordered={true}
                       hoverable={true}
                       cover={
+
                           <img
+                              onClick={forwardToCardDetails}
                               className='product-card-img'
                               alt="product-item"
                               src={imageUrls[0]}
