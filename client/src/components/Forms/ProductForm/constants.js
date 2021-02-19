@@ -31,12 +31,12 @@ export const tailLayout = {
 };
 
 export const initialFormValues = {
-  name: "test_name",
-  currentPrice: 1000,
-  previousPrice: 500,
-  color: "red",
-  productUrl: "/red",
-  brand: "red_cool",
+  name: "",
+  currentPrice: 0,
+  previousPrice: 0,
+  color: "",
+  productUrl: "",
+  brand: "",
 };
 
 export const rootCloudinaryFolderName = "products";
