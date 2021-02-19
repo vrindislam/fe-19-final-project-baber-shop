@@ -5,20 +5,30 @@ import PriceSlider from "../../components/PriceSlider";
 import {pickUpValues, groupValues} from "../../functions/checkboxFilters/filters";
 import Ajax from "../../services/Ajax";
 import FilteredProducts from "../../components/FilteredProducts";
+import {useDispatch, useSelector} from "react-redux";
+import {addFilter, deleteFilter} from "../../store/filters/filterAction";
 
 import {MetaForPages} from "../../components/Helmet"
 
 const ProductList = () => {
 
+    const queryString = require('query-string');
+    const dispatch = useDispatch();
+    const filtersRedux = useSelector(state => state.filterReducer.filters);
+
     const [checkboxFiltersDB, setCheckboxFiltersDB] = useState([]);
-    const [checkboxFiltersClicked, setCheckboxFiltersClicked] = useState([]);
-    const [minValue, setMinValue] = useState(100);
+    const [minValue, setMinValue] = useState(150);
     const [maxValue, setMaxValue] = useState(700);
     const [showFilters, setShowFilters] = useState(false);
-    const queryString = require('query-string');
-    const values = pickUpValues(checkboxFiltersClicked);
+
+    const values = pickUpValues(filtersRedux);
     const groupedValues = groupValues(values);
-    const string = queryString.stringify({...groupedValues, ...{minPrice: minValue, maxPrice: maxValue}}, {arrayFormat: "comma"});
+    const string = queryString.stringify({
+        ...groupedValues, ...{
+            minPrice: minValue,
+            maxPrice: maxValue
+        }
+    }, {arrayFormat: "comma"});
 
     useEffect(() => {
         async function fetch() {
@@ -30,25 +40,22 @@ const ProductList = () => {
 
     const catchCheckbox = (e) => {
         if (e.target.type === 'checkbox') {
-            const clonedCheckboxFilters = [...checkboxFiltersClicked]
-            const index = checkboxFiltersClicked.findIndex(item => item.name === e.target.name);
+            const index = filtersRedux.findIndex(item => item.name === e.target.name);
             const el = {type: e.target.dataset.type, name: e.target.name};
             if (index < 0) {
-                clonedCheckboxFilters.push(el);
-                setCheckboxFiltersClicked(clonedCheckboxFilters);
+                dispatch(addFilter(el));
             } else {
-                const filtered = clonedCheckboxFilters.filter(item => item.name !== el.name);
-                setCheckboxFiltersClicked(filtered);
+                dispatch(deleteFilter(el));
             }
         }
     }
-
-    const openFilters = () =>{
+    const openFilters = () => {
         setShowFilters(!showFilters);
     }
-
     const show = showFilters ? 'active' : 'hidden';
-    const showButton = {display: showFilters? 'none' : 'inline-block'}
+
+    const showButton = {display: showFilters ? 'none' : 'inline-block'}
+
 
     return (
         <>
@@ -58,15 +65,19 @@ const ProductList = () => {
               rel = "icon"
             />
             <div className="product-list-container">
-                <div className={"filters-container " + show} >
-                    <PriceSlider minValue={minValue} maxValue={maxValue} setMinVal={setMinValue} setMaxVal={setMaxValue}/>
+                <div className={"filters-container " + show}>
+                    <PriceSlider minValue={minValue} maxValue={maxValue}
+                                 setMinVal={setMinValue}
+                                 setMaxVal={setMaxValue}
+                    />
                     <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
                 </div>
                 <div className="open-filters-btn-container">
-                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X</button>
+                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X
+                    </button>
                     <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>O</button>
                 </div>
-                    <FilteredProducts queryString={string}/>
+                <FilteredProducts queryString={string}/>
             </div>
         </>
     )

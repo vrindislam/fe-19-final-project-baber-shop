@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Preloader from "../Preloader";
-import { Avatar, Badge } from "antd";
+import { Avatar, Badge, message } from "antd";
 import CloudinaryService from "../../services/CloudinaryService";
 
 import "./styles.less";
 
-const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
+const ImageUpload = ({ images, setImages, cloudinaryfolderName, imageButtonDisabled }) => {
 
   const [preloaderStatus, setPreloaderStatus] = useState(false);
+  const [imageUploadButtonStyle, setImageUploadButtonStyle] = useState("cloudinary__upload cloudinaryDisabled");
+  const [labelInputType, setLabelInputtype] = useState("input");
+
+  useEffect(() => {
+    if (!imageButtonDisabled) {
+      setImageUploadButtonStyle("cloudinary__upload");
+      setLabelInputtype("file");
+    } else {
+      setImageUploadButtonStyle("cloudinary__upload cloudinaryDisabled");
+      setLabelInputtype("input");
+    }
+  }, [imageButtonDisabled]);
 
   const fileUpload = (e) => {
+    if (imageButtonDisabled) return message.error("update form to upload image", 1.5);
     setPreloaderStatus(true);
     const files = Object.values(e.target.files);
     let allUploadedFiles = [];
@@ -52,10 +65,10 @@ const ImageUpload = ({ images, setImages, cloudinaryfolderName }) => {
 
   return (
     <div className={"cloudinary__container"}>
-      <label className={"cloudinary__upload"}>
-        Upload Image
+      <label className={imageUploadButtonStyle}>
+        Load image
         <input
-          type="file"
+          type={labelInputType}
           multiple
           hidden
           accept="images/*"

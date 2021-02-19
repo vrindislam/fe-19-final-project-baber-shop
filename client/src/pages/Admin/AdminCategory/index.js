@@ -8,9 +8,10 @@ import AdminCategoryCard from "../../../components/AdminCategoryCard";
 import withModal from "../../../components/Modal";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../../store/modal/modalAction";
+import LocalSearch from "../../../components/LocalSearch";
 
 import "./styles.less";
-import LocalSearch from "../../../components/LocalSearch";
+
 const { Content } = Layout;
 
 const AdminCatergory = () => {

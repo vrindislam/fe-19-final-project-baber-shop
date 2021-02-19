@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Col, PageHeader, Row} from "antd";
 import {authUser} from "../../store/user/userAction";
@@ -8,9 +8,10 @@ import PopoverBasket from "../PopoverBasket/index";
 import LiveSearch from './LiveSearch'
 import {showModal} from "../../store/modal/modalAction";
 import Login from "../Modal/LoginModal";
-import {headerLogo, iconCatalogue, iconContact, iconLogin} from './img/index'
+import {headerLogo, iconContact, iconLogin} from './img/index'
 import {LogoutOutlined} from "@ant-design/icons";
 import Catalogue from "../Catalogue";
+import BreadCrumbs from "../BreadCrumbs";
 
 
 const SiteHeader = () => {
@@ -20,11 +21,6 @@ const SiteHeader = () => {
     const showModalLogin = () => {
         dispatch(showModal({status: true, type: "LoginForm"}));
     };
-
-    const [visibleCatalogue, setVisibleCatalogue] = useState(false);
-    const showHeaderCatalogue = () => {
-        setVisibleCatalogue(!visibleCatalogue);
-    }
 
     const handleLogout = () => {
         if (!isAuthenticated) return
@@ -87,13 +83,11 @@ const SiteHeader = () => {
 
             <Row className="header-row" justify='center' gutter={[24, 24]}>
 
+
                 <Col className="catalogue-box" style={{padding: 2,textAlign: '-webkit-center'}} xs={{span: 12, order: 1}} sm={{span: 12, order: 1}} lg={{span: 8, order: 1}}>
-                    <div className="catalogue-btn" key="plp" onClick={showHeaderCatalogue}>
-                        <Link to='#' className="catalogue-btn-link">
-                            <img className="catalogue-img" src={iconCatalogue} alt="icon"/>
-                            Catalogue
-                            <Catalogue visible={visibleCatalogue}/>
-                        </Link>
+                    <div className="catalogue-btn" key="plp">
+                        <Catalogue/>
+
                     </div>
                 </Col>
                 <Col style={{ paddingTop:3, paddingLeft: 4, paddingRight:4}} className="search-box" xs={{span: 24, order: 3}} sm={{span: 21, order: 3}}
@@ -107,6 +101,11 @@ const SiteHeader = () => {
                     </div>
                 </Col>
             </Row>
+
+            <Row className="header-row header-breadcrumbs" gutter={[24, 24]}>
+                    <BreadCrumbs/>
+            </Row>
+
         </PageHeader>
 
     );

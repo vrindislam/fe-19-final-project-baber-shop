@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
-import {persistReducer} from "redux-persist";
-import storage from 'redux-persist/lib/storage'
 import testReducer from './test_store/testReducer'
 import modalHandler from './modal/modalReducer'
 import preloaderReducer from './preloader/preloaderReducer'
-import cartReducer from "./cart/cartReducer";
 import userReducer from "./user/userReducer";
+import cartReducer from "./cart/cartReducer";
+import filterReducer from "./filters/filterReducer";
+import {persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 
 const persistConfig ={
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   modalHandler: modalHandler,
   preloader: preloaderReducer,
   cart: cartReducer,
+  filterReducer: filterReducer,
 })
 
 export default persistReducer(persistConfig,rootReducer)

@@ -46,7 +46,7 @@ const AdminCategoryCard = ({ category: { name, imgUrl, description, id }, loadCa
       cover={
         <img
           alt={name}
-          src={imgUrl && imgUrl.length > 0 ? `${imgUrl[0].url}` : noImage}
+          src={imgUrl && imgUrl.length > 0 && typeof(imgUrl) === 'object' ? `${imgUrl[0].url}` : noImage}
           style={{ height: "300px", objectFit: "cover", padding: "2px" }}
         />
       }
