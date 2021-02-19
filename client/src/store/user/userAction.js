@@ -1,6 +1,10 @@
-import { USER_AUTH_STATUS } from './actionTypesUser';
+import { USER_AUTH_STATUS } from "./actionTypesUser";
 
-export const authUser = (status) => ({
-  type: USER_AUTH_STATUS,
-  payload: status
-});
+export const authUser = status => dispatch => {
+  return dispatch(
+    {
+      type: USER_AUTH_STATUS,
+      payload: status
+    }
+  );
+};
