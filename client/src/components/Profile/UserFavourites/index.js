@@ -43,7 +43,7 @@ const UserFavourites = () => {
             {
                 loading
                     ?
-                    <Col> <Preloader/> </Col>
+                    <Col className='profile-preloader'> <Preloader/> </Col>
                     :
 
                     (wishlist.length > 0)

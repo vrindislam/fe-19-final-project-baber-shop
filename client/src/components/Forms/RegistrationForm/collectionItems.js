@@ -21,3 +21,18 @@ export const collectionItemsCheckoutAddress = [
   { name: "zip", label: "Zip", rules:[{required: true, message: 'Please enter your zip!'}]},
   { name: "phone", label: "Phone Number", rules:[{required: true, message: 'Please enter your phone number!'},{min:12, max:12, message: 'The phone number must contain 12 characters'}]}
 ]
+
+export const collectionItemsProfileChangePassword = [
+  { name: "oldPassword", label: "Old Password", rules: [{required: true, message: 'Please enter your old password!!'}, {min: 7, message: 'Must be min 7 characters'}, {max: 25, message: 'Must be max 25 characters'}],feedback:false},
+  { name: "newPassword", label: "New password", rules: [{required: true, message: 'Please enter your password!'}, {min: 7, message: 'Must be min 7 characters'}, {max: 25, message: 'Must be max 25 characters'}],feedback:false},
+  { name: "confirmPassword", label: "Confirm new password", feedback:true, rules: [{required: true, message: 'Please enter your password!'}, {min: 7, message: 'Must be min 7 characters'}, {max: 25, message: 'Must be max 25 characters'}, ({ getFieldValue }) => ({
+      validator(_, value) {
+        if (!value || getFieldValue('newPassword') === value) {
+          return Promise.resolve();
+        }
+        // eslint-disable-next-line prefer-promise-reject-errors
+        return Promise.reject('The two passwords that you entered do not match!');
+      },
+    })]},
+
+]
