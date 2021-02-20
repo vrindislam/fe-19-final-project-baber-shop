@@ -66,7 +66,7 @@ const ProductPage = () => {
                                 </Col>
                                 <Col className="btn-buy_box">
                                     { product.quantity === 0
-                                        ? (<span className="sold-out"></span>)
+                                        ? (<></>)
                                         :  (<button className="btn-buy" onClick={onAddToCart}>Buy</button>)
                                     }
 
