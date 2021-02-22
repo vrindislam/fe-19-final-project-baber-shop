@@ -23,12 +23,8 @@ const ProductCard = ({product, refresh}) => {
 
     const onAddToCart = (e) => {
         e.preventDefault();
-        if(isAuthenticated){
-            put('/cart/',_id)
-        }else {
             const newProduct = {...product, cartQuantity: + 1}
-            dispatch(addToCart(newProduct));
-        }
+            dispatch(addToCart(newProduct, _id, isAuthenticated));
     }
 
     const forwardToCardDetails = () => {
