@@ -1,7 +1,7 @@
 import React from "react";
 import {Col} from "antd";
-import SubscriptionBox from "../../SubscriptionBox";
 import {FacebookOutlined, InstagramOutlined, YoutubeOutlined} from "@ant-design/icons";
+import SubscriptionBox from "../../SubscriptionBox";
 import './styles.less'
 
 const Socials = () => {

@@ -1,7 +1,9 @@
 import React from 'react'
-import {Button, Col, Row} from "antd";
 import {NavLink} from "react-router-dom";
+import {Button, Col, Row} from "antd";
 import './styles.less';
+
+
 const UserOptionsMenu = ()=> {
     return(
         <Col className='userOptionsMenu' xs={{span: 20, offset: 2}} sm={{span: 8,offset: 0}}

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row} from 'antd';
 import ProfileRoutes from "../../routes/ProfileRoutes";
-import UserOptionsMenu from "../../components/Profile/UserOptionsMenu/UserOptionsMenu";
+import UserOptionsMenu from "../../components/Profile/UserOptionsMenu";
 import './style.less'
 
 const Profile = () => {

@@ -1,8 +1,8 @@
-import {Button, Col, Form, Input, message} from "antd";
 import React from "react";
+import {Button, Col, Form, Input, message} from "antd";
 import Ajax from "../../../services/Ajax";
-import './style.less'
 import {collectionItemsProfileChangePassword} from "../../Forms/RegistrationForm/collectionItems";
+import './style.less'
 
 const {put} = Ajax;
 
