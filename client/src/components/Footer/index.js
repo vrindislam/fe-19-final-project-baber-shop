@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import {Col, Image, Layout, Row} from 'antd';
 import Ajax from "../../services/Ajax";
+import Socials from "./Socials";
 import './styles.less'
-import {Link} from "react-router-dom";
-import {FacebookOutlined, InstagramOutlined, YoutubeOutlined} from '@ant-design/icons';
-import SubscriptionBox from "../SubscriptionBox";
 
 const {get} = Ajax;
 const {Footer: AntFooter} = Layout;
@@ -53,18 +52,7 @@ const Footer = () => {
                 })
                 }
 
-                <Col className="footer-socials" xs={24} sm={18} lg={7}>
-                    <SubscriptionBox/>
-                    <a href="https://www.instagram.com" target='_blank' rel='noopener noreferrer'>
-                        <InstagramOutlined className='footer-socials_icons'/>
-                    </a>
-                    <a href="https://www.facebook.com/" target='_blank' rel='noopener noreferrer'>
-                        <FacebookOutlined className='footer-socials_icons'/>
-                    </a>
-                    <a href="https://www.youtube.com/" target='_blank' rel='noopener noreferrer'>
-                        <YoutubeOutlined className='footer-socials_icons'/>
-                    </a>
-                </Col>
+                <Socials/>
             </Row>
             <Row justify='center'>
                 <Col className='footer-copyright'>Copyright © Barber All Rights Reserved 2021</Col>
