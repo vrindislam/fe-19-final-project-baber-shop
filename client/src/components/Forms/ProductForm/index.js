@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, message, Select, Row, Col, InputNumber } from "antd";
+import { Form, Input, Button, message, Select, Row, Col, InputNumber, Checkbox } from "antd";
 import cloneDeep from "lodash/cloneDeep";
 import { fieldsSetArr, layout, tailLayout, initialFormValues, rootCloudinaryFolderName } from "./constants";
 import ImageUpload from "../../ImageUpload";
@@ -9,9 +9,9 @@ import "./style.less";
 
 const { Option } = Select;
 
-const ProductForm = ({ loadCategories, dispatchModal, listOfCategories }) => {
+const ProductForm = ({ loadCategories, dispatchModal, listOfCategories, filters: { brand, country } }) => {
   const [form] = Form.useForm();
-  // const [disabledBtn, setDisabledBtn] = useState(true);
+  const [disabledBtn, setDisabledBtn] = useState(true);
   const [productCategories, setProductCategories] = useState(cloneDeep(listOfCategories));
   const [images, setImages] = useState([]);
   const [cloudinaryFolderName, setCloudinaryFolderName] = useState(rootCloudinaryFolderName);
@@ -29,6 +29,13 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories }) => {
           </Form.Item>
         );
         break;
+      case "checkbox":
+        element = (
+          <Form.Item key={settings.name} {...settings} valuePropName="checked">
+            <Checkbox>Enabled</Checkbox>
+          </Form.Item>
+        );
+        break;
       case "number":
         element = (
           <Form.Item key={settings.name} {...settings}>
@@ -41,7 +48,6 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories }) => {
         let categLevel = 0;
         if (levelParam === 2) categLevel = 1;
         if (levelParam === 3) categLevel = 2;
-        // console.log('Check', productCategories[categLevel][1].map(cat => cat.name))
         element = (
           <Form.Item key={settings.name} {...settings}>
             <Select placeholder={`input ${settings.label}`}>
@@ -50,6 +56,22 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories }) => {
             </Select>
           </Form.Item>
         );
+        break;
+      case "select-filter":
+        // eslint-disable-next-line no-case-declarations
+        let arr = [];
+        if (settings.name === "brand") arr = brand;
+        if (settings.name === "country") arr = country;
+        if (arr.length > 0) {
+          element = (
+            <Form.Item key={settings.name} {...settings}>
+              <Select placeholder={`input ${settings.label}`}>
+                {arr.map(cat => cat.name).map(category => (
+                  <Option key={category} value={category}>{category}</Option>))}
+              </Select>
+            </Form.Item>
+          );
+        }
         break;
       default:
         element = null;
@@ -113,9 +135,19 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories }) => {
     }
   };
 
+  const setSubmitButtonStatus = () => {
+    const status = [];
+    const checkFields = fieldsSetArr.filter(el => el[1].touched).map(el => el[1].name);
+    checkFields.forEach(field => {
+      status.push(form.isFieldTouched(field) && (form.getFieldError(field).length === 0));
+    });
+    status.includes(false) ? setDisabledBtn(true) : setDisabledBtn(false);
+  };
+
   const handleOnFieldsChange = ([{ name: [name], value }]) => {
     handleCategoriesList(name, value, listOfCategories);
     handleCloudinaryFolderCreate();
+    setSubmitButtonStatus();
   };
 
   return (
@@ -144,7 +176,7 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories }) => {
         <Button
           type="primary"
           htmlType="submit"
-          // disabled={disabledBtn}
+          disabled={disabledBtn}
         >
           Submit
         </Button>
