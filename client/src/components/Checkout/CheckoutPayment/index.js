@@ -1,13 +1,13 @@
-import React, {useContext, useEffect, useState} from "react";
-import CheckoutContext from "../util/CheckoutContext";
+import React, {useEffect, useState} from "react";
 import Ajax from "../../../services/Ajax";
 import {Button, message, Radio, Skeleton} from "antd";
-import actions from "../util/actions";
-import './styles.less';
 import PaymentForm from "./PaymentForm";
+import {useDispatch} from "react-redux";
+import './styles.less';
+import {setPayment} from "../../../store/checkout/checkoutAction";
 
 const CheckoutPayment = ({disabled, onChange}) => {
-    const {dispatch} = useContext(CheckoutContext);
+    const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
     const [methods, setMethods] = useState([]);
     const [value, setValue] = useState(null);
@@ -34,7 +34,7 @@ const CheckoutPayment = ({disabled, onChange}) => {
 
     const onFinish = async () => {
         if (value) {
-            dispatch({type: actions.setPayment, payload: value});
+            dispatch(setPayment(value));
             onChange();
         } else {
             message.error('Select a method or call us.');

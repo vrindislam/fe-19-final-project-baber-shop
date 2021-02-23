@@ -1,71 +1,58 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import './styles.less';
 import CheckoutNavigation from "./CheckoutNavigation";
 import CheckoutAddress from "./CheckoutAddress";
 import CheckoutShipping from "./CheckoutShipping";
 import CheckoutPayment from "./CheckoutPayment";
 import CheckoutSteps from "./CheckoutSteps";
-import CheckoutContext from "./util/CheckoutContext";
-import actions from "./util/actions";
+import Ajax from "../../services/Ajax";
 
-const Checkout = () => {
+const Checkout = ({products}) => {
 
-    const initialState = {
-        step: 0,
-        address: null,
-        shipping: null,
-        payment: null
-    }
+    const placeOrder = async (email, phone, address, shipping, payment) => {
+        try {
+            const customer = await Ajax.get('/customers/customer');
+            console.log('customer', customer);
+        } catch (err) {
+            //
+        }
 
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case actions.nextStep:
-                return {
-                    ...state,
-                    step: state.step + 1
-                }
-            case actions.goToStep:
-                return {
-                    ...state,
-                    step: action.payload
-                }
-            case actions.setAddress:
-                return {
-                    ...state,
-                    address: action.payload
-                }
-            case actions.setShipping:
-                return {
-                    ...state,
-                    shipping: action.payload
-                }
-            case actions.setPayment:
-                return {
-                    ...state,
-                    payment: action.payload
-                }
-            case actions.placeOrder:
-                return initialState;
-            default:
-                return state;
+        const newOrder = {
+            customerId: "???", // TODO: add customer id
+            products, // TODO: fix products
+            deliveryAddress: address,
+            shipping: shipping,
+            paymentInfo: payment,
+            status: "not shipped",
+            email: email,
+            mobile: phone,
+            letterSubject: "Thank you for order! You are welcome!",
+            letterHtml:
+                "<h1>Your order is placed.</h1>"
+        };
+
+        console.log("order", newOrder);
+        console.log("orderjson", JSON.stringify(newOrder));
+
+        try {
+            const order = await Ajax.post('/orders', newOrder);
+            console.log('order placed', order);
+            return Promise.resolve(order);
+        } catch (err) {
+            console.error(111, err);
+            return Promise.resolve(err);
         }
     }
 
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const checkoutState = {state, dispatch};
-
     return (
-        <CheckoutContext.Provider value={checkoutState}>
-            <div className='checkout'>
-                <CheckoutNavigation/>
-                <CheckoutSteps>
-                    <CheckoutAddress/>
-                    <CheckoutShipping/>
-                    <CheckoutPayment/>
-                </CheckoutSteps>
-
-            </div>
-        </CheckoutContext.Provider>
+        <div className='checkout'>
+            <CheckoutNavigation/>
+            <CheckoutSteps onFinish={placeOrder}>
+                <CheckoutAddress/>
+                <CheckoutShipping/>
+                <CheckoutPayment/>
+            </CheckoutSteps>
+        </div>
     );
 }
 

@@ -42,7 +42,7 @@ const Cart = () => {
           </div>
         </>
       }
-    <Checkout/>
+    <Checkout products={isAuth? productsDB : products}/>
     </div>
   );
 };

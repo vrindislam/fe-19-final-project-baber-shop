@@ -1,29 +1,22 @@
-import React, {useContext} from "react";
+import React from "react";
 import "./styles.less";
 import {Col, Row} from "antd";
-import CheckoutContext from "../util/CheckoutContext";
-import actions from "../util/actions";
 import {useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {nextStep, placeOrder} from "../../../store/checkout/checkoutAction";
 
-const CheckoutSteps = ({children}) => {
-
-    const {state, dispatch} = useContext(CheckoutContext);
+const CheckoutSteps = ({children, onFinish}) => {
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.checkout);
     const history = useHistory();
 
-    const onStepChange = () => {
+    const onStepChange = async () => {
         const steps = children.length;
         const newStep = state.step + 1;
         if (newStep < steps) {
-            dispatch({type: actions.nextStep});
+            dispatch(nextStep());
         } else {
-            console.log(state.address);
-            console.log(state.shipping);
-            console.log(state.payment);
-
-            // TODO: place order here
-
-            dispatch({type: actions.placeOrder});
-            history.push('/order-confirmation');
+            dispatch(placeOrder(onFinish, history));
         }
     }
 
