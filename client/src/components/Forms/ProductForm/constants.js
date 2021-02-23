@@ -3,15 +3,15 @@
 const rules = [{ required: true, message: "field is required" }];
 
 export const fieldsSetArr = [
-  ["checkbox", { label: "Enabled", name: "enabled", className: "productPrice", touched: false }],
-  ["input", { label: "Product Name", name: "name", rules, touched: true }],
-  ["number", { label: "Current price", name: "currentPrice", className: "productPrice", rules, touched: true }],
-  ["number", { label: "Quantity", name: "quantity", className: "productPrice", rules, touched: true }],
-  ["select-categories", { label: "Product Catalog", name: "categories_level1", rules, touched: true }, 1],
-  ["select-categories", { label: "Parent Product Category", name: "categories_parent", rules, touched: true }, 2],
-  ["select-categories", { label: "Product Category", name: "categories", rules, touched: true }, 3],
-  ["select-filter", { label: "Country", name: "country", rules, touched: true }],
-  ["select-filter", { label: "Brand", name: "brand", rules, touched: true }],
+  ["checkbox", { label: "Enabled", name: "enabled", className: "productPrice" }],
+  ["input", { label: "Product Name", name: "name", rules, status: 'yes' }],
+  ["number", { label: "Current price", name: "currentPrice", className: "productPrice", rules, status: 'yes' }],
+  ["number", { label: "Quantity", name: "quantity", className: "productPrice", rules, status: 'yes' }],
+  ["select-categories", { label: "Product Catalog", name: "categories_level1", rules, status: 'yes' }, 1],
+  ["select-categories", { label: "Parent Product Category", name: "categories_parent", rules, status: 'yes' }, 2],
+  ["select-categories", { label: "Product Category", name: "categories", rules, status: 'yes' }, 3],
+  ["select-filter", { label: "Country", name: "country", rules, status: 'yes' }],
+  ["select-filter", { label: "Brand", name: "brand", rules, status: 'yes' }],
 ];
 
 // form layout settings

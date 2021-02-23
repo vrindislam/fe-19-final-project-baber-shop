@@ -137,7 +137,7 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories, filters:
 
   const setSubmitButtonStatus = () => {
     const status = [];
-    const checkFields = fieldsSetArr.filter(el => el[1].touched).map(el => el[1].name);
+    const checkFields = fieldsSetArr.filter(el => el[1].status).map(el => el[1].name);
     checkFields.forEach(field => {
       status.push(form.isFieldTouched(field) && (form.getFieldError(field).length === 0));
     });
