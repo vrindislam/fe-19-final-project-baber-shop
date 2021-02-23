@@ -19,10 +19,10 @@ const Checkout = ({products}) => {
 
         const newOrder = {
             customerId: "???", // TODO: add customer id
-            products, // TODO: fix products
-            deliveryAddress: address,
-            shipping: shipping,
-            paymentInfo: payment,
+            products: JSON.stringify(products), // TODO: fix products
+            deliveryAddress: JSON.stringify(address),
+            shipping: JSON.stringify({id: shipping}),
+            paymentInfo: JSON.stringify({id: payment}),
             status: "not shipped",
             email: email,
             mobile: phone,
