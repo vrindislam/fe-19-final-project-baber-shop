@@ -1,4 +1,4 @@
-import { USER_AUTH_STATUS } from "./actionTypesUser";
+import {USER_AUTH_STATUS, USER_NAME_CHANGE} from "./actionTypesUser";
 
 export const authUser = status => dispatch => {
   return dispatch(
@@ -8,3 +8,12 @@ export const authUser = status => dispatch => {
     }
   );
 };
+
+export const changeFirstName = name => dispatch => {
+    return dispatch(
+        {
+            type: USER_NAME_CHANGE,
+            payload: name
+        }
+    )
+}

@@ -35,7 +35,7 @@ const LiveSearch = () => {
 
   const products = items.map((el,index) =>
     <Menu.Item key={index}>
-      <Link to={`/${el.id}`}>
+      <Link to={`/product/${el.itemNo}`}>
         <div className='search-product'>
           <img className='search-product-logo' src={el.imageUrls[0]} alt="product logo"/>
           <p className='search-product-name'>{el.name.toUpperCase()}</p>
