@@ -1,4 +1,4 @@
-import {ADDING_TO_CART,DELETE_FROM_CART,DECREASE_QUANTITY,INCREASE_QUANTITY} from "./actionTypes"
+import {ADDING_TO_CART,DELETE_FROM_CART,DECREASE_QUANTITY,INCREASE_QUANTITY,UPDATE_CART} from "./actionTypes"
 import Ajax from '../../services/Ajax'
 
 const { deleteRequest, put } = Ajax
@@ -14,13 +14,13 @@ export const addToCart = (item,_id, isAuthenticated)  => {
   }
 }
 
-export const deleteFromCart = (id, isAuth)  => {
+export const deleteFromCart = (_id, isAuth)  => {
   if (isAuth) {
-    deleteRequest('/cart', id).then(r => console.log(r.products))
+    deleteRequest('/cart', _id).then(r => console.log(r.products))
   }
   return {
     type: DELETE_FROM_CART,
-    payload: {id}
+    payload: {_id}
   }
 }
 
@@ -43,11 +43,15 @@ export const decreaseQuantity = (_id, isAuth) => {
     payload: {_id}
   }
 }
-//
-// export const updateCart = (updatedProducts) =>{
-//   return {
-//     type: UPDATE_CART,
-//     payload: {updatedProducts}
-//   }
-// }
+
+export const updateCart = (updatedCart) => {
+  console.log("updatedCart",updatedCart);
+  // if (isAuth) {
+  //   put("/cart", updatedCart).then(r => console.log("updateCart------->>>",r))
+  // }
+  return {
+    type: UPDATE_CART,
+    payload: {updatedCart}
+  }
+}
 

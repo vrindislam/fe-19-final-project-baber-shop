@@ -6,7 +6,8 @@ import { content } from './popoverBasketContent'
 import { iconCart } from '../Header/img'
 import { useSelector } from 'react-redux'
 const PopoverBasket = () => {
-  const productsLength = useSelector(state => state.cart.products.length)
+  const productsLength = useSelector(state => state.cart.products.products.length)
+  // console.log("PopoverBasket--------productsLength",productsLength);
 
   return (
     <Popover placement="bottomRight" align={{ offset: [70, 0] }} className='popover-basket-div' content={content}

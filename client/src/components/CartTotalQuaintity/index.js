@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom'
 
 export const TotalAmount = (props) => {
 
-  const products = useSelector(state => state.cart.products)
+  const products = useSelector(state => state.cart.products.products)
+  // console.log("-----TotalAmount-----",products);
+  // console.log("product.product.currentPrice",);
 
   const sumArray = []
-    products.forEach(item => sumArray.push(item.currentPrice * item.cartQuantity))
+  products.forEach(product => sumArray.push(Number(product.product.currentPrice) * Number(product.cartQuantity)))
   const totalMoney = Number(sumArray.reduce((a, b) => a + b, 0).toFixed(2))
   const [shipment, setShipment] = useState(0)
   useEffect(() => {

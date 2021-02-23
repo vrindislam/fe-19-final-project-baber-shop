@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './styles.less'
 import {Col, Row} from 'antd'
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {addToCart} from "../../store/cart/actionCart";
 import Banner from "../../components/Banner";
 import ProductCarousel from "../../components/ProductCarousel";
@@ -9,17 +9,26 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Ajax from "../../services/Ajax";
 import {CheckCircleOutlined} from '@ant-design/icons'
+import { MetaForEachPage } from "../../components/Helmet";
+const {put} = Ajax;
 
-const ProductPage = () => {
+
+
+const ProductPage = (props) => {
+    console.log("props--------ProductPage",props.location.state.product);
+    const { _id} = props.location.state.product;
+    const {isAuthenticated} = useSelector(state => ({...state.user}));
     const dispatch = useDispatch();
     const { itemNo } = useParams()
+    console.log("---itemNo---itemNo--->>>",itemNo);
     const [product, setProduct] = useState({})
+    console.log("product------product------product",product);
     const [images, setImages] = useState([])
 
     useEffect(() => {
         axios(`http://localhost:5000/api/products/${itemNo}`)
             .then((response) => setProduct(response.data))
-            .catch((e) => console.log(e))
+            .catch((e) => console.log("ProductPage---->>>>useEffect----->>>",e))
     }, [itemNo])
 
 
@@ -33,12 +42,28 @@ const ProductPage = () => {
     }, [itemNo])
 
 
+    // const onAddToCart = (e) => {
+    //     e.preventDefault();
+    //     dispatch(addToCart(product));
+    // }
     const onAddToCart = (e) => {
         e.preventDefault();
-        dispatch(addToCart(product));
+        if(isAuthenticated) {
+            put('/cart/',_id)
+        } else {
+            const newProduct = {...product, cartQuantity: + 1}
+            dispatch(addToCart(newProduct));
+        }
     }
 
     return (
+      <>
+          <MetaForEachPage
+            title = "Barber Shop Market"
+            content = "Barber Shop market"
+            rel = "icon"
+            product={product}
+          />
         <div className="product-page">
             <div className="product_page__container">
                 <Row>
@@ -91,6 +116,7 @@ const ProductPage = () => {
 
             <Banner title={'One more  thing'} config='cc'/>
         </div>
+          </>
     )}
 
 

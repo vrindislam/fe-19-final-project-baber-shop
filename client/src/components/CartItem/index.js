@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './style.less'
 import { PlusCircleFilled, MinusCircleFilled, DeleteFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,13 +7,17 @@ import { deleteFromCart, increaseQuantity, decreaseQuantity } from '../../store/
 
 const CartItem = (props) => {
   const dispatch = useDispatch()
-  const { imageUrls, name, currentPrice, _id, cartQuantity, } = props.product
-  const [total, setTotal] = useState(0)
+  // console.log("CartItem-------------->>>>",props.product);
+  const cartQuantity = props.product.cartQuantity
+  const { imageUrls, name, currentPrice, _id } = props.product.product
+  // console.log("imageUrls, name, currentPrice, _id",imageUrls, name, currentPrice, _id);
+  // console.log("props.product.product>>>>>>---->>>>",props.product.product);
+  // const [total, setTotal] = useState(0)
   const isAuth = useSelector(state => state.user.isAuthenticated)
 
-  useEffect(() => {
-      setTotal(cartQuantity * currentPrice)
-  }, [currentPrice, cartQuantity])
+  // useEffect(() => {
+  //     setTotal(cartQuantity * currentPrice)
+  // }, [currentPrice, cartQuantity])
   return (
     <div className="cart-item-wrapper">
       <div className="cart-item_item-image-description">
@@ -40,12 +44,12 @@ const CartItem = (props) => {
           <div className="item-handler_main-quantity">
             {cartQuantity === 0
               ? <MinusCircleFilled/>
-              : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id))}/>
+              : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id,isAuth))}/>
             }
             <span>{cartQuantity}</span>
-            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id))}/>
+            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth))}/>
           </div>
-          <div className="item-handler_main-total">{total.toFixed(2)}</div>
+          <div className="item-handler_main-total">{(currentPrice * cartQuantity).toFixed(2)}</div>
           <div className="item-handler_main-basket" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>
             <DeleteFilled/>
           </div>

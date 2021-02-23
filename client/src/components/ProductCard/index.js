@@ -23,8 +23,10 @@ const ProductCard = ({product, refresh}) => {
 
     const onAddToCart = (e) => {
         e.preventDefault();
-            const newProduct = {...product, cartQuantity: + 1}
-            dispatch(addToCart(newProduct, _id, isAuthenticated));
+            // const newProduct = {...product, cartQuantity: + 1}
+            // dispatch(addToCart(newProduct, _id, isAuthenticated));
+        const newProduct = {product, cartQuantity: + 1}
+        dispatch(addToCart(newProduct, _id, isAuthenticated));
     }
 
     const forwardToCardDetails = () => {
