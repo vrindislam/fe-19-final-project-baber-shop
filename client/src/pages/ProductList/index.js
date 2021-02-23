@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addFilter, deleteFilter} from "../../store/filters/filterAction";
 
 import {MetaForPages} from "../../components/Helmet"
+import {CaretDownOutlined, CaretUpOutlined} from "@ant-design/icons";
 
 const ProductList = () => {
 
@@ -54,7 +55,7 @@ const ProductList = () => {
     }
     const show = showFilters ? 'active' : 'hidden';
 
-    const showButton = {display: showFilters ? 'none' : 'inline-block'}
+    const showButton = {display: showFilters ? 'none' : 'block'}
 
 
     return (
@@ -65,6 +66,13 @@ const ProductList = () => {
               rel = "icon"
             />
             <div className="product-list-container">
+                <div className='filters'>
+                <div className="open-filters-btn-container">
+                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>Filter <CaretDownOutlined  className='filters-btn-icon'/>
+                    </button>
+                    <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>Filter   <CaretUpOutlined className='filters-btn-icon' />
+                    </button>
+                </div>
                 <div className={"filters-container " + show}>
                     <PriceSlider minValue={minValue} maxValue={maxValue}
                                  setMinVal={setMinValue}
@@ -72,10 +80,6 @@ const ProductList = () => {
                     />
                     <CheckboxFilter filters={checkboxFiltersDB} clickCheckbox={catchCheckbox}/>
                 </div>
-                <div className="open-filters-btn-container">
-                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X
-                    </button>
-                    <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>O</button>
                 </div>
                 <FilteredProducts queryString={string}/>
             </div>
