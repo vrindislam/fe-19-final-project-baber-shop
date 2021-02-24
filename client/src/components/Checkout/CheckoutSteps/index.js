@@ -10,7 +10,7 @@ const CheckoutSteps = ({children, onFinish}) => {
     const state = useSelector(state => state.checkout);
     const history = useHistory();
 
-    const onStepChange = async () => {
+    const onStepChange = () => {
         const steps = children.length;
         const newStep = state.step + 1;
         if (newStep < steps) {
