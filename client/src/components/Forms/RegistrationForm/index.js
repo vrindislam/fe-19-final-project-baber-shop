@@ -2,14 +2,14 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Button, Form, Input } from "antd";
-import { collectionItemsForm, onlyNumbers, onlyLetters } from "./collectionItems";
+import { collectionItemsForm } from "./collectionItems";
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
 import { showModal } from "../../../store/modal/modalAction";
 import { authUser } from "../../../store/user/userAction";
 import LoginService from "../../../services/LoginService";
 import RegisterService from "../../../services/RegisterService";
 import { ToastContainer } from "react-toastify";
-import {errorRegisterToast,successRegisterToast} from "../../Toasters";
+import { errorRegisterToast, successRegisterToast } from "../../Toasters";
 import jwt_decode from "jwt-decode";
 import "./styles.less";
 
@@ -77,14 +77,8 @@ const RegistrationForm = (props) => {
                      rules={formItem.rules}
                      key={formItem.name}>
             {formItem.name === "password"
-              ? <Input.Password maxLength={25} placeholder={formItem.label}/>
-              : formItem.name === "phone"
-                ? <Input maxLength={13} onKeyPress={onlyNumbers()}/>
-                : formItem.name === "firstName" || formItem.name === "lastName"
-                  ? <Input placeholder={formItem.label} onKeyPress={onlyLetters()} maxLength={25}/>
-                  : formItem.name === "login"
-                    ? <Input placeholder={formItem.label} maxLength={10}/>
-                    : <Input placeholder={formItem.label} maxLength={25}/>
+              ? <Input.Password maxLength={formItem.maxLength} placeholder={formItem.label} />
+              : <Input maxLength={formItem.maxLength} placeholder={formItem.label} onKeyPress={formItem.onKeyPress}/>
             }
           </Form.Item>
         )}
