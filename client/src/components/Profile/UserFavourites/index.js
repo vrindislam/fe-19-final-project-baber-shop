@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {StarTwoTone} from '@ant-design/icons';
 import {Col, Typography} from 'antd';
-import '../style.less'
 import Ajax from "../../../services/Ajax";
 import ProductCard from "../../ProductCard";
 import Preloader from "../../Preloader";
+import '../style.less'
 
 const {get} = Ajax;
 
@@ -21,7 +21,6 @@ const UserFavourites = () => {
 
     }
     useEffect(() => {
-
             let cleanupFunction = false;
             get('/wishlist')
                 .then(wishlist => {
@@ -33,9 +32,7 @@ const UserFavourites = () => {
                     }
                 })
             return () => cleanupFunction = true
-
-        },
-        []
+        }, []
     )
 
     return (

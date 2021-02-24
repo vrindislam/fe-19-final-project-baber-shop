@@ -1,8 +1,8 @@
-import {Button, Carousel} from 'antd';
 import React, {useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
-import './styles.less'
+import {Button, Carousel} from 'antd';
 import Ajax from "../../services/Ajax";
+import './styles.less'
 
 const {get} = Ajax;
 
