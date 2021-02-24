@@ -6,7 +6,6 @@ import { collectionItemsForm, onlyNumbers, onlyLetters } from "./collectionItems
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
 import { Link, useHistory } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-
 import { showModal } from "../../../store/modal/modalAction";
 import { useDispatch } from "react-redux";
 import LoginService from "../../../services/LoginService";
@@ -14,7 +13,6 @@ import jwt_decode from "jwt-decode";
 import { authUser } from "../../../store/user/userAction";
 import {errorRegisterToast,successRegisterToast} from "../../Toasters";
 import { ToastContainer } from "react-toastify";
-
 
 const RegistrationForm = (props) => {
   console.log("props.handleRegisterModalClose",props.handleRegisterModalClose);
@@ -48,11 +46,15 @@ const RegistrationForm = (props) => {
           .catch(err => {
             errorRegisterToast()
             console.log("login error",err);
+            const error = err.response.data;
+            console.log("error",error);
           })
       })
       .catch(err => {
         errorRegisterToast()
         console.log("Registration error");
+        const error = err.response.data;
+        console.log("error",error);
         console.log(err);
       });
   };
@@ -68,6 +70,7 @@ const RegistrationForm = (props) => {
       initialValues={{
         phone: "+380"
       }}
+
       scrollToFirstError
     >
       <Form.Item className='registration-form-title' {...tailFormItemLayout}>
@@ -79,11 +82,13 @@ const RegistrationForm = (props) => {
                    rules={formItem.rules}
                    key={formItem.name}>
           {formItem.name === "password"
-            ? <Input.Password maxLength={25} placeholder={formItem.label}/>
-            : formItem.name === "phone"
+              ? <Input.Password maxLength={25} placeholder={formItem.label}/>
+              : formItem.name === "phone"
               ? <Input maxLength={13} onKeyPress={onlyNumbers()}/>
               : formItem.name === "firstName" || formItem.name === "lastName"
               ? <Input placeholder={formItem.label} onKeyPress={onlyLetters()} maxLength={25}/>
+              : formItem.name === "login"
+              ? <Input placeholder={formItem.label} maxLength={10}/>
               : <Input placeholder={formItem.label} maxLength={25}/>
           }
         </Form.Item>
