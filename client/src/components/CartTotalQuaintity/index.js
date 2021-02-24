@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 export const TotalAmount = (props) => {
 
   const products = useSelector(state => state.cart.products.products)
-  // console.log("-----TotalAmount-----",products);
-  // console.log("product.product.currentPrice",);
 
   const sumArray = []
   products.forEach(product => sumArray.push(Number(product.product.currentPrice) * Number(product.cartQuantity)))

@@ -45,10 +45,7 @@ export const decreaseQuantity = (_id, isAuth) => {
 }
 
 export const updateCart = (updatedCart) => {
-  console.log("updatedCart",updatedCart);
-  // if (isAuth) {
-  //   put("/cart", updatedCart).then(r => console.log("updateCart------->>>",r))
-  // }
+
   return {
     type: UPDATE_CART,
     payload: {updatedCart}

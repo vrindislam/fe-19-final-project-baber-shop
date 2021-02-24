@@ -3,11 +3,10 @@ import './style.less'
 import CartItem from '../CartItem'
 
 const ProductsContainer = ({ products }) => {
-  // console.log("ProductsContainer------------->>>",products);
   const items = products.map(product =>
     <CartItem
       product={product}
-      key={product.itemNo}
+      key={product.product._id}
     />)
 
   return (
