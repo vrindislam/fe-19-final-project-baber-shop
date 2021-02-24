@@ -3,34 +3,15 @@ import './style.less'
 import { useSelector } from 'react-redux'
 import { Button } from 'antd'
 import { Link } from 'react-router-dom'
-import Ajax from '../../services/Ajax'
-
-const { get } = Ajax
 
 export const TotalAmount = (props) => {
 
-  const products = useSelector(state => state.cart.products)
-  const isAuth = useSelector(state => state.user.isAuthenticated)
-  const [productsDB, setProductsDB] = useState([])
-  useEffect(() => {
-    if (isAuth) {
-      async function fetch () {
-        const queryDB = await get('/cart')
-        if(queryDB){
-          setProductsDB(queryDB.products)
-        }
-      }
-
-      fetch()
-    }
-  }, [isAuth])
+  const products = useSelector(state => state.cart.products.products)
+  // console.log("-----TotalAmount-----",products);
+  // console.log("product.product.currentPrice",);
 
   const sumArray = []
-  if (isAuth) {
-    productsDB.forEach(item => sumArray.push(item.product.currentPrice * item.cartQuantity))
-  } else {
-    products.forEach(item => sumArray.push(item.currentPrice * item.cartQuantity))
-  }
+  products.forEach(product => sumArray.push(Number(product.product.currentPrice) * Number(product.cartQuantity)))
   const totalMoney = Number(sumArray.reduce((a, b) => a + b, 0).toFixed(2))
   const [shipment, setShipment] = useState(0)
   useEffect(() => {
@@ -49,7 +30,7 @@ export const TotalAmount = (props) => {
         <div>
           <div className="cart-total_main">
             <div>
-              <span>{isAuth ? productsDB.length : products.length} item(s)</span>
+              <span>{products.length} item(s)</span>
               <span>${totalMoney}</span>
             </div>
             <div>
@@ -64,7 +45,7 @@ export const TotalAmount = (props) => {
         </div>
       </div>
       : <div className='popover-basket-wrapper'>
-        <p>You have {isAuth ? productsDB.length : products.length} goods in the basket</p>
+        <p>You have {products.length} goods in the basket</p>
         <p>For a total amount ${totalMoney}</p>
         <div className="basket-buttons-wrapper">
           <Button className='make-order-button'>Make an order</Button>
