@@ -1,19 +1,20 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Steps} from "antd";
 import {CheckCircleOutlined} from "@ant-design/icons";
-import CheckoutContext from "../util/CheckoutContext";
-import actions from "../util/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {goToStep} from "../../../store/checkout/checkoutAction";
 
 
 const {Step} = Steps;
 
 const CheckoutNavigation = () => {
 
-    const {state, dispatch} = useContext(CheckoutContext);
+    const state = useSelector(state => state.checkout);
+    const dispatch = useDispatch();
 
     const onChange = (current) => {
         if (current <= (state.step + 1)) {
-            dispatch({type: actions.goToStep, payload: current});
+            dispatch(goToStep(current));
         }
     }
 

@@ -7,6 +7,7 @@ import cartReducer from "./cart/cartReducer";
 import filterReducer from "./filters/filterReducer";
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import checkoutReducer from "./checkout/checkoutReducer";
 
 
 const persistConfig ={
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   preloader: preloaderReducer,
   cart: cartReducer,
   filterReducer: filterReducer,
+  checkout: checkoutReducer
 })
 
 export default persistReducer(persistConfig,rootReducer)

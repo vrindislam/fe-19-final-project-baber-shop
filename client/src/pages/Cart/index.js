@@ -20,7 +20,7 @@ const Cart = () => {
           </div>
         </>
       }
-      <Checkout/>
+    <Checkout products={products}/>
     </div>
   );
 };
