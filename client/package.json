@@ -52,7 +52,8 @@
     "stylelint": "^13.8.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-order": "^4.1.0",
-    "use-async-effect": "^2.2.2"
+    "use-async-effect": "^2.2.2",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "all": "concurrently \"(npm run server --prefix ../)\" \"(npm run start)\"",

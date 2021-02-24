@@ -7,17 +7,10 @@ import { deleteFromCart, increaseQuantity, decreaseQuantity } from '../../store/
 
 const CartItem = (props) => {
   const dispatch = useDispatch()
-  // console.log("CartItem-------------->>>>",props.product);
   const cartQuantity = props.product.cartQuantity
   const { imageUrls, name, currentPrice, _id } = props.product.product
-  // console.log("imageUrls, name, currentPrice, _id",imageUrls, name, currentPrice, _id);
-  // console.log("props.product.product>>>>>>---->>>>",props.product.product);
-  // const [total, setTotal] = useState(0)
   const isAuth = useSelector(state => state.user.isAuthenticated)
 
-  // useEffect(() => {
-  //     setTotal(cartQuantity * currentPrice)
-  // }, [currentPrice, cartQuantity])
   return (
     <div className="cart-item-wrapper">
       <div className="cart-item_item-image-description">

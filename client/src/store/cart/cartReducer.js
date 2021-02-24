@@ -1,14 +1,15 @@
 import { ADDING_TO_CART, DELETE_FROM_CART, DECREASE_QUANTITY,INCREASE_QUANTITY,UPDATE_CART } from "./actionTypes";
 
 const initialState = {
-  products: {products:[]},
+  products: {
+    products:[]
+  }
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADDING_TO_CART:
       return {...state, products: {products: [...state.products.products.filter(item => item.product._id !== action.payload.item.product._id),action.payload.item]}}
-      // return {...state, products: [...state.products.filter(item => item.product._id !== action.payload.item.product._id),action.payload.item]}
     case DELETE_FROM_CART:
       console.log("DELETE_FROM_CART",action.payload.id);
       return {...state, products: {products: [...state.products.products.filter(item => item.product._id !== action.payload._id)]}}
@@ -18,7 +19,6 @@ const cartReducer = (state = initialState, action) => {
         products: {products: state.products.products.map(product =>
           product.product._id === action.payload._id
             ? {...product, cartQuantity: product.cartQuantity + 1,
-              quantity: product.product.quantity - 1
         }
             : product,
         )},
@@ -29,15 +29,13 @@ const cartReducer = (state = initialState, action) => {
         products: {products: state.products.products.map(product =>
           product.product._id === action.payload._id
             ? { ...product, cartQuantity: product.cartQuantity - 1,
-              quantity:product.product.quantity + 1
         }
             : product,
         )},
       };
     case UPDATE_CART:
       return {
-        ...state, products: {products: [...new Set ([...state.products.products, ...action.payload.updatedCart])]}
-        // ...state, products: {products: [...state.products.products, ...action.payload.updatedCart]}
+        ...state, products: {products: action.payload.updatedCart}
       }
     default:
       return state;
