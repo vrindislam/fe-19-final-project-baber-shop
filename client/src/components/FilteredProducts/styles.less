@@ -3,16 +3,16 @@
 .filtered-products-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   align-content: baseline;
+  justify-content: space-evenly;
   padding: 20px;
 
 
-  & .productCard {
+  .productCard {
     margin: 5px;
   }
 
-  & .load-more-btn {
+  .load-more-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +21,7 @@
     margin: 5px;
     background-color: #f0f0f0;
 
-    & .load-more-spinner {
+    .load-more-spinner {
       color: @black;
 
       & svg {
@@ -30,12 +30,11 @@
       }
     }
 
-    & .load-more-text {
+    .load-more-text {
       color: @black;
       font-weight: bold;
       font-size: 16px
     }
-
 
     .ant-card-body {
       display: flex;
@@ -45,16 +44,15 @@
   }
 }
 
-
 @media screen and (min-width: 576px) {
   .filtered-products-container {
     justify-content: start;
+    padding: 20px 0;
   }
 }
 
 @media screen and (min-width: 768px) {
   .filtered-products-container {
-
     & .load-more-btn {
       width: 165px;
       height: 165px;
@@ -79,19 +77,18 @@
 
 @media screen and (min-width: 1200px) {
   .filtered-products-container {
-
-    & .load-more-btn {
+    .load-more-btn {
       width: 260px;
       height: 260px;
 
-      & .load-more-spinner {
+      .load-more-spinner {
         & svg {
           width: 45px;
           height: 50px;
         }
       }
 
-      & .load-more-text {
+      .load-more-text {
         font-size: 22px;
       }
     }
@@ -100,8 +97,7 @@
 
 @media screen and (min-width: 1600px) {
   .filtered-products-container {
-
-    & .load-more-btn {
+    .load-more-btn {
       width: 300px;
       height: 300px;
     }

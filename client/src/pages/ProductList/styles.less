@@ -4,43 +4,42 @@
 .product-list-container {
   display: block;
 
-  & .filters {
+  .filters {
     position: relative;
   }
 
-  & .open-filters-btn-container {
+  .open-filters-btn-container {
     display: block;
     padding-top: 10px;
 
-    & .open-filters-btn {
+    .open-filters-btn {
       width: 280px;
-      font-size: 22px;
+      margin: 0 auto;
       padding: 10px;
       color: @white;
+      font-size: 22px;
       background-color: @black;
       border: none;
       border-radius: 5px;
-      margin: 0 auto;
 
       &:hover {
         color: @yellow-5;
       }
 
-      & .filters-btn-icon {
+      .filters-btn-icon {
         margin-left: 20px;
       }
     }
   }
 
-  & .filters-container {
+  .filters-container {
     position: absolute;
     top: 125%;
-
-    padding: 0 5%;
+    z-index: 1;
     display: none;
     width: 100%;
+    padding: 0 5%;
     background-color: #f0f2f5;
-    z-index: 1;
   }
 
   .active {
@@ -52,31 +51,67 @@
   }
 }
 
-@media screen and (min-width: 586px) {
-
+@media screen and (min-width: 576px) {
 
   .product-list-container {
     display: flex;
-    padding: 3vw 7vw;
+    justify-content: space-between;
+    padding: 3vw 5vw;
 
     .filters {
       width: 30%;
-      min-width: 300px;
+      margin-right: 20px;
     }
 
-    & .filters-container {
-      display: block;
+    .filters-container {
       position: static;
+      display: block;
+      width: 160px;
       padding: 0;
-      width: 100%;
       background-color: @white;
-
     }
 
-    & .open-filters-btn-container {
+    .open-filters-btn-container {
       display: none;
     }
   }
+}
 
+@media screen and (min-width: 768px) {
 
+  .product-list-container {
+    padding: 3vw 4vw;
+
+    .filters {
+      width: 22%;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+
+  .product-list-container {
+
+    .filters {
+      width: 20%;
+
+      &-container {
+        width: 185px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+
+  .product-list-container {
+
+    .filters {
+      margin-right: 40px;
+
+      &-container {
+        width: 240px;
+      }
+    }
+  }
 }
