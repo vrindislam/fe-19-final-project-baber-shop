@@ -1,4 +1,5 @@
 import * as actions from "./checkoutActionTypes"
+import {message} from "antd";
 // import {resetCart} from "../cart/actionCart";
 
 export const nextStep = () => dispatch => dispatch({type: actions.NEXT_STEP});
@@ -18,7 +19,7 @@ export const placeOrder = (createOrder, history) => async (dispatch, getState) =
         // dispatch(resetCart());
         history.push('/order-confirmation');
     } catch (err) {
-        //
+        return message.error('Order is not placed due to error: ' + err);
     }
 
 }

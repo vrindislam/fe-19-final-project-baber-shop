@@ -34,6 +34,9 @@ const Checkout = ({products}) => {
         try {
             const order = await Ajax.post('/orders', newOrder);
             console.log('Order created:', order);
+            if (order.message) {
+                return Promise.reject(order.message);
+            }
             return Promise.resolve(order);
         } catch (err) {
             return Promise.reject(err);

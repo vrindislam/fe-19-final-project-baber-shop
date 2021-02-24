@@ -77,7 +77,19 @@ const PaymentForm = ({disabled, form}) => {
                         <Form.Item
                             label='Valid through'
                             name='expiry'
-                            rules={[{required: true, message: 'Please enter your expiration date!'}]}
+                            validateTrigger={'onBlur'}
+                            rules={[{required: true, message: 'Please enter your expiration date!'}, ({ getFieldValue }) => ({
+                                validator(_, value) {
+                                    if (value) {
+                                        const [month, year] = value.split('/');
+                                        if (+month > 12 || +month < 1 || +year < +(new Date().getFullYear().toString().slice(2))) {
+                                            // eslint-disable-next-line prefer-promise-reject-errors
+                                            return Promise.reject("Please enter the valid date!")
+                                        }
+                                    }
+                                    return Promise.resolve();
+                                },
+                            })]}
                         >
                             <MaskedInput name='expiry' placeholder='Valid through' disabled={disabled}
                                          onChange={handleInputChange} onFocus={handleInputFocus} mask='11/11' size={5}/>
