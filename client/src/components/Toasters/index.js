@@ -1,10 +1,11 @@
 import React from 'react';
-import "./styless.less"
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from "react-toastify";
-import {Button} from "antd";
-import { showModal } from "../../store/modal/modalAction";
 import { useDispatch } from "react-redux";
+import { Button } from "antd";
+import { toast } from "react-toastify";
+import { showModal } from "../../store/modal/modalAction";
+import 'react-toastify/dist/ReactToastify.css';
+import "./styless.less"
+
 
 const LoginModal = () => {
   const dispatch = useDispatch();
