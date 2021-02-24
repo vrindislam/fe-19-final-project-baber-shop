@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Ajax from "../../../services/Ajax";
-import {Button, message, Radio, Skeleton} from "antd";
+import {Button, Form, message, Radio, Skeleton} from "antd";
 import PaymentForm from "./PaymentForm";
 import {useDispatch} from "react-redux";
 import './styles.less';
@@ -33,8 +33,9 @@ const CheckoutPayment = ({disabled, onChange}) => {
     }
 
     const onFinish = async () => {
+        const values = await form.validateFields();
         if (value) {
-            dispatch(setPayment(value));
+            dispatch(setPayment({id: value, data: values}));
             onChange();
         } else {
             message.error('Select a method or call us.');
@@ -42,6 +43,8 @@ const CheckoutPayment = ({disabled, onChange}) => {
     }
 
     const isCC = (methods.filter(method => method.customId === value)[0] || {}).paymentProcessor;
+
+    const [form] = Form.useForm();
 
     return (
         <div className="checkout-payment">
@@ -66,7 +69,7 @@ const CheckoutPayment = ({disabled, onChange}) => {
                 {
                     isCC
                         ? (
-                            <PaymentForm disabled={disabled}/>
+                            <PaymentForm disabled={disabled} form={form}/>
                         )
                         : null
                 }

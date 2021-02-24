@@ -5,7 +5,7 @@ import {Row, Col, Form, Input} from "antd";
 import 'react-credit-cards/es/styles-compiled.css';
 import "./styles.less";
 
-const PaymentForm = ({disabled}) => {
+const PaymentForm = ({disabled, form}) => {
     const [state, setState] = useState({
         cvc: '',
         expiry: '',
@@ -27,8 +27,6 @@ const PaymentForm = ({disabled}) => {
 
         setState({...state, [name]: value});
     }
-
-    const [form] = Form.useForm();
 
     const layout = {
         labelCol: {

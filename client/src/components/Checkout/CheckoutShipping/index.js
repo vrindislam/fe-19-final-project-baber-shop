@@ -37,7 +37,8 @@ const CheckoutShipping = ({disabled, onChange}) => {
 
     const onFinish = async () => {
         if (value) {
-            dispatch(setShipping(value));
+            const price = methods.filter(m => m.customId === value)[0]?.costValue;
+            dispatch(setShipping({id: value, price: price}));
             onChange();
         } else {
             message.error('Select a method or call us.');

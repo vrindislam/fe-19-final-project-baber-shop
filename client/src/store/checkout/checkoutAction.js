@@ -1,5 +1,5 @@
 import * as actions from "./checkoutActionTypes"
-import {resetCart} from "../cart/actionCart";
+// import {resetCart} from "../cart/actionCart";
 
 export const nextStep = () => dispatch => dispatch({type: actions.NEXT_STEP});
 export const goToStep = current => dispatch => dispatch({type: actions.GO_TO_STEP, payload: current});
@@ -15,7 +15,7 @@ export const placeOrder = (createOrder, history) => async (dispatch, getState) =
         const order = await createOrder(email, phone, rest, state.shipping, state.payment);
         console.log(order);
         dispatch({type: actions.PLACE_ORDER});
-        dispatch(resetCart());
+        // dispatch(resetCart());
         history.push('/order-confirmation');
     } catch (err) {
         //

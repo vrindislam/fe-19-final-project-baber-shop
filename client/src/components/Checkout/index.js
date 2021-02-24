@@ -6,20 +6,14 @@ import CheckoutShipping from "./CheckoutShipping";
 import CheckoutPayment from "./CheckoutPayment";
 import CheckoutSteps from "./CheckoutSteps";
 import Ajax from "../../services/Ajax";
+import {useSelector} from "react-redux";
 
 const Checkout = ({products}) => {
+    
+    const {isAuthenticated: isAuth, id} = useSelector(state => state.user);
 
     const placeOrder = async (email, phone, address, shipping, payment) => {
-        try {
-            const customer = await Ajax.get('/customers/customer');
-            console.log('customer', customer);
-        } catch (err) {
-            //
-        }
-
         const newOrder = {
-            customerId: "???", // TODO: add customer id
-            products: JSON.stringify(products), // TODO: fix products
             deliveryAddress: JSON.stringify(address),
             shipping: JSON.stringify({id: shipping}),
             paymentInfo: JSON.stringify({id: payment}),
@@ -31,16 +25,18 @@ const Checkout = ({products}) => {
                 "<h1>Your order is placed.</h1>"
         };
 
-        console.log("order", newOrder);
-        console.log("orderjson", JSON.stringify(newOrder));
+        if (isAuth) {
+            newOrder.customerId = id;
+        } else {
+            newOrder.products = JSON.stringify(products);
+        }
 
         try {
             const order = await Ajax.post('/orders', newOrder);
-            console.log('order placed', order);
+            console.log('Order created:', order);
             return Promise.resolve(order);
         } catch (err) {
-            console.error(111, err);
-            return Promise.resolve(err);
+            return Promise.reject(err);
         }
     }
 
