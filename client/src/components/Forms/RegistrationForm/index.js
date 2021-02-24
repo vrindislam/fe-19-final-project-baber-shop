@@ -1,23 +1,19 @@
 import React from "react";
-import "./styles.less";
-import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button, Form, Input } from "antd";
 import { collectionItemsForm, onlyNumbers, onlyLetters } from "./collectionItems";
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
-import { Link, useHistory } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
-
 import { showModal } from "../../../store/modal/modalAction";
-import { useDispatch } from "react-redux";
-import LoginService from "../../../services/LoginService";
-import jwt_decode from "jwt-decode";
 import { authUser } from "../../../store/user/userAction";
-import {errorRegisterToast,successRegisterToast} from "../../Toasters";
+import LoginService from "../../../services/LoginService";
+import RegisterService from "../../../services/RegisterService";
 import { ToastContainer } from "react-toastify";
-
+import {errorRegisterToast,successRegisterToast} from "../../Toasters";
+import jwt_decode from "jwt-decode";
+import "./styles.less";
 
 const RegistrationForm = (props) => {
-  console.log("props.handleRegisterModalClose",props.handleRegisterModalClose);
   const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -28,10 +24,9 @@ const RegistrationForm = (props) => {
   const onFinish = (values) => {
     const newCustomer = { ...values, isAdmin: false };
     const userData = {}
-    axios.post(`${process.env.REACT_APP_API}/customers`, newCustomer)
+    RegisterService.RegisterResult(newCustomer)
       .then(savedCustomer => {
-        const {data} = savedCustomer
-        userData.loginOrEmail = data.email;
+        userData.loginOrEmail = savedCustomer.email;
         userData.password = values.password;
         LoginService.LoginResult(userData)
           .then(loginResult => {
@@ -39,20 +34,22 @@ const RegistrationForm = (props) => {
             const decoded = jwt_decode(loginResult.token);
             delete decoded.iat
             dispatch(authUser({...decoded, isAuthenticated: true}));
-            props.modal !== true &&
-            history.push('/');
+            if (!props.modal) history.push('/');
             successRegisterToast()
-            props.modal &&
-            props.handleRegisterModalClose()
+            if (props.handleRegisterModalClose) props.handleRegisterModalClose();
           })
           .catch(err => {
             errorRegisterToast()
             console.log("login error",err);
+            const error = err.response.data;
+            console.log("error",error);
           })
       })
       .catch(err => {
         errorRegisterToast()
         console.log("Registration error");
+        const error = err.response.data;
+        console.log("error",error);
         console.log(err);
       });
   };
@@ -60,47 +57,51 @@ const RegistrationForm = (props) => {
 
   return (
     <>
-    <Form
-      {...formItemLayout2}
-      form={form}
-      name="register"
-      onFinish={onFinish}
-      initialValues={{
-        phone: "+380"
-      }}
-      scrollToFirstError
-    >
-      <Form.Item className='registration-form-title' {...tailFormItemLayout}>
+      <Form
+        {...formItemLayout2}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          phone: "+380"
+        }}
+
+        scrollToFirstError
+      >
+        <Form.Item className='registration-form-title' {...tailFormItemLayout}>
           Register
-      </Form.Item>
-      {collectionItemsForm.map(formItem =>
-        <Form.Item name={formItem.name}
-                   label={formItem.label}
-                   rules={formItem.rules}
-                   key={formItem.name}>
-          {formItem.name === "password"
-            ? <Input.Password maxLength={25} placeholder={formItem.label}/>
-            : formItem.name === "phone"
-              ? <Input maxLength={13} onKeyPress={onlyNumbers()}/>
-              : formItem.name === "firstName" || formItem.name === "lastName"
-              ? <Input placeholder={formItem.label} onKeyPress={onlyLetters()} maxLength={25}/>
-              : <Input placeholder={formItem.label} maxLength={25}/>
-          }
         </Form.Item>
-      )}
-      <Form.Item {...tailFormItemLayout}>
-        <Button className='registration-button' type="primary" htmlType="submit">
-          Register
-        </Button>
-      </Form.Item>
-      <Form.Item {...tailFormItemLayout}>
-        <span onClick={showModalLogin}>Already registered?(link to Login Form MODAL)</span>
-        <Link to="/login">link to Login PAGE</Link>
-      </Form.Item>
-    </Form>
+        {collectionItemsForm.map(formItem =>
+          <Form.Item name={formItem.name}
+                     label={formItem.label}
+                     rules={formItem.rules}
+                     key={formItem.name}>
+            {formItem.name === "password"
+              ? <Input.Password maxLength={25} placeholder={formItem.label}/>
+              : formItem.name === "phone"
+                ? <Input maxLength={13} onKeyPress={onlyNumbers()}/>
+                : formItem.name === "firstName" || formItem.name === "lastName"
+                  ? <Input placeholder={formItem.label} onKeyPress={onlyLetters()} maxLength={25}/>
+                  : formItem.name === "login"
+                    ? <Input placeholder={formItem.label} maxLength={10}/>
+                    : <Input placeholder={formItem.label} maxLength={25}/>
+            }
+          </Form.Item>
+        )}
+        <Form.Item {...tailFormItemLayout}>
+          <Button className='registration-button' type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          <span onClick={showModalLogin}>Already registered?(link to Login Form MODAL)</span>
+          <Link to="/login">link to Login PAGE</Link>
+        </Form.Item>
+      </Form>
       <ToastContainer/>
     </>
   );
 };
 
 export default RegistrationForm;
+
