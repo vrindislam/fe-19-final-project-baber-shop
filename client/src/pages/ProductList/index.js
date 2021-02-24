@@ -68,9 +68,9 @@ const ProductList = () => {
             <div className="product-list-container">
                 <div className='filters'>
                 <div className="open-filters-btn-container">
-                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>Filter <CaretDownOutlined  className='filters-btn-icon'/>
+                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>Filter <CaretUpOutlined  className='filters-btn-icon'/>
                     </button>
-                    <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>Filter   <CaretUpOutlined className='filters-btn-icon' />
+                    <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>Filter   <CaretDownOutlined className='filters-btn-icon' />
                     </button>
                 </div>
                 <div className={"filters-container " + show}>
