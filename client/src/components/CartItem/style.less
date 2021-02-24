@@ -25,13 +25,20 @@
   .cart-item_item-description {
     max-width: 380px;
     p:first-child {
-      margin-bottom: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
       font-weight: bold;
       font-size: 16px;
     }
-    p:last-child {
+    .cart-item_item-description-paragraph {
+      max-height: 86px;
+      overflow: scroll;
       margin-top: 20px;
       font-size: 14px;
+      p {
+      font-weight: 700;
+    }
     }
   }
   .item-handler_main-price {
@@ -55,10 +62,19 @@
     margin: 0 20px;
   }
   .item-handler_main-basket {
+    cursor: pointer;
     margin: 0 20px;
   }
   .item-handler_main-basket-mobile {
+    cursor: pointer;
     display: none;
+  }
+  .available-span {
+    background-color: #EFE95E;
+    border: 1px black solid;
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin-left: 40px;
   }
 }
 @media (max-width: 800px) {

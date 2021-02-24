@@ -23,12 +23,13 @@ const LoginModal = () => {
 export const errorRegisterToast = () => {
   toast.error(<LoginModal/>,{
     position: toast.POSITION.TOP_CENTER,
-    autoClose: 20000
+    autoClose: 5000
   })
 }
 export const successRegisterToast = () => {
   toast.success("Registration complete",{
     position: toast.POSITION.TOP_CENTER,
-    autoClose: 20000
+    autoClose: 2000
   })
 }
+
