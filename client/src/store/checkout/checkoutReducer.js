@@ -3,7 +3,7 @@ import * as actions from "./checkoutActionTypes";
 const initialState = {
     step: 0,
     address: null,
-    shipping: null,
+    shipping: {price: 30},
     payment: null
 }
 

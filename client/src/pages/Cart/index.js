@@ -18,9 +18,9 @@ const Cart = () => {
             <ProductsContainer products={products}/>
             <TotalAmount total="cartTotal"/>
           </div>
+          <Checkout products={products}/>
         </>
       }
-    <Checkout products={products}/>
     </div>
   );
 };

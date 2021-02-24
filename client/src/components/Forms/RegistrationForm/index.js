@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input } from "antd";
 import { collectionItemsForm } from "./collectionItems";
 import { formItemLayout2, tailFormItemLayout} from "./formLayouts"
@@ -13,10 +13,14 @@ import { errorRegisterToast, successRegisterToast } from "../../Toasters";
 import jwt_decode from "jwt-decode";
 import "./styles.less";
 
+import {cartMerging} from '../../../services/cartAuth'
+
 const RegistrationForm = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
+  const products = useSelector(state => state.cart.products.products);
+  console.log("RegistrationForm-------products------->",products);
   const showModalLogin = () => {
     dispatch(showModal({status: true, type: 'LoginForm'}));
   };
@@ -34,6 +38,7 @@ const RegistrationForm = (props) => {
             const decoded = jwt_decode(loginResult.token);
             delete decoded.iat
             dispatch(authUser({...decoded, isAuthenticated: true}));
+            cartMerging(products, dispatch)
             if (!props.modal) history.push('/');
             successRegisterToast()
             if (props.handleRegisterModalClose) props.handleRegisterModalClose();

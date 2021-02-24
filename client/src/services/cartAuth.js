@@ -6,7 +6,15 @@ export const cartMerging = (products, dispatch) => {
 
   async function fetch () {
     const existingCart = await get('/cart')
-    const mergedArr = [...existingCart.products, ...products]
+    const mergedArr = []
+    if (existingCart === null) {
+      products.forEach(item => {mergedArr.push(item)})
+    } else {
+      products.forEach(item => {mergedArr.push(item)})
+      existingCart.products.forEach(item => {mergedArr.push(item)})
+    }
+    console.log("------mergedArr-----mergedArr------",mergedArr);
+    // const mergedArr = [...existingCart.products, ...products]
     const uniq = {}
     const arrFiltered = mergedArr.filter(obj => !uniq[obj.product._id] && (uniq[obj.product._id] = true))
     const items = arrFiltered.map(product => {
