@@ -10,20 +10,21 @@ import axios from 'axios'
 import Ajax from "../../services/Ajax";
 import {CheckCircleOutlined} from '@ant-design/icons'
 import { MetaForEachPage } from "../../components/Helmet";
-const {put} = Ajax;
 
 
 
 const ProductPage = (props) => {
-    console.log("props--------ProductPage",props.location.state.product);
-    const { _id} = props.location.state.product;
+    console.log("ProductPage---props.location.state.product--------",props.location.state.product);
+    // const { _id} = props.location.state.product;
     const {isAuthenticated} = useSelector(state => ({...state.user}));
+
     const dispatch = useDispatch();
     const { itemNo } = useParams()
-    console.log("---itemNo---itemNo--->>>",itemNo);
+    console.log("itemNo---itemNo",itemNo);
     const [product, setProduct] = useState({})
-    console.log("product------product------product",product);
     const [images, setImages] = useState([])
+
+    console.log("useState-product----_id_id",product._id);
 
     useEffect(() => {
         axios(`http://localhost:5000/api/products/${itemNo}`)
@@ -41,19 +42,10 @@ const ProductPage = (props) => {
         fetch();
     }, [itemNo])
 
-
-    // const onAddToCart = (e) => {
-    //     e.preventDefault();
-    //     dispatch(addToCart(product));
-    // }
     const onAddToCart = (e) => {
         e.preventDefault();
-        if(isAuthenticated) {
-            put('/cart/',_id)
-        } else {
-            const newProduct = {...product, cartQuantity: + 1}
-            dispatch(addToCart(newProduct));
-        }
+        const newProduct = {product, cartQuantity: + 1}
+        dispatch(addToCart(newProduct, product._id, isAuthenticated));
     }
 
     return (

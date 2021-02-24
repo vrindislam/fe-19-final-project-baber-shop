@@ -36,7 +36,7 @@ export const MetaForEachPage = ({ title, content, rel, href, src, type }) => {
       .then((response) => setProduct(response.data))
       .catch((e) => console.log("ProductPage---->>>>useEffect----->>>HELMET------>>>",e))
   }, [itemNo])
-  console.log("MetaForEachPage----------->>>HELMET------>>>",itemNo);
+  // console.log("MetaForEachPage----------->>>HELMET------>>>",itemNo);
   const metaContent = (product.name + product.brand + product.categories).toString().split(",").join(" ");
   const metaTitle = (product.name + product.brand + product.categories).toString();
   return (
