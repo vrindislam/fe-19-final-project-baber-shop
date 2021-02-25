@@ -3,8 +3,7 @@ import { Helmet } from "react-helmet";
 import Ajax from "../../services/Ajax";
 import { useParams } from "react-router-dom";
 
-export const MetaForPages = ({ title, content, rel, href, src, type,reddd }) => {
-  console.log("reddd",reddd);
+export const MetaForPages = ({ title, content, rel, href, src, type }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     async function fetchProducts() {

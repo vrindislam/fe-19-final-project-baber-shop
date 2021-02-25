@@ -10,7 +10,6 @@ import axios from 'axios'
 import Ajax from "../../services/Ajax";
 import {CheckCircleOutlined} from '@ant-design/icons'
 import { MetaForEachPage } from "../../components/Helmet";
-const {put} = Ajax;
 
 
 
@@ -48,12 +47,8 @@ const ProductPage = (props) => {
     // }
     const onAddToCart = (e) => {
         e.preventDefault();
-        if(isAuthenticated) {
-            put('/cart/',product._id)
-        } else {
-            const newProduct = {...product, cartQuantity: + 1}
-            dispatch(addToCart(newProduct));
-        }
+        const newProduct = {product, cartQuantity: + 1}
+        dispatch(addToCart(newProduct, product._id, isAuthenticated));
     }
 
     return (
