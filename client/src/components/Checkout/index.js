@@ -10,7 +10,7 @@ import {useSelector} from "react-redux";
 import Preloader from "../Preloader";
 
 const Checkout = ({products}) => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const {isAuthenticated: isAuth, id} = useSelector(state => state.user);
 
     const placeOrder = async (email, phone, address, shipping, payment) => {
