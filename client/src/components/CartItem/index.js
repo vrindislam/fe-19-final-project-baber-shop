@@ -3,24 +3,26 @@ import './style.less'
 import { PlusCircleFilled, MinusCircleFilled, DeleteFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteFromCart, increaseQuantity, decreaseQuantity } from '../../store/cart/actionCart'
-
+import { Link } from 'react-router-dom'
 
 const CartItem = (props) => {
   const dispatch = useDispatch()
   const cartQuantity = props.product.cartQuantity
-  const { imageUrls, name, currentPrice, _id } = props.product.product
-  const updatedProduct = props.product.product
-  console.log("updatedProduct------->>>",updatedProduct);
+  const { imageUrls, name, currentPrice, _id, itemNo } = props.product.product
   const isAuth = useSelector(state => state.user.isAuthenticated)
 
   return (
     <div className="cart-item-wrapper">
       <div className="cart-item_item-image-description">
+        <Link to={`/product/${itemNo}`}>
         <div>
           <img className="cart-item_item-image" src={imageUrls[0]} alt=""/>
         </div>
+        </Link>
         <div className="cart-item_item-description">
-          <p>{name}</p>
+          <Link to={`/product/${itemNo}`}>
+            <p className='cart-item-link'>{name}</p>
+          </Link>
           <p>
             Lorem ipsum dolor sit amet,
             consectetur adipisicing elit.
@@ -42,7 +44,7 @@ const CartItem = (props) => {
               : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id,isAuth))}/>
             }
             <span>{cartQuantity}</span>
-            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth,updatedProduct))}/>
+            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth))}/>
           </div>
           <div className="item-handler_main-total">{(currentPrice * cartQuantity).toFixed(2)}</div>
           <div className="item-handler_main-basket" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>
