@@ -37,8 +37,8 @@ export const TotalAmount = (props) => {
       : <div className='popover-basket-wrapper'>
         {products.length
           ? <>
-            <p>You have {products.length} goods in the basket</p>
-            <p>For a total amount ${totalMoney}</p>
+            <p>You have <span className="popover-basket-span">{products.length}</span> goods in the basket</p>
+            <p>For a total amount <span className="popover-basket-span">${totalMoney}</span></p>
             <div className="basket-buttons-wrapper">
               <Button className='make-order-button'>Make an order</Button>
               <Link to="/cart">
@@ -46,7 +46,7 @@ export const TotalAmount = (props) => {
               </Link>
             </div>
           </>
-          : <p>You don't have any products in the Cart</p>
+          : <p className="popover-basket-empty">You don't have any products in the Cart</p>
         }
       </div>
     }</>

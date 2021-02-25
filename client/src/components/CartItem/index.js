@@ -9,6 +9,8 @@ const CartItem = (props) => {
   const dispatch = useDispatch()
   const cartQuantity = props.product.cartQuantity
   const { imageUrls, name, currentPrice, _id } = props.product.product
+  const updatedProduct = props.product.product
+  console.log("updatedProduct------->>>",updatedProduct);
   const isAuth = useSelector(state => state.user.isAuthenticated)
 
   return (
@@ -40,7 +42,7 @@ const CartItem = (props) => {
               : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id,isAuth))}/>
             }
             <span>{cartQuantity}</span>
-            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth))}/>
+            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth,updatedProduct))}/>
           </div>
           <div className="item-handler_main-total">{(currentPrice * cartQuantity).toFixed(2)}</div>
           <div className="item-handler_main-basket" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>

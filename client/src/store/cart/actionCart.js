@@ -26,7 +26,7 @@ export const deleteFromCart = (_id, isAuth)  => {
 
 export const increaseQuantity = (_id, isAuth) => {
   if (isAuth) {
-    put('/cart/', _id).then(r => console.log(r.products))
+    put('/cart/', _id).then(r => console.log(r.products));
   }
   return {
     type: INCREASE_QUANTITY,

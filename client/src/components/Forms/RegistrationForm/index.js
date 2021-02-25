@@ -13,14 +13,13 @@ import { errorRegisterToast, successRegisterToast } from "../../Toasters";
 import jwt_decode from "jwt-decode";
 import "./styles.less";
 
-import {cartMerging} from '../../../services/cartAuth'
+import { cartMerging } from '../../../services/cartAuth'
 
 const RegistrationForm = (props) => {
   const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useDispatch();
   const products = useSelector(state => state.cart.products.products);
-  console.log("RegistrationForm-------products------->",products);
   const showModalLogin = () => {
     dispatch(showModal({status: true, type: 'LoginForm'}));
   };

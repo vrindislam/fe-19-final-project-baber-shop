@@ -18,11 +18,8 @@ const ProductPage = (props) => {
 
     const dispatch = useDispatch();
     const { itemNo } = useParams()
-    console.log("itemNo---itemNo",itemNo);
     const [product, setProduct] = useState({})
     const [images, setImages] = useState([])
-
-    console.log("useState-product----_id_id",product._id);
 
     useEffect(() => {
         axios(`http://localhost:5000/api/products/${itemNo}`)
@@ -45,6 +42,7 @@ const ProductPage = (props) => {
         const newProduct = {product, cartQuantity: + 1}
         dispatch(addToCart(newProduct, product._id, isAuthenticated));
     }
+    console.log("product={product}",product);
 
     return (
       <>
@@ -52,7 +50,8 @@ const ProductPage = (props) => {
             title = "Barber Shop Market"
             content = "Barber Shop market"
             rel = "icon"
-            product={product}
+            reddd={product}
+            // product={product}
           />
         <div className="product-page">
             <div className="product_page__container">

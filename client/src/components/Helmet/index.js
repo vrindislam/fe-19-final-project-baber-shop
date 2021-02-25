@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Ajax from "../../services/Ajax";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
-export const MetaForPages = ({ title, content, rel, href, src, type }) => {
+export const MetaForPages = ({ title, content, rel, href, src, type,reddd }) => {
+  console.log("reddd",reddd);
   const [products, setProducts] = useState([]);
   useEffect(() => {
     async function fetchProducts() {
@@ -20,7 +20,7 @@ export const MetaForPages = ({ title, content, rel, href, src, type }) => {
   return (
     <Helmet>
       <title>{title} {metaTitle}</title>
-      <meta name="description" content={`${content}${metaContent}`}/>
+      <meta name="description" content={`${content} ${metaContent}`}/>
       <link rel={rel} type={type} href={href}/>
       <script src={src} type={type}/>
     </Helmet>
@@ -28,31 +28,23 @@ export const MetaForPages = ({ title, content, rel, href, src, type }) => {
 };
 
 export const MetaForEachPage = ({ title, content, rel, href, src, type }) => {
-
   const { itemNo } = useParams()
   const [product, setProduct] = useState({})
   useEffect(() => {
-    axios(`http://localhost:5000/api/products/${itemNo}`)
-      .then((response) => setProduct(response.data))
-      .catch((e) => console.log("ProductPage---->>>>useEffect----->>>HELMET------>>>",e))
-  }, [itemNo])
-  // console.log("MetaForEachPage----------->>>HELMET------>>>",itemNo);
+    async function fetchProducts2() {
+      const result = await Ajax.get(`/products/${itemNo}`);
+      setProduct(result);
+    }
+    fetchProducts2();
+  },[itemNo]);
   const metaContent = (product.name + product.brand + product.categories).toString().split(",").join(" ");
   const metaTitle = (product.name + product.brand + product.categories).toString();
   return (
     <Helmet>
-      <title>
-        `{title} {metaTitle}`
-      </title>
-      <meta name="description"
-            content={`${content}${metaContent}`}
-      />
-      <link
-        rel={rel} type={type} href={href}
-      />
-      <script
-        src={src} type={type}
-      />
+      <title>`{title} {metaTitle}`</title>
+      <meta name="description" content={`${content} ${metaContent}`}/>
+      <link rel={rel} type={type} href={href}/>
+      <script src={src} type={type}/>
     </Helmet>
   );
 }
