@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles.less';
 import CheckoutNavigation from "./CheckoutNavigation";
 import CheckoutAddress from "./CheckoutAddress";
@@ -7,9 +7,10 @@ import CheckoutPayment from "./CheckoutPayment";
 import CheckoutSteps from "./CheckoutSteps";
 import Ajax from "../../services/Ajax";
 import {useSelector} from "react-redux";
+import Preloader from "../Preloader";
 
 const Checkout = ({products}) => {
-    
+    const [loading, setLoading] = useState(true);
     const {isAuthenticated: isAuth, id} = useSelector(state => state.user);
 
     const placeOrder = async (email, phone, address, shipping, payment) => {
@@ -31,7 +32,10 @@ const Checkout = ({products}) => {
             newOrder.products = JSON.stringify(products);
         }
 
+        console.log('Order prepared: ', JSON.stringify(newOrder));
+
         try {
+            setLoading(true);
             const order = await Ajax.post('/orders', newOrder);
             console.log('Order created:', order);
             if (order.message) {
@@ -40,17 +44,29 @@ const Checkout = ({products}) => {
             return Promise.resolve(order);
         } catch (err) {
             return Promise.reject(err);
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
         <div className='checkout'>
-            <CheckoutNavigation/>
-            <CheckoutSteps onFinish={placeOrder}>
-                <CheckoutAddress/>
-                <CheckoutShipping/>
-                <CheckoutPayment/>
-            </CheckoutSteps>
+            {
+                loading
+                ?
+                    <div style={{textAlign: 'center'}}>
+                        <Preloader/>
+                    </div>
+                :
+                <>
+                    <CheckoutNavigation/>
+                    <CheckoutSteps onFinish={placeOrder}>
+                        <CheckoutAddress/>
+                        <CheckoutShipping/>
+                        <CheckoutPayment/>
+                    </CheckoutSteps>
+                </>
+            }
         </div>
     );
 }
