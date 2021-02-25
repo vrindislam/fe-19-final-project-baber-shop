@@ -12,6 +12,7 @@ export const fieldsSetArr = [
   ["select-categories", { label: "Product Category", name: "categories", rules, status: 'yes' }, 3],
   ["select-filter", { label: "Country", name: "country", rules, status: 'yes' }],
   ["select-filter", { label: "Brand", name: "brand", rules, status: 'yes' }],
+  ["input", { label: "Product Description", name: "description" }],
 ];
 
 // form layout settings
@@ -34,7 +35,8 @@ export const initialFormValues = {
   name: "",
   currentPrice: 0,
   quantity: 1,
-  enabled: true
+  enabled: true,
+  description: "",
 };
 
 export const rootCloudinaryFolderName = "products";

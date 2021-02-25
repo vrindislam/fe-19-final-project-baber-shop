@@ -31,11 +31,6 @@ exports.addProduct = (req, res, next) => {
       .trim()
       .replace(/\s\s+/g, " ");
 
-    // const imageUrls = req.body.previewImages.map(img => {
-    //   return `/img/products/${productFields.itemNo}/${img.name}`;
-    // });
-
-    // productFields.imageUrls = _.cloneDeep(imageUrls);
   } catch (err) {
     res.status(400).json({
       message: `Error happened on server: "${err}" `

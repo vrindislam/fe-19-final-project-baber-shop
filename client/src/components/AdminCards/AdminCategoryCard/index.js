@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { Card, message, Modal } from "antd";
-import noImage from "../../blank_image/no_image.png";
-import CategoryService from "../../services/CategoryService";
-import "./style.less";
-import CloudinaryService from "../../services/CloudinaryService";
+import noImage from "../../../blank_image/no_image.png";
+import CategoryService from "../../../services/CategoryService";
+import CloudinaryService from "../../../services/CloudinaryService";
+
+import "./styles.less";
 
 const { Meta } = Card;
 const { confirm } = Modal;
