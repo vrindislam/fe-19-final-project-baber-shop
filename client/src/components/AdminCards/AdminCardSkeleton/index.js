@@ -9,6 +9,7 @@ const AdminCardSkeleton = () => {
       <Skeleton active />
       <Skeleton active />
       <Skeleton active />
+      <Skeleton active />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import "./style.less";
 
 const { Option } = Select;
 
-const ProductForm = ({ loadCategories, dispatchModal, listOfCategories, filters: { brand, country } }) => {
+const ProductForm = ({ loadProducts, dispatchModal, listOfCategories, filters: { brand, country } }) => {
   const [form] = Form.useForm();
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [productCategories, setProductCategories] = useState(cloneDeep(listOfCategories));
@@ -86,7 +86,7 @@ const ProductForm = ({ loadCategories, dispatchModal, listOfCategories, filters:
         message.success(`Product ${res.name} was created`, 1.5);
         form.resetFields();
         dispatchModal && dispatchModal(false);
-        loadCategories && loadCategories();
+        loadProducts && loadProducts();
       })
       .catch(err => message.error(`${err}`, 1.5));
   };

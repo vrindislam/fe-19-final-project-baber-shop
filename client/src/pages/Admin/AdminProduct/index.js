@@ -48,7 +48,6 @@ const AdminProduct = () => {
     ProductService.getProductsListForAdminPageByFiletr(searchString)
       .then(res => {
         if (!isMounted() && !res) return;
-        console.log(res);
         setPreloaderStatusProducts(false);
         setProducts(res.products);
         setProductsQuantity(res.productsQuantity);
@@ -58,6 +57,21 @@ const AdminProduct = () => {
         console.log(err);
       });
   }, [history, searchString]);
+
+  const loadProducts = () => {
+    setPreloaderStatusProducts(true);
+    ProductService.getProductsListForAdminPageByFiletr(searchString)
+      .then(res => {
+        if (!res) return;
+        setPreloaderStatusProducts(false);
+        setProducts(res.products);
+        setProductsQuantity(res.productsQuantity);
+      })
+      .catch(err => {
+        setPreloaderStatusProducts(false);
+        console.log(err);
+      });
+  }
 
   useAsyncEffect(async isMounted => {
     setPreloaderStatusCategory(true);
@@ -89,15 +103,6 @@ const AdminProduct = () => {
       });
   }, []);
 
-  //  to put function in form props to update categories after new categoty adding
-  const loadCategories = () => {
-    CategoryService.getCategoriesSortedPerLevels()
-      .then(res => {
-          setListOfCategories(Object.entries(res));
-        }
-      )
-      .catch(err => console.log(err));
-  };
 
   const dispatchModal = (status) => {
     dispatch(showModal({ status, type: typeOfModal }));
@@ -126,7 +131,7 @@ const AdminProduct = () => {
             <ModalProductForm
               width={800}
               listOfCategories={listOfCategories && listOfCategories}
-              loadCategories={loadCategories}
+              loadProducts={loadProducts}
               dispatchModal={dispatchModal}
               filters={filters}
             />
@@ -140,7 +145,7 @@ const AdminProduct = () => {
             {preloaderStatusProducts && [...Array(perPage).keys()].map(skeleton => <AdminCardSkeleton
               key={`skeleton_${skeleton}`} />)}
             {!preloaderStatusProducts && products.map(product => (
-              <AdminProductCard key={product.itemNo} product={product} />))}
+              <AdminProductCard key={product.itemNo} product={product} loadProducts={loadProducts} />))}
           </Col>
         </Row>
         <Row gutter={16}>
@@ -154,7 +159,7 @@ const AdminProduct = () => {
                 showSizeChanger={true}
                 showQuickJumper={true}
                 onShowSizeChange={handlePerPageSizeChange}
-                pageSizeOptions={["5","10", "15", "20","25", "30"]}
+                pageSizeOptions={["5", "10", "15", "20", "25", "30"]}
                 showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
               />
             </nav>

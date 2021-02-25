@@ -6,7 +6,7 @@ export const fieldsSetArr = [
   ["checkbox", { label: "Enabled", name: "enabled", className: "productPrice" }],
   ["input", { label: "Product Name", name: "name", rules, status: 'yes' }],
   ["number", { label: "Current price", name: "currentPrice", className: "productPrice", rules, status: 'yes' }],
-  ["number", { label: "Quantity", name: "quantity", className: "productPrice", rules, status: 'yes' }],
+  ["number", { label: "Quantity", name: "quantity", className: "productPrice", rules }],
   ["select-categories", { label: "Product Catalog", name: "categories_level1", rules, status: 'yes' }, 1],
   ["select-categories", { label: "Parent Product Category", name: "categories_parent", rules, status: 'yes' }, 2],
   ["select-categories", { label: "Product Category", name: "categories", rules, status: 'yes' }, 3],
