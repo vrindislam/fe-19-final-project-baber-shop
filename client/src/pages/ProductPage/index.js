@@ -15,8 +15,8 @@ const {put} = Ajax;
 
 
 const ProductPage = (props) => {
-    console.log("props--------ProductPage",props.location.state.product);
-    const { _id} = props.location.state.product;
+    // console.log("props--------ProductPage",props.location.state.product);
+    // const { _id} = props.location.state.product;
     const {isAuthenticated} = useSelector(state => ({...state.user}));
     const dispatch = useDispatch();
     const { itemNo } = useParams()
@@ -49,7 +49,7 @@ const ProductPage = (props) => {
     const onAddToCart = (e) => {
         e.preventDefault();
         if(isAuthenticated) {
-            put('/cart/',_id)
+            put('/cart/',product._id)
         } else {
             const newProduct = {...product, cartQuantity: + 1}
             dispatch(addToCart(newProduct));
