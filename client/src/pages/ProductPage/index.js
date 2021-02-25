@@ -6,9 +6,9 @@ import {addToCart} from "../../store/cart/actionCart";
 import Banner from "../../components/Banner";
 import ProductCarousel from "../../components/ProductCarousel";
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import Ajax from "../../services/Ajax";
 import {CheckCircleOutlined} from '@ant-design/icons'
+
 
 const ProductPage = () => {
     const dispatch = useDispatch();
@@ -17,15 +17,10 @@ const ProductPage = () => {
     const [images, setImages] = useState([])
 
     useEffect(() => {
-        axios(`http://localhost:5000/api/products/${itemNo}`)
-            .then((response) => setProduct(response.data))
-            .catch((e) => console.log(e))
-    }, [itemNo])
-
-
-    useEffect(() => {
         async function fetch() {
-            const {imageUrls} = await Ajax.get(`/products/${itemNo}`)
+            const {name, currentPrice, imageUrls, _id, quantity, description} = await Ajax.get(`/products/${itemNo}`)
+
+            setProduct({name, currentPrice, _id, quantity, description, itemNo});
             setImages(imageUrls);
         }
 
@@ -44,7 +39,7 @@ const ProductPage = () => {
                 <Row>
                     <Col className="product_page__box" xs={{span: 24, order: 1}} sm={{order: 1}}
                          lg={{span: 12, order: 1}}>
-                        <div className="product_title">{product.name}</div>
+                        <div className="product_title" >{product.name}</div>
                         <div className="img-slider">
                             <ProductCarousel imageUrls={images}/>
                         </div>
@@ -66,7 +61,7 @@ const ProductPage = () => {
                                 </Col>
                                 <Col className="btn-buy_box">
                                     { product.quantity === 0
-                                        ? (<span className="sold-out"></span>)
+                                        ? (<button className="btn-notAvailable">Not Available</button>)
                                         :  (<button className="btn-buy" onClick={onAddToCart}>Buy</button>)
                                     }
 
@@ -78,15 +73,13 @@ const ProductPage = () => {
                                 mouth and U word mouth. Flat mouth is a relatively early design, because the shears
                                 open and close when the hair will slip away from the mouth of the teeth, so the
                                 proportion of thinning is not standard. The V-shaped and U-shaped teeth have
-                                grooves, which can fix the hair proportionally in the teeth. The other blade cuts
-                                the hair in the teeth, and the hair outside the teeth will slide naturally. These
-                                two kinds of teeth have many uses. They can be used in the top and bangs to achieve
-                                a more natural effect and can meet the requirements of natural pruning.
+                                grooves, which can fix the hair proportionally in the teeth.
                             </div>
                         </Col>
 
                     </Col>
                 </Row>
+
             </div>
 
             <Banner title={'One more  thing'} config='cc'/>
