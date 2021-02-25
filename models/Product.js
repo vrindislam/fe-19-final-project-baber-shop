@@ -5,7 +5,6 @@ const ProductSchema = new Schema(
   {
     itemNo: {
       type: String,
-      default: Date.now + 1,
       required: true
     },
     enabled: {

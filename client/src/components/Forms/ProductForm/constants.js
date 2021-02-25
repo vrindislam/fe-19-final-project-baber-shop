@@ -3,15 +3,15 @@
 const rules = [{ required: true, message: "field is required" }];
 
 export const fieldsSetArr = [
-  ["input", { label: "Product Name", name: "name", rules }],
-  ["number", { label: "Current price", name: "currentPrice", className: "productPrice", rules }],
-  ["number", { label: "Previous price", name: "previousPrice", className: "productPrice", rules }],
-  ["select-categories", { label: "Product Catalog", name: "categories_level1", rules }, 1],
-  ["select-categories", { label: "Parent Product Category", name: "categories_parent", rules }, 2],
-  ["select-categories", { label: "Product Category", name: "categories", rules }, 3],
-  ["input", { label: "Color", name: "color", rules }],
-  ["input", { label: "Product URL", name: "productUrl", rules }],
-  ["input", { label: "Brand", name: "brand", rules }],
+  ["checkbox", { label: "Enabled", name: "enabled", className: "productPrice" }],
+  ["input", { label: "Product Name", name: "name", rules, status: 'yes' }],
+  ["number", { label: "Current price", name: "currentPrice", className: "productPrice", rules, status: 'yes' }],
+  ["number", { label: "Quantity", name: "quantity", className: "productPrice", rules, status: 'yes' }],
+  ["select-categories", { label: "Product Catalog", name: "categories_level1", rules, status: 'yes' }, 1],
+  ["select-categories", { label: "Parent Product Category", name: "categories_parent", rules, status: 'yes' }, 2],
+  ["select-categories", { label: "Product Category", name: "categories", rules, status: 'yes' }, 3],
+  ["select-filter", { label: "Country", name: "country", rules, status: 'yes' }],
+  ["select-filter", { label: "Brand", name: "brand", rules, status: 'yes' }],
 ];
 
 // form layout settings
@@ -33,10 +33,8 @@ export const tailLayout = {
 export const initialFormValues = {
   name: "",
   currentPrice: 0,
-  previousPrice: 0,
-  color: "",
-  productUrl: "",
-  brand: "",
+  quantity: 1,
+  enabled: true
 };
 
 export const rootCloudinaryFolderName = "products";
