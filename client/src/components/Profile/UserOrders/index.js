@@ -1,6 +1,6 @@
 import React from "react";
-import {ShoppingTwoTone} from '@ant-design/icons';
 import {Col, Typography} from 'antd';
+import {ShoppingTwoTone} from '@ant-design/icons';
 import '../style.less'
 
 const {Title} = Typography;
