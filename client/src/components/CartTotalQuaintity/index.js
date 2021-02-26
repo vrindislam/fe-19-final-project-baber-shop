@@ -1,13 +1,15 @@
 import React from 'react'
 import './style.less'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'antd'
 import { Link } from 'react-router-dom'
+import {resetCart} from '../../store/cart/actionCart'
 
 export const TotalAmount = (props) => {
 
   const products = useSelector(state => state.cart.products.products)
   const shippingPrice = useSelector(state => state.checkout.shipping.price)
+  const dispatch = useDispatch()
 
   const sumArray = []
   products.forEach(product => sumArray.push(Number(product.product.currentPrice) * Number(product.cartQuantity)))
@@ -40,7 +42,7 @@ export const TotalAmount = (props) => {
             <p>You have <span className="popover-basket-span">{products.length}</span> goods in the basket</p>
             <p>For a total amount <span className="popover-basket-span">${totalMoney}</span></p>
             <div className="basket-buttons-wrapper">
-              <Button className='make-order-button'>Make an order</Button>
+              <Button onClick={() => dispatch(resetCart())} className='make-order-button'>Reset Cart</Button>
               <Link to="/cart">
                 <Button className='to-basket-button' type={"primary"}>Go to Basket</Button>
               </Link>

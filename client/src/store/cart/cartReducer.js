@@ -1,4 +1,4 @@
-import { ADDING_TO_CART, DELETE_FROM_CART, DECREASE_QUANTITY,INCREASE_QUANTITY,UPDATE_CART } from "./actionTypes";
+import { ADDING_TO_CART, DELETE_FROM_CART, DECREASE_QUANTITY,INCREASE_QUANTITY,UPDATE_CART, RESET_CART } from "./actionTypes";
 
 const initialState = {
   products: {
@@ -36,6 +36,8 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state, products: {products: action.payload.updatedCart}
       }
+    case RESET_CART:
+      return initialState
     default:
       return state;
   }
