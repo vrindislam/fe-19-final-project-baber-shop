@@ -17,7 +17,6 @@ const CheckboxFilter = ({clickCheckbox, query}) => {
 
         fetch()
     }, []);
-
     useEffect(() => {
         async function fetch() {
             const result = (await Ajax.get('/filters'))
