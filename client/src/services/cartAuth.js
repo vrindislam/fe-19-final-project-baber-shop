@@ -13,8 +13,6 @@ export const cartMerging = (products, dispatch) => {
       products.forEach(item => {mergedArr.push(item)})
       existingCart.products.forEach(item => {mergedArr.push(item)})
     }
-    console.log("------mergedArr-----mergedArr------",mergedArr);
-    // const mergedArr = [...existingCart.products, ...products]
     const uniq = {}
     const arrFiltered = mergedArr.filter(obj => !uniq[obj.product._id] && (uniq[obj.product._id] = true))
     const items = arrFiltered.map(product => {

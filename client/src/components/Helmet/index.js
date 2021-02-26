@@ -26,7 +26,7 @@ export const MetaForPages = ({ title, content, rel, href, src, type }) => {
   );
 };
 
-export const MetaForEachPage = ({ title, content, rel, href, src, type }) => {
+export const MetaForEachPage = ({ title, content, rel, href, src, type, }) => {
   const { itemNo } = useParams()
   const [product, setProduct] = useState({})
   useEffect(() => {
@@ -36,12 +36,12 @@ export const MetaForEachPage = ({ title, content, rel, href, src, type }) => {
     }
     fetchProducts2();
   },[itemNo]);
-  const metaContent = (product.name + product.brand + product.categories).toString().split(",").join(" ");
+  const metaContent = (product.name + product.brand + product.categories + product.categories_level1 + product.categories_parent).toString();
   const metaTitle = (product.name + product.brand + product.categories).toString();
   return (
     <Helmet>
-      <title>`{title} {metaTitle}`</title>
-      <meta name="description" content={`${content} ${metaContent}`}/>
+      <title>{title} {metaTitle}</title>
+      <meta name="description" content={`${content}  ${metaContent}`}/>
       <link rel={rel} type={type} href={href}/>
       <script src={src} type={type}/>
     </Helmet>

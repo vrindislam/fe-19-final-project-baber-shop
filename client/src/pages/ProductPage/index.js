@@ -6,7 +6,6 @@ import {addToCart} from "../../store/cart/actionCart";
 import Banner from "../../components/Banner";
 import ProductCarousel from "../../components/ProductCarousel";
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import Ajax from "../../services/Ajax";
 import {CheckCircleOutlined} from '@ant-design/icons'
 import { MetaForEachPage } from "../../components/Helmet";
@@ -19,32 +18,21 @@ const ProductPage = (props) => {
     const {isAuthenticated} = useSelector(state => ({...state.user}));
     const dispatch = useDispatch();
     const { itemNo } = useParams()
-    console.log("---itemNo---itemNo--->>>",itemNo);
     const [product, setProduct] = useState({})
-    console.log("product------product------product",product);
     const [images, setImages] = useState([])
-
-    useEffect(() => {
-        axios(`http://localhost:5000/api/products/${itemNo}`)
-            .then((response) => setProduct(response.data))
-            .catch((e) => console.log("ProductPage---->>>>useEffect----->>>",e))
-    }, [itemNo])
 
 
     useEffect(() => {
         async function fetch() {
-            const {imageUrls} = await Ajax.get(`/products/${itemNo}`)
+            const {name, currentPrice, imageUrls, _id, quantity, description} = await Ajax.get(`/products/${itemNo}`)
+
+            setProduct({name, currentPrice, _id, quantity, description, itemNo});
             setImages(imageUrls);
         }
 
         fetch();
     }, [itemNo])
 
-
-    // const onAddToCart = (e) => {
-    //     e.preventDefault();
-    //     dispatch(addToCart(product));
-    // }
     const onAddToCart = (e) => {
         e.preventDefault();
         const newProduct = {product, cartQuantity: + 1}
@@ -57,7 +45,6 @@ const ProductPage = (props) => {
             title = "Barber Shop Market"
             content = "Barber Shop market"
             rel = "icon"
-            product={product}
           />
         <div className="product-page">
             <div className="product_page__container">
