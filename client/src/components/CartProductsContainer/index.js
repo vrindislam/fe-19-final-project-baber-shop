@@ -2,14 +2,11 @@ import React from 'react'
 import './style.less'
 import CartItem from '../CartItem'
 
-const ProductsContainer = ({ products, isAuth, setProductsDB }) => {
-
+const ProductsContainer = ({ products }) => {
   const items = products.map(product =>
     <CartItem
-      product={isAuth ? product.product : product}
-      key={isAuth ? product._id : product.itemNo}
-      cartQuantityDB={product.cartQuantity}
-      setProductsDB={setProductsDB}
+      product={product}
+      key={product.product._id}
     />)
 
   return (

@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
-import CheckoutContext from "../util/CheckoutContext";
+import React, {useEffect, useState} from "react";
 import Ajax from "../../../services/Ajax";
 import {Button, message, Radio, Skeleton} from "antd";
-import actions from "../util/actions";
 import './styles.less';
+import {useDispatch} from "react-redux";
+import {setShipping} from "../../../store/checkout/checkoutAction";
 
 const CheckoutShipping = ({disabled, onChange}) => {
-    const {dispatch} = useContext(CheckoutContext);
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [methods, setMethods] = useState([]);
     const [value, setValue] = useState(null);
@@ -37,7 +37,8 @@ const CheckoutShipping = ({disabled, onChange}) => {
 
     const onFinish = async () => {
         if (value) {
-            dispatch({type: actions.setShipping, payload: value});
+            const price = methods.filter(m => m.customId === value)[0]?.costValue;
+            dispatch(setShipping({id: value, price: price}));
             onChange();
         } else {
             message.error('Select a method or call us.');

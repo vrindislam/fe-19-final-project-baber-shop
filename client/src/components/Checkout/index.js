@@ -1,71 +1,73 @@
-import React, {useReducer} from 'react';
+import React, {useState} from 'react';
 import './styles.less';
 import CheckoutNavigation from "./CheckoutNavigation";
 import CheckoutAddress from "./CheckoutAddress";
 import CheckoutShipping from "./CheckoutShipping";
 import CheckoutPayment from "./CheckoutPayment";
 import CheckoutSteps from "./CheckoutSteps";
-import CheckoutContext from "./util/CheckoutContext";
-import actions from "./util/actions";
+import Ajax from "../../services/Ajax";
+import {useSelector} from "react-redux";
+import Preloader from "../Preloader";
 
-const Checkout = () => {
+const Checkout = ({products}) => {
+    const [loading, setLoading] = useState(false);
+    const {isAuthenticated: isAuth, id} = useSelector(state => state.user);
 
-    const initialState = {
-        step: 0,
-        address: null,
-        shipping: null,
-        payment: null
-    }
+    const placeOrder = async (email, phone, address, shipping, payment) => {
+        const newOrder = {
+            deliveryAddress: JSON.stringify(address),
+            shipping: JSON.stringify({id: shipping}),
+            paymentInfo: JSON.stringify({id: payment}),
+            status: "not shipped",
+            email: email,
+            mobile: phone,
+            letterSubject: "Thank you for order! You are welcome!",
+            letterHtml:
+                "<h1>Your order is placed.</h1>"
+        };
 
-    const reducer = (state, action) => {
-        switch (action.type) {
-            case actions.nextStep:
-                return {
-                    ...state,
-                    step: state.step + 1
-                }
-            case actions.goToStep:
-                return {
-                    ...state,
-                    step: action.payload
-                }
-            case actions.setAddress:
-                return {
-                    ...state,
-                    address: action.payload
-                }
-            case actions.setShipping:
-                return {
-                    ...state,
-                    shipping: action.payload
-                }
-            case actions.setPayment:
-                return {
-                    ...state,
-                    payment: action.payload
-                }
-            case actions.placeOrder:
-                return initialState;
-            default:
-                return state;
+        if (isAuth) {
+            newOrder.customerId = id;
+        } else {
+            newOrder.products = JSON.stringify(products);
+        }
+
+        console.log('Order prepared: ', JSON.stringify(newOrder));
+
+        try {
+            setLoading(true);
+            const order = await Ajax.post('/orders', newOrder);
+            console.log('Order created:', order);
+            if (order.message) {
+                return Promise.reject(order.message);
+            }
+            return Promise.resolve(order);
+        } catch (err) {
+            return Promise.reject(err);
+        } finally {
+            setLoading(false);
         }
     }
 
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const checkoutState = {state, dispatch};
-
     return (
-        <CheckoutContext.Provider value={checkoutState}>
-            <div className='checkout'>
-                <CheckoutNavigation/>
-                <CheckoutSteps>
-                    <CheckoutAddress/>
-                    <CheckoutShipping/>
-                    <CheckoutPayment/>
-                </CheckoutSteps>
-
-            </div>
-        </CheckoutContext.Provider>
+        <div className='checkout'>
+            {
+                loading
+                ?
+                    <div style={{textAlign: 'center'}}>
+                        <Preloader/>
+                    </div>
+                :
+                <>
+                    <CheckoutNavigation/>
+                    <CheckoutSteps onFinish={placeOrder}>
+                        <CheckoutAddress/>
+                        <CheckoutShipping/>
+                        <CheckoutPayment/>
+                    </CheckoutSteps>
+                </>
+            }
+        </div>
     );
 }
 

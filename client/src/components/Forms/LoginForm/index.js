@@ -5,14 +5,16 @@ import {Form, Input, Button} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import LoginService from "../../../services/LoginService";
 import Preloader from "../../Preloader";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
 import {authUser} from "../../../store/user/userAction";
 import jwt_decode from "jwt-decode";
+import {cartMerging} from '../../../services/cartAuth'
 
 const LoginForm = (props) => {
     const [form] = Form.useForm();
     const history = useHistory();
     const dispatch = useDispatch();
+    const products = useSelector(state => state.cart.products.products);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -31,6 +33,7 @@ const LoginForm = (props) => {
                 if (props.handleRegisterModalClose) props.handleRegisterModalClose();
                 dispatch(authUser({...decoded, isAuthenticated: true}));
                 if (!decoded.isAdmin) history.push('/');
+                cartMerging(products, dispatch)
             })
             .catch(err => {
                 const error = err.response.data;
