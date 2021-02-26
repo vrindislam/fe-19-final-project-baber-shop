@@ -5,7 +5,6 @@ import PaymentForm from "./PaymentForm";
 import {useDispatch} from "react-redux";
 import './styles.less';
 import {setPayment} from "../../../store/checkout/checkoutAction";
-import { resetCart } from '../../../store/cart/actionCart'
 
 const CheckoutPayment = ({disabled, onChange}) => {
     const dispatch = useDispatch()
@@ -78,11 +77,7 @@ const CheckoutPayment = ({disabled, onChange}) => {
             {!disabled
                 ?
                 <div className="payment-actions">
-                    <Button type="primary" onClick={() =>{
-                        onFinish()
-                        dispatch(resetCart())
-                        }
-                    }>
+                    <Button type="primary" onClick={onFinish}>
                         Submit
                     </Button>
                 </div>
