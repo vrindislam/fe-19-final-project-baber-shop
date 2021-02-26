@@ -46,7 +46,6 @@ const ProductList = () => {
     }
 
     const show = showFilters ? 'active' : 'hidden';
-
     const showButton = {display: showFilters ? 'none' : 'inline-block'}
 
     return (
