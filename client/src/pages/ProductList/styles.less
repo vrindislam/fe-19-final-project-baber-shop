@@ -1,50 +1,116 @@
-.product-list-container{
-  display: flex;
+@import '../../../node_modules/antd/lib/style/themes/default.less';
 
-  & .open-filters-btn-container{
-    position: absolute;
-    display: none;
-  }
-}
 
-.filters-container{
-  display: inline-block;
-  padding-left: 10px;
-}
+.product-list-container {
+  display: block;
 
-@media screen and (max-width: 585px){
-
-  .filters-container{
-    position: absolute;
-    top: 164px;
-    z-index: 1;
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: #f0f2f5;
+  .filters {
+    position: relative;
   }
 
-  .product-list-container .open-filters-btn-container{
-    top: 125px;
-    left: 25px;
-    display: inline-block;
+  .open-filters-btn-container {
+    display: block;
+    padding-top: 10px;
 
-    & .open-filters-btn{
-      width: 40px;
+    .open-filters-btn {
+      width: 280px;
+      margin: 0 auto;
       padding: 10px;
-      color: #FFFFFF;
-      font-weight: 900;
-      background-color: #000000;
+      color: @white;
+      font-size: 22px;
+      background-color: @black;
       border: none;
       border-radius: 5px;
+
+      &:hover {
+        color: @yellow-5;
+      }
+
+      .filters-btn-icon {
+        margin-left: 20px;
+      }
     }
   }
 
-  .active{
-    display: inline-block;
+  .filters-container {
+    position: absolute;
+    top: 125%;
+    z-index: 1;
+    display: none;
+    width: 100%;
+    padding: 0 5%;
+    background-color: #f0f2f5;
   }
 
-  .hidden{
+  .active {
+    display: block;
+  }
+
+  .hidden {
     display: none;
+  }
+}
+
+@media screen and (min-width: 576px) {
+
+  .product-list-container {
+    display: flex;
+    padding: 3vw 5vw;
+
+    .filters {
+      width: 30%;
+      margin-right: 20px;
+    }
+
+    .filters-container {
+      position: static;
+      display: block;
+      width: 160px;
+      padding: 0;
+      background-color: @white;
+    }
+
+    .open-filters-btn-container {
+      display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .product-list-container {
+    padding: 3vw 4vw;
+
+    .filters {
+      width: 22%;
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+
+  .product-list-container {
+
+    .filters {
+      width: 20%;
+
+      &-container {
+        width: 185px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+
+  .product-list-container {
+
+    .filters {
+      margin-right: 40px;
+
+      &-container {
+        width: 240px;
+      }
+    }
   }
 }
