@@ -69,7 +69,7 @@ const ProductCard = ({product, refresh}) => {
                 <Link to={forwardToCardDetails()}>
                     <div className='productCard-title'>{name}</div>
                     <div className='productCard-picture'>
-                        <Image src={imageUrls[0]} preview={false}/>
+                        <Image src={imageUrls[0]?.url} preview={false}/>
                         <div className='productCard-price'>{currentPrice}$</div>
                     </div>
                 </Link>
