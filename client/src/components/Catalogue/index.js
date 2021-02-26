@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import {iconCatalogue} from "../Header/img";
 
 import {Menu} from 'antd';
-
 const {SubMenu} = Menu;
 
 const Catalogue = () => {
@@ -37,7 +36,6 @@ const Catalogue = () => {
     const handleCategoryClick = ({key}) => {
         console.log('click', key);
         setVisible('none')
-
     }
 
     const categoriesCatalogue = sortedCategories.map((topLevelCategory, index) => {
@@ -73,7 +71,7 @@ const Catalogue = () => {
     })
 
     return (
-        <div className="catalogue-wrapper">
+        <>
             <button className='catalogue-btn' onClick={showCatalogue}>
                 <img className="catalogue-btn-img" src={iconCatalogue} alt="icon"/>
                 <span className="catalogue-btn-text">Catalogue</span>
@@ -83,7 +81,7 @@ const Catalogue = () => {
                   className='catalogue-menu'>
                 {categoriesCatalogue}
             </Menu>
-        </div>
+        </>
     )
 }
 
