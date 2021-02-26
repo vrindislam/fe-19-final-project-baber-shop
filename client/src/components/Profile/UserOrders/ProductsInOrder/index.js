@@ -27,7 +27,7 @@ const ProductsInOrder = ({products}) => {
                             <Row>
                                 <Col xs={{span: 4}} sm={{span: 4}}>
                                     <Image
-                                        src={product.product.imageUrls[0]}
+                                        src={product.product.imageUrls[0].url}
                                         alt={product.product.name}
                                         width={60}
                                         height={60}
