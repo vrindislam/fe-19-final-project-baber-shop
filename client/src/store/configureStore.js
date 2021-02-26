@@ -12,6 +12,7 @@ const checkTokenExpirationMiddleware = store => next => action => {
         const decoded = jwt_decode(localStorage.getItem("token"));
         if (decoded?.exp && (decoded.exp < Date.now() / 1000)) {
             localStorage.removeItem("token");
+            localStorage.removeItem("persist:root");
             dispatch(authUser({isAuthenticated: false}));
         }
     }

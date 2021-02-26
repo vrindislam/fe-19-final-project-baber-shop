@@ -4,8 +4,6 @@
   text-align: center;
   background-color: @black;
 
-
-
   & a {
     color: @white;
     text-decoration: none;
@@ -18,26 +16,12 @@
   &-link {
     display: block;
     margin-bottom: 10px;
-    //border: 2px solid @red-10;
   }
 
   &-header_link {
     display: block;
     margin-bottom: 15px;
     font-weight: 700;
-  }
-
-  &-socials {
-
-    &_subscribePanel {
-      margin-bottom: 15px;
-    }
-
-    &_icons {
-      margin-right: 15px;
-      font-size: 2em;
-    }
-
   }
 
   & button {
@@ -51,6 +35,12 @@
       background: @yellow-6;
       border: 1px solid @black;
     }
+
+    &:focus {
+      color: @black;
+      background: @yellow-6;
+      border: 1px solid @black;
+    }
   }
 
   &-copyright {
@@ -59,9 +49,10 @@
   }
 }
 
-@media (max-width: 585px) {
+@media (max-width: 575px) {
   .footer {
     padding: 20px;
+
     &-link {
       display: none;
     }
@@ -69,7 +60,6 @@
     &-header_link {
       margin: 0;
     }
-
   }
 }
 

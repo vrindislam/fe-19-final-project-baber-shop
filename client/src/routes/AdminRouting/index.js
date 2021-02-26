@@ -13,6 +13,7 @@ const AdminRouting = () => {
       <AdminRoute exact path={'/admin/category'} component={AdminCategory}/>
       <AdminRoute exact path={'/admin/product'} component={AdminProduct}/>
       <AdminRoute exact path={'/admin/category/:id'} component={AdminCatergoryUpdate}/>
+      <AdminRoute exact path={'/admin/product/:_id'} component={AdminCatergoryUpdate}/>
       <Route exact path="*" render={() => <h1>You are on the wrong page boy</h1>}/>
     </Switch>
   )

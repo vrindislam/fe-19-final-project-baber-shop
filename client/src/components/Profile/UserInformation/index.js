@@ -1,10 +1,10 @@
-import {Button, Col, Form, Input, message} from "antd";
-import {collectionItemsForm, onlyLetters, onlyNumbers} from "../../Forms/RegistrationForm/collectionItems";
 import React, {useEffect} from "react";
-import Ajax from "../../../services/Ajax";
-import './style.less'
 import {useDispatch} from "react-redux";
+import {Button, Col, Form, Input, message} from "antd";
+import Ajax from "../../../services/Ajax";
 import {changeFirstName} from "../../../store/user/userAction";
+import {collectionItemsForm, onlyLetters, onlyNumbers} from "../../Forms/RegistrationForm/collectionItems";
+import './style.less'
 
 const {get, put} = Ajax;
 
