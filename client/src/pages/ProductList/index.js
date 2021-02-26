@@ -62,8 +62,7 @@ const ProductList = () => {
                     <CheckboxFilter clickCheckbox={catchCheckbox} query={query}/>
                 </div>
                 <div className="open-filters-btn-container">
-                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X
-                    </button>
+                    <button type='button' className='open-filters-btn' style={showButton} onClick={openFilters}>X</button>
                     <button type='button' className={'open-filters-btn ' + show} onClick={openFilters}>O</button>
                 </div>
                 <FilteredProducts queryString={stringify()}/>

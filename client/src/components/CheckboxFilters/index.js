@@ -24,7 +24,7 @@ const CheckboxFilter = ({clickCheckbox, query}) => {
                 .map(item => item.type)
                 .filter((v, i, a) => a.indexOf(v) === i)
                 .map(async type => {
-                    const result = await Ajax.get(`/filters/${type}`)
+                    const result = await Ajax.get(`/filters/${type}`);
                     return {
                         type,
                         values: result
@@ -55,7 +55,7 @@ const CheckboxFilter = ({clickCheckbox, query}) => {
             {
                 filters.map(filter =>
                     <div key={filter.type} className='checkbox-group'>
-                        <p className='checkbox-group__name'>{filter.type}</p>
+                        <p className='checkbox-group__name'>{filter.type.charAt(0).toUpperCase() + filter.type.slice(1)}</p>
                         {filter.values
                             .map(item => item.name)
                             .map(item =>
