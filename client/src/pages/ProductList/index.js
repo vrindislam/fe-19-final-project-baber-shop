@@ -52,9 +52,9 @@ const ProductList = () => {
     return (
         <>
             <MetaForPages
-              title = "Barber Shop Market"
-              content = "Barber Shop market"
-              rel = "icon"
+                title = "Barber Shop Market"
+                content = "Barber Shop market"
+                rel = "icon"
             />
             <div className="product-list-container">
                 <div className={"filters-container " + show}>

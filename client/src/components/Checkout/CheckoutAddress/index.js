@@ -1,12 +1,12 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Button, Form, Input, message} from "antd";
 import {collectionItemsCheckoutAddress} from "../../Forms/RegistrationForm/collectionItems";
+import {useDispatch} from "react-redux";
 import "./styles.less";
-import CheckoutContext from "../util/CheckoutContext";
-import actions from "../util/actions";
+import {setAddress} from "../../../store/checkout/checkoutAction";
 
 const CheckoutAddress = ({disabled, onChange}) => {
-    const {dispatch} = useContext(CheckoutContext);
+    const dispatch = useDispatch();
 
     const [form] = Form.useForm();
 
@@ -22,7 +22,7 @@ const CheckoutAddress = ({disabled, onChange}) => {
     const onFinish = async () => {
         try {
             const values = await form.validateFields();
-            dispatch({type: actions.setAddress, payload: values});
+            dispatch(setAddress(values));
             onChange();
         } catch (errorInfo) {
             message.error('Enter correct information');

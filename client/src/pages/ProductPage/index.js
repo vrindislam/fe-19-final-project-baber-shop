@@ -1,44 +1,47 @@
 import React, {useState, useEffect} from 'react';
 import './styles.less'
 import {Col, Row} from 'antd'
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {addToCart} from "../../store/cart/actionCart";
 import Banner from "../../components/Banner";
 import ProductCarousel from "../../components/ProductCarousel";
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 import Ajax from "../../services/Ajax";
 import {CheckCircleOutlined} from '@ant-design/icons'
+import { MetaForEachPage } from "../../components/Helmet";
 
-const ProductPage = () => {
+
+
+const ProductPage = (props) => {
+    const {isAuthenticated} = useSelector(state => ({...state.user}));
     const dispatch = useDispatch();
     const { itemNo } = useParams()
     const [product, setProduct] = useState({})
     const [images, setImages] = useState([])
 
     useEffect(() => {
-        axios(`http://localhost:5000/api/products/${itemNo}`)
-            .then((response) => setProduct(response.data))
-            .catch((e) => console.log(e))
-    }, [itemNo])
-
-
-    useEffect(() => {
         async function fetch() {
-            const {imageUrls} = await Ajax.get(`/products/${itemNo}`)
-            setImages(imageUrls);
+            const product = await Ajax.get(`/products/${itemNo}`)
+            setProduct(product);
+            setImages(product.imageUrls);
         }
 
         fetch();
     }, [itemNo])
 
-
     const onAddToCart = (e) => {
         e.preventDefault();
-        dispatch(addToCart(product));
+        const newProduct = {product, cartQuantity: + 1}
+        dispatch(addToCart(newProduct, product._id, isAuthenticated));
     }
 
     return (
+      <>
+          <MetaForEachPage
+            title = "Barber Shop Market"
+            content = "Barber Shop market"
+            rel = "icon"
+          />
         <div className="product-page">
             <div className="product_page__container">
                 <Row>
@@ -91,6 +94,7 @@ const ProductPage = () => {
 
             <Banner title={'One more  thing'} config='cc'/>
         </div>
+          </>
     )}
 
 

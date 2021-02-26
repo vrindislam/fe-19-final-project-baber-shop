@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import './styles.less';
 import CheckboxItem from "./CheckboxItem";
 import Ajax from "../../services/Ajax";
+import './styles.less';
 
 const CheckboxFilter = ({clickCheckbox, query}) => {
 

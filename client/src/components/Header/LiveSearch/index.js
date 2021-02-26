@@ -3,8 +3,9 @@ import './style.less'
 import { Input, Menu, Dropdown } from 'antd'
 import { Link } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
-import { getSearchedProducts } from '../../../functions/products/product'
 import {debounce} from 'lodash'
+import Ajax from '../../../services/Ajax'
+const { post } = Ajax
 
 const prefix = <SearchOutlined/>
 
@@ -17,7 +18,7 @@ const LiveSearch = () => {
   }
 
   const filterData = (products) =>{
-    setItems(products.data.filter(item => {
+    setItems(products.filter(item => {
       return item.name.toLowerCase().match(filteredItem)
     }))
   }
@@ -26,18 +27,20 @@ const LiveSearch = () => {
     if(!filteredItem){
       return setItems([])
     }
-    getSearchedProducts({query: filteredItem})
-      .then(products => filterData(products))
-      .catch(err => console.log(err))
+    async function fetch (){
+      const products = await post('/products/search', {query: filteredItem})
+      filterData(products)
+    }
+    fetch()
   }
   const delayedQuery = useCallback(debounce(updateQuery, 500),[filteredItem])
 
 
-  const products = items.map((el,index) =>
-    <Menu.Item key={index}>
+  const products = items.map((el) =>
+    <Menu.Item key={el._id}>
       <Link to={`/product/${el.itemNo}`}>
         <div className='search-product'>
-          <img className='search-product-logo' src={el.imageUrls[0]} alt="product logo"/>
+          <img className='search-product-logo' src={el.imageUrls[0].url} alt="product logo"/>
           <p className='search-product-name'>{el.name.toUpperCase()}</p>
           <p className='search-product-price'>{el.currentPrice} $</p>
         </div></Link>

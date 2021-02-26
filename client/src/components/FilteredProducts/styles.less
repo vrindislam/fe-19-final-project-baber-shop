@@ -3,6 +3,7 @@
 .filtered-products-container {
   display: flex;
   flex-wrap: wrap;
+  align-content: baseline;
   justify-content: space-evenly;
   padding: 40px 0 25px 25px;
   width: 100%;
@@ -36,7 +37,6 @@
       font-size: 16px
     }
 
-
     .ant-card-body {
       display: flex;
       flex-direction: column;
@@ -45,16 +45,15 @@
   }
 }
 
-
 @media screen and (min-width: 576px) {
   .filtered-products-container {
     justify-content: start;
+    padding: 25px 0 25px 25px;
   }
 }
 
 @media screen and (min-width: 768px) {
   .filtered-products-container {
-
     & .load-more-btn {
       width: 165px;
       height: 165px;

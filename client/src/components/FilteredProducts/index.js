@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Result } from 'antd'
 import { SyncOutlined } from '@ant-design/icons'
-import './styles.less';
-import ProductCard from '../ProductCard'
 import Ajax from "../../services/Ajax";
+import ProductCard from '../ProductCard'
+import './styles.less';
 
 const FilteredProducts = ({queryString}) => {
 

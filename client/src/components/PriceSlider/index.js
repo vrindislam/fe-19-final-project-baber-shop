@@ -55,7 +55,7 @@ const PriceSlider = ({query, onChange}) => {
                         />
                     </Form.Item>
                 </Col>
-                <Col span={12}>
+                <Col span={11}>
                     <Form.Item label='to'>
                         <InputNumber
                             min={1}
