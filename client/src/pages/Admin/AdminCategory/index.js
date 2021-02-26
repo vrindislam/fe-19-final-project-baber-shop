@@ -4,7 +4,7 @@ import useAsyncEffect from "use-async-effect";
 import AdminSider from "../../../components/AdminSider";
 import CategoryForm from "../../../components/Forms/CategoryForm";
 import CategoryService from "../../../services/CategoryService";
-import AdminCategoryCard from "../../../components/AdminCategoryCard";
+import AdminCategoryCard from "../../../components/AdminCards/AdminCategoryCard";
 import withModal from "../../../components/Modal";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../../store/modal/modalAction";
