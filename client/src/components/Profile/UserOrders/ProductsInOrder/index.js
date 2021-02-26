@@ -5,18 +5,17 @@ import PropTypes from 'prop-types';
 import './styles.less';
 
 
-
 const ProductsInOrder = ({products}) => {
 
 
     return (
         <>
             <Row className='userProfileOrder_tableNames'>
-                <Col xs={{span: 4}} sm={{span: 4}}/>
-                <Col xs={{span: 10}} sm={{span: 10}}/>
-                <Col xs={{span: 3}} sm={{span: 10}}>Price</Col>
-                <Col xs={{span: 4}} sm={{span: 10}}>Quantity</Col>
-                <Col xs={{span: 3}} sm={{span: 10}}>Total</Col>
+                <Col xs={{span: 4}}/>
+                <Col xs={{span: 10}}/>
+                <Col xs={{span: 3}}>Price</Col>
+                <Col xs={{span: 4}}>Quantity</Col>
+                <Col xs={{span: 3}}>Total</Col>
             </Row>
 
             {
@@ -35,11 +34,10 @@ const ProductsInOrder = ({products}) => {
                                         preview={false}
                                     />
                                 </Col>
-                                <Col xs={{span: 10}} sm={{span: 10}}>{product.product.name}</Col>
-                                <Col xs={{span: 3}} sm={{span: 4}}>{product.product.currentPrice}$</Col>
-                                <Col xs={{span: 4}} sm={{span: 2}}>{product.cartQuantity}</Col>
-                                <Col xs={{span: 3}}
-                                     sm={{span: 4}}>{product.product.currentPrice * product.cartQuantity}$</Col>
+                                <Col xs={{span: 10}}>{product.product.name}</Col>
+                                <Col xs={{span: 3}}>{product.product.currentPrice}$</Col>
+                                <Col xs={{span: 4}}>{product.cartQuantity}</Col>
+                                <Col xs={{span: 3}}>{product.product.currentPrice * product.cartQuantity}$</Col>
                             </Row>
                         </Link>
                     )
