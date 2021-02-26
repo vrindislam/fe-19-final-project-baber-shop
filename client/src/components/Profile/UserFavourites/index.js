@@ -54,7 +54,7 @@ const UserFavourites = () => {
                         </Col>
                         :
                         <Col className='userProfileOrderFav-emptyContainer' xs={{span: 20, offset: 2}}
-                             sm={{span: 8, offset: 2}}>
+                             sm={{span: 8, offset: 4}}>
                             <Title>My favourites</Title>
                             <StarTwoTone twoToneColor='#fadb14' className='userProfileOrderFav-icon'/>
                             <Title level={3}>You haven't products in your favourite list yet.</Title>
