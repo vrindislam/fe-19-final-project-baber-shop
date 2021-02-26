@@ -40,7 +40,7 @@ const LiveSearch = () => {
     <Menu.Item key={el._id}>
       <Link to={`/product/${el.itemNo}`}>
         <div className='search-product'>
-          <img className='search-product-logo' src={el.imageUrls[0]} alt="product logo"/>
+          <img className='search-product-logo' src={el.imageUrls[0].url} alt="product logo"/>
           <p className='search-product-name'>{el.name.toUpperCase()}</p>
           <p className='search-product-price'>{el.currentPrice} $</p>
         </div></Link>
