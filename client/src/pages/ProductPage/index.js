@@ -13,8 +13,6 @@ import { MetaForEachPage } from "../../components/Helmet";
 
 
 const ProductPage = (props) => {
-    // console.log("props--------ProductPage",props.location.state.product);
-    // const { _id} = props.location.state.product;
     const {isAuthenticated} = useSelector(state => ({...state.user}));
     const dispatch = useDispatch();
     const { itemNo } = useParams()
