@@ -19,13 +19,11 @@ const ProductPage = (props) => {
     const [product, setProduct] = useState({})
     const [images, setImages] = useState([])
 
-
     useEffect(() => {
         async function fetch() {
-            const {name, currentPrice, imageUrls, _id, quantity, description} = await Ajax.get(`/products/${itemNo}`)
-
-            setProduct({name, currentPrice, _id, quantity, description, itemNo});
-            setImages(imageUrls);
+            const product = await Ajax.get(`/products/${itemNo}`)
+            setProduct(product);
+            setImages(product.imageUrls);
         }
 
         fetch();

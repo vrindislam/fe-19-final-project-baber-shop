@@ -10,7 +10,8 @@ const CartItem = (props) => {
   const cartQuantity = props.product.cartQuantity
   const { imageUrls, name, currentPrice, _id, itemNo } = props.product.product
   const isAuth = useSelector(state => state.user.isAuthenticated)
-
+  console.log("props.product.product",props.product.product);
+  console.log("imageUrls",imageUrls);
   return (
     <div className="cart-item-wrapper">
       <div className="cart-item_item-image-description">
