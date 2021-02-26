@@ -1,5 +1,5 @@
-import React  from 'react';
-import { Slider, InputNumber, Row, Col, Form } from 'antd';
+import React from 'react';
+import {Col, Form, InputNumber, Row, Slider} from 'antd';
 import './styles.less';
 
 const PriceSlider = ({minValue, maxValue, setMinVal, setMaxVal}) => {
@@ -31,12 +31,11 @@ const PriceSlider = ({minValue, maxValue, setMinVal, setMaxVal}) => {
                 <p className='slider-heading'>Price</p>
             </div>
             <Row justify='space-between'>
-                <Col span={12}>
+                <Col span={13}>
                     <Form.Item label='from'>
                         <InputNumber
                             min={1}
                             max={1000}
-                            style={{ margin: '0 9px' }}
                             step={1}
                             value={minValue}
                             onChange={onChangeInputMin}
@@ -44,12 +43,11 @@ const PriceSlider = ({minValue, maxValue, setMinVal, setMaxVal}) => {
                         />
                     </Form.Item>
                 </Col>
-                <Col span={12}>
+                <Col span={11}>
                     <Form.Item label='to'>
                         <InputNumber
                             min={1}
                             max={1000}
-                            style={{ margin: '0 9px' }}
                             step={1}
                             value={maxValue}
                             onChange={onChangeInputMax}
