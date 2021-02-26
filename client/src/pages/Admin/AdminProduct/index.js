@@ -21,7 +21,7 @@ const { Content } = Layout;
 const AdminProduct = () => {
 
   const history = useHistory();
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(10);
   const [page, setPage] = useState(1);
   const [searchString, setSearchString] = useState(`?perPage=${perPage}&startPage=${page}`);
   const [products, setProducts] = useState([]);

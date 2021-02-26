@@ -77,10 +77,11 @@ const AdminProductCard = ({ product, loadProducts }) => {
       ]}
     >
       <Meta
-        title={`${categories}: (${itemNo}) ${name}`}
+        title={`(${itemNo}) ${name}`}
         description={description ? `${description.substring(0, 40)}...` : "no description"}
       />
       <ul className={"admin-product-card-list-container"}>
+        <li><span>Category:</span> {categories}</li>
         <li><span>Brand:</span> {brand}</li>
         <li><span>Country:</span> {country}</li>
         <li><span>Price:</span> {currentPrice}$</li>
