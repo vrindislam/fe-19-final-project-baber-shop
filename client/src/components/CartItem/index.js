@@ -16,7 +16,7 @@ const CartItem = (props) => {
       <div className="cart-item_item-image-description">
         <Link to={`/product/${itemNo}`}>
         <div>
-          <img className="cart-item_item-image" src={imageUrls[0]} alt=""/>
+          <img className="cart-item_item-image" src={imageUrls[0].url} alt={name}/>
         </div>
         </Link>
         <div className="cart-item_item-description">

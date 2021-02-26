@@ -4,6 +4,7 @@ import ProductsContainer from "../../components/CartProductsContainer";
 import { useSelector } from "react-redux";
 import { TotalAmount } from "../../components/CartTotalQuaintity";
 import Checkout from "../../components/Checkout";
+import EmptyCartPage from "../../components/CartEmpty"
 
 const Cart = () => {
   const products = useSelector(state => state.cart.products.products);
@@ -12,7 +13,7 @@ const Cart = () => {
   return (
     <div className="cart-page-wrapper">
       {!products.length
-        ? <p>add an item, please</p>
+        ? <EmptyCartPage/>
         : <>
           <div className="cart-container">
             <ProductsContainer products={products}/>
