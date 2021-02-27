@@ -6,7 +6,6 @@ import { showModal } from "../../store/modal/modalAction";
 import 'react-toastify/dist/ReactToastify.css';
 import "./styless.less"
 
-
 const LoginModal = () => {
   const dispatch = useDispatch();
   const showModalLogin = () => {
@@ -20,6 +19,23 @@ const LoginModal = () => {
     </div>
   )
 }
+export const successRegisterToastCustom = () => {
+  toast("Registration complete", {
+    position: toast.POSITION.TOP_CENTER,
+    className: 'foo-bar',
+    autoClose: 40000
+  });
+}
+export const errorRegisterToastCustom = () => {
+  toast(<LoginModal/>, {
+    position: toast.POSITION.TOP_CENTER,
+    className: 'foo-bar2',
+    autoClose: 40000
+  });
+}
+
+
+
 export const errorRegisterToast = () => {
   toast.error(<LoginModal/>,{
     position: toast.POSITION.TOP_CENTER,
