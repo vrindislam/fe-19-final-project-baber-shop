@@ -35,6 +35,10 @@ const BreadCrumbs = () => {
 
                 let pageName;
                 if (name === 'pages' || name === 'product') return '';
+                if (state) {
+                    const productName = state.product.name;
+                    pageName = productName.charAt(0).toUpperCase() + productName.slice(1);
+                }
                 else pageName = name.charAt(0).toUpperCase() + name.slice(1);
 
                 return (
