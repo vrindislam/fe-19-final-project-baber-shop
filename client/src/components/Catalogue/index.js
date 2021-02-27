@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import './styles.less';
 import CategoryService from "../../services/CategoryService";
 import {Link} from "react-router-dom";
 import {iconCatalogue} from "../Header/img";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 import {Menu} from 'antd';
 
@@ -37,7 +38,12 @@ const Catalogue = () => {
     const handleCategoryClick = ({key}) => {
         console.log('click', key);
         setVisible('none')
+    }
 
+    const handleOutsideClick = (e) => {
+        if (visible === 'block' && !e.target.className.includes('catalogue-btn')) {
+            showCatalogue();
+        }
     }
 
     const categoriesCatalogue = sortedCategories.map((topLevelCategory, index) => {
@@ -78,11 +84,13 @@ const Catalogue = () => {
                 <img className="catalogue-btn-img" src={iconCatalogue} alt="icon"/>
                 <span className="catalogue-btn-text">Catalogue</span>
             </button>
-            <Menu mode='inline' openKeys={openKeys} onOpenChange={onOpenChange}
-                  onClick={handleCategoryClick} style={{display: visible}}
-                  className='catalogue-menu'>
-                {categoriesCatalogue}
-            </Menu>
+            <OutsideClickHandler onOutsideClick={handleOutsideClick}>
+                <Menu mode='inline' openKeys={openKeys} onOpenChange={onOpenChange}
+                      onClick={handleCategoryClick} style={{display: visible}}
+                      className='catalogue-menu'>
+                    {categoriesCatalogue}
+                </Menu>
+            </OutsideClickHandler>
         </div>
     )
 }
