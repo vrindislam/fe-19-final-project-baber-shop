@@ -96,7 +96,6 @@ const SiteHeader = () => {
                     <LiveSearch/>
                 </Col>
                 <Col style={{padding: 2}} xs={{span: 12, order: 2}} sm={{span: 12, order: 2}} lg={{span: 8, order: 3}}>
-
                     <div className="cart" key="cart">
                         <PopoverBasket/>
                     </div>
