@@ -11,7 +11,6 @@ import Login from "../Modal/LoginModal";
 import {headerLogo, iconContact, iconLogin} from './img/index'
 import {LogoutOutlined} from "@ant-design/icons";
 import Catalogue from "../Catalogue";
-import BreadCrumbs from "../BreadCrumbs";
 
 
 const SiteHeader = () => {
@@ -102,10 +101,6 @@ const SiteHeader = () => {
                         <PopoverBasket/>
                     </div>
                 </Col>
-            </Row>
-
-            <Row className="header-row header-breadcrumbs" gutter={[24, 24]}>
-                    <BreadCrumbs/>
             </Row>
 
         </PageHeader>

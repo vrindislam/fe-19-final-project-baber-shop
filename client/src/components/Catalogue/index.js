@@ -6,7 +6,6 @@ import {iconCatalogue} from "../Header/img";
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import {Menu} from 'antd';
-
 const {SubMenu} = Menu;
 
 const Catalogue = () => {
