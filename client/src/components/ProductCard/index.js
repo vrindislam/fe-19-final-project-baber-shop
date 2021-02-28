@@ -23,14 +23,16 @@ const ProductCard = ({product, refresh}) => {
 
     const onAddToCart = (e) => {
         e.preventDefault();
-        const product2 = {...product, ...product, quantity: product.quantity - 1}
-        const newProduct2 = {product2, cartQuantity: + 1}
-        console.log("NewProductNew",newProduct2);
+        console.log("product.quantity",product.quantity);
+        if (product.quantity === 0) {
+            product = {...product, ...product, quantity: product.quantity}
+        }
+        else {
+            product = {...product, ...product, quantity: product.quantity - 1}
+        }
+        // product = {...product, ...product, quantity: product.quantity - 1}
+        const newProduct2 = {product, cartQuantity: + 1}
         dispatch(addToCart(newProduct2, _id, isAuthenticated));
-
-        // const newProduct = {product, cartQuantity: + 1}
-        // console.log("OldProductNew",newProduct);
-        // dispatch(addToCart(newProduct, _id, isAuthenticated));
     }
 
     const forwardToCardDetails = () => {

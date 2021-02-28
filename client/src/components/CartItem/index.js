@@ -8,14 +8,8 @@ import { Link } from 'react-router-dom'
 const CartItem = (props) => {
   const dispatch = useDispatch()
   const cartQuantity = props.product.cartQuantity
-  const { imageUrls, name, currentPrice, _id, itemNo } = props.product.product
+  const { imageUrls, name, currentPrice, _id, itemNo, quantity } = props.product.product
   const isAuth = useSelector(state => state.user.isAuthenticated)
-  console.log("props.product.product",props.product.product);
-
-  const quantityFromStore = useSelector(state => state.cart.available)
-  const newQuantityArray = []
-  quantityFromStore.forEach(item =>  {if (item._id === _id) {newQuantityArray.push(item)}})
-  const currentQuantity = newQuantityArray[0].quantity
 
   return (
     <div className="cart-item-wrapper">
@@ -33,7 +27,10 @@ const CartItem = (props) => {
             Lorem ipsum dolor sit amet,
             consectetur adipisicing elit.
             Delectus doloribus explicabo veniam!
-            <p className="cart-item-available">Available: {currentQuantity}</p>
+            {quantity < 0
+              ? <p className="cart-item-available">Available: 0</p>
+              : <p className="cart-item-available">Available: {quantity}</p>
+            }
           </p>
         </div>
       </div>
@@ -51,12 +48,10 @@ const CartItem = (props) => {
               : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id,isAuth,cartQuantity))}/>
             }
             <span>{cartQuantity}</span>
-            {currentQuantity === 0
+            {quantity === 0
             ? <PlusCircleFilled />
             : <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth,cartQuantity))}/>
             }
-
-            {/* <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth))}/> */}
           </div>
           <div className="item-handler_main-total"><span className="item-handler_main-total-mobile">Total</span><span>${(currentPrice * cartQuantity).toFixed(2)}</span></div>
           <div className="item-handler_main-basket" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>
@@ -64,7 +59,7 @@ const CartItem = (props) => {
           </div>
         </div>
         <div className="hidersmar">
-          <p className="cart-item-available">Available: {currentQuantity}</p>
+          <p className="cart-item-available">Available: {quantity}</p>
         </div>
         <div className="item-handler_main-basket-mobile" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>
           <DeleteFilled/>
