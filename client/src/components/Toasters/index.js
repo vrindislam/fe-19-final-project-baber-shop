@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { showModal } from "../../store/modal/modalAction";
 import 'react-toastify/dist/ReactToastify.css';
 import "./styless.less"
+import { MehOutlined } from '@ant-design/icons'
 
 const LoginModal = () => {
   const dispatch = useDispatch();
@@ -22,18 +23,24 @@ const LoginModal = () => {
 export const successRegisterToastCustom = () => {
   toast("Registration complete", {
     position: toast.POSITION.TOP_CENTER,
-    className: 'foo-bar',
+    className: 'success-register-toast',
     autoClose: 40000
   });
 }
 export const errorRegisterToastCustom = () => {
   toast(<LoginModal/>, {
     position: toast.POSITION.TOP_CENTER,
-    className: 'foo-bar2',
+    className: 'error-register-toast',
     autoClose: 40000
   });
 }
-
+export const absentToday = () => {
+  toast(<p>we don't have more today<MehOutlined/></p>, {
+    position: toast.POSITION.TOP_CENTER,
+    className: 'absent-today-toast',
+    autoClose: 40000
+  });
+}
 
 
 export const errorRegisterToast = () => {

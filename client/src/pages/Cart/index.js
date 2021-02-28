@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 import { TotalAmount } from "../../components/CartTotalQuaintity";
 import Checkout from "../../components/Checkout";
 import EmptyCartPage from "../../components/CartEmpty"
-
-import {errorRegisterToastCustom} from "../../components/Toasters/index"
 import { ToastContainer } from "react-toastify";
 
 const Cart = () => {
@@ -24,7 +22,6 @@ const Cart = () => {
           </div>
           <Checkout products={products}/>
           <ToastContainer/>
-          <button onClick={errorRegisterToastCustom} >tree</button>
         </>
       }
     </div>

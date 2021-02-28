@@ -6,22 +6,10 @@
     margin-top: 10px;
   }
   .error-registration_button {
-    //background-color: white;
     color: red;
   }
 }
-.foo-bar {
-  color: black;
-  background-color: #EFE95E;
-  border: 1px black solid;
-  font-size: 20px;
-  border-radius: 0;
-  .Toastify__progress-bar--default {
-    //background: linear-gradient(to right, red, red, red, red, red, red);
-    background: transparent;
-  }
-}
-.foo-bar2 {
+.Toastify__toast--default {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,9 +17,7 @@
   color: white;
   background-color: #e84c3d;
   font-size: 20px;
-  border: 1px black solid;
   border-radius: 0;
-
   > button {
     position: absolute;
     right: 10px;
@@ -40,5 +26,18 @@
     background: transparent;
   }
   .Toastify__close-button .Toastify__close-button--default {
+    background: transparent;
   }
+}
+.success-register-toast {
+  color: darkgreen;
+  background-color: #EFE95E;
+  border: 1px black solid;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: bold;
+}
+.absent-today-toast {
+  background-color: #EFE95E;
+  color: black;
 }

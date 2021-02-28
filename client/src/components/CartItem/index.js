@@ -11,7 +11,12 @@ const CartItem = (props) => {
   const { imageUrls, name, currentPrice, _id, itemNo } = props.product.product
   const isAuth = useSelector(state => state.user.isAuthenticated)
   console.log("props.product.product",props.product.product);
-  console.log("imageUrls",imageUrls);
+
+  const quantityFromStore = useSelector(state => state.cart.available)
+  const newQuantityArray = []
+  quantityFromStore.forEach(item =>  {if (item._id === _id) {newQuantityArray.push(item)}})
+  const currentQuantity = newQuantityArray[0].quantity
+
   return (
     <div className="cart-item-wrapper">
       <div className="cart-item_item-image-description">
@@ -28,6 +33,7 @@ const CartItem = (props) => {
             Lorem ipsum dolor sit amet,
             consectetur adipisicing elit.
             Delectus doloribus explicabo veniam!
+            <p className="cart-item-available">Available: {currentQuantity}</p>
           </p>
         </div>
       </div>
@@ -38,19 +44,27 @@ const CartItem = (props) => {
           <span>Total for Item</span>
         </div>
         <div className="item-handler_main">
-          <div className="item-handler_main-price">{currentPrice}</div>
+          <div className="item-handler_main-price"><span className="item-handler_main-total-mobile">Price</span><span>${currentPrice}</span></div>
           <div className="item-handler_main-quantity">
             {cartQuantity === 0
               ? <MinusCircleFilled/>
-              : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id,isAuth))}/>
+              : <MinusCircleFilled onClick={() =>  dispatch(decreaseQuantity(_id,isAuth,cartQuantity))}/>
             }
             <span>{cartQuantity}</span>
-            <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth))}/>
+            {currentQuantity === 0
+            ? <PlusCircleFilled />
+            : <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth,cartQuantity))}/>
+            }
+
+            {/* <PlusCircleFilled onClick={() => dispatch(increaseQuantity(_id,isAuth))}/> */}
           </div>
-          <div className="item-handler_main-total">{(currentPrice * cartQuantity).toFixed(2)}</div>
+          <div className="item-handler_main-total"><span className="item-handler_main-total-mobile">Total</span><span>${(currentPrice * cartQuantity).toFixed(2)}</span></div>
           <div className="item-handler_main-basket" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>
             <DeleteFilled/>
           </div>
+        </div>
+        <div className="hidersmar">
+          <p className="cart-item-available">Available: {currentQuantity}</p>
         </div>
         <div className="item-handler_main-basket-mobile" onClick={() => dispatch(deleteFromCart(_id, isAuth))}>
           <DeleteFilled/>
